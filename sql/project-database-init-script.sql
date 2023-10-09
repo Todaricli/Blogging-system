@@ -18,3 +18,18 @@ create table test (
 insert into test (stuff) values
     ('Things'),
     ('More things');
+
+
+-- Create dummy data to test the login
+drop table if exists userTest;
+
+create table userTest (
+    id integer not null primary key,
+    username text,
+    password text,
+    name text
+);
+
+insert into userTest (username, password, name) values
+    ('user1', '123', 'Alice'),
+    ('user2', '123', 'Bob');
