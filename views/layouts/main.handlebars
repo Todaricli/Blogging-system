@@ -11,7 +11,41 @@
 </head>
 
 <body>
+    <nav>
+        {{!-- Page logo --}}
+        <div class="logo">
+            <a href="/">
+                <img src="/images/logo.png" alt="page logo">
+            </a>
+        </div>
+
+        {{!-- Navigation search bar--}}
+        <div class="search_bar">
+            <input type="text" id="searchInput" placeholder="Search...">
+        </div>
+
+        {{!-- Nav login and dropdown button --}}
+        <ul>
+            <li>
+                <a href="/login">Login</a>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn">...</button>
+                    <div class="dropdown-content">
+                        <a href="/register">Register</a>
+                        <a href="#"></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
     {{{body}}}
+
+    <footer>
+        <h1>Footer is here</h1>
+    </footer>
 </body>
 
 </html>

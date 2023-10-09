@@ -10,4 +10,9 @@ router.get('/', async function (req, res) {
     res.render('home');
 });
 
+
+router.get('/register', function(req, res) {
+    res.render('register');
+})
+
 module.exports = router;
