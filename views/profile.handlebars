@@ -1,0 +1,36 @@
+<div id="profile_container">
+    <div id="profile_info">
+        <div id="profile_icon">Icon{{profile_icon}}</div>
+        <div id="profile_name">Name{{profile_name}}</div>
+        <div id="profile_DOB">DOB{{profile_DOB}}</div>
+    </div>
+
+    <div id="profile_related_info">
+        {{#if profile_subscribers}}
+        <div id="profile_subscribers">{{profile_subscribers.length}} subscribers</div>
+        {{else}}
+        <div id="profile_subscribers">0 subscriber</div>
+        {{/if}}
+        {{#if profile_articles}}
+        <div id="profile_articles_number">{{profile_articles.length}} articles</div>
+        {{else}}
+        <div id="profile_articles_number">0 article</div>
+        {{/if}}
+    </div>
+    
+
+    <div id="profile_articles_container">
+        {{#if profile_articles}}
+        <div id="articles_container_title">{{profile_articles.length}} articles</div>
+        {{#each profile_articles}}
+        <div class="profile_article_title">{{this.article_title}}</div>
+        <div class="profile_article_description">{{this.article_description}}</div>
+        <div class="profile_article_category">{{this.article_category}}</div>
+        <div class="profile_article_timestamp">{{this.article_timestamp}}</div>
+        {{/each}}
+        {{else}}
+        <div id="articles_container_title">0 article</div>
+        {{/if}}
+    </div>
+
+</div>
