@@ -1,5 +1,6 @@
 const authDao = require('../../models/auth-dao');
 const userDb = require('../../models/generic-dao');
+const bcrypt = require('bcrypt');
 
 async function authenticate(req, res, next) {
     req.username = req.body.username;
@@ -26,12 +27,16 @@ async function authenticate(req, res, next) {
 async function user(req, res, next) {
     req.name = req.body.name;
     req.email = req.body.email;
-    await authDao.createNewUser(
-        req.name,
-        req.username,
-        req.email,
-        req.password
-    );
+    bcrypt.hash(req.password, 10, async (err, passwordHash) => {
+      bcrypt.hash(req.username, 10, async (err, usernameHash) => {
+        await authDao.createNewUser(
+            req.name,
+            usernameHash,
+            req.email,
+            passwordHash
+        );
+      });
+    });
     next();
 }
 

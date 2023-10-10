@@ -2,12 +2,29 @@
 const SQL = require('sql-template-strings');
 const { getDatabase } = require('../db/database.js');
 const { getAllUserData } = require('./generic-dao.js');
+const bcrypt = require('bcrypt');
 
 async function getUserWithCredentials(username, password) {
     const users = await getAllUserData();
-    return users.find(function (user) {
-        return user.username === username && user.password === password;
-    });
+    let matchedUser;
+    for (user of users) {
+        if (
+            (user.username === username && user.password === password) ||
+            ((await verifyHashed(username, user.username)) &&
+                (await verifyHashed(password, user.password)))
+        ) {
+            matchedUser = user;
+            break;
+        }
+    }
+    return matchedUser;
+    // return users.find(async function (user) {
+    //     return (
+    //         (user.username === username && user.password === password) ||
+    //         (await verifyHashed(username, user.username) &&
+    //             await verifyHashed(password, user.password))
+    //     );
+    // });
 }
 
 async function getUserWithAuthToken(auth_token) {
@@ -22,11 +39,22 @@ async function getUserWithAuthToken(auth_token) {
 
 async function setUserDbAuthToken(username, auth_token) {
     const db = await getDatabase();
-
+    const users = await getAllUserData();
+    let matchedUser;
+    for (user of users) {
+        if (
+            user.username === username ||
+            (await verifyHashed(username, user.username))
+        ) {
+            matchedUser = user;
+            break;
+        }
+    }
+    console.log(matchedUser);
     return await db.run(SQL`
         update user
         set auth_token = ${auth_token}
-        where username = ${username}`);
+        where username = ${matchedUser.username}`);
 }
 
 async function createNewUser(fname, username, email, password) {
@@ -34,6 +62,15 @@ async function createNewUser(fname, username, email, password) {
     return await db.run(SQL`
     insert into user (fname, username, password, admin)
     values (${fname}, ${username}, ${password}, 0)`);
+}
+
+async function verifyHashed(original, hashed) {
+    try {
+        const result = await bcrypt.compare(original, hashed);
+        return result;
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 // Export functions.
