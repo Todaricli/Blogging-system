@@ -8,6 +8,7 @@
     {{else}}
     <title>Default title.</title>
     {{/if}}
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -25,8 +26,8 @@
         </div>
 
         {{!-- Nav login and dropdown button --}}
-        <ul>
-            <li>
+        <ul class="nav_list">
+            <li class="login">
                 <a href="/login">Login</a>
             </li>
             <li>
@@ -34,7 +35,8 @@
                     <button class="dropbtn">...</button>
                     <div class="dropdown-content">
                         <a href="/register">Register</a>
-                        <a href="#"></a>
+                        <a href="#">1</a>
+                        <a href="#">2</a>
                     </div>
                 </div>
             </li>
