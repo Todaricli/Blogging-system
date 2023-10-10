@@ -9,7 +9,6 @@ async function getUserWithCredentials(username, password) {
     let matchedUser;
     for (user of users) {
         if (
-            (user.username === username && user.password === password) ||
             ((await verifyHashed(username, user.username)) &&
                 (await verifyHashed(password, user.password)))
         ) {
@@ -43,14 +42,12 @@ async function setUserDbAuthToken(username, auth_token) {
     let matchedUser;
     for (user of users) {
         if (
-            user.username === username ||
             (await verifyHashed(username, user.username))
         ) {
             matchedUser = user;
             break;
         }
     }
-    console.log(matchedUser);
     return await db.run(SQL`
         update user
         set auth_token = ${auth_token}
@@ -64,19 +61,20 @@ async function createNewUser(fname, username, email, password) {
     values (${fname}, ${username}, ${password}, 0)`);
 }
 
-async function verifyHashed(original, hashed) {
+async function verifyHashed(original, dbData) {
     try {
-        const result = await bcrypt.compare(original, hashed);
-        return result;
+        if (await bcrypt.compare(original, dbData) ||
+        original === dbData) return true; // second conditional is for testing purposes
+        return false;
     } catch (err) {
         console.error(err);
     }
 }
 
-// Export functions.
 module.exports = {
     getUserWithCredentials,
     getUserWithAuthToken,
     setUserDbAuthToken,
     createNewUser,
+    verifyHashed
 };

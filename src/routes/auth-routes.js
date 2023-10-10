@@ -23,7 +23,7 @@ router.get('/register', function (req, res) {
     res.render('register');
 });
 
-router.post('/register', register.authenticate, register.user, function (req, res) {
+router.post('/register', register.authenticate, register.newUser, function (req, res) {
     res.setToastMessage('Successfully registered!');
     res.redirect('/login');
 });
