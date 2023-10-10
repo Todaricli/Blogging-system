@@ -5,7 +5,6 @@ const testDao = require('../models/test-dao.js');
 const { verifyAuthenticated } = require('../middleware/auth-middleware.js');
 
 router.get('/', verifyAuthenticated, async function (req, res) {
-    console.log("hello");
     res.locals.title = 'My route title!';
     res.locals.allTestData = await testDao.retrieveAllTestData();
     res.render('home');

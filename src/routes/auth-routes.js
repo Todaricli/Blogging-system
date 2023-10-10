@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { v4: uuid } = require('uuid');
 
-const userDb = require('../models/test-auth');
+const userDb = require('../models/test-auth-dao');
 
 router.get('/login', function (req, res) {
     res.render('login');
@@ -14,8 +14,7 @@ router.post('/login', async function (req, res) {
     const user = await userDb.getUserWithCredentials(username, password);
     if (user) {
         const authToken = uuid();
-        user.authToken = authToken; // save this as a property for the database
-        console.log(user);
+        userDb.setUserAuthToken(username, authToken); // save a token in database
         res.cookie('authToken', authToken);
         res.locals.user = user;
         res.redirect('/');

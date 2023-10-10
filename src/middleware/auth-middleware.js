@@ -1,14 +1,12 @@
-const userDb = require("../models/test-auth");
+const userDb = require("../models/test-auth-dao");
 
-function addUserToLocals(req, res, next) {
-  console.log("called?");
+async function addUserToLocals(req, res, next) {
   const authToken = req.cookies["authToken"];
-  res.locals.user = userDb.getUserWithAuthToken(authToken);
+  res.locals.user = await userDb.getUserWithAuthToken(authToken);
   next();
 }
 
 function verifyAuthenticated(req, res, next) {
-  console.log(res.locals.user);
   if (res.locals.user) {
     next();
   }

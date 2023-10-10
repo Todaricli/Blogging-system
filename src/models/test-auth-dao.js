@@ -1,3 +1,4 @@
+// this is for authentication queries with the database
 const SQL = require('sql-template-strings');
 const { getDatabase } = require('../db/database.js');
 
@@ -30,18 +31,18 @@ async function getUserWithAuthToken(authToken) {
         return undefined;
     }
     return users.find(function (user) {
-        return user.authToken === authToken;
+        return user.authtoken === authToken;
     });
 }
 
-// async function updateTestData(testData) {
-//     const db = await getDatabase();
+async function setUserAuthToken(username, authToken) {
+    const db = await getDatabase();
 
-//     return await db.run(SQL`
-//         update test
-//         set stuff = ${testData.stuff}
-//         where id = ${testData.id}`);
-// }
+    return await db.run(SQL`
+        update user
+        set authtoken = ${authToken}
+        where username = ${username}`);
+}
 
 // async function deleteTestData(id) {
 //     const db = await getDatabase();
@@ -56,5 +57,6 @@ module.exports = {
     getUserDataById,
     getAllUserData,
     getUserWithCredentials,
-    getUserWithAuthToken
+    getUserWithAuthToken,
+    setUserAuthToken
 };
