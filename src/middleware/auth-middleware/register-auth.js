@@ -4,14 +4,7 @@ const bcrypt = require('bcrypt');
 
 async function authenticate(req, res, next) {
     req.username = req.body.username;
-    const users = await userDb.getAllUserData();
-    let matchedUser;
-    for (user of users) {
-        if (await authDao.verifyHashed(req.username, user.username)) {
-            matchedUser = user;
-            break;
-        }
-    }
+    const matchedUser = await userDb.getUserDataByUsername(req.username);
     if (matchedUser) {
         res.setToastMessage('Username taken, please choose another');
         return res.redirect('/register');
