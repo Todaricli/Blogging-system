@@ -26,11 +26,11 @@ async function initializeDatabase() {
 
     // create tables
     // todo: design a way to check if sql tables need to created
-    // if (fs.existsSync(INIT_SCRIPT)) {
-    //     console.log(`creating new database with INIT_SCRIPT: ${INIT_SCRIPT}`);
-    //     const initSQLText = fs.readFileSync(INIT_SCRIPT, 'utf-8');
-    //     await db.exec(initSQLText);
-    // }
+    if (fs.existsSync(INIT_SCRIPT)) {
+        console.log(`creating new database with INIT_SCRIPT: ${INIT_SCRIPT}`);
+        const initSQLText = fs.readFileSync(INIT_SCRIPT, 'utf-8');
+        await db.exec(initSQLText);
+    }
 
     // store database instance
     dbInstance = db;

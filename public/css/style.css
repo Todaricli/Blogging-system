@@ -1,0 +1,54 @@
+nav {
+    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+}
+
+.nav_list {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    width: 150px;
+    list-style: none;
+    margin-right: 20px;
+}
+
+.search_bar input{
+    width: 500px;
+    height: 30px;
+    border-radius: 20px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    width: 30px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100px;
+    background-color: bisque;
+    z-index: 1;
+    
+}
+
+.dropdown-content a {
+    display: block;
+    height: 20px;
+}
+
+.dropdown-content a:hover {
+    background-color: grey;
+}
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
