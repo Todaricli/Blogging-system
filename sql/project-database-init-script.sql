@@ -50,7 +50,7 @@ INSERT INTO user
 VALUES
     (1, 'user1', '123', 'John', 'Doe', '1990-01-01', 'User 1', 'path1', 0),
     (2, 'user2', '123', 'Jane', 'Smith', '1995-03-15', 'User 2', 'path2', 0),
-    (3, '$2b$10$be7qFjYyAXAtuvDk4JmGFuYsxihjT2xQBmGMBOfqeFmyJPqyG961e', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Bob', 'Johnson', '1988-07-20', 'User 3', 'path3', 0),
+    (3, 'user3', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Bob', 'Johnson', '1988-07-20', 'User 3', 'path3', 0),
     (4, 'user4', '123', 'Alice', 'Williams', '1992-09-10', 'User 4', 'path4', 0),
     (5, 'user5', '123', 'Charlie', 'Brown', '1998-12-05', 'User 5', 'path5', 0),
     (6, 'user6', '123', 'Eve', 'Anderson', '1993-04-30', 'User 6', 'path6', 0),

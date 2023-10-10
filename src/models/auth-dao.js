@@ -9,7 +9,7 @@ async function getUserWithCredentials(username, password) {
     let matchedUser;
     for (user of users) {
         if (
-            ((await verifyHashed(username, user.username)) &&
+            ((await verifyHashed(username, user.username)) && // for both hashed and unhashed
                 (await verifyHashed(password, user.password)))
         ) {
             matchedUser = user;
@@ -64,7 +64,7 @@ async function createNewUser(fname, username, email, password) {
 async function verifyHashed(original, dbData) {
     try {
         if (await bcrypt.compare(original, dbData) ||
-        original === dbData) return true; // second conditional is for testing purposes
+        original === dbData) return true;
         return false;
     } catch (err) {
         console.error(err);

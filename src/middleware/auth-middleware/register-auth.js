@@ -29,11 +29,11 @@ async function authenticate(req, res, next) {
 async function newUser(req, res, next) {
     req.name = req.body.name;
     req.email = req.body.email;
-    bcrypt.hash(req.password, 10, async (err, passwordHash) => {
-        bcrypt.hash(req.username, 10, async (err, usernameHash) => {
+    bcrypt.hash(req.password, 12, async (err, passwordHash) => {
+        bcrypt.hash(req.username, 1, async (err, usernameHash) => {
             await authDao.createNewUser(
                 req.name,
-                usernameHash,
+                req.username, // can use usernameHash to store hash instead
                 req.email,
                 passwordHash
             );
