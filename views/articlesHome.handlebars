@@ -1,5 +1,12 @@
 <div id="article_container">
 
+    {{#if user}}
+    <div>
+        <h1>Hello, {{user.fname}}!</h1>
+        <p>This is your homepage!</p>
+    </div>
+    {{/if}}
+
     <h1 id="category_nav">
         {{#if current_category}}
         <span id="all_articles_category">All Articles</span> / <span id="current_category">{{current_category}}</span>
@@ -47,7 +54,7 @@
             </div>
             {{/each}}
         </div>
-
     </div>
+    <div>
 
 </div>
