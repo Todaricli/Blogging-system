@@ -1,0 +1,53 @@
+<div>
+    <img src="{{this.avatar}}" alt="avatar" style="width: 110px">
+    <p><strong>{{this.name}}</strong></p>
+</div>
+
+
+<ul>
+    <li>Name: {{this.username}}</li>
+    <li>{{this.total_followers}} Follower</li>
+    <li>Email: {{this.email}}</li>
+    {{#if information}}
+    {{!-- Bio appears on profile, under name and total follower --}}
+    <li>Bio: {{this.bio}}</li>
+    <li>Gender: {{this.gender}}</li>
+    <li>Address: {{this.address}}</li>
+    {{/if}}
+
+    <li>
+        <a href="/my_posts">My posts</a>
+    </li>
+</ul>
+
+{{!-- Following sections on the right side --}}
+<div>
+    <h2>Following</h2>
+    {{#if subscribers}}
+    <div>
+        {{#each subscribers}}
+        <img src="{{this.user_avatar}}" alt="subsciber avatar">
+        <p>{{this.username}}</p>
+        <button>
+            <div>
+                <img src="{{this.user_avatar}}" alt="subsciber avatar">
+                <p>{{this.username}}</p>
+                <p>{{this.bio}}</p>
+                <p>{{this.total_followers}} Followers</p>
+                <button>Following</button>
+            </div>
+        </button>
+    </div>
+    <div>
+        <a href="/subscribers">See all ({{this.total_subscribers}})</a>
+    </div>
+    {{else}}
+    <p>You are not following anyone!</p>
+</div>
+
+{{!-- Options section --}}
+<div>
+    <a href="/update_info">Update information</a>
+    <a href="/update_password">Update Password</a>
+    <a href="/delete_account">Delete account</a>
+</div>
