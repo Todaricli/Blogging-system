@@ -1,4 +1,4 @@
-const userDb = require("../models/test-auth-dao");
+const userDb = require("../models/auth-dao");
 
 async function addUserToLocals(req, res, next) {
   const authToken = req.cookies["authToken"];

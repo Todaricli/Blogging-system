@@ -4,7 +4,6 @@ const { getDatabase } = require('../db/database.js');
 
 async function getUserDataById(id) {
     const db = await getDatabase();
-
     const testData = await db.get(SQL`
         select * from user
         where id = ${id}`);
@@ -44,13 +43,14 @@ async function setUserAuthToken(username, authToken) {
         where username = ${username}`);
 }
 
-// async function deleteTestData(id) {
-//     const db = await getDatabase();
+async function createNewUser(name, username, email, password) {
+    const db = await getDatabase();
 
-//     return await db.run(SQL`
-//         delete from test
-//         where id = ${id}`);
-// }
+    return await db.run(SQL`
+        update user
+        set authtoken = ${authToken}
+        where username = ${username}`);
+}
 
 // Export functions.
 module.exports = {

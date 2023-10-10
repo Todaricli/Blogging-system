@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { v4: uuid } = require('uuid');
 
-const userDb = require('../models/test-auth-dao');
+const userDb = require('../models/auth-dao');
 
 router.get('/login', function (req, res) {
     res.render('login');
@@ -28,6 +28,15 @@ router.get('/logout', function (req, res) {
     res.clearCookie('authToken');
     res.setToastMessage('Successfully logged out!');
     res.redirect('/login');
+});
+
+router.get('/register', function (req, res) {
+  res.render('register');
+});
+
+router.post('/register', function (req, res) {
+  
+  res.render('register');
 });
 
 module.exports = router;
