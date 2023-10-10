@@ -1,0 +1,65 @@
+<div id="article_container">
+    <div id="category_nav"><span id="articles_home">All</span> / <span id="current_category">{{current_category}}</span>
+    </div>
+
+    <div id="article_title">{{article_title}}</div>
+
+    <div id="author_details">
+        <div id="author_icon">{{author_icon}}</div>
+        <div id="author_name"> By {{author_name}}</div>
+        <div id="article_timestamp">{{article_timestamp}}</div>
+    </div>
+
+    <div id="article_content">
+        {{article_content}}
+    </div>
+
+    <div id="like_section">
+        <div id="like">
+            {{article_like_number}} <span id="btn_like">Like</span>
+        </div>
+
+        <div id="unlike">
+            {{#if like_article}}
+            <span id="btn_unlike">Un like</span>
+            {{/if}}
+        </div>
+    </div>
+
+    <div id="comments_container">
+        <form>
+            <label for="your_comment">Add your comment</label><br>
+            <textarea name="comments" id="comments_id" placeholder="Add your comment here..." rows="5"
+                cols="60"></textarea>
+            <input type="submit" name="submit_button" id="submit_id" value="Done!"/>
+        </form>
+
+        <div id="exist_comments">
+            {{#if exist_comments}}
+                <div id="comments_title">Comments ({{exist_comments.length}})</div>
+
+                <div id="comments_container">
+                    {{#each exist_comments}}
+                    <div id="comment_details">
+                        <div id="comment_content">{{this.comment_content}}</div>
+                        <div id="comment_by_name">{{this.comment.name}}</div>
+                        <div id="comment_by_icon">{{this.comment.icon}}</div>
+                        <div id="comment_by_timestamp">{{this.comment.timestamp}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            {{else}}
+                <div id="comments_title">Comments (0)</div>
+                <div id="comments_container">This article has not had comment yet...</div>
+
+            {{/if}}
+            
+
+        </div>        
+
+    </div>
+
+
+
+
+</div>
