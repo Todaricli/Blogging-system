@@ -34,9 +34,17 @@ router.get('/register', function (req, res) {
   res.render('register');
 });
 
-router.post('/register', function (req, res) {
-  
-  res.render('register');
+router.post('/register', async function (req, res) {
+  const name = req.body.name;
+  const username = req.body.username;
+  const email = req.body.email;
+  const password = req.body.password;
+  await userDb.createNewUser(name, username, email, password);
+  res.setToastMessage('Successfully registered!');
+  res.redirect('/login');
+  //res.redirect('login');
 });
+
+
 
 module.exports = router;

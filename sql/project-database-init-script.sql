@@ -59,11 +59,6 @@ VALUES
     (9, 'user9', '123', 'Frank', 'Martinez', '1987-02-08', 'User 9', 'path9', 0),
     (10, 'user10', '123', 'Olivia', 'Jones', '1994-08-12', 'User 10', 'path10', 0);
 
-<<<<<<< HEAD
-ALTER TABLE user
-ADD COLUMN authtoken VARCHAR
-(50) DEFAULT NULL;
-=======
 CREATE TABLE articles (
     id INTEGER NOT NULL PRIMARY KEY,
     title VARCHAR(88) NOT NULL,
@@ -390,5 +385,4 @@ VALUES
 
 
 
->>>>>>> 012c2dbfdbfd5f1a809beef3b863668382f6586d
 
