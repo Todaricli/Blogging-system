@@ -17,6 +17,6 @@ router.get('/', verifyAuthenticated, async function (req, res) {
 
 router.get('/article', async function (req, res) {
     res.render('articleDemo');
-
+});
 
 module.exports = router;
