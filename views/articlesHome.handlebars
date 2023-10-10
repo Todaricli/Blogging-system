@@ -1,41 +1,42 @@
-<div id="article_container">
+<div id="home_container">
 
     <h1 id="category_nav">
         {{#if current_category}}
-        <span id="all_articles_category">All Articles</span> / <span id="current_category">{{current_category}}</span>
+        <div id="specific_category_title">
+            <span id="all_articles_category"><a href="/">All Articles</a></span> / <span
+                id="current_category">{{current_category}}</span>
+        </div>
         {{else}}
-        Explore All Articles
+        <div id="home_title">Explore All Articles</div>
         {{/if}}
     </h1>
 
-    <div id="articles">
-        <div id="top5_articles">
-            <h2 id="top5_block_title">Top 5 Popular Articles</h2>
-            {{#each top5Articles}}
-            <div>
-                <div id="background_image"></div>
-                <div id="article_title">{{this.article_title}}</div>
-                <div id="article_description">{{this.article_description}}</div>
-                <div id="article_category">{{this.article_category}}</div>
-                <div id="btn_readmore">Read more</div>
-            </div>
-            {{/each}}
+    <div id="top5_articles">
+        <h2 id="top5_block_title">Top 5 Popular Articles</h2>
+        {{#each top5Articles}}
+        <div>
+            <div class="background_image"></div>
+            <div class="article_title">{{this.article_title}}</div>
+            <div class="article_description">{{this.article_description}}</div>
+            <div class="article_category">{{this.article_category}}</div>
+            <div class="btn_readmore">Read more</div>
+        </div>
+        {{/each}}
+    </div>
+
+    <div id="all_articles">
+        <h2 id="main_block_title">Explore More Articles</h2>
+        {{#each articleData}}
+        <div id="authorData">
+            <div id="author_icon">{{this.author_icon}}</div>
+            <div id="author_name">{{this.author_name}}</div>
         </div>
 
-        <div id="all_articles">
-            <h2 id="main_block_title">Explore More Articles</h2>
-            {{#each articleData}}
-            <div id="authorData">
-                <div id="author_icon">{{this.author_icon}}</div>
-                <div id="author_name">{{this.author_name}}</div>
-            </div>
-
-            <div id="article_title">{{this.article_title}}</div>
-            <div id="article_description">{{this.article_description}}</div>
-            <div id="article_category">{{this.article_category}}</div>
-            <div id="article_timestamp">{{this.article_timestamp}}</div>
-            {{/each}}
-        </div>
+        <div id="article_title">{{this.article_title}}</div>
+        <div id="article_description">{{this.article_description}}</div>
+        <div id="article_category">{{this.article_category}}</div>
+        <div id="article_timestamp">{{this.article_timestamp}}</div>
+        {{/each}}
     </div>
 
     <div id="sidebar">
