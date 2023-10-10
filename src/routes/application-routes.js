@@ -33,4 +33,8 @@ router.get('/sub', function (req,res) {
     res.render('subscription&subscriber');
 })
 
+router.get('/profile', function (req,res) {
+    res.render('profile');
+})
+
 module.exports = router;
