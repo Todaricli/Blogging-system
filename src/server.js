@@ -54,7 +54,11 @@ async function startExpress() {
     app.use(cookieToaster);
 
     // Setup routes
+    const { addUserToLocals } = require('./middleware/auth-middleware');
+    app.use(addUserToLocals);
+
     app.use(require('./routes/application-routes.js'));
+    app.use(require('./routes/auth-routes.js'));
 
     // Make the "public" folder available statically
     const publicFolder = path.join(process.cwd(), 'public');

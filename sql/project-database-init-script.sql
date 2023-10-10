@@ -10,12 +10,15 @@
 
 drop table if exists test;
 
-create table test (
+create table test
+(
     id integer not null primary key,
-    stuff text  
+    stuff text
 );
 
-insert into test (stuff) values
+insert into test
+    (stuff)
+values
     ('Things'),
     ('More things');
 
@@ -27,7 +30,8 @@ DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS articles;
 DROP TABLE IF EXISTS user;
 
-CREATE TABLE user (
+CREATE TABLE user
+(
     id INTEGER NOT NULL PRIMARY KEY,
     username VARCHAR(28) NOT NULL,
     password VARCHAR(28) NOT NULL,
@@ -41,7 +45,8 @@ CREATE TABLE user (
     CHECK (admin >= 0 AND admin <= 1)
 );
 
-INSERT INTO user (id, username, password, fname, lname, DOB, description, icon_path, admin)
+INSERT INTO user
+    (id, username, password, fname, lname, DOB, description, icon_path, admin)
 VALUES
     (1, 'user1', '123', 'John', 'Doe', '1990-01-01', 'User 1', 'path1', 0),
     (2, 'user2', '123', 'Jane', 'Smith', '1995-03-15', 'User 2', 'path2', 0),
