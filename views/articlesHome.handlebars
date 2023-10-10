@@ -1,6 +1,12 @@
 <div id="article_container">
 
-    <h1 id="category_nav">Explore All Articles</h1>
+    <h1 id="category_nav">
+        {{#if current_category}}
+        <span id="all_articles_category">All Articles</span> / <span id="current_category">{{current_category}}</span>
+        {{else}}
+        Explore All Articles
+        {{/if}}
+    </h1>
 
     <div id="articles">
         <div id="top5_articles">
@@ -34,11 +40,14 @@
 
     <div id="sidebar">
         <div id="sidebar_title">More to explore</div>
-        {{#each categoryData}}
-        <div>
-            {{this.category}}
+        <div id="sidebar_category_container">
+            {{#each categoryData}}
+            <div class="categoryData">
+                {{this.category}}
+            </div>
+            {{/each}}
         </div>
-        {{/each}}
+
     </div>
 
 </div>
