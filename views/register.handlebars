@@ -1,23 +1,44 @@
-<form action="/register" method="post">
+<form action='/register' method='post'>
     <div>
         <h1>Register</h1>
         <p>Please fill in to register your account</p>
-        <hr>
+        <hr />
 
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" placeholder="Enter username" required>
+        <label for='name'>Name</label>
+        <input
+            type='text'
+            name='name'
+            id='name'
+            placeholder='Enter name'
+            required
+        />
 
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" placeholder="Enter email">
+        <label for='username'>Username</label>
+        <input
+            type='text'
+            name='username'
+            id='username'
+            placeholder='Enter username'
+            required
+        />
 
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" placeholder="Enter password" required>
+        <label for='email'>Email</label>
+        <input type='text' name='email' id='email' placeholder='Enter email' />
 
-        <button type="submit">Register</button>
+        <label for='password'>Password</label>
+        <input
+            type='password'
+            name='password'
+            id='password'
+            placeholder='Enter password'
+            required
+        />
+
+        <button type='submit'>Register</button>
     </div>
 
     <div>
-        <p>Already have an account? <a href="/login">Login</a></p>
+        <p>Already have an account? <a href='/login'>Login</a></p>
     </div>
 
 </form>
