@@ -36,6 +36,7 @@ CREATE TABLE user
     username VARCHAR(28) NOT NULL,
     password VARCHAR(28) NOT NULL,
     auth_token VARCHAR(100),
+	email VARCHAR(28),
     fname VARCHAR(28),
     lname VARCHAR(28),
     DOB DATE,
