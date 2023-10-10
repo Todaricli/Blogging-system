@@ -8,7 +8,7 @@ const testDao = require('../models/test-dao.js');
 //     res.locals.allTestData = await testDao.retrieveAllTestData();
 //     res.render('home');
 // });
-const { verifyAuthenticated } = require('../middleware/auth-middleware.js');
+const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 
 router.get('/', verifyAuthenticated, async function (req, res) {
     //res.locals.current_category = "Marketing";
