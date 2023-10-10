@@ -10,7 +10,12 @@ const testDao = require('../models/test-dao.js');
 // });
 
 router.get('/', async function (req, res) {
+    //res.locals.current_category = "Marketing";
     res.render('articlesHome');
+});
+
+router.get('/article', async function (req, res) {
+    res.render('articleDemo');
 });
 
 module.exports = router;
