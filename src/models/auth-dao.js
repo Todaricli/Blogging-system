@@ -20,7 +20,7 @@ async function getUserWithAuthToken(auth_token) {
     });
 }
 
-async function setUserAuthToken(username, auth_token) {
+async function setUserDbAuthToken(username, auth_token) {
     const db = await getDatabase();
 
     return await db.run(SQL`
@@ -40,6 +40,6 @@ async function createNewUser(fname, username, email, password) {
 module.exports = {
     getUserWithCredentials,
     getUserWithAuthToken,
-    setUserAuthToken,
+    setUserDbAuthToken,
     createNewUser,
 };

@@ -5,34 +5,29 @@
         <hr />
 
         <label for='name'>Name</label>
-        <input
-            type='text'
-            name='name'
-            id='name'
-            placeholder='Enter name'
-            required
-        />
+        <input type='text' name='name' id='name' placeholder='Enter name' required />
+        <br />
 
         <label for='username'>Username</label>
-        <input
-            type='text'
-            name='username'
-            id='username'
-            placeholder='Enter username'
-            required
-        />
+        <input type='text' name='username' id='username' placeholder='Enter username' required />
+        <br />
 
         <label for='email'>Email</label>
         <input type='text' name='email' id='email' placeholder='Enter email' />
+        <br />
 
         <label for='password'>Password</label>
-        <input
-            type='password'
-            name='password'
-            id='password'
-            placeholder='Enter password'
-            required
-        />
+        <input type='password' name='password' id='password' placeholder='Enter password' required />
+        <br />
+
+        <label for='confirm-password'>Confirm password</label>
+        <input type='confirm-password' name='confirm_password' id='confirm-password' placeholder='Confirm password'
+            required />
+        <br />
+
+        {{#if toastMessage}}
+        <p>{{toastMessage}}</p>
+        {{/if}}
 
         <button type='submit'>Register</button>
     </div>
@@ -40,5 +35,4 @@
     <div>
         <p>Already have an account? <a href='/login'>Login</a></p>
     </div>
-
 </form>
