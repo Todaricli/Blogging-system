@@ -31,12 +31,12 @@
             <label for="your_comment">Add your comment</label><br>
             <textarea name="comments" id="comments_id" placeholder="Add your comment here..." rows="5"
                 cols="60"></textarea>
-            <input type="submit" name="submit_button" id="submit_id" value="Done!"/>
+            <input type="submit" name="submit_button" id="submit_id" value="Done!" />
         </form>
 
         <div id="exist_comments">
             {{#if exist_comments}}
-                <div id="comments_title">Comments ({{exist_comments.length}})</div>
+            <div id="comments_title">Comments ({{exist_comments.length}})</div>
 
                 <div id="comments_container">
                     {{#each exist_comments}}
@@ -49,13 +49,13 @@
                     {{/each}}
                 </div>
             {{else}}
-                <div id="comments_title">Comments (0)</div>
-                <div id="comments_container">This article has not had comment yet...</div>
+            <div id="comments_title">Comments (0)</div>
+            <div id="comments_container">This article has not had comment yet...</div>
 
             {{/if}}
-            
 
-        </div>        
+
+        </div>
 
     </div>
 
