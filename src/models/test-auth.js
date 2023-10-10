@@ -5,7 +5,7 @@ async function getUserDataById(id) {
     const db = await getDatabase();
 
     const testData = await db.get(SQL`
-        select * from test
+        select * from user
         where id = ${id}`);
 
     return testData;
@@ -13,7 +13,7 @@ async function getUserDataById(id) {
 
 async function getAllUserData() {
     const db = await getDatabase();
-    const allTestData = await db.all(SQL`select * from test`);
+    const allTestData = await db.all(SQL`select * from user`);
     return allTestData;
 }
 
@@ -56,4 +56,5 @@ module.exports = {
     getUserDataById,
     getAllUserData,
     getUserWithCredentials,
+    getUserWithAuthToken
 };
