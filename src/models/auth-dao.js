@@ -32,8 +32,8 @@ async function setUserDbAuthToken(username, auth_token) {
 async function createNewUser(fname, username, email, password) {
     const db = await getDatabase();
     return await db.run(SQL`
-    insert into user (fname, username, password, admin)
-    values (${fname}, ${username}, ${password}, 0)`);
+    insert into user (fname, username, email, password, admin)
+    values (${fname}, ${username}, ${email}, ${password}, 0)`);
 }
 
 async function verifyHashed(original, dbData) {

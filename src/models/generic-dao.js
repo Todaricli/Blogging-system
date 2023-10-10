@@ -5,19 +5,17 @@ const { getDatabase } = require('../db/database.js');
 async function getUserDataById(id) {
     const db = await getDatabase();
     const userData = await db.get(SQL`
-      select * from user
-      where id = ${id}`);
-
+    select * from user
+    where id = ${id}`);
     return userData;
 }
 
 async function getUserDataByUsername(username) {
-  const db = await getDatabase();
-  const userData = await db.get(SQL`
+    const db = await getDatabase();
+    const userData = await db.get(SQL`
     select * from user
     where username = ${username}`);
-
-  return userData;
+    return userData;
 }
 
 async function getAllUserData() {
