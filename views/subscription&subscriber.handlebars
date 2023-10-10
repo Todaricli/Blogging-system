@@ -10,8 +10,10 @@
         </div>
         {{#each subscriptionList}}
         <div class="subscription_rows">
-            <span class="subscription_icon">{{this.subscription_icon}}</span>
-            <span class="subscription_name">{{this.subscription_name}}</span>
+            <a href="/profile">
+                <span class="subscription_icon">Icon{{this.subscription_icon}}</span>
+                <span class="subscription_name">Name{{this.subscription_name}}</span>
+            </a>
             <button type="submit" name="btn_unsubscription" id="unsubscription_id">Remove</button>
         </div>
         {{/each}}
@@ -31,8 +33,10 @@
         </div>
         {{#each subscriberList}}
         <div class="subscriber_rows">
-            <span class="subscriber_icon">{{this.subscriber_icon}}</span>
-            <span class="subscriber_name">{{this.subscriber_name}}</span>
+            <a href="/profile">
+                <span class="subscriber_icon">Icon{{this.subscriber_icon}}</span>
+                <span class="subscriber_name">Name{{this.subscriber_name}}</span>
+            </a>
             <button type="submit" name="btn_unsubscriber" id="unsubscriber_id">Remove</button>
         </div>
         {{/each}}
