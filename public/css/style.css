@@ -135,3 +135,42 @@ nav {
     width: 200px;
 }
 
+.subscription_rows > a {
+    display: flex;
+    gap: 10px;
+}
+
+.subscriber_rows > a {
+    display: flex;
+    gap: 10px;
+}
+
+#profile_container {
+    margin-right: 20px;
+}
+
+#profile_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(187, 230, 123);
+    padding: 10px;
+}
+
+#profile_info > * {
+    padding: 10px;
+}
+
+#profile_related_info {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 50px;
+    padding: 10px;
+}
+
+#profile_articles_container > * {
+    padding: 10px;
+}
