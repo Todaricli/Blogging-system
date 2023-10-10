@@ -27,9 +27,15 @@
 
         {{!-- Nav login and dropdown button --}}
         <ul class="nav_list">
+            {{#if user}}
+            <li>
+                <a href="/logout">Logout</a>
+            </li>
+            {{else}}
             <li class="login">
                 <a href="/login">Login</a>
             </li>
+            {{/if}}
             <li>
                 <div class="dropdown">
                     <button class="dropbtn">...</button>
