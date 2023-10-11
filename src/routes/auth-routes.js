@@ -39,7 +39,9 @@ router.post('/register', async function (req, res) {
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
-  await userDb.createNewUser(name, username, email, password);
+  const icon = req.body.icon;
+  const icon_path = `/images/avatars/${icon}.png`;
+  await userDb.createNewUser(name, username, email, password, icon_path);
   res.setToastMessage('Successfully registered!');
   res.redirect('/login');
   //res.redirect('login');
