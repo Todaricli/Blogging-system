@@ -53,11 +53,21 @@ async function getAllCommentsByArticles(userId) {
 }
 
 
+async function getUserIdByUsername(username) {
+    const db = await getDatabase();
+    const testData = await db.get(SQL`
+      select id from user
+      where username = ${username}`);
+
+    return userId;
+}
+
 module.exports = {
     getUserDataById,
     getUserDataByUsername,
     getAllUserData,
     getUserArticles,
     getAllCommentsByArticles
+    getUserIdByUsername
 };
 

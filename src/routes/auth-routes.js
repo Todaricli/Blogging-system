@@ -23,9 +23,17 @@ router.get('/register', function (req, res) {
     res.render('register');
 });
 
-router.post('/register', register.authenticate, register.newUser, function (req, res) {
-    res.setToastMessage('Successfully registered!');
-    res.redirect('/login');
+router.post('/register', async function (req, res) {
+  const name = req.body.name;
+  const username = req.body.username;
+  const email = req.body.email;
+  const password = req.body.password;
+  const icon = req.body.icon;
+  const icon_path = `/images/avatars/${icon}.png`;
+  await userDb.createNewUser(name, username, email, password, icon_path);
+  res.setToastMessage('Successfully registered!');
+  res.redirect('/login');
+  //res.redirect('login');
 });
 
 module.exports = router;
