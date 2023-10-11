@@ -1,20 +1,33 @@
-<form action='/register' method='post'>
-    <div>
-        <h1>Register</h1>
+<form action='/register' method='post' id="register_page_body">
+    <div id="register_page_container">
+        <div id="register_title">
+            <h1>Register</h1>
+            <div>
+                <p>Already have an account? <a href='/login'>Log in</a></p>
+            </div>
+        </div>
+
         <p>Please fill in to register your account</p>
         <hr />
 
-        <label for='name'>Name</label>
-        <input type='text' name='name' id='name' placeholder='Enter name' required />
-
-        <label for='username'>Username</label>
-        <input type='text' name='username' id='username' placeholder='Enter username' required />
-
-        <label for='email'>Email</label>
-        <input type='text' name='email' id='email' placeholder='Enter email' />
-
-        <label for='password'>Password</label>
-        <input type='password' name='password' id='password' placeholder='Enter password' required /> <br>
+        <div id="register_fillinbox">
+            <div id="register_name">
+                <label for='name'>Name</label>
+                <input type='text' name='name' id='name' placeholder='Enter name' required />
+            </div>
+            <div id="register_username">
+                <label for='username'>Username</label>
+                <input type='text' name='username' id='username' placeholder='Enter username' required />
+            </div>
+            <div id="register_email">
+                <label for='email'>Email</label>
+                <input type='text' name='email' id='email' placeholder='Enter email' />
+            </div>
+            <div id="register_password">
+                <label for='password'>Password</label>
+                <input type='password' name='password' id='password' placeholder='Enter password' required /> <br>
+            </div>
+        </div>
 
         <div id="icon_container">
             <label for="icon" id="icon_container_label">Choose your icon</label>
@@ -141,12 +154,8 @@
 
             </div>
         </div>
-
+        <div id="register_button">
         <button type='submit'>Register</button>
+        </div>
     </div>
-
-    <div>
-        <p>Already have an account? <a href='/login'>Login</a></p>
-    </div>
-
 </form>
