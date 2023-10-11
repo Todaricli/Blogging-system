@@ -50,39 +50,18 @@
             {{!-- <div id="article_category">{{this.article_category}}</div> --}}
             <div id="article_timestamp">{{this.date_of_publish}}</div>
             {{/each}}
-    <div id="all_articles">
-        <h2 id="main_block_title">Explore More Articles</h2>
-        {{#each articleData}}
-        <div class="authorData">
-            <div class="author_icon">{{this.author_icon}}</div>
-            <div class="author_name">{{this.author_name}}</div>
-        </div>
 
-    <div id="all_articles">
-        <h2 id="main_block_title">Explore More Articles</h2>
-        {{#each articleData}}
-        <div class="authorData">
-            <div class="author_icon">{{this.author_icon}}</div>
-            <div class="author_name">{{this.author_name}}</div>
-        </div>
 
-        <div class="article_title">{{this.article_title}}</div>
-        <div class="article_description">{{this.article_description}}</div>
-        <div class="article_category">{{this.article_category}}</div>
-        <div class="article_timestamp">{{this.article_timestamp}}</div>
-        {{/each}}
-    </div>
-
-    <div id="sidebar">
-        <div id="sidebar_title">More to explore</div>
-        <div id="sidebar_category_container">
-            {{#each categoryData}}
-            <div class="categoryData">
-                {{this.category}}
+            <div id="sidebar">
+                <div id="sidebar_title">More to explore</div>
+                <div id="sidebar_category_container">
+                    {{#each categoryData}}
+                    <div class="categoryData">
+                        {{this.category}}
+                    </div>
+                    {{/each}}
+                </div>
             </div>
-            {{/each}}
-        </div>
-    </div>
-    <div>
+            <div>
 
-    </div>
+            </div>
