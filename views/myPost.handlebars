@@ -1,0 +1,72 @@
+<h1>Your stories</h1>
+
+{{!-- Option to write new articles --}}
+<div>
+    <a href="/write_article">Write a story</a>
+</div>
+
+{{!-- Draft section --}}
+<h2>Drafts</h2>
+{{#if drafts}}
+<div class="drafts">
+    <p>You have {{this.total_drafts}} drafts in totla.</p>
+    <ul>
+        {{#each drafts}}
+        <div>
+            <img src="{{this.draft_img}}" alt="my draft image" id="draft_img">
+            <p id="draft_create_time">Created on {{this.draft_created_time}}</p>
+            <p id="draft_title">{{this.draft_title}}</p>
+            <p id="draft_content">{{this.draft_content}}</p>
+            {{#if tags}}
+            {{#each tags}}
+            <p id="tag">{{this.draft_tag}}</p>
+            {{/if}}
+        </div>
+    </ul>
+</div>
+{{else}}
+<p>You have no drafts</p>
+<a href="/write_articles">Write a story</a>
+{{/if}}
+
+{{!-- Published section --}}
+<h2>Published</h2>
+{{#if posts}}
+<div class="all_posts">
+    <p>You have {{this.total_posts}} posts in total.</p>
+    <ul>
+        {{#each posts}}
+        <div>
+            <img src="{{this.post_img}}" alt="my post image" id="post_img">
+            <p id="post_publish_time">Published on {{this.post_published_time}}</p>
+            <p id="post_title">{{this.post_title}}</p>
+            <p id="post_content">{{this.post_content}}</p>
+            {{#if tags}}
+            {{#each tags}}
+            <p id="tag">{{this.post_tag}}</p>
+            {{/if}}
+        </div>
+        {{/each}}
+    </ul>
+</div>
+{{else}}
+<p>You have no posts</p>
+{{/if}}
+
+{{!-- Responses section only if user received them --}}
+<h2>Responses</h2>
+{{#if responses}}
+<div class="response">
+    <p>You have {{this.total_responses}} responses in total.</p>
+    <ul>
+        {{#each responses}}
+        <div>
+            <img src="{{this.user_avatar}}" alt="user avatar" id="user_avatar">
+            <p id="username">{{username}}</p>
+            <p id="response_published_time">{{this.response_published_time}}</p>
+            <p id="response_content">{{this.response_content}}</p>
+            <p id="likes_total">{{this.likes_total}} likes</p>
+            <a href="/reply">Reply</a>
+        </div>
+    </ul>
+</div>

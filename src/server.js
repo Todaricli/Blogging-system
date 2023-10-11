@@ -54,7 +54,7 @@ async function startExpress() {
     app.use(cookieToaster);
 
     // Setup routes
-    const { addUserToLocals } = require('./middleware/auth-middleware');
+    const { addUserToLocals } = require('./middleware/auth-middleware/login-auth');
     app.use(addUserToLocals);
 
     app.use(require('./routes/application-routes.js'));
