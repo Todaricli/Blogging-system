@@ -67,7 +67,7 @@ module.exports = {
     getUserDataByUsername,
     getAllUserData,
     getUserArticles,
-    getAllCommentsByArticles
+    getAllCommentsByArticles,
     getUserIdByUsername
 };
 
