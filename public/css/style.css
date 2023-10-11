@@ -5,8 +5,8 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 50px;
-    overflow: hidden;
+    height: 60px;
+    
 }
 
 .nav_list {
@@ -334,6 +334,7 @@ nav {
 
 #icon_select_container img:hover {
     background-color: lightgray;
+    cursor: pointer;
 }
 
 :checked+label img {
