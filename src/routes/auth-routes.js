@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const userDb = require('../models/auth-dao');
-const login = require('../middleware/auth-middleware/login-auth')
-const register = require('../middleware/auth-middleware/register-auth')
+const login = require('../middleware/auth-middleware/login-auth');
+const register = require('../middleware/auth-middleware/register-auth');
 
 router.get('/login', function (req, res) {
     res.render('login');
@@ -23,9 +22,14 @@ router.get('/register', function (req, res) {
     res.render('register');
 });
 
-router.post('/register', register.authenticate, register.newUser, function (req, res) {
-    res.setToastMessage('Successfully registered!');
-    res.redirect('/login');
-});
+router.post(
+    '/register',
+    register.authenticate,
+    register.newUser,
+    function (req, res) {
+        res.setToastMessage('Successfully registered!');
+        res.redirect('/login');
+    }
+);
 
 module.exports = router;

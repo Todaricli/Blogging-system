@@ -1,9 +1,11 @@
 const { v4: uuid } = require('uuid');
-const userDb = require('../../models/auth-dao');
+const userDb = require('../../models/generic-dao');
+const authDao = require('../../models/auth-dao');
 
 async function addUserToLocals(req, res, next) {
     const authToken = req.cookies['authToken'];
-    res.locals.user = await userDb.getUserWithAuthToken(authToken);
+    res.locals.user = await authDao.getUserWithAuthToken(authToken);
+    if (!res.locals.user) res.locals.user = await userDb.getUserDataById(1); // THIS IS FOR DEVELOPING PURPOSES ONLY
     next();
 }
 
@@ -11,18 +13,18 @@ function verifyAuthenticated(req, res, next) {
     if (res.locals.user) {
         next();
     } else {
-        res.redirect('/login');
+        res.render('articlesHome');
     }
 }
 
 async function authenticate(req, res, next) {
     const username = req.body.username;
     const password = req.body.password;
-    const user = await userDb.getUserWithCredentials(username, password);
+    const user = await authDao.getUserWithCredentials(username, password);
 
     if (user) {
         const authToken = uuid();
-        await userDb.setUserDbAuthToken(username, authToken); // Save token in the database
+        await authDao.setUserDbAuthToken(username, authToken); // Save token in the database
         res.cookie('authToken', authToken);
         res.locals.user = user;
         next(); // logged in

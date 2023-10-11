@@ -8,19 +8,6 @@
  * However this script will serve as documentation / backup for how your database is designed
  */
 
-drop table if exists test;
-
-create table test
-(
-    id integer not null primary key,
-    stuff text
-);
-
-insert into test
-    (stuff)
-values
-    ('Things'),
-    ('More things');
 
 DROP TABLE IF EXISTS notify;
 DROP TABLE IF EXISTS notifications;
