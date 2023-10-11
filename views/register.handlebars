@@ -161,7 +161,7 @@
 
         <label for='username'>Username</label>
         <input type='text' name='username' id='username' placeholder='Enter username' required />
-        <p id='username-error' style='color: red; display: none;'></p>
+        {{!-- <p id='username-error' style='color: red; display: none;'></p> --}}
         <br />
 
         <label for='email'>Email</label>
@@ -174,8 +174,8 @@
 
         <label for='confirm-password'>Confirm password</label>
         <input type='password' name='confirm_password' id='confirm-password' placeholder='Confirm password' required />
-        <p id="password-format-error" style="color: red; display: none;"></p>
-        <p id="password-match-error" style="color: red; display: none;"></p>
+        {{!-- <p id="password-format-error" style="color: red; display: none;"></p>
+        <p id="password-match-error" style="color: red; display: none;"></p> --}}
         <br />
 
         {{#if toastMessage}}

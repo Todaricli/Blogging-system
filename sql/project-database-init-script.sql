@@ -51,7 +51,6 @@ CREATE TABLE articles (
     id INTEGER NOT NULL PRIMARY KEY,
     title VARCHAR(88) NOT NULL,
     content VARCHAR(8000) NOT NULL,
-    genre VARCHAR(20),
     date_of_publish TIMESTAMP NOT NULL,
     author_id INTEGER NOT NULL,
     FOREIGN KEY (author_id) REFERENCES user (id)
