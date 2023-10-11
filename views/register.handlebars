@@ -23,9 +23,10 @@
 
         <label for='confirm-password'>Confirm password</label>
         <input type='password' name='confirm_password' id='confirm-password' placeholder='Confirm password' required />
-        <p id="password-error" style="color: red; display: none;"></p>
+        <p id="password-format-error" style="color: red; display: none;"></p>
+        <p id="password-match-error" style="color: red; display: none;"></p>
         <br />
-        
+
         {{#if toastMessage}}
         <p>{{toastMessage}}</p>
         {{/if}}
