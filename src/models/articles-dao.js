@@ -15,6 +15,17 @@ async function getArticlesByUserID(userid){
     return article
 }
 
+async function getAllArticles(){
+    const db = await getDatabase();
+
+    const articles = await db.all(SQL`
+    select articles.*, user.fname, user.lname 
+    from articles left join user on articles.author_id = user.id
+    `);
+
+    return articles;
+}
+
 //working
 async function getArticlesByID(id){
     const db = await getDatabase();
@@ -123,5 +134,6 @@ module.exports = {
     getAllArticlesSortedByPublishDate,
     getAllArticlesSortedByUsername,
     getAllArticlesSortedByTitle,
-    getAllArticlesByPublishDate
+    getAllArticlesByPublishDate,
+    getAllArticles
 };
