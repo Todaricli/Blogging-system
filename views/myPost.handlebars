@@ -2,7 +2,7 @@
 
 {{!-- Option to write new articles --}}
 <div>
-    <a href="/write_article">Write a story</a>
+    <a href="/writeArticle">Write a story</a>
 </div>
 
 {{!-- Draft section --}}
@@ -20,30 +20,33 @@
             {{#if tags}}
             {{#each tags}}
             <p id="tag">{{this.draft_tag}}</p>
+            {{/each}}
             {{/if}}
         </div>
+        {{/each}}
     </ul>
 </div>
 {{else}}
 <p>You have no drafts</p>
-<a href="/write_articles">Write a story</a>
+<a href="/writeArticle">Write a story</a>
 {{/if}}
 
 {{!-- Published section --}}
 <h2>Published</h2>
 {{#if posts}}
 <div class="all_posts">
-    <p>You have {{this.total_posts}} posts in total.</p>
+    <p>You have <strong>{{this.total_posts}} posts</strong> in total.</p>
     <ul>
         {{#each posts}}
-        <div>
-            <img src="{{this.post_img}}" alt="my post image" id="post_img">
-            <p id="post_publish_time">Published on {{this.post_published_time}}</p>
-            <p id="post_title">{{this.post_title}}</p>
-            <p id="post_content">{{this.post_content}}</p>
+        <div class="each_posts">
+            <img src="/images/nature.avif" alt="my post image" id="post_img" width="200px">
+            <h3 id="post_title">{{this.title}}</h3>
+            <p id="post_publish_time"><strong>Published on </strong>{{this.date_of_publish}}</p>
+            <p id="post_content">{{this.content}}</p>
             {{#if tags}}
             {{#each tags}}
             <p id="tag">{{this.post_tag}}</p>
+            {{/each}}
             {{/if}}
         </div>
         {{/each}}
@@ -57,16 +60,21 @@
 <h2>Responses</h2>
 {{#if responses}}
 <div class="response">
-    <p>You have {{this.total_responses}} responses in total.</p>
+    <p>You have <strong>{{this.total_responses}}</strong> responses in total.</p>
     <ul>
         {{#each responses}}
-        <div>
-            <img src="{{this.user_avatar}}" alt="user avatar" id="user_avatar">
-            <p id="username">{{username}}</p>
-            <p id="response_published_time">{{this.response_published_time}}</p>
-            <p id="response_content">{{this.response_content}}</p>
-            <p id="likes_total">{{this.likes_total}} likes</p>
+        <div class="each_responses">
+            <img src="/images/Dragonite.png" alt="user avatar" id="user_avatar" width="20px">
+            <p id="username"><strong>{{this.commentor_fname}} {{this.commentor_lname}}</strong></p>
+            <p><strong>Replied on </strong>{{this.time_of_comment}}</p>
+            <p><strong>Articles:</strong> {{this.article_title}}</p>
+            <p><strong>Comment: </strong>{{this.content}}</p>
             <a href="/reply">Reply</a>
         </div>
+        {{/each}}
     </ul>
 </div>
+{{else}}
+<p>You have no responses</p>
+{{/if}}
+
