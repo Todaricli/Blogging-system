@@ -31,21 +31,23 @@
             <li>
                 <a href="/logout">Logout</a>
             </li>
-            {{else}}
-            <li class="login">
-                <a href="/login">Login</a>
-            </li>
-            {{/if}}
             <li>
                 <div class="dropdown">
                     <button class="dropbtn">...</button>
                     <div class="dropdown-content">
-                        <a href="/register">Register</a>
-                        <a href="#">1</a>
-                        <a href="#">2</a>
+                        <a href="/my_profile">My Profile</a>
+                        <a href="/my_post">My Post</a>
                     </div>
                 </div>
             </li>
+            {{else}}
+            <li class="login">
+                <a href="/login">Login</a>
+            </li>
+            <li class="register">
+                <a href="/register">Register</a>
+            </li>
+            {{/if}}
         </ul>
     </nav>
 
