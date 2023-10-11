@@ -181,3 +181,15 @@ nav {
     border-radius: 50%;
     background-color: antiquewhite;
 }
+
+.each_posts {
+    background-color: bisque;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.each_responses {
+    background-color: orange;
+    margin-bottom: 10px;
+    padding: 10px;
+}

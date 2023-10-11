@@ -9,7 +9,7 @@ const testDao = require('../models/test-dao.js');
 //     res.render('home');
 // });
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
-const { getUserArticles, getAllCommentsByArticles } = require('../models/generic-dao.js');
+const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
 router.get('/', verifyAuthenticated, async function (req, res) {
     //res.locals.current_category = "Marketing";
@@ -45,6 +45,14 @@ router.get('/my_post', async function(_,res) {
     const comments = await getAllCommentsByArticles(user.id)
     console.log(comments)
 
+    const filteredComments = comments.filter(comment => comment.comment_id !== null);
+
+
+    const totalResponses = filteredComments.length;
+    res.locals.responses = filteredComments;
+    res.locals.total_responses = totalResponses;
+
+   
     res.render('myPost');
 })
 
