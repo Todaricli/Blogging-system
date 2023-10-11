@@ -10,7 +10,7 @@ nav {
     display: flex;
     gap: 50px;
     align-items: center;
-    width: 150px;
+    width: 200px;
     list-style: none;
     margin-right: 20px;
 }
@@ -173,4 +173,11 @@ nav {
 
 #profile_articles_container > * {
     padding: 10px;
+}
+
+#user_avatar {
+    width: 40px;
+    border: 1px solid;
+    border-radius: 50%;
+    background-color: antiquewhite;
 }
