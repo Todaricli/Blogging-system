@@ -5,6 +5,7 @@ const quill = new Quill('#write_article_content', {
         toolbar: [
             [{ header: [1, 2, false] }],
             ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
             ['image', 'code-block']
         ]
     },
