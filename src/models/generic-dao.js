@@ -24,8 +24,18 @@ async function getAllUserData() {
     return allData;
 }
 
+async function getUserIdByUsername(username) {
+    const db = await getDatabase();
+    const testData = await db.get(SQL`
+      select id from user
+      where username = ${username}`);
+
+    return userId;
+}
+
 module.exports = {
     getUserDataById,
     getUserDataByUsername,
     getAllUserData,
+    getUserIdByUsername
 };

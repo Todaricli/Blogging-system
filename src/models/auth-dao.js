@@ -29,11 +29,11 @@ async function setUserDbAuthToken(username, auth_token) {
         where username = ${matchedUser.username}`);
 }
 
-async function createNewUser(fname, username, email, password) {
+async function createNewUser(fname, username, email, password, icon_path) {
     const db = await getDatabase();
     return await db.run(SQL`
-    insert into user (fname, username, email, password, admin)
-    values (${fname}, ${username}, ${email}, ${password}, 0)`);
+    insert into user (fname, username, password, admin, icon_path)
+    values (${fname}, ${username}, ${password}, 0, ${icon_path})`);
 }
 
 async function verifyHashed(original, dbData) {
