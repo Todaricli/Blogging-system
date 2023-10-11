@@ -1,4 +1,4 @@
-<div id="article_container">
+<div id="home_container">
 
     {{#if user}}
     <div>
@@ -7,11 +7,16 @@
     </div>
     {{/if}}
 
+    <a href="/writeArticle">Write a new article</a>
+
     <h1 id="category_nav">
         {{#if current_category}}
-        <span id="all_articles_category">All Articles</span> / <span id="current_category">{{current_category}}</span>
+        <div id="specific_category_title">
+            <span id="all_articles_category"><a href="/">All Articles</a></span> / <span
+                id="current_category">{{current_category}}</span>
+        </div>
         {{else}}
-        Explore All Articles
+        <div id="home_title">Explore All Articles</div>
         {{/if}}
     </h1>
 
@@ -45,7 +50,27 @@
             {{!-- <div id="article_category">{{this.article_category}}</div> --}}
             <div id="article_timestamp">{{this.date_of_publish}}</div>
             {{/each}}
+    <div id="all_articles">
+        <h2 id="main_block_title">Explore More Articles</h2>
+        {{#each articleData}}
+        <div class="authorData">
+            <div class="author_icon">{{this.author_icon}}</div>
+            <div class="author_name">{{this.author_name}}</div>
         </div>
+
+    <div id="all_articles">
+        <h2 id="main_block_title">Explore More Articles</h2>
+        {{#each articleData}}
+        <div class="authorData">
+            <div class="author_icon">{{this.author_icon}}</div>
+            <div class="author_name">{{this.author_name}}</div>
+        </div>
+
+        <div class="article_title">{{this.article_title}}</div>
+        <div class="article_description">{{this.article_description}}</div>
+        <div class="article_category">{{this.article_category}}</div>
+        <div class="article_timestamp">{{this.article_timestamp}}</div>
+        {{/each}}
     </div>
 
     <div id="sidebar">
@@ -60,4 +85,4 @@
     </div>
     <div>
 
-</div>
+    </div>

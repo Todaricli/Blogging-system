@@ -1,27 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const { v4: uuid } = require('uuid');
 
 const userDb = require('../models/auth-dao');
+const login = require('../middleware/auth-middleware/login-auth')
+const register = require('../middleware/auth-middleware/register-auth')
 
 router.get('/login', function (req, res) {
     res.render('login');
 });
 
-router.post('/login', async function (req, res) {
-    const username = req.body.username;
-    const password = req.body.password;
-    const user = await userDb.getUserWithCredentials(username, password);
-    if (user) {
-        const authToken = uuid();
-        userDb.setUserAuthToken(username, authToken); // save a token in database
-        res.cookie('authToken', authToken);
-        res.locals.user = user;
-        res.redirect('/');
-    } else {
-        res.setToastMessage('Authentication Failed!');
-        res.redirect('/login');
-    }
+router.post('/login', login.authenticate, function (req, res) {
+    res.redirect('/'); // redirect to home if user is authenticated
 });
 
 router.get('/logout', function (req, res) {
@@ -31,7 +20,7 @@ router.get('/logout', function (req, res) {
 });
 
 router.get('/register', function (req, res) {
-  res.render('register');
+    res.render('register');
 });
 
 router.post('/register', async function (req, res) {
@@ -39,12 +28,12 @@ router.post('/register', async function (req, res) {
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
-  await userDb.createNewUser(name, username, email, password);
+  const icon = req.body.icon;
+  const icon_path = `/images/avatars/${icon}.png`;
+  await userDb.createNewUser(name, username, email, password, icon_path);
   res.setToastMessage('Successfully registered!');
   res.redirect('/login');
   //res.redirect('login');
 });
-
-
 
 module.exports = router;

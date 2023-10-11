@@ -16,12 +16,13 @@
         {{!-- Page logo --}}
         <div class="logo">
             <a href="/">
-                <img src="/images/logo.png" alt="page logo">
+                <img src="/images/logo1.png" alt="page logo">
             </a>
         </div>
 
         {{!-- Navigation search bar--}}
         <div class="search_bar">
+            <img src="/images/search-icon.png">
             <input type="text" id="searchInput" placeholder="Search...">
         </div>
 
@@ -31,25 +32,33 @@
             <li>
                 <a href="/logout">Logout</a>
             </li>
-            {{else}}
-            <li class="login">
-                <a href="/login">Login</a>
-            </li>
-            {{/if}}
             <li>
                 <div class="dropdown">
                     <button class="dropbtn">...</button>
                     <div class="dropdown-content">
-                        <a href="/register">Register</a>
-                        <a href="#">1</a>
-                        <a href="#">2</a>
+                        <a href="/my_profile">My Profile</a>
+                        <a href="/my_post">My Post</a>
                     </div>
                 </div>
             </li>
+            <li>
+                <img src="/images/Dragonite.png" alt="user_avatar" id="user_avatar">
+            </li>
+            {{else}}
+            <li class="login">
+                <a href="/login">Login</a>
+            </li>
+            <li class="register">
+                <a href="/register">Register</a>
+            </li>
+            {{/if}}
         </ul>
     </nav>
-
-    {{{body}}}
+    
+    <div id="page_body">
+        {{{body}}}
+    </div>
+    
 
     <footer>
         <h1>Footer is here</h1>

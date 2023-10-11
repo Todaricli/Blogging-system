@@ -1,0 +1,48 @@
+<div id="sub_container">
+
+    <div id="subscription_container">
+        {{#if subscriptionList}}
+        <div id="subscription_title">
+            <div id="subscription_number">{{subscriptionList.length}} Subscriptions</div>
+            <div id="search_subscription">
+                <input type="text" id="searchSubscription" placeholder="Search subscriptions">
+            </div>
+        </div>
+        {{#each subscriptionList}}
+        <div class="subscription_rows">
+            <a href="/profile">
+                <span class="subscription_icon">Icon{{this.subscription_icon}}</span>
+                <span class="subscription_name">Name{{this.subscription_name}}</span>
+            </a>
+            <button type="submit" name="btn_unsubscription" id="unsubscription_id">Remove</button>
+        </div>
+        {{/each}}
+
+        {{else}}
+        <div id="subscription_number">0 Subscription</div>
+        {{/if}}
+    </div>
+
+    <div id="subscriber_container">
+        {{#if subscriberList}}
+        <div id="subscriber_title">
+            <div id="subscriber_number">{{subscriberList.length}} Subscribers</div>
+            <div id="search_subscriber">
+                <input type="text" id="searchSubscriber" placeholder="Search subscribers">
+            </div>
+        </div>
+        {{#each subscriberList}}
+        <div class="subscriber_rows">
+            <a href="/profile">
+                <span class="subscriber_icon">Icon{{this.subscriber_icon}}</span>
+                <span class="subscriber_name">Name{{this.subscriber_name}}</span>
+            </a>
+            <button type="submit" name="btn_unsubscriber" id="unsubscriber_id">Remove</button>
+        </div>
+        {{/each}}
+
+        {{else}}
+        <div id="subscription_number">0 Subscriber</div>
+        {{/if}}
+    </div>
+</div>
