@@ -37,7 +37,6 @@ router.get('/article', async function (req, res) {
     res.render('articleDemo');
 });
 
-//return current article information - not displaying on handlebars???
 router.get('/article/:id', async function (req,res) {
     const articleId = req.params.id;
     console.log("Article ID:", articleId);
