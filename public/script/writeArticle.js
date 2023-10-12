@@ -16,7 +16,8 @@ window.addEventListener("load", function () {
 
     const form = document.querySelector('#write_article_form');
 
-    form.addEventListener('submit', async function () {
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
 
         // Populate hidden form on submit
         const content = document.querySelector('input[name=write_article_content]');
@@ -34,8 +35,10 @@ window.addEventListener("load", function () {
             contentKey: actualContent
         }
 
+        const toastMessage = document.getElementById("write-article-toast-message");
+
         try {
-            const response = await fetch('/postNewArticle', {
+            const response = await fetch('/api/postNewArticle', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -47,13 +50,15 @@ window.addEventListener("load", function () {
                 throw new Error('Request failed with status: ' + response.status);
             }
 
-            const responseData = await response.json();
+            const responseData = await response.text();
 
             // Handle the response from the server
-            console.log(responseData);
-
-            // Log the URL after the response
-            console.log('URL after response:', window.location.href);
+            toastMessage.innerText = responseData + 'URL after response:' + window.location.href;
+            //remove user input from text editor
+            quill.deleteText(0, quill.getLength());
+            //remove other user input
+            document.getElementById("write_article_title").value = "";
+        
 
         } catch (error) {
             // Handle any errors that occur during the request
