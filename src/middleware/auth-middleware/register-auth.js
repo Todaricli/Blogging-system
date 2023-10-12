@@ -22,13 +22,16 @@ async function authenticate(req, res, next) {
 async function newUser(req, res, next) {
     req.name = req.body.name;
     req.email = req.body.email;
+    const icon = req.body.icon;
+    const icon_path = `/images/avatars/${icon}.png`;
     bcrypt.hash(req.password, 12, async (err, passwordHash) => {
         bcrypt.hash(req.username, 1, async (err, usernameHash) => {
             await authDao.createNewUser(
                 req.name,
                 req.username, // can use usernameHash to store hash instead
                 req.email,
-                passwordHash
+                passwordHash,
+                icon_path
             );
         });
     });
