@@ -2,7 +2,7 @@
     border: 1px solid black;
     border-radius: 20px;
     z-index: 10;
-    background-color: bisque;
+    background-color: greenyellow;
     width: 500px;
     min-height: 250px;
     padding: 20px;
@@ -30,5 +30,11 @@
 
 #article-div {
     background-color:bisque;
+}
+
+.each-top5Articles, #each-articleData, #article_container {
+    background-color: bisque;
+    margin: 20px;
+    padding: 15px;
 }
 
