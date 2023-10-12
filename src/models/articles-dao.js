@@ -39,6 +39,19 @@ async function getArticlesByID(id){
     return article;
 }
 
+async function getAuthorByArticle(articleId) {
+    const db = await getDatabase();
+
+    const author = await db.all(SQL `
+    SELECT user.fname AS author_fname, user.lname AS author_lname
+    FROM articles
+    INNER JOIN user ON articles.author_id = user.id
+    WHERE articles.id = ${articleId};
+    `)
+
+    return author;
+}
+
 //working
 async function getTopFiveArticles(){
     const db = await getDatabase();
@@ -137,6 +150,18 @@ async function getAllCommentsFromArticle(articleId) {
     return comments;
 }
 
+async function getNumberOfLikesFromArticle(articleId) {
+    const db = await getDatabase();
+
+    const likeCounts = await db.all(SQL `
+    select count(*) as like_count
+    from likes
+    where article_id = ${articleId}
+    `)
+
+    return likeCounts;
+}
+
 
 module.exports = {
     getArticlesByUserID,
@@ -149,5 +174,7 @@ module.exports = {
     getAllArticlesSortedByTitle,
     getAllArticlesByPublishDate,
     getAllArticles,
-    getAllCommentsFromArticle
+    getAllCommentsFromArticle,
+    getNumberOfLikesFromArticle,
+    getAuthorByArticle
 };

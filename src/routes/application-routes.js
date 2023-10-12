@@ -1,15 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const session = require('express-session');
-
-
-router.use(
-    session({
-        secret: 'your-secret-key', // Replace with a strong, random secret
-        resave: false,
-        saveUninitialized: true,
-    })
-);
 
 const testDao = require('../models/test-dao.js');
 const articleDao = require('../models/articles-dao.js');
@@ -54,12 +44,19 @@ router.get('/article/:id', async function (req,res) {
 
     const article = await articleDao.getArticlesByID(articleId);
     console.log(article);
-    //req.session.currentArticle = article;
     res.locals.article = article;
+
+    const authorName = await articleDao.getAuthorByArticle(articleId);
+    console.log(authorName);
+    res.locals.authorName = authorName;
 
     const comments = await articleDao.getAllCommentsFromArticle(articleId);
     console.log(comments);
     res.locals.comments = comments;
+
+    const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
+    console.log(likeCounts);
+    res.locals.like_count = likeCounts;
 
     res.render('articleDemo');
 })

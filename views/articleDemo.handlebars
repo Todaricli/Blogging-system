@@ -4,17 +4,17 @@
     </div>
 
     {{!-- Displaying article content --}}
-    <div>
-        <p id="article_title">Title: {{this.title}}</p>
+    <div id="article-div">
+        <p id="article_title"><strong>Title:</strong> {{article.[0].title}}</p>
 
         <div id="author_details">
             <div id="author_icon">{{author_icon}}</div>
-            <p id="author_name"> By {{author_name}}</p>
-            <p id="article_timestamp">Published on {{this.date_of_publish}}</p>
+            <p id="author_name"> <strong>By</strong> {{authorName.[0].author_fname}} {{authorName.[0].author_lname}}</p>
+            <p id="article_timestamp"><strong>Published on</strong> {{article.[0].date_of_publish}}</p>
         </div>
 
         <p id="article_content">
-            Content: {{this.content}}
+            <strong>Content:</strong> {{article.[0].content}}
         </p>
     </div>
 
@@ -23,9 +23,10 @@
     {{!-- Displaying like button --}}
     <div id="like_section">
         <div id="like">
-            {{article_like_number}}
+            
             <button class="like-btn">
                 <i class="fa-regular fa-thumbs-up" id="like-icon"></i>
+                {{like_count.[0].like_count}}
             </button>
         </div>
     </div>
