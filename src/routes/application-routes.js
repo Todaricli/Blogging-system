@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const testDao = require('../models/test-dao.js');
-const articleDao = require('../models/article-dao.js');
+const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 
 const writeArticleDao = require('../models/writeArticle-dao.js');
