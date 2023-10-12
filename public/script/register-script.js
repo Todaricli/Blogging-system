@@ -14,14 +14,21 @@ window.addEventListener('load', function () {
     passwordInput.addEventListener('input', async () => {
         checkValidPasswordFormat();
         checkPasswordsMatch();
+        registerButtonEnabler();
     });
     confirmPasswordInput.addEventListener('input', async () => {
         checkPasswordsMatch();
+        registerButtonEnabler();
     });
+
+    const registerButton = document.querySelector('#register_button');
+    
 
     async function checkUsernameInDb() {
         const username = usernameInput.value;
-        const response = await fetch(`/api/check-username?username=${username}`);
+        const response = await fetch(
+            `/api/check-username?username=${username}`
+        );
         let data = await response.text();
         if (data === 'username exists') {
             usernameError.style.display = '';
@@ -67,5 +74,15 @@ window.addEventListener('load', function () {
             passwordMatchError.style.display = '';
             passwordMatchError.innerHTML = 'Please ensure passwords match';
         }
+    }
+
+    function registerButtonEnabler() {
+        if (
+            usernameError.value === '' &&
+            passwordFormatError.value === '' &&
+            passwordMatchError.value === ''
+        ) { 
+            registerButton.disabled = false;
+        } else registerButton.disabled = true;
     }
 });

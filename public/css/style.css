@@ -185,7 +185,7 @@ nav {
     color: rgb(12, 175, 17);
 }
 
-#home_container {
+/* #home_container {
     display: grid;
     margin: 20px;
     padding: 5px;
@@ -210,7 +210,7 @@ nav {
     grid-area: articles;
     height: 800px;
     background-color: bisque;
-}
+} */
 
 #sidebar {
     grid-area: sidebar;
