@@ -3,6 +3,7 @@
             id="current_category">{{current_category}}</span>
     </div>
 
+    {{!-- Displaying article content --}}
     <div>
         <p id="article_title">Title: {{this.title}}</p>
 
@@ -19,24 +20,19 @@
 
     <hr>
 
+    {{!-- Displaying like button --}}
     <div id="like_section">
         <div id="like">
             {{article_like_number}}
             <button class="like-btn">
-                <i class="fa-regular fa-thumbs-up" id=""></i>
-                Like</button>
-        </div>
-
-        <div id="unlike">
-            {{#if like_article}}
-            <span id="btn_unlike">Un like</span>
-            {{/if}}
+                <i class="fa-regular fa-thumbs-up" id="like-icon"></i>
+            </button>
         </div>
     </div>
 
     <hr>
 
-    <div class="hidden"></div>
+    {{!-- Displaying comment section  --}}
     <button id="open-comment">Comment</button>
 
     <div class="comment hidden">
@@ -63,9 +59,9 @@
             <div id="comments_container">This article has not had comment yet...</div>
             {{/if}}
         </div>
-
     </div>
+
 </div>
 
-
+{{!-- JS linked to button effects --}}
 <script src="/script/button.js"></script>
