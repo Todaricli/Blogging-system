@@ -8,10 +8,10 @@ async function getArticlesByUserID(userid){
 
     const article = await db.all(SQL`
     select * from articles
-    where author_id = ${userid};
+    where author_id = ${userid}
     `)
 
-    return article
+    return article;
 }
 
 async function getAllArticles(){
