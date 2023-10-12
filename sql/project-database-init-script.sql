@@ -8,19 +8,6 @@
  * However this script will serve as documentation / backup for how your database is designed
  */
 
-drop table if exists test;
-
-create table test
-(
-    id integer not null primary key,
-    stuff text
-);
-
-insert into test
-    (stuff)
-values
-    ('Things'),
-    ('More things');
 
 DROP TABLE IF EXISTS notify;
 DROP TABLE IF EXISTS notifications;
@@ -64,7 +51,6 @@ CREATE TABLE articles (
     id INTEGER NOT NULL PRIMARY KEY,
     title VARCHAR(88) NOT NULL,
     content VARCHAR(8000) NOT NULL,
-    genre VARCHAR(20),
     date_of_publish TIMESTAMP NOT NULL,
     author_id INTEGER NOT NULL,
     FOREIGN KEY (author_id) REFERENCES user (id)
