@@ -16,18 +16,9 @@ const { verifyAuthenticated } = require('../middleware/auth-middleware/login-aut
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
 router.get('/', verifyAuthenticated, async function (req, res) {
-    //res.locals.current_category = "Marketing";
-
-    // const username = 
-    // res.locals.user = 
 
     res.locals.top5Articles = await articleDao.getTopFiveArticles();
-
     res.locals.articleData = await articleDao.getAllArticles();
-    // res.locals.
-    // res.locals.
-    // res.locals.
-
 
     res.render('articlesHome');
 });
@@ -97,21 +88,18 @@ router.get("/writeArticle", function(req, res) {
     res.render("writeArticle");
 })
 
-router.post("/postNewArticle", function(req, res) {
+router.post("/postNewArticle", async function(req, res) {
     const newArticle = req.body;
 
     const user_id = res.locals.user.id;
     const title = newArticle.titleKey;
     const genre = newArticle.genreKey;
     const content = newArticle.contentKey;
-
-    console.log(user_id);
-    console.log(title);
-    console.log(genre);
+    
     console.log(content);
     
     let done = undefined;
-    done = writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, content);
+    done = await writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, content);
 
     if(done) {
         res.setToastMessage("New Article created!");
