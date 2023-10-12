@@ -11,7 +11,8 @@ router.get('/displaySingleArticleWithDelta', async function (req, res) {
   const user_id = res.locals.user.id;
 
   const article = await articleDao.getArticlesByUserID(user_id);
-  const content = article[0].content;
+  const index = article.length - 1;
+  const content = article[index].content;
   const content_obj = JSON.parse(content);
   const delta_obj = content_obj.ops;
 

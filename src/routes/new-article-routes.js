@@ -26,7 +26,7 @@ router.post("/postNewArticle", async function(req, res) {
         res.setToastMessage("Submitting error, try again!");
     }
     
-    res.redirect('/writeArticle');
+    res.redirect("/writeArticle");
 })
 
 module.exports = router;
