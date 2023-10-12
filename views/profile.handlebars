@@ -1,8 +1,8 @@
 <div id="profile_container">
     <div id="profile_info">
-        <div id="profile_icon">Icon{{profile_icon}}</div>
-        <div id="profile_name">Name{{profile_name}}</div>
-        <div id="profile_DOB">DOB{{profile_DOB}}</div>
+        <div id="profile_icon"><img src="{{profile_icon}}"></div>
+        <div id="profile_name">{{profile_name}}</div>
+        <div id="profile_DOB">{{profile_DOB}}</div>
     </div>
 
     <div id="profile_related_info">
@@ -23,10 +23,10 @@
         {{#if profile_articles}}
         <div id="articles_container_title">{{profile_articles.length}} articles</div>
         {{#each profile_articles}}
-        <div class="profile_article_title">{{this.article_title}}</div>
-        <div class="profile_article_description">{{this.article_description}}</div>
+        <div class="profile_article_title">{{this.title}}</div>
+        <div class="profile_article_description">{{this.content}}</div>
         <div class="profile_article_category">{{this.article_category}}</div>
-        <div class="profile_article_timestamp">{{this.article_timestamp}}</div>
+        <div class="profile_article_timestamp">{{this.date_of_publish}}</div>
         {{/each}}
         {{else}}
         <div id="articles_container_title">0 article</div>
