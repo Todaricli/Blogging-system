@@ -4,6 +4,7 @@ const router = express.Router();
 const testDao = require('../models/test-dao.js');
 const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
+const subDao = require('../models/sub-dao.js');
 
 const writeArticleDao = require('../models/writeArticle-dao.js');
 
@@ -41,19 +42,33 @@ router.get('/article', async function (req, res) {
     res.render('articleDemo');
 });
 
-router.get('/sub', function (req,res) {
-    res.render('subscription&subscriber');
+router.get('/sub', verifyAuthenticated, async function (req, res) {
+    const user_id = res.locals.user.id;
+    if (user_id) {
+        res.locals.subscriptionList = await subDao.getSubscriptionsByUserID(user_id);
+        res.locals.subscriberList = await subDao.getSubscribersByUserID(user_id);
+        res.render('subscription&subscriber');
+    } else {
+        res.redirect('/login');
+    }
 })
 
-router.get('/profile', function (req,res) {
+router.get('/profile', verifyAuthenticated, async function (req, res) {
+    const id = req.query.id;
+    const profileData = await genericDao.getUserDataById(id);
+    res.locals.profile_icon = profileData.icon_path;
+    res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
+    res.locals.profile_DOB = profileData.DOB;
+    res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);
+    res.locals.profile_articles = await articleDao.getArticlesByID(profileData.id);
     res.render('profile');
 })
-router.get('/my_profile', function (req,res) {
+router.get('/my_profile', function (req, res) {
 
     res.render('myProfile');
 })
 
-router.get('/my_post', async function(_,res) {
+router.get('/my_post', async function (_, res) {
     const user = res.locals.user;
 
     const data = await getUserArticles(user.id)
@@ -72,32 +87,32 @@ router.get('/my_post', async function(_,res) {
     res.locals.responses = filteredComments;
     res.locals.total_responses = totalResponses;
 
-   
+
     res.render('myPost');
 })
 
-router.post('/update_info', function(req,res) {
+router.post('/update_info', function (req, res) {
 
-    const {bio, gender, address} = req.body;
+    const { bio, gender, address } = req.body;
 
     const updateInfo = {
-        bio: bio? true:false,
-        gender: gender? true:false,
-        address: address? true:false
+        bio: bio ? true : false,
+        gender: gender ? true : false,
+        address: address ? true : false
     };
 
     res.locals.bio = bio;
     res.locals.gender = gender;
     res.locals.address = address;
 
-    res.render('myProfile', {this: res.locals, information: updateInfo});
+    res.render('myProfile', { this: res.locals, information: updateInfo });
 })
 
-router.get("/writeArticle", function(req, res) {
+router.get("/writeArticle", function (req, res) {
     res.render("writeArticle");
 })
 
-router.post("/postNewArticle", function(req, res) {
+router.post("/postNewArticle", function (req, res) {
     const newArticle = req.body;
 
     const user_id = res.locals.user.id;
@@ -109,17 +124,26 @@ router.post("/postNewArticle", function(req, res) {
     console.log(title);
     console.log(genre);
     console.log(content);
-    
+
     let done = undefined;
     done = writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, content);
 
-    if(done) {
+    if (done) {
         res.setToastMessage("New Article created!");
     } else {
         res.setToastMessage("Submitting error, try again!");
     }
-    
+
     res.redirect('/writeArticle');
 })
+
+router.post("/sub", async function (req, res) {
+    const id = req.body.dataset.id;
+    const user_id = res.locals.user.id;
+    const subData = await subDao.getSpecificSubscriptionByID(user_id, id);
+    console.log(user_id);
+    res.render("subscription&subscriber")
+})
+
 
 module.exports = router;
