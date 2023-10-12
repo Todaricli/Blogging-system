@@ -11,7 +11,6 @@ const morgan = require('morgan');
 const path = require('path');
 const fs = require('fs');
 const { cookieToaster } = require('./middleware/toaster-middleware');
-const session = require('express-session');
 
 const PORT = 3000;
 
@@ -72,8 +71,6 @@ async function startExpress() {
     // Start listening on PORT
     app.listen(PORT, console.log(`Server listening on port ${PORT}`));
 
-    //Using session express
-    app.use(session({secret: 'secret blog'}));
 }
 
 module.exports = {

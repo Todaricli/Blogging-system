@@ -47,17 +47,21 @@ router.get('/article', async function (req, res) {
     res.render('articleDemo');
 });
 
-//return current article information - not displaying on handlebars????
+//return current article information - not displaying on handlebars???
 router.get('/article/:id', async function (req,res) {
     const articleId = req.params.id;
     console.log("Article ID:", articleId);
 
     const article = await articleDao.getArticlesByID(articleId);
     console.log(article);
+    //req.session.currentArticle = article;
+    res.locals.article = article;
 
-    req.session.currentArticle = article;
+    const comments = await articleDao.getAllCommentsFromArticle(articleId);
+    console.log(comments);
+    res.locals.comments = comments;
 
-    res.render('articleDemo', {article});
+    res.render('articleDemo');
 })
 
 router.get('/sub', function (req,res) {

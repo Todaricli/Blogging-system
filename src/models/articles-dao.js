@@ -126,6 +126,17 @@ async function getAllArticlesSortedByTitle(){
     return articles
 }
 
+async function getAllCommentsFromArticle(articleId) {
+    const db = await getDatabase();
+
+    const comments = await db.all(SQL `
+    select * from comments 
+    where article_id = ${articleId}
+    `)
+
+    return comments;
+}
+
 
 module.exports = {
     getArticlesByUserID,
@@ -137,5 +148,6 @@ module.exports = {
     getAllArticlesSortedByUsername,
     getAllArticlesSortedByTitle,
     getAllArticlesByPublishDate,
-    getAllArticles
+    getAllArticles,
+    getAllCommentsFromArticle
 };
