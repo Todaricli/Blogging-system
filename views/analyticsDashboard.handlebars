@@ -1,0 +1,73 @@
+<div id="analytics_dashboard">
+    {{#if user}}
+    <h2 id="keyMetricsTitle"> <img src ="{{this.user_icon}}"> {{this.fname}}'s KEY PERFORMANCE METRICS</h2>
+    {{else}}
+    <h2 id="keyMetricsTitle">KEY PERFORMANCE METRICS</h2>
+    {{/if}}
+
+    <h3>Total Number of Followers</h3>
+    {{#if followers}}
+    <ul>
+        {{#each followers}}
+        <li>
+            <p>{{this.number_of_followers}} followers</p>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p>0 Followers</p>
+    {{/if}}
+
+    <h3>Total Number of Comments for Each Article</h3>
+    {{#if comments}}
+    {{#each comments}}
+    <p>{{this.article}}</p>
+    <ul>
+        <li>
+            <p>{{this.numberOfComments}} Comments</p>
+        </li>
+    </ul>
+    {{/each}}
+    {{else}}
+    <p>0 Comments</p>
+    {{/if}}
+
+    <h3>Total Number of Likes for Each Article</h3>
+    {{#if likes}}
+    {{#each likes}}
+    <p>{{this.article}}</p>
+    <ul>
+        <li>
+            <p>{{this.numberOfLikes}} Comments</p>
+        </li>
+    </ul>
+    {{/each}}
+    {{else}}
+    <p>0 Likes</p>
+    {{/if}}
+
+
+    {{#if user}}
+    <h2 id="topThreeTitle"> {{this.fname}}'s TOP 3 ARTICLES</h2>
+    {{else}}
+    <h2 id="topThreeTitle">TOP 3 ARTICLES</h2>
+    {{/if}}
+
+    {{#if topArticles}}
+    {{#each topArticles}}
+    <img src="{{this.article_thumbnail}}" alt="{{this.article_name}}" style="width:500px;height:600px;">
+        <ul>
+            <li>Rank: {{this.rank}}</li>
+            <li>Title: {{this.article_name}}</li>
+            <li>Number of Comments: {{this.comments}}</li>
+            <li>Number of Likes: {{this.likes}}</li>
+            <li>Popularity Metric: {{this.}}</li>
+            <li>Creation Time: {{this.creation_period}}</li>
+        </ul>
+    {{/each}}
+    {{else}}
+    <p>You have no top articles...do better?</p>
+    {{/if}}
+
+
+</div>
