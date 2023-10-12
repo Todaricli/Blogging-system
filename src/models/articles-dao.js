@@ -3,6 +3,7 @@ const SQL = require('sql-template-strings');
 const { getDatabase } = require('../db/database.js');
 const { getAllUserData } = require('./generic-dao.js');
 
+
 //working
 async function getArticlesByUserID(userid){
     const db = await getDatabase();
@@ -35,7 +36,7 @@ async function getArticlesByID(id){
     where id = ${id};
     `)
 
-    return article
+    return article;
 }
 
 //working
@@ -124,6 +125,7 @@ async function getAllArticlesSortedByTitle(){
 
     return articles
 }
+
 
 module.exports = {
     getArticlesByUserID,

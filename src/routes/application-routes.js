@@ -1,8 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const session = require('express-session');
+
+
+router.use(
+    session({
+        secret: 'your-secret-key', // Replace with a strong, random secret
+        resave: false,
+        saveUninitialized: true,
+    })
+);
 
 const testDao = require('../models/test-dao.js');
-const articleDao = require('../models/article-dao.js');
+const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 
 const writeArticleDao = require('../models/writeArticle-dao.js');
@@ -34,12 +44,21 @@ router.get('/', verifyAuthenticated, async function (req, res) {
 
 router.get('/article', async function (req, res) {
 
-    // res.locals. =
-
-
-
     res.render('articleDemo');
 });
+
+//return current article information - not displaying on handlebars????
+router.get('/article/:id', async function (req,res) {
+    const articleId = req.params.id;
+    console.log("Article ID:", articleId);
+
+    const article = await articleDao.getArticlesByID(articleId);
+    console.log(article);
+
+    req.session.currentArticle = article;
+
+    res.render('articleDemo', {article});
+})
 
 router.get('/sub', function (req,res) {
     res.render('subscription&subscriber');
@@ -121,5 +140,7 @@ router.post("/postNewArticle", function(req, res) {
     
     res.redirect('/writeArticle');
 })
+
+
 
 module.exports = router;
