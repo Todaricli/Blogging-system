@@ -263,7 +263,8 @@ VALUES
     (17, 2, 9),
     (18, 3, 9),
     (19, 4, 10),
-    (20, 5, 10);
+    (20, 5, 10),
+    (21,1,1);
 
 CREATE TABLE likes_comments(
     user_id INTEGER NOT NULL,

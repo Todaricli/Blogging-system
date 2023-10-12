@@ -4,9 +4,9 @@ const { getDatabase } = require('../db/database.js');
 const { getAllUserData } = require('./generic-dao.js');
 
 async function getNumFollowers(user_id) {
-    const db = getDatabase()
+    const db = await getDatabase()
 
-    const numFollowers = db.all(SQL`
+    const numFollowers = await db.all(SQL`
     select count(being_subscribed_id) as counts from subscription 
     where being_subscribed_id = ${user_id}
     `)
@@ -15,21 +15,22 @@ async function getNumFollowers(user_id) {
 
 }
 
-async function getTotalLikes(id) {
-    const db = getDatabase();
+async function getTotalLikes(user_id) {
+    const db = await getDatabase();
 
-    const numLikes = db.all(SQL`
-    select count(id) as counts from likes 
-    where user_id = ${id}
+    const numLikes = await db.all(SQL`
+    select user.*,article_id, count(likes.id) as number_of_likes from articles join likes on articles.id = likes.article_id join user on articles.author_id = user.id
+    where user.id = ${user_id}
+    group by article_id
     `)
 
     return numLikes;
 }
 
 async function getNumberOfComments(user_id){
-    const db = getDatabase();
+    const db = await getDatabase();
 
-    const numOfComments = db.all(SQL`
+    const numOfComments = await db.all(SQL`
     select count(id) as counts from comments 
     where user_id = ${user_id}
     `)
@@ -38,9 +39,9 @@ async function getNumberOfComments(user_id){
 }
 
 async function getMostPopularArticles(user_id){
-    const db = getDatabase();
+    const db = await getDatabase();
     
-    const mostPopular = db.all(SQL`
+    const mostPopular =await  db.all(SQL`
     select user.*, article_id,title,date_of_publish, comment_count, like_count, popularity 
         from user left join (
         select articles.id as article_id, title,date_of_publish, comment_count, like_count, author_id, ((comment_count*2)+like_count) as popularity 
