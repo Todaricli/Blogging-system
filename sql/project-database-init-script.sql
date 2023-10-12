@@ -12,6 +12,7 @@
 DROP TABLE IF EXISTS notify;
 DROP TABLE IF EXISTS notifications;
 DROP TABLE IF EXISTS subscription;
+DROP TABLE IF EXISTS likes_comments;
 DROP TABLE IF EXISTS likes;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS articles;
@@ -202,7 +203,7 @@ CREATE TABLE comments (
     content VARCHAR(1000),
     time_of_comment TIMESTAMP NOT NULL,
     comments_id INTEGER,
-    PRIMARY KEY (id, user_id, article_id),
+    PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES user (id),
     FOREIGN KEY (article_id) REFERENCES articles (id)
 );
@@ -235,35 +236,65 @@ CREATE TABLE likes (
     id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     article_id INTEGER NOT NULL,
-    comments_id INTEGER,
     PRIMARY KEY (id, user_id, article_id),
     FOREIGN KEY (user_id) REFERENCES user (id),
     FOREIGN KEY (article_id) REFERENCES articles (id)
 );
 
 -- Inserting 20 rows of sample data into the likes table
-INSERT INTO likes (id, user_id, article_id, comments_id)
+INSERT INTO likes (id, user_id, article_id)
 VALUES
-    (1, 1, 1, NULL),
-    (2, 2, 1, NULL),
-    (3, 3, 2, NULL),
-    (4, 4, 2, NULL),
-    (5, 5, 3, NULL),
-    (6, 1, 3, NULL),
-    (7, 2, 4, NULL),
-    (8, 3, 4, NULL),
-    (9, 4, 5, NULL),
-    (10, 5, 5, NULL),
-    (11, 1, 6, NULL),
-    (12, 2, 6, NULL),
-    (13, 3, 7, NULL),
-    (14, 4, 7, NULL),
-    (15, 5, 8, NULL),
-    (16, 1, 8, NULL),
-    (17, 2, 9, NULL),
-    (18, 3, 9, NULL),
-    (19, 4, 10, NULL),
-    (20, 5, 10, NULL);
+    (1, 1, 1),
+    (2, 2, 1),
+    (3, 3, 2),
+    (4, 4, 2),
+    (5, 5, 3),
+    (6, 1, 3),
+    (7, 2, 4),
+    (8, 3, 4),
+    (9, 4, 5),
+    (10, 5, 5),
+    (11, 1, 6),
+    (12, 2, 6),
+    (13, 3, 7),
+    (14, 4, 7),
+    (15, 5, 8),
+    (16, 1, 8),
+    (17, 2, 9),
+    (18, 3, 9),
+    (19, 4, 10),
+    (20, 5, 10);
+
+CREATE TABLE likes_comments(
+    user_id INTEGER NOT NULL,
+    comments_id INTEGER NOT NULL,
+    PRIMARY KEY (user_id, comments_id),
+    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (comments_id) REFERENCES comments (id)
+);
+
+-- Insert 20 rows of data into the likes_comments table
+INSERT INTO likes_comments (user_id, comments_id) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 4),
+(2, 5),
+(2, 6),
+(3, 7),
+(3, 8),
+(3, 9),
+(4, 10),
+(4, 11),
+(4, 12),
+(5, 13),
+(5, 14),
+(5, 15),
+(6, 16),
+(6, 17),
+(6, 18),
+(7, 19),
+(7, 20);
 
 CREATE TABLE subscription(
     being_subscribed_id INTEGER NOT NULL,
