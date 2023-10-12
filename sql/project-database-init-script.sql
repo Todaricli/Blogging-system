@@ -15,9 +15,9 @@ DROP TABLE IF EXISTS subscription;
 DROP TABLE IF EXISTS likes;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS articles;
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS "user";
 
-CREATE TABLE user
+CREATE TABLE "user"
 (
     id INTEGER NOT NULL PRIMARY KEY,
     username VARCHAR(28) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE user
     CHECK (admin >= 0 AND admin <= 1)
 );
 
-INSERT INTO user
+INSERT INTO "user"
     (id, username, password, fname, lname, DOB, description, icon_path, admin)
 VALUES
     (1, 'user1', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'John', 'Doe', '1990-01-01', 'User 1', 'path1', 0),
@@ -53,7 +53,7 @@ CREATE TABLE articles (
     content VARCHAR(8000) NOT NULL,
     date_of_publish TIMESTAMP NOT NULL,
     author_id INTEGER NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES user (id)
+    FOREIGN KEY (author_id) REFERENCES "user" (id)
 );
 
 -- Inserting 15 rows of sample data into the articles table
@@ -203,7 +203,7 @@ CREATE TABLE comments (
     time_of_comment TIMESTAMP NOT NULL,
     comments_id INTEGER,
     PRIMARY KEY (id, user_id, article_id),
-    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (user_id) REFERENCES "user" (id),
     FOREIGN KEY (article_id) REFERENCES articles (id)
 );
 
@@ -237,7 +237,7 @@ CREATE TABLE likes (
     article_id INTEGER NOT NULL,
     comments_id INTEGER,
     PRIMARY KEY (id, user_id, article_id),
-    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (user_id) REFERENCES "user" (id),
     FOREIGN KEY (article_id) REFERENCES articles (id)
 );
 
@@ -269,8 +269,8 @@ CREATE TABLE subscription(
     being_subscribed_id INTEGER NOT NULL,
     follower_id INTEGER NOT NULL,
     PRIMARY KEY (being_subscribed_id, follower_id),
-    FOREIGN KEY (being_subscribed_id) REFERENCES user (id),
-    FOREIGN KEY (follower_id) REFERENCES user (id)
+    FOREIGN KEY (being_subscribed_id) REFERENCES "user" (id),
+    FOREIGN KEY (follower_id) REFERENCES "user" (id)
 );
 
 -- Inserting 20 rows of sample data into the subscription table
@@ -302,7 +302,7 @@ CREATE TABLE notifications(
     host_id INTEGER NOT NULL,
     time TIMESTAMP NOT NULL,
     content VARCHAR(88),
-    FOREIGN KEY (host_id) REFERENCES user (id)
+    FOREIGN KEY (host_id) REFERENCES "user" (id)
 );
 
 -- Inserting 20 rows of sample data into the notifications table
@@ -335,7 +335,7 @@ CREATE TABLE notify (
     follower_id INTEGER NOT NULL,
     PRIMARY KEY (id, notification_id, follower_id),
     FOREIGN KEY (notification_id) REFERENCES notifications (id),
-    FOREIGN KEY (follower_id) REFERENCES user (id)
+    FOREIGN KEY (follower_id) REFERENCES "user" (id)
 );
 
 -- Inserting 20 rows of sample data into the notify table
