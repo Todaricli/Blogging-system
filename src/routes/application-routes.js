@@ -26,29 +26,6 @@ router.get('/article', async function (req, res) {
     res.render('articleDemo');
 });
 
-// router.get('/article/:id', async function (req,res) {
-//     const articleId = req.params.id;
-//     console.log("Article ID:", articleId);
-
-//     const article = await articleDao.getArticlesByID(articleId);
-//     console.log(article);
-//     res.locals.article = article;
-
-//     const authorName = await articleDao.getAuthorByArticle(articleId);
-//     console.log(authorName);
-//     res.locals.authorName = authorName;
-
-//     const comments = await articleDao.getAllCommentsFromArticle(articleId);
-//     console.log(comments);
-//     res.locals.comments = comments;
-
-//     const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
-//     console.log(likeCounts);
-//     res.locals.like_count = likeCounts;
-
-//     res.render('articleDemo');
-// })
-
 router.get('/sub', function (req,res) {
     res.render('subscription&subscriber');
 })

@@ -57,6 +57,8 @@ router.get('/article/:id', async function (req, res) {
   const article_id = req.params.id;
 
   const article = await articleDao.getArticlesByID(article_id);
+  console.log(article)
+  res.locals.article = article;
   const content = article[0].content;
 
   try {
@@ -79,6 +81,18 @@ router.get('/article/:id', async function (req, res) {
     const html = "<p>Article loading error! refresh the page.<p>"
     res.locals.article_content = html;
   }
+
+    const authorName = await articleDao.getAuthorByArticle(article_id);
+    console.log(authorName);
+    res.locals.authorName = authorName;
+
+    const comments = await articleDao.getAllCommentsFromArticle(article_id);
+    console.log(comments);
+    res.locals.comments = comments;
+
+    const likeCounts = await articleDao.getNumberOfLikesFromArticle(article_id);
+    console.log(likeCounts);
+    res.locals.like_count = likeCounts;
 
   res.render("articleDemo");
 });
