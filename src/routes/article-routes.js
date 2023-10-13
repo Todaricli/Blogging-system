@@ -28,31 +28,6 @@ router.post("/api/postNewArticle", async function (req, res) {
   }
 })
 
-//A middleware is required to transfer the article being clicked to res.locals
-
-router.get('/displaySingleArticleWithDelta', async function (req, res) {
-  const user_id = res.locals.user.id;
-
-  const article = await articleDao.getArticlesByUserID(user_id);
-  const index = article.length - 1;
-  const content = article[index].content;
-  const content_obj = JSON.parse(content);
-  const delta_obj = content_obj.ops;
-
-  const cfg = {
-    inlineStyles: true,
-    multiLineBlockquote: true,
-    multiLineHeader: true
-  };
-
-  const converter = new QuillDeltaToHtmlConverter(delta_obj, cfg);
-
-  const html = converter.convert();
-
-  res.send(html);
-
-});
-
 router.get('/article/:id', async function (req, res) {
   const article_id = req.params.id;
 
@@ -79,6 +54,18 @@ router.get('/article/:id', async function (req, res) {
     const html = "<p>Article loading error! refresh the page.<p>"
     res.locals.article_content = html;
   }
+
+  const authorName = await articleDao.getAuthorByArticle(articleId);
+  console.log(authorName);
+  res.locals.authorName = authorName;
+
+  const comments = await articleDao.getAllCommentsFromArticle(articleId);
+  console.log(comments);
+  res.locals.comments = comments;
+
+  const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
+  console.log(likeCounts);
+  res.locals.like_count = likeCounts;
 
   res.render("articleDemo");
 });
