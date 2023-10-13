@@ -33,6 +33,7 @@ router.get('/article/:id', async function (req, res) {
 
   const article = await articleDao.getArticlesByID(article_id);
   const content = article[0].content;
+  const articleId = article[0].id;
 
   try {
     const content_obj = JSON.parse(content);
@@ -50,16 +51,15 @@ router.get('/article/:id', async function (req, res) {
     const html = converter.convert();
     res.locals.article_content = html;
 
+    res.locals.article = article;
+
     const authorName = await articleDao.getAuthorByArticle(articleId);
-    console.log(authorName);
     res.locals.authorName = authorName;
 
     const comments = await articleDao.getAllCommentsFromArticle(articleId);
-    console.log(comments);
     res.locals.comments = comments;
 
     const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
-    console.log(likeCounts);
     res.locals.like_count = likeCounts
 
   } catch (error) {
