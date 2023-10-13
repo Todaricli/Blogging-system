@@ -22,17 +22,15 @@ async function getArticleLikes(user_id) {
     select user_id, article_id, title, like_count from [Articles_info]
     where user_id = ${user_id}
     `)
-
     return numLikes;
 }
 
 async function getNumberOfComments(user_id){
     const db = await getDatabase();
 
-    const numOfComments = await db.all(SQL`
-    select count(id) as counts from comments 
-    where user_id = ${user_id}
-    `)
+    // const numOfComments = await db.all(SQL`
+    // `)
+    const numOfComments = "hi"
 
     return numOfComments
 }
