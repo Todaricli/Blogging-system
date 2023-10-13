@@ -2,6 +2,7 @@
 const SQL = require('sql-template-strings');
 const { getDatabase } = require('../db/database.js');
 
+
 //working
 async function getArticlesByUserID(userid){
     const db = await getDatabase();
@@ -34,7 +35,20 @@ async function getArticlesByID(id){
     where id = ${id};
     `)
 
-    return article
+    return article;
+}
+
+async function getAuthorByArticle(articleId) {
+    const db = await getDatabase();
+
+    const author = await db.all(SQL `
+    SELECT user.fname AS author_fname, user.lname AS author_lname
+    FROM articles
+    INNER JOIN user ON articles.author_id = user.id
+    WHERE articles.id = ${articleId};
+    `)
+
+    return author;
 }
 
 //working
@@ -124,6 +138,30 @@ async function getAllArticlesSortedByTitle(){
     return articles
 }
 
+async function getAllCommentsFromArticle(articleId) {
+    const db = await getDatabase();
+
+    const comments = await db.all(SQL `
+    select * from comments 
+    where article_id = ${articleId}
+    `)
+
+    return comments;
+}
+
+async function getNumberOfLikesFromArticle(articleId) {
+    const db = await getDatabase();
+
+    const likeCounts = await db.all(SQL `
+    select count(*) as like_count
+    from likes
+    where article_id = ${articleId}
+    `)
+
+    return likeCounts;
+}
+
+
 module.exports = {
     getArticlesByUserID,
     getArticlesByID,
@@ -134,5 +172,8 @@ module.exports = {
     getAllArticlesSortedByUsername,
     getAllArticlesSortedByTitle,
     getAllArticlesByPublishDate,
-    getAllArticles
+    getAllArticles,
+    getAllCommentsFromArticle,
+    getNumberOfLikesFromArticle,
+    getAuthorByArticle
 };
