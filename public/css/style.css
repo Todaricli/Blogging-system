@@ -6,7 +6,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     height: 60px;
-    
+
 }
 
 .nav_list {
@@ -18,7 +18,7 @@ nav {
     margin-right: 20px;
 }
 
-.logo img{
+.logo img {
     width: auto;
     height: 60px;
 }
@@ -37,7 +37,7 @@ nav {
     width: 15px;
 }
 
-.search_bar input{
+.search_bar input {
     width: 500px;
     height: 28px;
     border: transparent;
@@ -58,7 +58,7 @@ nav {
     width: 100px;
     background-color: bisque;
     z-index: 1;
-    
+
 }
 
 .dropdown-content a {
@@ -105,7 +105,7 @@ nav {
     color: rgb(12, 175, 17);
 }
 
-#register_page_container > p {
+#register_page_container>p {
     padding: 0px 30px 0px 30px;
 }
 
@@ -113,7 +113,7 @@ nav {
     padding: 0px 30px 0px 30px;
 }
 
-#register_fillinbox > div {
+#register_fillinbox>div {
     padding: 10px 0px 10px 0px;
 }
 
@@ -134,7 +134,7 @@ nav {
     justify-content: center;
 }
 
-#login_toast{
+#login_toast {
     color: rgb(12, 175, 17);
 }
 
@@ -150,7 +150,7 @@ nav {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#login_username{
+#login_username {
     padding-bottom: 20px;
 }
 
@@ -244,10 +244,10 @@ nav {
 
 #subscriber_container {
     grid-area: subscriber;
-    
+
 }
 
-#subscription_container > *{
+#subscription_container>* {
     display: flex;
     justify-content: space-between;
     border: 1px solid lightgray;
@@ -255,7 +255,7 @@ nav {
     padding: 5px;
 }
 
-#subscriber_container > *{
+#subscriber_container>* {
     display: flex;
     justify-content: space-between;
     border: 1px solid lightgray;
@@ -267,12 +267,12 @@ nav {
     width: 200px;
 }
 
-.subscription_rows > a {
+.subscription_rows>a {
     display: flex;
     gap: 10px;
 }
 
-.subscriber_rows > a {
+.subscriber_rows>a {
     display: flex;
     gap: 10px;
 }
@@ -291,7 +291,7 @@ nav {
     padding: 10px;
 }
 
-#profile_info > * {
+#profile_info>* {
     padding: 10px;
 }
 
@@ -303,7 +303,7 @@ nav {
     padding: 10px;
 }
 
-#profile_articles_container > * {
+#profile_articles_container>* {
     padding: 10px;
 }
 
@@ -322,7 +322,7 @@ nav {
     overflow: scroll;
 }
 
-#icon_select_container > *{
+#icon_select_container>* {
     display: flex;
     justify-content: center;
 }
@@ -341,18 +341,22 @@ nav {
     background-color: lightgray;
 }
 
-.icon_select > input {
-    opacity:0;
+.icon_select>input {
+    opacity: 0;
 }
 
-@media only screen and (max-width:800px){#register_page_body {
-    width: 100%;
-}}
+@media only screen and (max-width:800px) {
+    #register_page_body {
+        width: 100%;
+    }
+}
 
-@media only screen and (max-width:600px){#icon_select_container {
-    width: 100%;
+@media only screen and (max-width:600px) {
+    #icon_select_container {
+        width: 100%;
 
-}}
+    }
+}
 
 
 
@@ -371,7 +375,7 @@ nav {
     overflow: scroll;
 }
 
-#icon_select_container > *{
+#icon_select_container>* {
     display: flex;
     justify-content: center;
 }
@@ -390,18 +394,22 @@ nav {
     background-color: lightgray;
 }
 
-.icon_select > input {
-    opacity:0;
+.icon_select>input {
+    opacity: 0;
 }
 
-@media only screen and (max-width:800px){#register_page_body {
-    width: 100%;
-}}
+@media only screen and (max-width:800px) {
+    #register_page_body {
+        width: 100%;
+    }
+}
 
-@media only screen and (max-width:600px){#icon_select_container {
-    width: 100%;
+@media only screen and (max-width:600px) {
+    #icon_select_container {
+        width: 100%;
 
-}}
+    }
+}
 
 #user_avatar {
     width: 40px;
@@ -421,3 +429,116 @@ nav {
     margin-bottom: 10px;
     padding: 10px;
 }
+
+/* ANAYTICS DASHBOARD START*/
+.analyticsDashboard {
+    background-color: rgb(241, 248, 248);
+    margin-bottom: 20px;
+}
+
+#keyMetricsTitle {
+    color: rgb(130, 130, 198);
+    font-size: 60px;
+}
+
+.keyMetricsDiv {
+    display: flex;
+    margin: 20px;
+}
+
+.keyMetricsDiv>* {
+    margin: auto;
+    padding: auto;
+    text-align: center;
+}
+
+#keyMetricsTitle {
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.indvKeyMetrics {
+    padding: 20px;
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.divTitles {
+    font-size: 30px;
+}
+
+#followersDiv {
+    padding-left: 50px;
+    padding-right: 50px;
+    background: rgb(255,133,244);
+    background: linear-gradient(90deg, rgba(255,133,244,1) 0%, rgba(252,176,69,1) 98%);
+    color: aliceblue;
+}
+
+#followerNumber {
+    font-size: 55px;
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+
+#commentsDiv, #likesDiv {
+    padding: 40px;
+    font-size: larger;
+}
+
+.articleWithComments {
+    font-style: italic;
+}
+
+.topThreeDiv, #commentsDiv, #likesDiv {
+    background-color: white;
+    color: rgb(130, 130, 198);
+}
+
+.topThreeDiv {
+    padding: 20px;
+    margin: 30px;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.topThreeDiv > * {
+    margin: auto;
+    padding: auto;
+    text-align: center;
+}
+
+#topThreeTitle {
+    margin: 20px;
+    margin-top: 0;
+    font-size: 40px;
+}
+
+.indvTopArticles {
+
+}
+
+.furtherData {
+    /* display: flex; */
+    background-color: white;
+    margin: 30px;
+}
+
+#dataIcon{
+    margin:20px;
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-left: 5px;
+}
+
+#plot {
+    margin: auto;
+    margin-bottom: 50px;
+    padding: auto;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+/* ANAYTICS DASHBOARD END*/
