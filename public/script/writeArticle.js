@@ -62,7 +62,11 @@ window.addEventListener("load", function () {
 
         } catch (error) {
             // Handle any errors that occur during the request
-            console.error('Error:', error);
+            toastMessage.innerText = error;
+            //remove user input from text editor
+            quill.deleteText(0, quill.getLength());
+            //remove other user input
+            document.getElementById("write_article_title").value = "";
         }
     });
 
