@@ -77,6 +77,7 @@ router.get('/article/:id', async function (req, res) {
 
   } catch (error) {
     const html = "<p>Article loading error! refresh the page.<p>"
+    res.locals.article_content = html;
   }
 
   res.render("articleDemo");
