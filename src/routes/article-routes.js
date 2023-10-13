@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const articleDao = require('../models/articles-dao.js');
-const writeArticleDao = require('../models/writeArticle-dao.js');
 
 const QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
 
@@ -21,6 +20,7 @@ router.post("/api/postNewArticle", async function (req, res) {
   try {
     const content_obj = JSON.parse(content);
     const delta_obj = content_obj.ops;
+    const delta_obj_string = JSON.stringify(delta_obj);
 
     const cfg = {
       inlineStyles: true,
@@ -33,7 +33,7 @@ router.post("/api/postNewArticle", async function (req, res) {
     const html = converter.convert();
 
     let done = undefined;
-    done = await writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, html);
+    done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string);
 
     if (done) {
       res.status(200).send("New Article Created!");
