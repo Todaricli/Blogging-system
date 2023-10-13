@@ -160,11 +160,10 @@ router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res)
     }
 })
 
-// <<<<<<< HEAD
-// router.get("/analytics-Dashboard", async (req,res) =>{
-//     console.log("skeet")
-//     res.render("analyticsDashboard")
-// })
+router.get("/analytics-Dashboard", async (req,res) =>{
+    console.log("skeet")
+    res.render("analyticsDashboard")
+})
 
 router.get("/subscriberRemove", verifyAuthenticated, async function (req, res) {
     const subscriber_id = req.query.id;
@@ -178,5 +177,12 @@ router.get("/subscriberRemove", verifyAuthenticated, async function (req, res) {
         res.redirect('/login');
     }
 })
+
+router.get('/analytics', function(req, res){
+
+
+
+    res.render('analyticsDashboard');
+});
 
 module.exports = router;
