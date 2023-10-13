@@ -61,6 +61,7 @@ async function startExpress() {
     app.use(require('./routes/auth-routes.js'));
     app.use(require('./routes/api-routes.js'));
     app.use(require('./routes/api-routes-analytics.js'));
+    app.use(require('./routes/article-routes.js'));
 
     // Make the "public" folder available statically
     const publicFolder = path.join(process.cwd(), 'public');
@@ -72,6 +73,7 @@ async function startExpress() {
 
     // Start listening on PORT
     app.listen(PORT, console.log(`Server listening on port ${PORT}`));
+
 }
 
 module.exports = {
