@@ -1,7 +1,6 @@
 // General queries with the database
 const SQL = require('sql-template-strings');
 const { getDatabase } = require('../db/database.js');
-const { getAllUserData } = require('./generic-dao.js');
 
 
 //working
@@ -10,10 +9,10 @@ async function getArticlesByUserID(userid){
 
     const article = await db.all(SQL`
     select * from articles
-    where author_id = ${userid};
+    where author_id = ${userid}
     `)
 
-    return article
+    return article;
 }
 
 async function getAllArticles(){
@@ -64,7 +63,7 @@ async function getTopFiveArticles(){
     limit 5
     `)
 
-    return article
+    return article;
 }
 
 //this one not working yet, not sure how you wanna do the date input, cos need to convert the date column matching format.
