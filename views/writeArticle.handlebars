@@ -2,9 +2,8 @@
 
 <br>
 
-{{#if toastMessage}}
-<p style="color: brown;"><strong>{{toastMessage}}</strong></p>
-{{/if}}
+
+<p style="color: brown;"><strong id="write-article-toast-message"></strong></p>
 
 <hr>
 
@@ -15,7 +14,7 @@
             <div>
                 <div>
                     <label for="write_article_title">Title</label>
-                    <input id="write_article_title" name="write_article_title" type="text" style="height: 20px; width: 500px;">
+                    <input id="write_article_title" name="write_article_title" type="text" style="height: 20px; width: 500px;" required>
                 </div>
                 <div>
                     <label for="write_article_genre">Genre</label>
@@ -44,9 +43,10 @@
             <button type="submit">Publish!</button>
         </div>
     </form>
-    {{!-- <div>
-        <button id="btn-write-article" type="submit">Publish!</button>
-    </div> --}}
+
+    <!-- these two anchor tags for trialling purpose only -->
+
+    <a href="/article/16">Single article!</a>
 </div>
 
 

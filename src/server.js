@@ -74,6 +74,7 @@ async function startExpress() {
 
     // Start listening on PORT
     app.listen(PORT, console.log(`Server listening on port ${PORT}`));
+
 }
 
 module.exports = {

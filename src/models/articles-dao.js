@@ -1,7 +1,7 @@
 // General queries with the database
 const SQL = require('sql-template-strings');
 const { getDatabase } = require('../db/database.js');
-const { getAllUserData } = require('./generic-dao.js');
+
 
 //working
 async function getArticlesByUserID(userid){
@@ -9,10 +9,10 @@ async function getArticlesByUserID(userid){
 
     const article = await db.all(SQL`
     select * from articles
-    where author_id = ${userid};
+    where author_id = ${userid}
     `)
 
-    return article
+    return article;
 }
 
 async function getAllArticles(){
@@ -35,7 +35,20 @@ async function getArticlesByID(id){
     where id = ${id};
     `)
 
-    return article
+    return article;
+}
+
+async function getAuthorByArticle(articleId) {
+    const db = await getDatabase();
+
+    const author = await db.all(SQL `
+    SELECT user.fname AS author_fname, user.lname AS author_lname
+    FROM articles
+    INNER JOIN user ON articles.author_id = user.id
+    WHERE articles.id = ${articleId};
+    `)
+
+    return author;
 }
 
 //working
@@ -50,7 +63,7 @@ async function getTopFiveArticles(){
     limit 5
     `)
 
-    return article
+    return article;
 }
 
 //this one not working yet, not sure how you wanna do the date input, cos need to convert the date column matching format.
@@ -125,6 +138,30 @@ async function getAllArticlesSortedByTitle(){
     return articles
 }
 
+async function getAllCommentsFromArticle(articleId) {
+    const db = await getDatabase();
+
+    const comments = await db.all(SQL `
+    select * from comments 
+    where article_id = ${articleId}
+    `)
+
+    return comments;
+}
+
+async function getNumberOfLikesFromArticle(articleId) {
+    const db = await getDatabase();
+
+    const likeCounts = await db.all(SQL `
+    select count(*) as like_count
+    from likes
+    where article_id = ${articleId}
+    `)
+
+    return likeCounts;
+}
+
+
 module.exports = {
     getArticlesByUserID,
     getArticlesByID,
@@ -135,5 +172,8 @@ module.exports = {
     getAllArticlesSortedByUsername,
     getAllArticlesSortedByTitle,
     getAllArticlesByPublishDate,
-    getAllArticles
+    getAllArticles,
+    getAllCommentsFromArticle,
+    getNumberOfLikesFromArticle,
+    getAuthorByArticle
 };
