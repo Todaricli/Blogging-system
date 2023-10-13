@@ -62,6 +62,7 @@ async function getUserIdByUsername(username) {
     return userId;
 }
 
+
 module.exports = {
     getUserDataById,
     getUserDataByUsername,

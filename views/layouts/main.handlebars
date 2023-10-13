@@ -9,6 +9,9 @@
     <title>Default title.</title>
     {{/if}}
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
 </head>
 
 <body>
@@ -22,7 +25,6 @@
 
         {{!-- Navigation search bar--}}
         <div class="search_bar">
-            <img src="/images/search-icon.png">
             <input type="text" id="searchInput" placeholder="Search...">
         </div>
 
@@ -42,7 +44,7 @@
                 </div>
             </li>
             <li>
-                <img src="/images/Dragonite.png" alt="user_avatar" id="user_avatar">
+                <img src="{{user.icon_path}}" alt="user_avatar" id="user_avatar">
             </li>
             {{else}}
             <li class="login">
@@ -61,7 +63,10 @@
     
 
     <footer>
-        <h1>Footer is here</h1>
+        <div id="footer">
+        <img src="images/footer-logo.png">
+        <span> &copy 2023 UOA-PGCIT-S2 Group 2</span>
+        </div>
     </footer>
 </body>
 
