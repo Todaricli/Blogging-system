@@ -7,11 +7,6 @@ const subDao = require('../models/sub-dao.js');
 
 const writeArticleDao = require('../models/writeArticle-dao.js');
 
-// router.get('/', async function (req, res) {
-//     res.locals.title = 'My route title!';
-//     res.locals.allTestData = await testDao.retrieveAllTestData();
-//     res.render('home');
-// });
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
@@ -27,29 +22,6 @@ router.get('/', verifyAuthenticated, async function (req, res) {
 router.get('/article', async function (req, res) {
     res.render('articleDemo');
 });
-
-// router.get('/article/:id', async function (req,res) {
-//     const articleId = req.params.id;
-//     console.log("Article ID:", articleId);
-
-//     const article = await articleDao.getArticlesByID(articleId);
-//     console.log(article);
-//     res.locals.article = article;
-
-//     const authorName = await articleDao.getAuthorByArticle(articleId);
-//     console.log(authorName);
-//     res.locals.authorName = authorName;
-
-//     const comments = await articleDao.getAllCommentsFromArticle(articleId);
-//     console.log(comments);
-//     res.locals.comments = comments;
-
-//     const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
-//     console.log(likeCounts);
-//     res.locals.like_count = likeCounts;
-
-//     res.render('articleDemo');
-// })
 
 router.get('/sub', verifyAuthenticated, async function (req, res) {
     const user_id = res.locals.user.id;
@@ -122,6 +94,31 @@ router.post('/update_info', function (req, res) {
     res.render('myProfile', { this: res.locals, information: updateInfo });
 })
 
+router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res) {
+    const subscription_id = req.query.id;
+    const user_id = res.locals.user.id;
+    if (user_id) {
+        await subDao.removeSpecificSubscriptionByID(user_id, subscription_id);
+        res.locals.subscriptionList = await subDao.getSubscriptionsByUserID(user_id);
+        res.locals.subscriberList = await subDao.getSubscribersByUserID(user_id);
+        res.render('subscription&subscriber');
+    } else {
+        res.redirect('/login');
+    }
+})
+
+router.get("/subscriberRemove", verifyAuthenticated, async function (req, res) {
+    const subscriber_id = req.query.id;
+    const user_id = res.locals.user.id;
+    if (user_id) {
+        await subDao.removeSpecificSubscriberByID(user_id, subscriber_id);
+        res.locals.subscriptionList = await subDao.getSubscriptionsByUserID(user_id);
+        res.locals.subscriberList = await subDao.getSubscribersByUserID(user_id);
+        res.render('subscription&subscriber');
+    } else {
+        res.redirect('/login');
+    }
+})
 
 
 module.exports = router;
