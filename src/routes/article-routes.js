@@ -26,7 +26,7 @@ router.post("/api/postNewArticle", async function (req, res) {
   } else {
     res.status(404).send("Publishing error, try again!");
   }
-})
+});
 
 router.get('/article/:id', async function (req, res) {
   const article_id = req.params.id;
@@ -50,24 +50,25 @@ router.get('/article/:id', async function (req, res) {
     const html = converter.convert();
     res.locals.article_content = html;
 
+    const authorName = await articleDao.getAuthorByArticle(articleId);
+    console.log(authorName);
+    res.locals.authorName = authorName;
+
+    const comments = await articleDao.getAllCommentsFromArticle(articleId);
+    console.log(comments);
+    res.locals.comments = comments;
+
+    const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
+    console.log(likeCounts);
+    res.locals.like_count = likeCounts
+
   } catch (error) {
     const html = "<p>Article loading error! refresh the page.<p>"
     res.locals.article_content = html;
   }
 
-  const authorName = await articleDao.getAuthorByArticle(articleId);
-  console.log(authorName);
-  res.locals.authorName = authorName;
-
-  const comments = await articleDao.getAllCommentsFromArticle(articleId);
-  console.log(comments);
-  res.locals.comments = comments;
-
-  const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
-  console.log(likeCounts);
-  res.locals.like_count = likeCounts;
-
   res.render("articleDemo");
+
 });
 
 module.exports = router;
