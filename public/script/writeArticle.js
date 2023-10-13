@@ -1,13 +1,19 @@
 window.addEventListener("load", function () {
 
+    const toolBox = [
+        [{ header: [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'color': [] }, { 'background': [] }],       
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+        ['clean'],
+        ['image', 'code-block']
+    ];
+
     const quill = new Quill('#write_article_content', {
         modules: {
-            toolbar: [
-                [{ header: [1, 2, false] }],
-                ['bold', 'italic', 'underline'],
-                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                ['image', 'code-block']
-            ]
+            toolbar: toolBox
         },
         scrollingContainer: '#scrolling-container',
         placeholder: 'Compose an epic...',
@@ -58,11 +64,11 @@ window.addEventListener("load", function () {
             quill.deleteText(0, quill.getLength());
             //remove other user input
             document.getElementById("write_article_title").value = "";
-        
+
 
         } catch (error) {
             // Handle any errors that occur during the request
-            toastMessage.innerText = error;
+            toastMessage.innerText = error + ". Potential cause: Image uploading is not supported yet.";
             //remove user input from text editor
             quill.deleteText(0, quill.getLength());
             //remove other user input
