@@ -156,26 +156,27 @@ CREATE TABLE likes
 
 -- Inserting 20 rows of sample data into the likes table
 INSERT INTO likes (id, user_id, article_id)
-VALUES (1, 1, 1),
-       (2, 2, 1),
-       (3, 3, 2),
-       (4, 4, 2),
-       (5, 5, 3),
-       (6, 1, 3),
-       (7, 2, 4),
-       (8, 3, 4),
-       (9, 4, 5),
-       (10, 5, 5),
-       (11, 1, 6),
-       (12, 2, 6),
-       (13, 3, 7),
-       (14, 4, 7),
-       (15, 5, 8),
-       (16, 1, 8),
-       (17, 2, 9),
-       (18, 3, 9),
-       (19, 4, 10),
-       (20, 5, 10);
+VALUES
+    (1, 1, 1),
+    (2, 2, 1),
+    (3, 3, 2),
+    (4, 4, 2),
+    (5, 5, 3),
+    (6, 1, 3),
+    (7, 2, 4),
+    (8, 3, 4),
+    (9, 4, 5),
+    (10, 5, 5),
+    (11, 1, 6),
+    (12, 2, 6),
+    (13, 3, 7),
+    (14, 4, 7),
+    (15, 5, 8),
+    (16, 1, 8),
+    (17, 2, 9),
+    (18, 3, 9),
+    (19, 4, 10),
+    (20, 5, 10);
 
 CREATE TABLE likes_comments
 (
@@ -305,6 +306,21 @@ VALUES (1, 1, 2),
        (18, 18, 4),
        (19, 19, 5),
        (20, 20, 1);
+
+-- creating a view that shows articles likes, comments and popularity
+DROP VIEW IF EXISTS articles_info;
+
+create view [Articles_info]as 
+select articles.author_id as user_id,articles.id as article_id,user.fname, user.lname, articles.title, count(likes.id) as like_count, comments_count, (count(likes.id) + comments_count*2) as popularity
+	from articles
+	left join likes on articles.id = likes.article_id
+	left join (
+		select article_id as comment_articles_id, count(comments.id) as comments_count
+			from comments 
+			group by article_id
+	) on articles.id = comment_articles_id
+	left join user on user.id = articles.author_id
+ group by articles.id;
 
 
 
