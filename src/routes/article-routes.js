@@ -18,23 +18,6 @@ router.post("/api/postNewArticle", async function (req, res) {
   const genre = newArticle.genreKey;
   const content = newArticle.contentKey;
 
-  let done = undefined;
-  done = await writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, content);
-
-  if (done) {
-    res.status(200).send("New Article Created!");
-  } else {
-    res.status(404).send("Publishing error, try again!");
-  }
-});
-
-router.get('/article/:id', async function (req, res) {
-  const article_id = req.params.id;
-
-  const article = await articleDao.getArticlesByID(article_id);
-  const content = article[0].content;
-  const articleId = article[0].id;
-
   try {
     const content_obj = JSON.parse(content);
     const delta_obj = content_obj.ops;
@@ -48,7 +31,26 @@ router.get('/article/:id', async function (req, res) {
     const converter = new QuillDeltaToHtmlConverter(delta_obj, cfg);
 
     const html = converter.convert();
-    res.locals.article_content = html;
+
+    let done = undefined;
+    done = await writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, html);
+
+    if (done) {
+      res.status(200).send("New Article Created!");
+    }
+  } catch (e) {
+    res.status(404).send("Publishing error, try again!");
+  }
+
+});
+
+router.get('/article/:id', async function (req, res) {
+  const article_id = req.params.id;
+
+  const article = await articleDao.getArticlesByID(article_id);
+  const articleId = article[0].id;
+
+  try {
 
     res.locals.article = article;
 
