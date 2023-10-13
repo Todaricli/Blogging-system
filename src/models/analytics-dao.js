@@ -1,0 +1,56 @@
+// General queries with the database
+const SQL = require('sql-template-strings');
+const { getDatabase } = require('../db/database.js');
+const { getAllUserData } = require('./generic-dao.js');
+
+async function getNumFollowers(user_id) {
+    const db = await getDatabase()
+
+    const numFollowers = await db.all(SQL`
+    select count(being_subscribed_id) as counts from subscription 
+    where being_subscribed_id = ${user_id}
+    `)
+
+    return numFollowers
+
+}
+
+async function getArticleLikes(user_id) {
+    const db = await getDatabase();
+
+    const numLikes = await db.all(SQL`
+    select user_id, article_id, title, like_count from [Articles_info]
+    where user_id = ${user_id}
+    `)
+    return numLikes;
+}
+
+async function getNumberOfComments(user_id){
+    const db = await getDatabase();
+
+    // const numOfComments = await db.all(SQL`
+    // `)
+    const numOfComments = "hi"
+
+    return numOfComments
+}
+
+async function getMostPopularArticles(user_id){
+    const db = await getDatabase();
+    
+    const mostPopular =await db.all(SQL`
+        select * from [Articles_info]
+        where user_id = ${user_id}
+        order by popularity desc
+        limit 3
+    `)
+
+    return mostPopular;
+}
+
+module.exports ={
+    getNumFollowers,
+    getNumberOfComments,
+    getArticleLikes,
+    getMostPopularArticles
+}

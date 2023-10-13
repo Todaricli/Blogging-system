@@ -107,6 +107,11 @@ router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res)
     }
 })
 
+router.get("/analytics-Dashboard", async (req,res) =>{
+    console.log("skeet")
+    res.render("analyticsDashboard")
+})
+
 router.get("/subscriberRemove", verifyAuthenticated, async function (req, res) {
     const subscriber_id = req.query.id;
     const user_id = res.locals.user.id;
@@ -120,5 +125,11 @@ router.get("/subscriberRemove", verifyAuthenticated, async function (req, res) {
     }
 })
 
+router.get('/analytics', function(req, res){
+
+
+
+    res.render('analyticsDashboard');
+});
 
 module.exports = router;
