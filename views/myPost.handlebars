@@ -42,7 +42,7 @@
             <img src="/images/nature.avif" alt="my post image" id="post_img" width="200px">
             <h3 id="post_title">{{this.title}}</h3>
             <p id="post_publish_time"><strong>Published on </strong>{{this.date_of_publish}}</p>
-            <p id="post_content">{{{this.content}}}</p>
+            <p id="post_content">{{{this.content_html}}}</p>
             {{#if tags}}
             {{#each tags}}
             <p id="tag">{{this.post_tag}}</p>
