@@ -162,6 +162,7 @@ async function getNumberOfLikesFromArticle(articleId) {
 }
 
 
+
 module.exports = {
     getArticlesByUserID,
     getArticlesByID,

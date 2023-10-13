@@ -14,6 +14,7 @@ const writeArticleDao = require('../models/writeArticle-dao.js');
 // });
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
+const { subscribe } = require('./application-routes.js');
 
 router.get('/', verifyAuthenticated, async function (req, res) {
 
@@ -78,7 +79,29 @@ router.get('/profile', verifyAuthenticated, async function (req, res) {
     }
 
 })
-router.get('/my_profile', function (req, res) {
+router.get('/my_profile', async function (req, res) {
+    const user = res.locals.user;
+    console.log(user);
+
+    res.locals.details = user;
+
+    //Get subscribers
+    const userData = await subDao.getSubscribersByUserID(user.id);
+    //console.log(userData);
+
+    res.locals.subscribers = userData;
+
+    const totalSubscribers = userData.length;
+    res.locals.total_subscribers = totalSubscribers;
+
+    //Get followings
+    const userFollowings = await subDao.getSubscriptionsByUserID(user.id);
+    //console.log("Followings:" + userFollowings);
+
+    res.locals.followings = userFollowings;
+
+    const totalFollowings = userFollowings.length;
+    res.locals.total_followings = totalFollowings;
 
     res.render('myProfile');
 })
@@ -108,19 +131,9 @@ router.get('/my_post', async function (_, res) {
 
 router.post('/update_info', function (req, res) {
 
-    const { bio, gender, address } = req.body;
+  
 
-    const updateInfo = {
-        bio: bio ? true : false,
-        gender: gender ? true : false,
-        address: address ? true : false
-    };
-
-    res.locals.bio = bio;
-    res.locals.gender = gender;
-    res.locals.address = address;
-
-    res.render('myProfile', { this: res.locals, information: updateInfo });
+    res.render('myProfile');
 })
 
 // router.post("/postNewArticle", function(req, res) {
