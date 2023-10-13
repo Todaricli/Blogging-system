@@ -20,34 +20,11 @@ router.get('/', verifyAuthenticated, async function (req, res) {
     res.render('articlesHome');
 });
 
-router.get('/sub', function (req, res) {
-router.get('/article', async function (req, res) {
 
+router.get('/article', async function (req, res) {
     res.render('articleDemo');
 });
 
-// router.get('/article/:id', async function (req,res) {
-//     const articleId = req.params.id;
-//     console.log("Article ID:", articleId);
-
-//     const article = await articleDao.getArticlesByID(articleId);
-//     console.log(article);
-//     res.locals.article = article;
-
-//     const authorName = await articleDao.getAuthorByArticle(articleId);
-//     console.log(authorName);
-//     res.locals.authorName = authorName;
-
-//     const comments = await articleDao.getAllCommentsFromArticle(articleId);
-//     console.log(comments);
-//     res.locals.comments = comments;
-
-//     const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
-//     console.log(likeCounts);
-//     res.locals.like_count = likeCounts;
-
-//     res.render('articleDemo');
-// })
 
 router.get('/sub', function (req,res) {
     res.render('subscription&subscriber');
@@ -56,8 +33,8 @@ router.get('/sub', function (req,res) {
 router.get('/profile', function (req, res) {
     res.render('profile');
 })
-router.get('/my_profile', function (req, res) {
 
+router.get('/my_profile', function (req, res) {
     res.render('myProfile');
 })
 
@@ -99,31 +76,6 @@ router.post('/update_info', function (req, res) {
     res.locals.address = address;
 
     res.render('myProfile', { this: res.locals, information: updateInfo });
-})
-
-// router.post("/postNewArticle", function(req, res) {
-//     const newArticle = req.body;
-
-//     const user_id = res.locals.user.id;
-//     const title = newArticle.titleKey;
-//     const genre = newArticle.genreKey;
-//     const content = newArticle.contentKey;
-
-//     console.log(user_id);
-//     console.log(title);
-//     console.log(genre);
-//     console.log(content);
-    
-//     let done = undefined;
-//     done = writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, content);
-
-//     if(done) {
-//         res.setToastMessage("New Article created!");
-//     } else {
-//         res.setToastMessage("Submitting error, try again!");
-//     }
-    
-//     res.redirect('/writeArticle');
 })
 
 
