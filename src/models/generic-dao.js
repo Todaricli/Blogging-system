@@ -43,7 +43,8 @@ async function getAllCommentsByArticles(userId) {
     articles.id AS article_id, articles.title AS article_title,
     user.fname AS commentor_fname,
     user.lname AS commentor_lname,
-    user.username AS commentor_username
+    user.username AS commentor_username,
+    user.icon_path AS commentor_icon_path
     FROM articles
     LEFT JOIN comments ON articles.id = comments.article_id
     LEFT JOIN user ON comments.user_id = user.id
