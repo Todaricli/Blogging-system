@@ -16,9 +16,9 @@ DROP TABLE IF EXISTS likes_comments;
 DROP TABLE IF EXISTS likes;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS articles;
-DROP TABLE IF EXISTS "user";
+DROP TABLE IF EXISTS user;
 
-CREATE TABLE "user"
+CREATE TABLE user
 (
     id          INTEGER     NOT NULL PRIMARY KEY,
     username    VARCHAR(28) NOT NULL,
@@ -35,25 +35,36 @@ CREATE TABLE "user"
 );
 
 INSERT INTO user
-    (id, username, password, fname, lname, DOB, description, icon_path, admin)
-VALUES
-    (1, 'user1', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'John', 'Doe', '1990-01-01', 'User 1', 'path1', 0),
-    (2, 'user2', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Jane', 'Smith', '1995-03-15', 'User 2', 'path2', 0),
-    (3, 'user3', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Bob', 'Johnson', '1988-07-20', 'User 3', 'path3', 0),
-    (4, 'user4', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Alice', 'Williams', '1992-09-10', 'User 4', 'path4', 0),
-    (5, 'user5', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Charlie', 'Brown', '1998-12-05', 'User 5', 'path5', 0),
-    (6, 'user6', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Eve', 'Anderson', '1993-04-30', 'User 6', 'path6', 0),
-    (7, 'user7', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'David', 'Wilson', '1996-06-25', 'User 7', 'path7', 0),
-    (8, 'user8', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Grace', 'Miller', '1991-11-15', 'User 8', 'path8', 0),
-    (9, 'user9', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Frank', 'Martinez', '1987-02-08', 'User 9', 'path9', 0),
-    (10, 'user10', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Olivia', 'Jones', '1994-08-12', 'User 10', 'path10', 0);
+(id, username, password, fname, lname, DOB, description, icon_path, admin)
+VALUES (1, 'user1', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'John', 'Doe', '1990-01-01',
+        'User 1', 'path1', 0),
+       (2, 'user2', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Jane', 'Smith', '1995-03-15',
+        'User 2', 'path2', 0),
+       (3, 'user3', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Bob', 'Johnson', '1988-07-20',
+        'User 3', 'path3', 0),
+       (4, 'user4', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Alice', 'Williams', '1992-09-10',
+        'User 4', 'path4', 0),
+       (5, 'user5', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Charlie', 'Brown', '1998-12-05',
+        'User 5', 'path5', 0),
+       (6, 'user6', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Eve', 'Anderson', '1993-04-30',
+        'User 6', 'path6', 0),
+       (7, 'user7', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'David', 'Wilson', '1996-06-25',
+        'User 7', 'path7', 0),
+       (8, 'user8', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Grace', 'Miller', '1991-11-15',
+        'User 8', 'path8', 0),
+       (9, 'user9', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Frank', 'Martinez', '1987-02-08',
+        'User 9', 'path9', 0),
+       (10, 'user10', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Olivia', 'Jones', '1994-08-12',
+        'User 10', 'path10', 0);
 
-CREATE TABLE articles (
-    id INTEGER NOT NULL PRIMARY KEY,
-    title VARCHAR(88) NOT NULL,
-    content VARCHAR(8000) NOT NULL,
-    date_of_publish TIMESTAMP NOT NULL,
-    author_id INTEGER NOT NULL,
+CREATE TABLE articles
+(
+    id              INTEGER       NOT NULL PRIMARY KEY,
+    title           VARCHAR(88)   NOT NULL,
+    content         VARCHAR(8000) NOT NULL,
+    genre           VARCHAR(20),
+    date_of_publish TIMESTAMP     NOT NULL,
+    author_id       INTEGER       NOT NULL,
     FOREIGN KEY (author_id) REFERENCES user (id)
 );
 
@@ -113,8 +124,8 @@ CREATE TABLE comments
     article_id      INTEGER   NOT NULL,
     content         VARCHAR(1000),
     time_of_comment TIMESTAMP NOT NULL,
-    comments_id INTEGER,
-    PRIMARY KEY (id, user_id, article_id),
+    comments_id     INTEGER,
+    PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES user (id),
     FOREIGN KEY (article_id) REFERENCES articles (id)
 );
@@ -148,7 +159,7 @@ CREATE TABLE likes
     user_id    INTEGER NOT NULL,
     article_id INTEGER NOT NULL,
     PRIMARY KEY (id, user_id, article_id),
-    FOREIGN KEY (user_id) REFERENCES "user" (id),
+    FOREIGN KEY (user_id) REFERENCES user (id),
     FOREIGN KEY (article_id) REFERENCES articles (id)
 );
 
@@ -212,8 +223,8 @@ CREATE TABLE subscription
     being_subscribed_id INTEGER NOT NULL,
     follower_id         INTEGER NOT NULL,
     PRIMARY KEY (being_subscribed_id, follower_id),
-    FOREIGN KEY (being_subscribed_id) REFERENCES "user" (id),
-    FOREIGN KEY (follower_id) REFERENCES "user" (id)
+    FOREIGN KEY (being_subscribed_id) REFERENCES user (id),
+    FOREIGN KEY (follower_id) REFERENCES user (id)
 );
 
 -- Inserting 20 rows of sample data into the subscription table
@@ -245,7 +256,7 @@ CREATE TABLE notifications
     host_id INTEGER   NOT NULL,
     time    TIMESTAMP NOT NULL,
     content VARCHAR(88),
-    FOREIGN KEY (host_id) REFERENCES "user" (id)
+    FOREIGN KEY (host_id) REFERENCES user (id)
 );
 
 -- Inserting 20 rows of sample data into the notifications table
@@ -278,7 +289,7 @@ CREATE TABLE notify
     follower_id     INTEGER NOT NULL,
     PRIMARY KEY (id, notification_id, follower_id),
     FOREIGN KEY (notification_id) REFERENCES notifications (id),
-    FOREIGN KEY (follower_id) REFERENCES "user" (id)
+    FOREIGN KEY (follower_id) REFERENCES user (id)
 );
 
 -- Inserting 20 rows of sample data into the notify table
@@ -303,16 +314,3 @@ VALUES (1, 1, 2),
        (18, 18, 4),
        (19, 19, 5),
        (20, 20, 1);
-
-
-
-
-
-
-
-
-
-
-
-
-

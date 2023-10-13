@@ -9,14 +9,8 @@ const genericDao = require('../models/generic-dao.js');
 //     res.locals.allTestData = await testDao.retrieveAllTestData();
 //     res.render('home');
 // });
-const {
-    verifyAuthenticated,
-} = require('../middleware/auth-middleware/login-auth.js');
-const {
-    getUserArticles,
-    getAllCommentsByArticles,
-    getUserNameByComment,
-} = require('../models/generic-dao.js');
+const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
+const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
 router.get('/', verifyAuthenticated, async function (req, res) {
 
@@ -26,7 +20,7 @@ router.get('/', verifyAuthenticated, async function (req, res) {
     res.render('articlesHome');
 });
 
-router.get('/sub', function (req, res) {
+// router.get('/sub', function (req, res) {
 router.get('/article', async function (req, res) {
 
     res.render('articleDemo');
@@ -55,32 +49,9 @@ router.get('/article', async function (req, res) {
 //     res.render('articleDemo');
 // })
 
-// router.get('/article/:id', async function (req,res) {
-//     const articleId = req.params.id;
-//     console.log("Article ID:", articleId);
-
-//     const article = await articleDao.getArticlesByID(articleId);
-//     console.log(article);
-//     res.locals.article = article;
-
-//     const authorName = await articleDao.getAuthorByArticle(articleId);
-//     console.log(authorName);
-//     res.locals.authorName = authorName;
-
-//     const comments = await articleDao.getAllCommentsFromArticle(articleId);
-//     console.log(comments);
-//     res.locals.comments = comments;
-
-//     const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
-//     console.log(likeCounts);
-//     res.locals.like_count = likeCounts;
-
-//     res.render('articleDemo');
-// })
-
-router.get('/sub', function (req, res) {
+router.get('/sub', function (req,res) {
     res.render('subscription&subscriber');
-});
+})
 
 router.get('/profile', function (req, res) {
     res.render('profile');
@@ -88,31 +59,30 @@ router.get('/profile', function (req, res) {
 router.get('/my_profile', function (req, res) {
 
     res.render('myProfile');
-});
+})
 
 router.get('/my_post', async function (_, res) {
     const user = res.locals.user;
 
-    const data = await getUserArticles(user.id);
-    console.log(data);
+    const data = await getUserArticles(user.id)
+    console.log(data)
     const totalPosts = data.length;
     res.locals.posts = data;
     res.locals.total_posts = totalPosts;
 
-    const comments = await getAllCommentsByArticles(user.id);
-    console.log(comments);
+    const comments = await getAllCommentsByArticles(user.id)
+    console.log(comments)
 
-    const filteredComments = comments.filter(
-        (comment) => comment.comment_id !== null
-    );
+    const filteredComments = comments.filter(comment => comment.comment_id !== null);
+
 
     const totalResponses = filteredComments.length;
     res.locals.responses = filteredComments;
     res.locals.total_responses = totalResponses;
 
-   
+
     res.render('myPost');
-});
+})
 
 router.post('/update_info', function (req, res) {
 
@@ -154,7 +124,7 @@ router.post('/update_info', function (req, res) {
 //     }
     
 //     res.redirect('/writeArticle');
-})
+// })
 
 
 
