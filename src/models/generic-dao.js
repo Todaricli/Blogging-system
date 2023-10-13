@@ -27,7 +27,7 @@ async function getAllUserData() {
 async function getUserArticles(userId) {
     const db = await getDatabase();
     const allArticles = await db.all(SQL`
-    SELECT articles.id AS article_id, articles.title, articles.content, articles.date_of_publish, user.id AS author_id, user.username AS author_username
+    SELECT articles.id AS article_id, articles.title, articles.content_html, articles.content_delta, articles.date_of_publish, user.id AS author_id, user.username AS author_username
     FROM articles
     INNER JOIN user ON articles.author_id = user.id
     WHERE user.id = ${userId}
