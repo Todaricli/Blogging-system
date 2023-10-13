@@ -20,7 +20,6 @@ router.get('/', verifyAuthenticated, async function (req, res) {
     res.render('articlesHome');
 });
 
-router.get('/sub', function (req, res) {
 router.get('/article', async function (req, res) {
 
     res.render('articleDemo');
@@ -101,7 +100,7 @@ router.post('/update_info', function (req, res) {
 //     }
     
 //     res.redirect('/writeArticle');
-})
+//})
 
 
 
