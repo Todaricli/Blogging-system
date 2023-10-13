@@ -5,8 +5,6 @@ const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 const subDao = require('../models/sub-dao.js');
 
-const writeArticleDao = require('../models/writeArticle-dao.js');
-
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
@@ -126,9 +124,6 @@ router.get("/subscriberRemove", verifyAuthenticated, async function (req, res) {
 })
 
 router.get('/analytics', function(req, res){
-
-
-
     res.render('analyticsDashboard');
 });
 
