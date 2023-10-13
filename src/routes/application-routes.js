@@ -110,4 +110,9 @@ router.post("/postNewArticle", async function(req, res) {
     res.redirect('/writeArticle');
 })
 
+router.get("/analytics-Dashboard", async (req,res) =>{
+    console.log("skeet")
+    res.render("analyticsDashboard")
+})
+
 module.exports = router;

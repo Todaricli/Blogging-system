@@ -15,13 +15,12 @@ async function getNumFollowers(user_id) {
 
 }
 
-async function getTotalLikes(user_id) {
+async function getArticleLikes(user_id) {
     const db = await getDatabase();
 
     const numLikes = await db.all(SQL`
-    select user.*,article_id, count(likes.id) as number_of_likes from articles join likes on articles.id = likes.article_id join user on articles.author_id = user.id
-    where user.id = ${user_id}
-    group by article_id
+    select user_id, article_id, title, like_count from [Articles_info]
+    where user_id = ${user_id}
     `)
 
     return numLikes;
@@ -41,21 +40,11 @@ async function getNumberOfComments(user_id){
 async function getMostPopularArticles(user_id){
     const db = await getDatabase();
     
-    const mostPopular =await  db.all(SQL`
-    select user.*, article_id,title,date_of_publish, comment_count, like_count, popularity 
-        from user left join (
-        select articles.id as article_id, title,date_of_publish, comment_count, like_count, author_id, ((comment_count*2)+like_count) as popularity 
-        from articles left join (
-            select article_id, count(likes.id) as like_count from articles left join likes on articles.id = likes.article_id
-            group by articles.id
-            )
-        on articles.id = article_id
-        left join (
-        select articles.id as art_id, count(comments.id) as comment_count from articles left join comments on articles.id = comments.article_id
-        group by articles.id) on articles.id = art_id
-        ) on user.id = author_id
-    where user.id = ${user_id}
-    limit 3
+    const mostPopular =await db.all(SQL`
+        select * from [Articles_info]
+        where user_id = ${user_id}
+        order by popularity desc
+        limit 3
     `)
 
     return mostPopular;
@@ -64,6 +53,6 @@ async function getMostPopularArticles(user_id){
 module.exports ={
     getNumFollowers,
     getNumberOfComments,
-    getTotalLikes,
+    getArticleLikes,
     getMostPopularArticles
 }

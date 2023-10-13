@@ -394,6 +394,21 @@ VALUES
     (19, 19, 5),
     (20, 20, 1);
 
+-- creating a view that shows articles likes, comments and popularity
+DROP VIEW IF EXISTS articles_info;
+
+create view [Articles_info]as 
+select articles.author_id as user_id,articles.id as article_id,user.fname, user.lname, articles.title, count(likes.id) as like_count, comments_count, (count(likes.id) + comments_count*2) as popularity
+	from articles
+	left join likes on articles.id = likes.article_id
+	left join (
+		select article_id as comment_articles_id, count(comments.id) as comments_count
+			from comments 
+			group by article_id
+	) on articles.id = comment_articles_id
+	left join user on user.id = articles.author_id
+ group by articles.id;
+
 
 
 
