@@ -1,7 +1,7 @@
 // Authentication queries with the database
 const SQL = require('sql-template-strings');
 const { getDatabase } = require('../db/database.js');
-const { getAllUserData } = require('./articles-dao.js');
+
 const userDb = require('./generic-dao.js');
 const bcrypt = require('bcrypt');
 
