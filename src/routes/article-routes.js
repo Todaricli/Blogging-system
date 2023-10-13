@@ -37,7 +37,6 @@ router.get('/article/:id', async function (req, res) {
 
   try {
     const content_obj = JSON.parse(content);
-
     const delta_obj = content_obj.ops;
 
     const cfg = {
