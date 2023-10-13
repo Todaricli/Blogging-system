@@ -161,6 +161,14 @@ async function getNumberOfLikesFromArticle(articleId) {
     return likeCounts;
 }
 
+async function insertNewArticleToArticleTable(user_id, title, genre, content_html, content_delta) {
+    const db = await getDatabase();
+    
+    return await db.run(SQL`
+        INSERT INTO articles (title, content_html, content_delta, genre, date_of_publish, author_id) VALUES 
+        (${title}, ${content_html}, ${content_delta}, ${genre}, datetime('now'), ${user_id})`);
+}
+
 
 module.exports = {
     getArticlesByUserID,
@@ -175,5 +183,6 @@ module.exports = {
     getAllArticles,
     getAllCommentsFromArticle,
     getNumberOfLikesFromArticle,
-    getAuthorByArticle
+    getAuthorByArticle,
+    insertNewArticleToArticleTable
 };
