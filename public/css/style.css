@@ -218,15 +218,15 @@ nav {
     display: grid;
     margin: 20px;
     padding: 5px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr 2fr 1fr;
     grid-template-rows: auto;
     grid-template-areas:
         "header header header header"
         "top5 top5 top5 top5"
-        "articles articles articles sidebar";
+        "articles articles articles sidebar"; */
 }
 
-#category_nav {
+/* #category_nav {
     grid-area: header;
 }
 
@@ -239,7 +239,7 @@ nav {
     grid-area: articles;
     height: 800px;
     background-color: bisque;
-}
+} */
 
 #sidebar {
     grid-area: sidebar;

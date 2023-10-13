@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const testDao = require('../models/test-dao.js');
 const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 const subDao = require('../models/sub-dao.js');
@@ -17,30 +16,41 @@ const { verifyAuthenticated } = require('../middleware/auth-middleware/login-aut
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
 router.get('/', verifyAuthenticated, async function (req, res) {
-    //res.locals.current_category = "Marketing";
-
-    // const username = 
-    // res.locals.user = 
 
     res.locals.top5Articles = await articleDao.getTopFiveArticles();
-
     res.locals.articleData = await articleDao.getAllArticles();
-    // res.locals.
-    // res.locals.
-    // res.locals.
-
 
     res.render('articlesHome');
 });
 
+
 router.get('/article', async function (req, res) {
-
-    // res.locals. =
-
-
 
     res.render('articleDemo');
 });
+
+// router.get('/article/:id', async function (req,res) {
+//     const articleId = req.params.id;
+//     console.log("Article ID:", articleId);
+
+//     const article = await articleDao.getArticlesByID(articleId);
+//     console.log(article);
+//     res.locals.article = article;
+
+//     const authorName = await articleDao.getAuthorByArticle(articleId);
+//     console.log(authorName);
+//     res.locals.authorName = authorName;
+
+//     const comments = await articleDao.getAllCommentsFromArticle(articleId);
+//     console.log(comments);
+//     res.locals.comments = comments;
+
+//     const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
+//     console.log(likeCounts);
+//     res.locals.like_count = likeCounts;
+
+//     res.render('articleDemo');
+// })
 
 router.get('/sub', verifyAuthenticated, async function (req, res) {
     const user_id = res.locals.user.id;
@@ -113,34 +123,29 @@ router.post('/update_info', function (req, res) {
     res.render('myProfile', { this: res.locals, information: updateInfo });
 })
 
-router.get("/writeArticle", function (req, res) {
-    res.render("writeArticle");
-})
+// router.post("/postNewArticle", function(req, res) {
+//     const newArticle = req.body;
 
-router.post("/postNewArticle", function (req, res) {
-    const newArticle = req.body;
+//     const user_id = res.locals.user.id;
+//     const title = newArticle.titleKey;
+//     const genre = newArticle.genreKey;
+//     const content = newArticle.contentKey;
 
-    const user_id = res.locals.user.id;
-    const title = newArticle.titleKey;
-    const genre = newArticle.genreKey;
-    const content = newArticle.contentKey;
+//     console.log(user_id);
+//     console.log(title);
+//     console.log(genre);
+//     console.log(content);
+    
+//     let done = undefined;
+//     done = writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, content);
 
-    console.log(user_id);
-    console.log(title);
-    console.log(genre);
-    console.log(content);
-
-    let done = undefined;
-    done = writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, content);
-
-    if (done) {
-        res.setToastMessage("New Article created!");
-    } else {
-        res.setToastMessage("Submitting error, try again!");
-    }
-
-    res.redirect('/writeArticle');
-})
+//     if(done) {
+//         res.setToastMessage("New Article created!");
+//     } else {
+//         res.setToastMessage("Submitting error, try again!");
+//     }
+    
+//     res.redirect('/writeArticle');
 
 router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res) {
     const subscription_id = req.query.id;
