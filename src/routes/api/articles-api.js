@@ -5,6 +5,7 @@ const articlesDao = require('../../models/articles-dao');
 
 router.get('/api/get-all-articles-from-db', async function (req, res) {
   const allArticles = await articlesDao.getAllArticles();
+  
   res.json(allArticles);
 });
 

@@ -2,7 +2,8 @@ window.addEventListener('load', function () {
     const usernameError = document.querySelector('#username-error');
     const usernameInput = document.querySelector('#username');
     usernameInput.addEventListener('input', async () => {
-        checkUsernameInDb();
+        await checkUsernameInDb();
+        registerButtonEnabler();
     });
 
     const passwordFormatError = document.querySelector(
@@ -12,17 +13,16 @@ window.addEventListener('load', function () {
     const passwordInput = document.querySelector('#password');
     const confirmPasswordInput = document.querySelector('#confirm-password');
     passwordInput.addEventListener('input', async () => {
-        checkValidPasswordFormat();
-        checkPasswordsMatch();
+        await checkValidPasswordFormat();
+        await checkPasswordsMatch();
         registerButtonEnabler();
     });
     confirmPasswordInput.addEventListener('input', async () => {
-        checkPasswordsMatch();
+        await checkPasswordsMatch();
         registerButtonEnabler();
     });
 
     const registerButton = document.querySelector('#register_button');
-    
 
     async function checkUsernameInDb() {
         const username = usernameInput.value;
@@ -33,7 +33,11 @@ window.addEventListener('load', function () {
         if (data === 'username exists') {
             usernameError.style.display = '';
             usernameError.innerHTML = 'Username exists, please choose another';
-        } else usernameError.style.display = 'none';
+            return false;
+        } else {
+            usernameError.style.display = 'none';
+            usernameError.innerHTML = '';
+        }
     }
 
     async function checkValidPasswordFormat() {
@@ -48,6 +52,7 @@ window.addEventListener('load', function () {
         let data = await response.text();
         if (data === 'valid') {
             passwordFormatError.style.display = 'none';
+            passwordFormatError.innerHTML = '';
             return true;
         } else {
             passwordFormatError.style.display = '';
@@ -70,6 +75,7 @@ window.addEventListener('load', function () {
         let data = await response.text();
         if (data === 'passwords match') {
             passwordMatchError.style.display = 'none';
+            passwordMatchError.innerHTML = '';
         } else {
             passwordMatchError.style.display = '';
             passwordMatchError.innerHTML = 'Please ensure passwords match';
@@ -78,11 +84,15 @@ window.addEventListener('load', function () {
 
     function registerButtonEnabler() {
         if (
-            usernameError.value === '' &&
-            passwordFormatError.value === '' &&
-            passwordMatchError.value === ''
-        ) { 
+            usernameError.style.display === 'none' &&
+            passwordFormatError.style.display === 'none' &&
+            passwordMatchError.style.display === 'none'
+        ) {
             registerButton.disabled = false;
-        } else registerButton.disabled = true;
+            console.log('button is enabled');
+        } else {
+            registerButton.disabled = true;
+            console.log('button is disabled');
+        }
     }
 });
