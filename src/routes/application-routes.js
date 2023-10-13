@@ -55,13 +55,18 @@ router.get('/sub', verifyAuthenticated, async function (req, res) {
 
 router.get('/profile', verifyAuthenticated, async function (req, res) {
     const id = req.query.id;
-    const profileData = await genericDao.getUserDataById(id);
-    res.locals.profile_icon = profileData.icon_path;
-    res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
-    res.locals.profile_DOB = profileData.DOB;
-    res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);
-    res.locals.profile_articles = await articleDao.getArticlesByID(profileData.id);
-    res.render('profile');
+    if (id) {
+        const profileData = await genericDao.getUserDataById(id);
+        res.locals.profile_icon = profileData.icon_path;
+        res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
+        res.locals.profile_DOB = profileData.DOB;
+        res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);
+        res.locals.profile_articles = await articleDao.getArticlesByID(profileData.id);
+        res.render('profile');
+    } else {
+        res.redirect('/');
+    }
+
 })
 router.get('/my_profile', function (req, res) {
 
@@ -137,13 +142,32 @@ router.post("/postNewArticle", function (req, res) {
     res.redirect('/writeArticle');
 })
 
-router.post("/sub", async function (req, res) {
-    const id = req.body.dataset.id;
+router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res) {
+    const subscription_id = req.query.id;
     const user_id = res.locals.user.id;
-    const subData = await subDao.getSpecificSubscriptionByID(user_id, id);
-    console.log(user_id);
-    res.render("subscription&subscriber")
+    if (user_id) {
+        await subDao.removeSpecificSubscriptionByID(user_id, subscription_id);
+        res.locals.subscriptionList = await subDao.getSubscriptionsByUserID(user_id);
+        res.locals.subscriberList = await subDao.getSubscribersByUserID(user_id);
+        res.render('subscription&subscriber');
+    } else {
+        res.redirect('/login');
+    }
 })
+
+router.get("/subscriberRemove", verifyAuthenticated, async function (req, res) {
+    const subscriber_id = req.query.id;
+    const user_id = res.locals.user.id;
+    if (user_id) {
+        await subDao.removeSpecificSubscriberByID(user_id, subscriber_id);
+        res.locals.subscriptionList = await subDao.getSubscriptionsByUserID(user_id);
+        res.locals.subscriberList = await subDao.getSubscribersByUserID(user_id);
+        res.render('subscription&subscriber');
+    } else {
+        res.redirect('/login');
+    }
+})
+
 
 
 module.exports = router;
