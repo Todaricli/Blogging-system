@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const analyticsDao = require(`../models/analytics-dao`)
+const analyticsDao = require(`../../models/analytics-dao`)
 
 router.get('/api/get-analytics', async function (req, res) {
     const user = res.locals.user

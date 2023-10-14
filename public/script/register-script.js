@@ -95,4 +95,18 @@ window.addEventListener('load', function () {
             registerButton.style.opacity = "0.3";
         }
     }
+
+    function togglePasswordVisibility() {
+        if (
+            usernameError.style.display === 'none' &&
+            passwordFormatError.style.display === 'none' &&
+            passwordMatchError.style.display === 'none'
+        ) {
+            registerButton.disabled = false;
+            registerButton.style.opacity = "1.0";
+        } else {
+            registerButton.disabled = true;
+            registerButton.style.opacity = "0.3";
+        }
+    }
 });

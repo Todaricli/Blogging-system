@@ -1,6 +1,6 @@
-<form action='/register' method='post' id="register_page_body">
-    <div id="register_page_container">
-        <div id="register_title">
+<form action='/register' method='post' id='register_page_body'>
+    <div id='register_page_container'>
+        <div id='register_title'>
             <h1>Register</h1>
             <div>
                 <p>Already have an account? <a href='/login'>Log in</a></p>
@@ -10,161 +10,214 @@
         <p>Please fill in to register your account</p>
         <hr />
 
-        <div id="register_fillinbox">
-            <div id="register_name">
-                <label for='name'>Name</label>
-                <input type='text' name='name' id='name' placeholder='Enter name' required />
+        <div id='register_fillinbox'>
+            <div id='register_name' class='input-container'>
+                <label for='name' class='styled-label'>Name</label>
+                <input type='text' name='name' id='name' placeholder='Enter name' required class='styled-input'>
             </div>
-            <div id="register_username">
-                <label for='username'>Username</label>
-                <input type='text' name='username' id='username' placeholder='Enter username' required />
+
+            <div id='register_username' class='input-container'>
+                <label for='username' class='styled-label'>Username</label>
+                <input type='text' name='username' id='username' placeholder='Enter username' required
+                    class='styled-input'>
                 <p id='username-error' style='color: red; display: none;'></p>
             </div>
-            <div id="register_email">
-                <label for='email'>Email</label>
-                <input type='text' name='email' id='email' placeholder='Enter email' />
+
+            <div id='register_email' class='input-container'>
+                <label for='email' class='styled-label'>Email</label>
+                <input type='text' name='email' id='email' placeholder='Enter email' class='styled-input'>
             </div>
-            <div id="register_password">
-                <label for='password'>Password</label>
-                <input type='password' name='password' id='password' placeholder='Enter password' required /> <br>
+
+            <div id='register_password' class='input-container'>
+                <label for='password' class='styled-label'>Password</label>
+                <input type='password' name='password' id='password' placeholder='Enter password' required
+                    class='styled-input'>
+                <img src='/images/svg/eye.svg' alt='eye icon' id='passwordEye' class='icon'>
             </div>
-            <div id="confirm_password">
-                <label for='password'>Confirm password</label>
+
+            <div id='confirm_password' class='input-container'>
+                <label for='confirm_password' class='write'>Confirm password</label>
                 <input type='password' name='confirm_password' id='confirm-password' placeholder='Enter password'
-                    required /> <br>
-                <p id="password-format-error" style="color: red; display: none;"></p>
-                <p id="password-match-error" style="color: red; display: none;"></p>
+                    required class='write'>
+                <p id='password-format-error' style='color: red; display: none;'></p>
+                <p id='password-match-error' style='color: red; display: none;'></p>
             </div>
+
+
         </div>
 
-        <div id="icon_container">
-            <label for="icon" id="icon_container_label">Choose your icon</label>
-            <div id="icon_select_container">
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_girl1" value="girl1" required><label for="icon_girl1">
-                        <img src="/images/avatars/girl1.png">
+
+        <div class="main">
+            <form>
+                <input type="text" class="write" placeholder></input>
+                <label class="hello">Username</label>
+                <span class="enter"></span>
+            </form>
+        </div>
+
+        <div id='icon_container'>
+            <label for='icon' id='icon_container_label'>Choose your icon</label>
+            <div id='icon_select_container'>
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_girl1' value='girl1' required><label for='icon_girl1'>
+                        <img src='/images/avatars/girl1.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_girl2" value="girl2"><label for="icon_girl2">
-                        <img src="/images/avatars/girl2.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_girl2' value='girl2'><label for='icon_girl2'>
+                        <img src='/images/avatars/girl2.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_girl3" value="girl3"><label for="icon_girl3">
-                        <img src="/images/avatars/girl3.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_girl3' value='girl3'><label for='icon_girl3'>
+                        <img src='/images/avatars/girl3.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_girl4" value="girl4"><label for="icon_girl4">
-                        <img src="/images/avatars/girl4.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_girl4' value='girl4'><label for='icon_girl4'>
+                        <img src='/images/avatars/girl4.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_girl5" value="girl5"><label for="icon_girl5">
-                        <img src="/images/avatars/girl5.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_girl5' value='girl5'><label for='icon_girl5'>
+                        <img src='/images/avatars/girl5.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_girl6" value="girl6"><label for="icon_girl6">
-                        <img src="/images/avatars/girl6.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_girl6' value='girl6'><label for='icon_girl6'>
+                        <img src='/images/avatars/girl6.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_girl7" value="girl7"><label for="icon_girl7">
-                        <img src="/images/avatars/girl7.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_girl7' value='girl7'><label for='icon_girl7'>
+                        <img src='/images/avatars/girl7.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_girl8" value="girl8"><label for="icon_girl8">
-                        <img src="/images/avatars/girl8.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_girl8' value='girl8'><label for='icon_girl8'>
+                        <img src='/images/avatars/girl8.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_girl9" value="girl9"><label for="icon_girl9">
-                        <img src="/images/avatars/girl9.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_girl9' value='girl9'><label for='icon_girl9'>
+                        <img src='/images/avatars/girl9.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_girl10" value="girl10"><label for="icon_girl10">
-                        <img src="/images/avatars/girl10.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_girl10' value='girl10'><label for='icon_girl10'>
+                        <img src='/images/avatars/girl10.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_guy1" value="guy1"><label for="icon_guy1">
-                        <img src="/images/avatars/guy1.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_guy1' value='guy1'><label for='icon_guy1'>
+                        <img src='/images/avatars/guy1.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_guy2" value="guy2"><label for="icon_guy2">
-                        <img src="/images/avatars/guy2.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_guy2' value='guy2'><label for='icon_guy2'>
+                        <img src='/images/avatars/guy2.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_guy3" value="guy3"><label for="icon_guy3">
-                        <img src="/images/avatars/guy3.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_guy3' value='guy3'><label for='icon_guy3'>
+                        <img src='/images/avatars/guy3.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_guy4" value="guy4"><label for="icon_guy4">
-                        <img src="/images/avatars/guy4.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_guy4' value='guy4'><label for='icon_guy4'>
+                        <img src='/images/avatars/guy4.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_guy5" value="guy5"><label for="icon_guy5">
-                        <img src="/images/avatars/guy5.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_guy5' value='guy5'><label for='icon_guy5'>
+                        <img src='/images/avatars/guy5.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_guy6" value="guy6"><label for="icon_guy6">
-                        <img src="/images/avatars/guy6.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_guy6' value='guy6'><label for='icon_guy6'>
+                        <img src='/images/avatars/guy6.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_guy7" value="guy7"><label for="icon_guy7">
-                        <img src="/images/avatars/guy7.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_guy7' value='guy7'><label for='icon_guy7'>
+                        <img src='/images/avatars/guy7.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_guy8" value="guy8"><label for="icon_guy8">
-                        <img src="/images/avatars/guy8.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_guy8' value='guy8'><label for='icon_guy8'>
+                        <img src='/images/avatars/guy8.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_guy9" value="guy9"><label for="icon_guy9">
-                        <img src="/images/avatars/guy9.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_guy9' value='guy9'><label for='icon_guy9'>
+                        <img src='/images/avatars/guy9.png'>
                     </label>
                 </div>
 
-                <div class="icon_select">
-                    <input type="radio" name="icon" id="icon_guy10" value="guy10"><label for="icon_guy10">
-                        <img src="/images/avatars/guy10.png">
+                <div class='icon_select'>
+                    <input type='radio' name='icon' id='icon_guy10' value='guy10'><label for='icon_guy10'>
+                        <img src='/images/avatars/guy10.png'>
                     </label>
                 </div>
 
             </div>
         </div>
-        <div id="register_button">
+        <div id='register_button'>
             <button type='submit'>Register</button>
         </div>
     </div>
 </form>
-<script src="/script/register-script.js"></script>
+
+<link rel='stylesheet' type='text/css' href='/css/animations/form-animation.css'>
+
+<style>
+    .input-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .styled-label {
+        display: block;
+        font-size: 10px;
+        padding-top: 20px;
+        margin-right: -30px;
+    }
+
+    .styled-input {
+        position: absolute;
+        right: 40px;
+        width: 80%;
+        text-align: center;
+    }
+
+    .icon {
+        position: absolute;
+        right: 5px;
+        top: 2.5px;
+        cursor: pointer;
+        width: 20px;
+        transform: translateY(50%);
+    }
+</style>
+
+<script src='/script/register-script.js'></script>

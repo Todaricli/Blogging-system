@@ -16,9 +16,9 @@ DROP TABLE IF EXISTS likes_comments;
 DROP TABLE IF EXISTS likes;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS articles;
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS "user";
 
-CREATE TABLE user
+CREATE TABLE "user"
 (
     id          INTEGER     NOT NULL PRIMARY KEY,
     username    VARCHAR(28) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE user
     CHECK (admin >= 0 AND admin <= 1)
 );
 
-INSERT INTO user
+INSERT INTO "user"
     (id, username, password, fname, lname, DOB, description, icon_path, admin)
 VALUES
     (1, 'user1', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'John', 'Doe', '1990-01-01', 'User 1', '/images/avatars/guy1.png', 0),
@@ -56,7 +56,7 @@ CREATE TABLE articles
     genre           VARCHAR(20),
     date_of_publish TIMESTAMP     NOT NULL,
     author_id       INTEGER       NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES user (id)
+    FOREIGN KEY (author_id) REFERENCES "user" (id)
 );
 
 -- Inserting 15 rows of sample data into the articles table
@@ -120,12 +120,12 @@ CREATE TABLE comments
     time_of_comment TIMESTAMP NOT NULL,
     comments_id     INTEGER,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (user_id) REFERENCES "user" (id),
     FOREIGN KEY (article_id) REFERENCES articles (id)
 );
 
 -- Inserting 20 rows of sample data into the comments table with NULL comments_id
-INSERT INTO comments (id, user_id, article_id, content, time_of_comment, parent_id)
+INSERT INTO comments (id, user_id, article_id, content, time_of_comment, comments_id)
 VALUES (1, 1, 1, 'Great article!', '2023-10-10 10:15:00', NULL),
        (2, 2, 1, 'I learned a lot from this.', '2023-10-10 11:30:00', NULL),
        (3, 3, 2, 'Silk fabric is so elegant!', '2023-10-10 12:45:00', NULL),
@@ -155,7 +155,7 @@ CREATE TABLE likes
     user_id    INTEGER NOT NULL,
     article_id INTEGER NOT NULL,
     PRIMARY KEY (id, user_id, article_id),
-    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (user_id) REFERENCES "user" (id),
     FOREIGN KEY (article_id) REFERENCES articles (id)
 );
 
@@ -188,7 +188,7 @@ CREATE TABLE likes_comments
     user_id     INTEGER NOT NULL,
     comments_id INTEGER NOT NULL,
     PRIMARY KEY (user_id, comments_id),
-    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (user_id) REFERENCES "user" (id),
     FOREIGN KEY (comments_id) REFERENCES comments (id)
 );
 
@@ -220,8 +220,8 @@ CREATE TABLE subscription
     being_subscribed_id INTEGER NOT NULL,
     follower_id         INTEGER NOT NULL,
     PRIMARY KEY (being_subscribed_id, follower_id),
-    FOREIGN KEY (being_subscribed_id) REFERENCES user (id),
-    FOREIGN KEY (follower_id) REFERENCES user (id)
+    FOREIGN KEY (being_subscribed_id) REFERENCES "user" (id),
+    FOREIGN KEY (follower_id) REFERENCES "user" (id)
 );
 
 -- Inserting 20 rows of sample data into the subscription table
@@ -253,7 +253,7 @@ CREATE TABLE notifications
     host_id INTEGER   NOT NULL,
     time    TIMESTAMP NOT NULL,
     content VARCHAR(88),
-    FOREIGN KEY (host_id) REFERENCES user (id)
+    FOREIGN KEY (host_id) REFERENCES "user" (id)
 );
 
 -- Inserting 20 rows of sample data into the notifications table
@@ -286,7 +286,7 @@ CREATE TABLE notify
     follower_id     INTEGER NOT NULL,
     PRIMARY KEY (id, notification_id, follower_id),
     FOREIGN KEY (notification_id) REFERENCES notifications (id),
-    FOREIGN KEY (follower_id) REFERENCES user (id)
+    FOREIGN KEY (follower_id) REFERENCES "user" (id)
 );
 
 -- Inserting 20 rows of sample data into the notify table
@@ -313,29 +313,16 @@ VALUES (1, 1, 2),
        (20, 20, 1);
 
 -- creating a view that shows articles likes, comments and popularity
-DROP VIEW IF EXISTS articles_info;
+-- DROP VIEW IF EXISTS articles_info;
 
-create view [Articles_info]as 
-select articles.author_id as user_id,articles.id as article_id,user.fname, user.lname, articles.title, count(likes.id) as like_count, comments_count, (count(likes.id) + comments_count*2) as popularity
-	from articles
-	left join likes on articles.id = likes.article_id
-	left join (
-		select article_id as comment_articles_id, count(comments.id) as comments_count
-			from comments 
-			group by article_id
-	) on articles.id = comment_articles_id
-	left join user on user.id = articles.author_id
- group by articles.id;
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- create view [Articles_info]as 
+-- select articles.author_id as user_id,articles.id as article_id,user.fname, user.lname, articles.title, count(likes.id) as like_count, comments_count, (count(likes.id) + comments_count*2) as popularity
+-- 	from articles
+-- 	left join likes on articles.id = likes.article_id
+-- 	left join (
+-- 		select article_id as comment_articles_id, count(comments.id) as comments_count
+-- 			from comments 
+-- 			group by article_id
+-- 	) on articles.id = comment_articles_id
+-- 	left join user on user.id = articles.author_id
+--  group by articles.id;

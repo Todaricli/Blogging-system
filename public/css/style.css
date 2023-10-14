@@ -140,6 +140,7 @@ nav {
 
 #register_fillinbox {
     padding: 0px 30px 0px 30px;
+    
 }
 
 #register_fillinbox>div {
@@ -223,8 +224,8 @@ nav {
     grid-template-areas:
         "header header header header"
         "top5 top5 top5 top5"
-        "articles articles articles sidebar"; */
-}
+        "articles articles articles sidebar"; 
+}*/
 
 /* #category_nav {
     grid-area: header;
