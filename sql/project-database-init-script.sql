@@ -105,7 +105,10 @@ VALUES (1, 'Introduction to Fabric Types',
         '2023-10-10 11:30:00', 10),
        (15, 'Silk Fabric Production',
         '{"ops":[{"insert":"Lorem Ipsum"},{"attributes":{"align":"center","header":1},"insert":"\n"},{"attributes":{"italic":true},"insert":"\"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\""},{"attributes":{"align":"center","header":4},"insert":"\n"},{"insert":"\"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...\""},{"attributes":{"align":"center","header":5},"insert":"\n"},{"insert":"Lorem ipsum dolor sit amet, consectetur adipiscing elit."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Sed pellentesque nibh eget cursus sollicitudin."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Praesent vestibulum massa in felis pellentesque feugiat."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Ut finibus nulla dignissim diam luctus elementum."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Morbi eget lorem tempor, finibus lectus vitae, suscipit felis."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Duis fringilla nisl et tincidunt euismod."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Praesent nec lectus lacinia, lobortis urna interdum, pharetra risus."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Maecenas sollicitudin augue eu nunc maximus tempor."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Nulla aliquam nunc ac felis placerat, quis consequat quam imperdiet."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Nullam suscipit velit eget orci molestie, eu convallis felis tincidunt."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Mauris accumsan ligula et massa posuere, a interdum arcu rhoncus."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Cras rutrum orci a vestibulum auctor."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Praesent non tortor ac nunc tempus pulvinar id non est."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Pellentesque efficitur lacus in velit tristique, nec convallis neque interdum."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Ut aliquam justo quis porta euismod."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"attributes":{"bold":true},"insert":"Generated 5 paragraphs, 111 words, 855 bytes of "},{"attributes":{"bold":true,"color":"#000000","link":"https://www.lipsum.com/"},"insert":"Lorem Ipsum"},{"attributes":{"align":"center"},"insert":"\n"},{"insert":"\n"}]}',
-        '2023-10-10 11:30:00', 8);
+        '2023-10-10 11:30:00', 8),
+        (16, 'the newest art',
+        '{"ops":[{"insert":"Lorem Ipsum"},{"attributes":{"align":"center","header":1},"insert":"\n"},{"attributes":{"italic":true},"insert":"\"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\""},{"attributes":{"align":"center","header":4},"insert":"\n"},{"insert":"\"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...\""},{"attributes":{"align":"center","header":5},"insert":"\n"},{"insert":"Lorem ipsum dolor sit amet, consectetur adipiscing elit."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Sed pellentesque nibh eget cursus sollicitudin."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Praesent vestibulum massa in felis pellentesque feugiat."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Ut finibus nulla dignissim diam luctus elementum."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Morbi eget lorem tempor, finibus lectus vitae, suscipit felis."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Duis fringilla nisl et tincidunt euismod."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Praesent nec lectus lacinia, lobortis urna interdum, pharetra risus."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Maecenas sollicitudin augue eu nunc maximus tempor."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Nulla aliquam nunc ac felis placerat, quis consequat quam imperdiet."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Nullam suscipit velit eget orci molestie, eu convallis felis tincidunt."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Mauris accumsan ligula et massa posuere, a interdum arcu rhoncus."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Cras rutrum orci a vestibulum auctor."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Praesent non tortor ac nunc tempus pulvinar id non est."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Pellentesque efficitur lacus in velit tristique, nec convallis neque interdum."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Ut aliquam justo quis porta euismod."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"attributes":{"bold":true},"insert":"Generated 5 paragraphs, 111 words, 855 bytes of "},{"attributes":{"bold":true,"color":"#000000","link":"https://www.lipsum.com/"},"insert":"Lorem Ipsum"},{"attributes":{"align":"center"},"insert":"\n"},{"insert":"\n"}]}',
+        '2023-10-10 11:30:00', 1);
 
 
 CREATE TABLE comments
@@ -142,7 +145,9 @@ VALUES (1, 1, 1, 'Great article!', '2023-10-10 10:15:00', NULL),
        (17, 2, 9, 'Polyester is easy to care for.', '2023-10-11 15:15:00', NULL),
        (18, 3, 9, 'I prefer natural fabrics.', '2023-10-11 16:30:00', NULL),
        (19, 4, 10, 'Sustainability is important.', '2023-10-11 17:45:00', NULL),
-       (20, 5, 10, 'I support eco-friendly fabrics.', '2023-10-11 19:00:00', NULL);
+       (20, 5, 10, 'I support eco-friendly fabrics.', '2023-10-11 19:00:00', NULL),
+       (21, 2, 1, 'shalom.', '2023-12-11 19:00:00', NULL),
+       (22, 2, 16, 'skeetyeet.', '2023-14-11 19:00:00', NULL);
 
 CREATE TABLE likes
 (
@@ -156,26 +161,27 @@ CREATE TABLE likes
 
 -- Inserting 20 rows of sample data into the likes table
 INSERT INTO likes (id, user_id, article_id)
-VALUES (1, 1, 1),
-       (2, 2, 1),
-       (3, 3, 2),
-       (4, 4, 2),
-       (5, 5, 3),
-       (6, 1, 3),
-       (7, 2, 4),
-       (8, 3, 4),
-       (9, 4, 5),
-       (10, 5, 5),
-       (11, 1, 6),
-       (12, 2, 6),
-       (13, 3, 7),
-       (14, 4, 7),
-       (15, 5, 8),
-       (16, 1, 8),
-       (17, 2, 9),
-       (18, 3, 9),
-       (19, 4, 10),
-       (20, 5, 10);
+VALUES
+    (1, 1, 1),
+    (2, 2, 1),
+    (3, 3, 2),
+    (4, 4, 2),
+    (5, 5, 3),
+    (6, 1, 3),
+    (7, 2, 4),
+    (8, 3, 4),
+    (9, 4, 5),
+    (10, 5, 5),
+    (11, 1, 6),
+    (12, 2, 6),
+    (13, 3, 7),
+    (14, 4, 7),
+    (15, 5, 8),
+    (16, 1, 8),
+    (17, 2, 9),
+    (18, 3, 9),
+    (19, 4, 10),
+    (20, 5, 10);
 
 CREATE TABLE likes_comments
 (
@@ -305,3 +311,31 @@ VALUES (1, 1, 2),
        (18, 18, 4),
        (19, 19, 5),
        (20, 20, 1);
+
+-- creating a view that shows articles likes, comments and popularity
+DROP VIEW IF EXISTS articles_info;
+
+create view [Articles_info]as 
+select articles.author_id as user_id,articles.id as article_id,user.fname, user.lname, articles.title, count(likes.id) as like_count, comments_count, (count(likes.id) + comments_count*2) as popularity
+	from articles
+	left join likes on articles.id = likes.article_id
+	left join (
+		select article_id as comment_articles_id, count(comments.id) as comments_count
+			from comments 
+			group by article_id
+	) on articles.id = comment_articles_id
+	left join user on user.id = articles.author_id
+ group by articles.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
