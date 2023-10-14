@@ -43,14 +43,15 @@
             </div>
         </button>
         <div>
-        <a href="/subscribers">See all ({{this.total_subscribers}})</a>
         </div>
+
         {{/each}}
     </div>
     {{else}}
     <p>You are not following anyone!</p>
     {{/if}}
 </div>
+        <a href="/sub">See all ({{this.total_subscribers}})</a>
 
 {{!-- Options section --}}
 <div id="inforForm">

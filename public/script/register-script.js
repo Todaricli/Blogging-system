@@ -22,7 +22,7 @@ window.addEventListener('load', function () {
         registerButtonEnabler();
     });
 
-    const registerButton = document.querySelector('#register_button');
+    const registerButton = document.querySelector('#register_button > button');
 
     async function checkUsernameInDb() {
         const username = usernameInput.value;
@@ -89,10 +89,10 @@ window.addEventListener('load', function () {
             passwordMatchError.style.display === 'none'
         ) {
             registerButton.disabled = false;
-            console.log('button is enabled');
+            registerButton.style.opacity = "1.0";
         } else {
             registerButton.disabled = true;
-            console.log('button is disabled');
+            registerButton.style.opacity = "0.3";
         }
     }
 });

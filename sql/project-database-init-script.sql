@@ -122,7 +122,7 @@ CREATE TABLE comments
 );
 
 -- Inserting 20 rows of sample data into the comments table with NULL comments_id
-INSERT INTO comments (id, user_id, article_id, content, time_of_comment, comments_id)
+INSERT INTO comments (id, user_id, article_id, content, time_of_comment, parent_id)
 VALUES (1, 1, 1, 'Great article!', '2023-10-10 10:15:00', NULL),
        (2, 2, 1, 'I learned a lot from this.', '2023-10-10 11:30:00', NULL),
        (3, 3, 2, 'Silk fabric is so elegant!', '2023-10-10 12:45:00', NULL),
