@@ -64,6 +64,7 @@ CREATE TABLE articles
     content_html    VARCHAR(8000) NOT NULL,
     content_delta   VARCHAR(8000) NOT NULL,
     genre           VARCHAR(20),
+    image_path      VARCHAR(8000),
     date_of_publish TIMESTAMP     NOT NULL,
     author_id       INTEGER       NOT NULL,
     FOREIGN KEY (author_id) REFERENCES user (id)
