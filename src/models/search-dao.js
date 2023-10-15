@@ -19,11 +19,10 @@ async function getArticlesByAuthorNameForSearch(author){
     const db = await getDatabase();
 
     const articles = await db.all(SQL`
-        select * from Articles_info
-        where fname like "a%" or lname like "a%"
+        select * from user
+        where fname like "j%" or lname like "a%"
     `)
     return articles
-
 }
 
 module.exports = {

@@ -3,13 +3,12 @@ const router = express.Router();
 const searchDao = require(`../models/search-dao`)
 
 router.get('/api/get-search', async function (req, res) {
-
     const searchTerm = req.query.searchTerm
 
     const articlesByTitle = await searchDao.getArticlesByTitleForSearch(searchTerm);
     const articlesByUser = await searchDao.getArticlesByAuthorNameForSearch(searchTerm);
-    // console.log(articlesByTitle)
-    // console.log(articlesByUser)
+    console.log(articlesByTitle)
+    console.log(articlesByUser)
 
     const returnObj = {
         articlesByTitle,

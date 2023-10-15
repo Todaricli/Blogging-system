@@ -24,12 +24,25 @@ nav {
     height: 60px;
 }
 
+#viewAllDiv{
+    text-align: center;
+    background-color: pink;
+}
+
 .search_bar {
     border: 1px solid black;
     border-radius: 20px;
+    padding-top: 10px;
     height: 30px;
     display: flex;
     overflow: hidden;
+    flex-direction: column;
+}
+
+.search_bar div {
+    background-color: lightblue;
+    border: 1px solid black;
+    border-radius: 15px;
 }
 
 .search_bar img {
@@ -42,6 +55,7 @@ nav {
     width: 500px;
     height: 28px;
     border: transparent;
+    margin-bottom: 20px;
 }
 
 .dropdown {
@@ -485,7 +499,8 @@ nav {
     #icon_select_container {
         width: 100%;
 
-}}
+    }
+}
 
 
 
@@ -504,7 +519,7 @@ nav {
     overflow: scroll;
 }
 
-#icon_select_container > *{
+#icon_select_container>* {
     display: flex;
     justify-content: center;
 }
@@ -523,18 +538,22 @@ nav {
     background-color: lightgray;
 }
 
-.icon_select > input {
-    opacity:0;
+.icon_select>input {
+    opacity: 0;
 }
 
-@media only screen and (max-width:800px){#register_page_body {
-    width: 100%;
-}}
+@media only screen and (max-width:800px) {
+    #register_page_body {
+        width: 100%;
+    }
+}
 
-@media only screen and (max-width:600px){#icon_select_container {
-    width: 100%;
+@media only screen and (max-width:600px) {
+    #icon_select_container {
+        width: 100%;
 
-}}
+    }
+}
 
 #user_avatar {
     width: 40px;
@@ -554,3 +573,116 @@ nav {
     margin-bottom: 10px;
     padding: 10px;
 }
+
+/* ANAYTICS DASHBOARD START*/
+.analyticsDashboard {
+    background-color: rgb(241, 248, 248);
+    margin-bottom: 20px;
+}
+
+#keyMetricsTitle {
+    color: rgb(130, 130, 198);
+    font-size: 60px;
+}
+
+.keyMetricsDiv {
+    display: flex;
+    margin: 20px;
+}
+
+.keyMetricsDiv>* {
+    margin: auto;
+    padding: auto;
+    text-align: center;
+}
+
+#keyMetricsTitle {
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.indvKeyMetrics {
+    padding: 20px;
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.divTitles {
+    font-size: 30px;
+}
+
+#followersDiv {
+    padding-left: 50px;
+    padding-right: 50px;
+    background: rgb(255,133,244);
+    background: linear-gradient(90deg, rgba(255,133,244,1) 0%, rgba(252,176,69,1) 98%);
+    color: aliceblue;
+}
+
+#followerNumber {
+    font-size: 55px;
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+
+#commentsDiv, #likesDiv {
+    padding: 40px;
+    font-size: larger;
+}
+
+.articleWithComments {
+    font-style: italic;
+}
+
+.topThreeDiv, #commentsDiv, #likesDiv {
+    background-color: white;
+    color: rgb(130, 130, 198);
+}
+
+.topThreeDiv {
+    padding: 20px;
+    margin: 30px;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.topThreeDiv > * {
+    margin: auto;
+    padding: auto;
+    text-align: center;
+}
+
+#topThreeTitle {
+    margin: 20px;
+    margin-top: 0;
+    font-size: 40px;
+}
+
+.indvTopArticles {
+
+}
+
+.furtherData {
+    /* display: flex; */
+    background-color: white;
+    margin: 30px;
+}
+
+#dataIcon{
+    margin:20px;
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-left: 5px;
+}
+
+#plot {
+    margin: auto;
+    margin-bottom: 50px;
+    padding: auto;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+/* ANAYTICS DASHBOARD END*/

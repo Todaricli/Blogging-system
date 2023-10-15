@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/popup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <script src="/script/search-script.js"></script>
 
 </head>
 
@@ -24,8 +25,18 @@
         </div>
 
         {{!-- Navigation search bar--}}
-        <div class="search_bar">
-            <input type="text" id="searchInput" placeholder="Search...">
+        <div class="search_bar search">
+            <input type="text" id="searchInput" placeholder="Search..." class = "search">
+            <div id = "searchResultContainer">
+                <div class="dropdownsearch search" id = "searchByTitle">
+                </div>
+                <div class="dropdownsearch search" id = "searchByAuthor">
+                </div>
+                <div id="viewAllDiv search">
+                    <a id = "viewAllSearchResults">view all search results</a>
+                </div>
+                
+            </div>
         </div>
 
         {{!-- Nav login and dropdown button --}}
@@ -56,16 +67,16 @@
             {{/if}}
         </ul>
     </nav>
-    
+
     <div id="page_body">
         {{{body}}}
     </div>
-    
+
 
     <footer>
         <div id="footer">
-        <img src="images/footer-logo.png">
-        <span> &copy 2023 UOA-PGCIT-S2 Group 2</span>
+            <img src="images/footer-logo.png">
+            <span> &copy 2023 UOA-PGCIT-S2 Group 2</span>
         </div>
     </footer>
 </body>

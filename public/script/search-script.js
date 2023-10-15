@@ -18,6 +18,7 @@ window.addEventListener(`load`, function () {
         searchNavBar.style.overflow = "visible"
         searchNavBar.style.border = "7px solid purple"
         searchBarForm.style.border = "transparent"
+
     })
 
 
@@ -30,7 +31,7 @@ window.addEventListener(`load`, function () {
         const resultByTitle = results["articlesByTitle"]
         const resultsByUser = results["articlesByUser"]
 
-        if (resultByTitle != null) {
+        if (resultByTitle != undefined) {
             const byTitleHeader = document.createElement("div")
             byTitleHeader.innerHTML = "<h2>Matching Title</h2>"
             searchByTitleContainer.append(byTitleHeader)
@@ -48,7 +49,9 @@ window.addEventListener(`load`, function () {
             }
         }
 
-        if (resultsByUser != null) {
+        if (resultsByUser != undefined) {
+            console.log(resultsByUser)
+            console.log(resultsByUser[1]["fname"])
             const byUserHeader = document.createElement("div")
             byUserHeader.innerHTML = "<h2>Matching user</h2>"
             searchByTitleContainer.append(byUserHeader)
@@ -57,7 +60,7 @@ window.addEventListener(`load`, function () {
                 searchResultDiv.setAttribute("id", `${resultsByUser[i]["user_id"]}`)
                 const searchResult = document.createElement("p")
                 searchResult.setAttribute("id", `${resultsByUser[i]["user_id"]}`)
-                searchResult.innerText = `${resultsByUser[i]["fname"]} ${resultByTitle[i]["lname"]}`
+                searchResult.innerText = `${resultsByUser[i]["fname"]} ${resultsByUser[i]["lname"]}`
                 searchResultDiv.addEventListener(`click`, (e)=>{
                     
                     
