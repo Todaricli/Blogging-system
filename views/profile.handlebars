@@ -24,6 +24,7 @@
         <div id="articles_container_title">{{profile_articles.length}} articles</div>
         {{#each profile_articles}}
         <div class="profile_article_title">{{this.title}}</div>
+        <div><img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}"></div>
         <div class="profile_article_timestamp">{{this.date_of_publish}}</div>
         <div class="profile_article_description">{{{this.content_html}}}</div>
         <div class="profile_article_category">{{this.article_category}}</div>
