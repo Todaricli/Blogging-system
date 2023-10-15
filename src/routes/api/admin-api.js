@@ -16,7 +16,7 @@ router.post('/api/login', async function (req, res) {
         await authDao.setUserDbAuthToken(username, authToken); // Save token in the database
         res.cookie('authToken', authToken);
         res.locals.user = user;
-        res.status(200).json({ authToken }); // I NEEDED TO SEND A 200 RESPONSE
+        res.sendStatus(204); // I NEEDED TO SEND A 200 RESPONSE
     } else {
         res.status(401).send('Unauthorized');
     }
@@ -37,15 +37,15 @@ router.get('/api/users', async function (req, res) {
     }
 });
 
-router.delete('/api/users/:id', async function (req, res) {
-    const userId = req.params.id;
-    const user = res.locals.user; 
-    if (user && user.admin === 1) {
-        await userDb.deleteUserById(userId);
-        res.status(204);
-    } else {
-        res.status(401).send('Access Denied');
-    }
-});
+// router.delete('/api/users/:id', async function (req, res) {
+//     const userId = req.params.id;
+//     const user = res.locals.user; 
+//     if (user && user.admin === 1) {
+//         await userDb.deleteUserById(userId);
+//         res.status(204);
+//     } else {
+//         res.status(401).send('Access Denied');
+//     }
+// });
 
 module.exports = router;
