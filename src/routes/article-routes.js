@@ -36,10 +36,10 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
 
     //Get article image
     const fileInfo = req.file;
-
+    const imagePath = user_id + fileInfo.originalname;
     // Move the image into the images folder
     const oldFileName = fileInfo.path;
-    const newFileName = `./public/images/article-images/${fileInfo.originalname}`;
+    const newFileName = `./public/images/article-images/${imagePath}`;
     fs.renameSync(oldFileName, newFileName);
 
     // TODO Create and save thumbnail
@@ -52,10 +52,10 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
     name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
     image.print(font, 10, 10, name);
 
-    await image.write(`./public/images/article-images/thumbnails/${fileInfo.originalname}`);
+    await image.write(`./public/images/article-images/thumbnails/${imagePath}`);
 
     let done = undefined;
-    done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string, fileInfo.originalname);
+    done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string, imagePath);
 
     if (done) {
       res.status(200).send("New Article Created!");
