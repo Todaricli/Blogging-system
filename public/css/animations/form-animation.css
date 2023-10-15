@@ -6,6 +6,14 @@ body {
   font-family: 'helvetica neue';
 }
 
+#password-eye {
+  opacity: 0.3;
+}
+
+#confirm-password-eye {
+  opacity: 0.3;
+}
+
 .input-container{
   position:relative;
   margin: 30px;
@@ -82,7 +90,3 @@ input:focus::before{
 .hidden-label {
   display: none;
 }
-
-/* input:not(:placeholder-shown) {
-  border-bottom: 1px solid black; 
-} */

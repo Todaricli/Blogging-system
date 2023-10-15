@@ -1,6 +1,7 @@
 window.addEventListener('load', async function () {
     const registerButton = document.querySelector('#register_button > button');
-    const passwordEye = document.querySelector('#passwordEye');
+    const passwordEye = document.querySelector('#password-eye');
+    const confirmPasswordEye = document.querySelector('#confirm-password-eye');
     // input selectors
     const nameInput = document.querySelector('#name');
     const usernameInput = document.querySelector('#username');
@@ -50,8 +51,7 @@ window.addEventListener('load', async function () {
         let data = await response.text();
         if (data === 'username exists') {
             usernameError.style.display = '';
-            usernameError.innerHTML =
-                'Username exists, please choose another';
+            usernameError.innerHTML = 'Username exists, please choose another';
             return false;
         } else {
             usernameError.style.display = 'none';
@@ -141,9 +141,22 @@ window.addEventListener('load', async function () {
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 passwordEye.src = '/images/svg/eye-fill.svg';
+                passwordEye.style.opacity = '1';
             } else {
                 passwordInput.type = 'password';
                 passwordEye.src = '/images/svg/eye.svg';
+                passwordEye.style.opacity = '0.3';
+            }
+        });
+        confirmPasswordEye.addEventListener('click', () => {
+            if (confirmPasswordInput.type === 'password') {
+                confirmPasswordInput.type = 'text';
+                confirmPasswordEye.src = '/images/svg/eye-fill.svg';
+                confirmPasswordEye.style.opacity = '1';
+            } else {
+                confirmPasswordInput.type = 'password';
+                confirmPasswordEye.src = '/images/svg/eye.svg';
+                confirmPasswordEye.style.opacity = '0.3';
             }
         });
     }
