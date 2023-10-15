@@ -46,7 +46,8 @@ VALUES
     (7, 'user7', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'David', 'Wilson', '1996-06-25', 'User 7', '/images/avatars/guy4.png', 0),
     (8, 'user8', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Grace', 'Miller', '1991-11-15', 'User 8', '/images/avatars/girl4.png', 0),
     (9, 'user9', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Frank', 'Martinez', '1987-02-08', 'User 9', '/images/avatars/guy5.png', 0),
-    (10, 'user10', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Olivia', 'Jones', '1994-08-12', 'User 10', '/images/avatars/girl6.png', 0);
+    (10, 'user10', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Olivia', 'Jones', '1994-08-12', 'User 10', '/images/avatars/girl6.png', 0),
+    (11, 'ADMIN', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'ADMIN', 'ADMIN', '1994-08-12', 'ADMIN', '/images/avatars/girl6.png', 1);
 
 CREATE TABLE articles
 (

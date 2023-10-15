@@ -34,8 +34,18 @@ async function authenticate(req, res, next) {
     }
 }
 
+function authorizeAdmin(req, res, next) {
+    const user = res.locals.user; 
+    if (user && user.admin === 1) {
+        next();
+    } else {
+        res.status(403).send('Access Denied');
+    }
+}
+
 module.exports = {
     verifyAuthenticated,
     addUserToLocals,
     authenticate,
+    authorizeAdmin,
 };
