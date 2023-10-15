@@ -16,4 +16,8 @@ router.get('/api/get-search', async function (req, res) {
     res.json(returnObj)
 });
 
+router.get(`/test`, (req,res)=>{
+    res.render("test")
+})
+
 module.exports = router
