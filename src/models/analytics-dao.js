@@ -22,22 +22,31 @@ async function getArticleLikes(user_id) {
     select user_id, article_id, title, like_count from [Articles_info]
     where user_id = ${user_id}
     `)
-    return numLikes;
+    let totalLikes = 0;
+    for (let i =0; i<numLikes.length;i++){
+        totalLikes += numLikes[i]["like_count"]
+    }
+    return totalLikes;
 }
 
 async function getNumberOfComments(user_id){
     const db = await getDatabase();
 
-    // const numOfComments = await db.all(SQL`
-    // `)
-    const numOfComments = "hi"
+    const numOfComments = await db.all(SQL`
+    select user_id, article_id, title, comments_count from [Articles_info]
+    where user_id = ${user_id}
+    `)
 
-    return numOfComments
+    let totalComments = 0;
+    for (let i =0; i<numOfComments.length;i++){
+        totalComments += numOfComments[i]["comments_count"]
+    }
+    return totalComments;
 }
 
 async function getMostPopularArticles(user_id){
     const db = await getDatabase();
-    
+
     const mostPopular =await db.all(SQL`
         select * from [Articles_info]
         where user_id = ${user_id}

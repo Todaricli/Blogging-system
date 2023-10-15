@@ -15,12 +15,12 @@ async function getArticlesByTitleForSearch(title){
 
 async function getArticlesByAuthorNameForSearch(author){
 
-
+    console.log(author)
     const db = await getDatabase();
 
     const articles = await db.all(SQL`
         select * from user
-        where fname like "j%" or lname like "a%"
+        where fname like "a%" or lname like "a%"
     `)
     return articles
 }

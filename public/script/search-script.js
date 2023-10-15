@@ -26,7 +26,8 @@ window.addEventListener(`load`, function () {
         searchNavBar.style.overflow = "visible"
         searchByTitleContainer.innerHTML = ""
         searchByAuthorContainer.innerHTML = ""
-        const results = await getSearchResults(e)
+        console.log(searchBarForm.value)
+        const results = await getSearchResults(searchBarForm.value)
 
         const resultByTitle = results["articlesByTitle"]
         const resultsByUser = results["articlesByUser"]
@@ -50,8 +51,6 @@ window.addEventListener(`load`, function () {
         }
 
         if (resultsByUser != undefined) {
-            console.log(resultsByUser)
-            console.log(resultsByUser[1]["fname"])
             const byUserHeader = document.createElement("div")
             byUserHeader.innerHTML = "<h2>Matching user</h2>"
             searchByTitleContainer.append(byUserHeader)
@@ -74,9 +73,8 @@ window.addEventListener(`load`, function () {
 
     })
 
-    async function getSearchResults(e) {
-        e.preventDefault()
-        const response = await fetch(`/api/get-search?searchTerm=a`)
+    async function getSearchResults(search) {
+        const response = await fetch(`/api/get-search?searchTerm=${search}`)
         const list = await response.json()
 
         return list
