@@ -5,7 +5,7 @@ const authDao = require('../../models/auth-dao');
 async function addUserToLocals(req, res, next) {
     const authToken = req.cookies['authToken'];
     res.locals.user = await authDao.getUserWithAuthToken(authToken);
-    if (!res.locals.user) res.locals.user = await userDb.getUserDataById(1); // THIS IS FOR DEVELOPING PURPOSES ONLY
+    if (!res.locals.user) res.locals.user = await userDb.getUserDataById(11); // THIS IS FOR DEVELOPING PURPOSES ONLY
     next();
 }
 
@@ -39,7 +39,7 @@ function authorizeAdmin(req, res, next) {
     if (user && user.admin === 1) {
         next();
     } else {
-        res.status(403).send('Access Denied');
+        res.status(401).send('Access Denied');
     }
 }
 
