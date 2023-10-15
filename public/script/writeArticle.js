@@ -31,25 +31,23 @@ window.addEventListener("load", function () {
 
         const title = document.getElementById("write_article_title").value;
         const genre = document.getElementById("write_article_genre").value;
-        //Convert content into json object.
-        // const actualContent = JSON.parse(content.value);
+        const image = document.getElementById("write_article_image").files[0];
+
         const actualContent = content.value;
 
-        const newArticleData = {
-            titleKey: title,
-            genreKey: genre,
-            contentKey: actualContent
-        }
+        //instantialize FormData obj, and append values
+        const formData = new FormData();
+        formData.append("titleKey", title);
+        formData.append("genreKey", genre);
+        formData.append("contentKey", actualContent);
+        formData.append("imageKey", image);
 
         const toastMessage = document.getElementById("write-article-toast-message");
 
         try {
             const response = await fetch('/api/postNewArticle', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newArticleData)
+                body: formData
             });
 
             if (!response.ok) {
@@ -64,7 +62,6 @@ window.addEventListener("load", function () {
             quill.deleteText(0, quill.getLength());
             //remove other user input
             document.getElementById("write_article_title").value = "";
-
 
         } catch (error) {
             // Handle any errors that occur during the request
