@@ -61,11 +61,11 @@ async function setUpQuillEditor() {
                 body: formData
             });
 
-            if (!response.ok) {
-                throw new Error('Request failed with status: ' + response.status + " " + response.statusText);
-            }
-
             const responseData = await response.text();
+
+            if (!response.ok) {
+                throw new Error('Request failed with status: ' + response.status + " " + responseData);
+            }
 
             //remove user input from text editor
             quill.deleteText(0, quill.getLength());

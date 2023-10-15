@@ -20,40 +20,15 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
   const content = newArticle.contentKey;
 
   try {
-    const content_obj = JSON.parse(content);
-    const delta_obj = content_obj.ops;
-    const delta_obj_string = JSON.stringify(delta_obj);
-
-    const cfg = {
-      inlineStyles: true,
-      multiLineBlockquote: true,
-      multiLineHeader: true
-    };
-
-    const converter = new QuillDeltaToHtmlConverter(delta_obj, cfg);
-
-    const html = converter.convert();
+    const contentArray = convertDeltaToHtml(content);
+    const html = contentArray[0];
+    const delta_obj_string = contentArray[1];
 
     //Get article image
     const fileInfo = req.file;
-    const imagePath = "user"+ user_id + "-" + fileInfo.originalname;
-    console.log(imagePath);
-    // Move the image into the images folder
-    const oldFileName = fileInfo.path;
-    const newFileName = `./public/images/article-images/${imagePath}`;
-    fs.renameSync(oldFileName, newFileName);
+    const imagePath = "user" + user_id + "-" + fileInfo.originalname;
 
-    // TODO Create and save thumbnail
-    const image = await jimp.read(newFileName);
-    image.resize(320, jimp.AUTO);
-    image.fade(0.5);
-    image.sepia();
-    const font = await jimp.loadFont(jimp.FONT_SANS_32_WHITE);
-    let name = fileInfo.originalname.substring(0, fileInfo.originalname.lastIndexOf("."));
-    name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
-    image.print(font, 10, 10, name);
-
-    await image.write(`./public/images/article-images/thumbnails/${imagePath}`);
+    processAndStoreImage(fileInfo, imagePath);
 
     let done = undefined;
     done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string, imagePath);
@@ -107,7 +82,7 @@ router.get('/api/currentEditArticleDelta', async (req, res) => {
   const article_id = req.query.article_id;
   const article = await articleDao.getArticlesByID(article_id);
 
-  if(article) {
+  if (article) {
     res.status(200).json(article);
   } else {
     res.status(404).send("Article loading error, please try again");
@@ -124,39 +99,15 @@ router.post("/api/updateArticle", uploadTempFolder.single("imageKey"), async fun
   const content = updateArticle.contentKey;
 
   try {
-    const content_obj = JSON.parse(content);
-    const delta_obj = content_obj.ops;
-    const delta_obj_string = JSON.stringify(delta_obj);
-
-    const cfg = {
-      inlineStyles: true,
-      multiLineBlockquote: true,
-      multiLineHeader: true
-    };
-
-    const converter = new QuillDeltaToHtmlConverter(delta_obj, cfg);
-
-    const html = converter.convert();
+    const contentArray = convertDeltaToHtml(content);
+    const html = contentArray[0];
+    const delta_obj_string = contentArray[1];
 
     //Get article image
     const fileInfo = req.file;
-    const imagePath = "user"+ user_id + "-" + fileInfo.originalname;
-    // Move the image into the images folder
-    const oldFileName = fileInfo.path;
-    const newFileName = `./public/images/article-images/${imagePath}`;
-    fs.renameSync(oldFileName, newFileName);
+    const imagePath = "user" + user_id + "-" + fileInfo.originalname;
 
-    //Create and save thumbnail
-    const image = await jimp.read(newFileName);
-    image.resize(320, jimp.AUTO);
-    image.fade(0.5);
-    image.sepia();
-    const font = await jimp.loadFont(jimp.FONT_SANS_32_WHITE);
-    let name = fileInfo.originalname.substring(0, fileInfo.originalname.lastIndexOf("."));
-    name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
-    image.print(font, 10, 10, name);
-
-    await image.write(`./public/images/article-images/thumbnails/${imagePath}`);
+    processAndStoreImage(fileInfo, imagePath);
 
     let done = undefined;
     done = await articleDao.updateArticleToArticleTable(article_id, title, genre, html, delta_obj_string, imagePath);
@@ -171,6 +122,44 @@ router.post("/api/updateArticle", uploadTempFolder.single("imageKey"), async fun
 
 });
 
-router.post("/articleImage", uploadTempFolder.single())
+async function processAndStoreImage(fileInfo, imagePath) {
+  const oldFileName = fileInfo.path;
+  const newFileName = `./public/images/article-images/${imagePath}`;
+  fs.renameSync(oldFileName, newFileName);
+
+  //Create and save thumbnail
+  const image = await jimp.read(newFileName);
+  image.resize(320, jimp.AUTO);
+  image.fade(0.5);
+  image.sepia();
+  const font = await jimp.loadFont(jimp.FONT_SANS_32_WHITE);
+  let name = fileInfo.originalname.substring(0, fileInfo.originalname.lastIndexOf("."));
+  name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+  image.print(font, 10, 10, name);
+
+  await image.write(`./public/images/article-images/thumbnails/${imagePath}`);
+}
+
+function convertDeltaToHtml(content) {
+  let contentArray = [];
+
+  const content_obj = JSON.parse(content);
+  const delta_obj = content_obj.ops;
+  const delta_obj_string = JSON.stringify(delta_obj);
+
+  const cfg = {
+    inlineStyles: true,
+    multiLineBlockquote: true,
+    multiLineHeader: true
+  };
+
+  const converter = new QuillDeltaToHtmlConverter(delta_obj, cfg);
+
+  const html = converter.convert();
+
+  contentArray = [html, delta_obj_string];
+
+  return contentArray;
+}
 
 module.exports = router;
