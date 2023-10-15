@@ -1,0 +1,50 @@
+const express = require('express');
+const router = express.Router();
+const searchDao = require(`../models/search-dao`)
+
+router.get('/api/get-search', async function (req, res) {
+
+    const searchTerm = req.query.searchTerm
+
+    const articlesByTitle = await searchDao.getArticlesByTitleForSearch(searchTerm);
+    const articlesByUser = await searchDao.getArticlesByAuthorNameForSearch(searchTerm);
+    // console.log(articlesByTitle)
+    // console.log(articlesByUser)
+
+    const returnObj = {
+        articlesByTitle,
+        articlesByUser
+    }
+
+    res.json(returnObj)
+
+
+
+
+    // const user = res.locals.user
+    // if (user !== undefined) {
+    //     const userId = user["id"]
+    //     const numberOfFollowers = await analyticsDao.getNumFollowers(userId);
+    //     const numberOfComments = await analyticsDao.getNumberOfComments(userId);
+    //     const numberOfLikes = await analyticsDao.getArticleLikes(userId);
+
+    //     const top3Articles = await analyticsDao.getMostPopularArticles(userId);
+
+    //     const sendObj = {
+    //         numberOfFollowers,
+    //         numberOfComments,
+    //         numberOfLikes,
+    //         top3Articles
+    //     }
+    //     console.log(sendObj)
+
+    //     res.json(sendObj)
+    // }else{
+    //     const sendObj = {
+    //         msg:"user not logged in"
+    //     }
+    //     res.json(sendObj)
+    // }
+});
+
+module.exports = router
