@@ -1,5 +1,6 @@
-window.addEventListener('load', function () {
+window.addEventListener('load', async function () {
     const registerButton = document.querySelector('#register_button > button');
+    const passwordEye = document.querySelector('#passwordEye');
     // input selectors
     const nameInput = document.querySelector('#name');
     const usernameInput = document.querySelector('#username');
@@ -20,34 +21,26 @@ window.addEventListener('load', function () {
     );
     const passwordMatchError = document.querySelector('#password-match-error');
 
-    usernameInput.addEventListener('input', async () => {
-        await checkUsernameInDb();
-        registerButtonEnabler();
-    });
-    passwordInput.addEventListener('input', async () => {
-        await checkValidPasswordFormat();
-        await checkPasswordsMatch();
-        registerButtonEnabler();
-    });
-    confirmPasswordInput.addEventListener('input', async () => {
-        await checkPasswordsMatch();
-        registerButtonEnabler();
-    });
+    await windowsOnLoadChecks();
+    await addFormVerificationListeners();
+    addFormInputAnimationListeners();
+    togglePasswordVisibility();
 
-    formInputs.forEach(function (input) {
-        const label = input.nextElementSibling; 
-    
-        input.addEventListener('input', function () {
-            if (input.value && input.value.trim() !== '') {
-                label.classList.add('focused-label'); 
-                label.classList.remove('label'); 
-            } else {
-                label.classList.remove('focused-label');
-                label.classList.add('label'); 
-            }
+    async function addFormVerificationListeners() {
+        usernameInput.addEventListener('input', async () => {
+            await checkUsernameInDb();
+            registerButtonEnabler();
         });
-    });
-    
+        passwordInput.addEventListener('input', async () => {
+            await checkValidPasswordFormat();
+            await checkPasswordsMatch();
+            registerButtonEnabler();
+        });
+        confirmPasswordInput.addEventListener('input', async () => {
+            await checkPasswordsMatch();
+            registerButtonEnabler();
+        });
+    }
 
     async function checkUsernameInDb() {
         const username = usernameInput.value;
@@ -57,7 +50,8 @@ window.addEventListener('load', function () {
         let data = await response.text();
         if (data === 'username exists') {
             usernameError.style.display = '';
-            usernameError.innerHTML = 'Username exists, please choose another';
+            usernameError.innerHTML =
+                'Username exists, please choose another';
             return false;
         } else {
             usernameError.style.display = 'none';
@@ -121,17 +115,46 @@ window.addEventListener('load', function () {
         }
     }
 
-    function togglePasswordVisibility() {
-        if (
-            usernameError.style.display === 'none' &&
-            passwordFormatError.style.display === 'none' &&
-            passwordMatchError.style.display === 'none'
-        ) {
-            registerButton.disabled = false;
-            registerButton.style.opacity = '1.0';
+    function addFormInputAnimationListeners() {
+        formInputs.forEach(function (input) {
+            input.addEventListener('input', function () {
+                checkIfInputFocused(input);
+            });
+        });
+    }
+
+    function checkIfInputFocused(input) {
+        const label = input.nextElementSibling;
+        if (input.value && input.value.trim() !== '') {
+            label.classList.add('focused-label');
+            label.classList.remove('label');
+            input.style.borderBottomColor = 'black';
         } else {
-            registerButton.disabled = true;
-            registerButton.style.opacity = '0.3';
+            label.classList.remove('focused-label');
+            label.classList.add('label');
+            input.style.borderBottomColor = '#cecece';
         }
+    }
+
+    function togglePasswordVisibility() {
+        passwordEye.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordEye.src = '/images/svg/eye-fill.svg';
+            } else {
+                passwordInput.type = 'password';
+                passwordEye.src = '/images/svg/eye.svg';
+            }
+        });
+    }
+
+    async function windowsOnLoadChecks() {
+        formInputs.forEach(async (input) => {
+            checkIfInputFocused(input);
+        });
+        await checkUsernameInDb();
+        await checkValidPasswordFormat();
+        await checkPasswordsMatch();
+        registerButtonEnabler();
     }
 });
