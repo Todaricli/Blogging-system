@@ -12,47 +12,38 @@
 
         <div id='register_fillinbox'>
             <div id='register_name' class='input-container'>
-                <label for='name' class='styled-label'>Name</label>
-                <input type='text' name='name' id='name' placeholder='Enter name' required class='styled-input'>
+                <input type='name' name='name' id='name' required class='write'>
+                <label for='name' class='label'>Name</label>
+                <span class="enter"></span>
             </div>
 
             <div id='register_username' class='input-container'>
-                <label for='username' class='styled-label'>Username</label>
-                <input type='text' name='username' id='username' placeholder='Enter username' required
-                    class='styled-input'>
+                <input type='username' name='username' id='username' required class='write'>
+                <label for='username' class='label'>Username</label>
+                <span class="enter"></span>
                 <p id='username-error' style='color: red; display: none;'></p>
             </div>
 
             <div id='register_email' class='input-container'>
-                <label for='email' class='styled-label'>Email</label>
-                <input type='text' name='email' id='email' placeholder='Enter email' class='styled-input'>
+                <input type='email' name='email' id='email' required class='write'>
+                <label for='email' class='label'>Email</label>
+                <span class="enter"></span>
             </div>
 
             <div id='register_password' class='input-container'>
-                <label for='password' class='styled-label'>Password</label>
-                <input type='password' name='password' id='password' placeholder='Enter password' required
-                    class='styled-input'>
+                <input type='password' name='password' id='password' required class='write'>
+                <label for='password' class='label'>Password</label>
+                <span class="enter"></span>
                 <img src='/images/svg/eye.svg' alt='eye icon' id='passwordEye' class='icon'>
             </div>
 
             <div id='confirm_password' class='input-container'>
-                <label for='confirm_password' class='write'>Confirm password</label>
-                <input type='password' name='confirm_password' id='confirm-password' placeholder='Enter password'
-                    required class='write'>
+                <input type='password' name='confirm_password' id='confirm-password' required class='write'>
+                <label for='confirm_password' class='label'>Confirm password</label>
+                <span class="enter"></span>
                 <p id='password-format-error' style='color: red; display: none;'></p>
                 <p id='password-match-error' style='color: red; display: none;'></p>
             </div>
-
-
-        </div>
-
-
-        <div class="main">
-            <form>
-                <input type="text" class="write" placeholder></input>
-                <label class="hello">Username</label>
-                <span class="enter"></span>
-            </form>
         </div>
 
         <div id='icon_container'>
@@ -188,7 +179,7 @@
 
 <link rel='stylesheet' type='text/css' href='/css/animations/form-animation.css'>
 
-<style>
+{{!-- <style>
     .input-container {
         position: relative;
         display: flex;
@@ -218,6 +209,6 @@
         width: 20px;
         transform: translateY(50%);
     }
-</style>
+</style> --}}
 
 <script src='/script/register-script.js'></script>

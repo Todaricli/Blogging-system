@@ -1,17 +1,29 @@
 window.addEventListener('load', function () {
-    const usernameError = document.querySelector('#username-error');
+    const registerButton = document.querySelector('#register_button > button');
+    // input selectors
+    const nameInput = document.querySelector('#name');
     const usernameInput = document.querySelector('#username');
-    usernameInput.addEventListener('input', async () => {
-        await checkUsernameInDb();
-        registerButtonEnabler();
-    });
-
+    const emailInput = document.querySelector('#email');
+    const passwordInput = document.querySelector('#password');
+    const confirmPasswordInput = document.querySelector('#confirm-password');
+    const formInputs = [
+        nameInput,
+        usernameInput,
+        emailInput,
+        passwordInput,
+        confirmPasswordInput,
+    ];
+    // error selectors
+    const usernameError = document.querySelector('#username-error');
     const passwordFormatError = document.querySelector(
         '#password-format-error'
     );
     const passwordMatchError = document.querySelector('#password-match-error');
-    const passwordInput = document.querySelector('#password');
-    const confirmPasswordInput = document.querySelector('#confirm-password');
+
+    usernameInput.addEventListener('input', async () => {
+        await checkUsernameInDb();
+        registerButtonEnabler();
+    });
     passwordInput.addEventListener('input', async () => {
         await checkValidPasswordFormat();
         await checkPasswordsMatch();
@@ -22,7 +34,20 @@ window.addEventListener('load', function () {
         registerButtonEnabler();
     });
 
-    const registerButton = document.querySelector('#register_button > button');
+    formInputs.forEach(function (input) {
+        const label = input.nextElementSibling; 
+    
+        input.addEventListener('input', function () {
+            if (input.value && input.value.trim() !== '') {
+                label.classList.add('focused-label'); 
+                label.classList.remove('label'); 
+            } else {
+                label.classList.remove('focused-label');
+                label.classList.add('label'); 
+            }
+        });
+    });
+    
 
     async function checkUsernameInDb() {
         const username = usernameInput.value;
@@ -89,10 +114,10 @@ window.addEventListener('load', function () {
             passwordMatchError.style.display === 'none'
         ) {
             registerButton.disabled = false;
-            registerButton.style.opacity = "1.0";
+            registerButton.style.opacity = '1.0';
         } else {
             registerButton.disabled = true;
-            registerButton.style.opacity = "0.3";
+            registerButton.style.opacity = '0.3';
         }
     }
 
@@ -103,10 +128,10 @@ window.addEventListener('load', function () {
             passwordMatchError.style.display === 'none'
         ) {
             registerButton.disabled = false;
-            registerButton.style.opacity = "1.0";
+            registerButton.style.opacity = '1.0';
         } else {
             registerButton.disabled = true;
-            registerButton.style.opacity = "0.3";
+            registerButton.style.opacity = '0.3';
         }
     }
 });

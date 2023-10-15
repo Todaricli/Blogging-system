@@ -1,15 +1,19 @@
-/* original source: https://codepen.io/mdchad/pen/qqmJex */
+/* original source: https://codepen.io/mdchad/pen/qqmJex 
+has been modified to cater to app*/
 
 body {
   text-align:center;
-  font-family: 'helvetica neue'
+  font-family: 'helvetica neue';
 }
 
-.main{
+.input-container{
   position:relative;
-  margin: 100px;
+  margin: 30px;
+  margin-left: -50px;
+  margin-right: -50px;
 }
-.hello{
+
+.label{
   position:absolute;
   left: 25%;
   top: 10px;
@@ -18,22 +22,32 @@ body {
   color: #cecece;
   transition: all 0.5s ease;
   pointer-events: none;
+  font-size: 18px;
 }
 
-input[type=text]:focus~.hello {
+.focused-label {
+  position:absolute;
+  left: 25%;
   display:block;
   color: black;
-  top: -20px;
+  top: -5px;
   font-size: 14px;
 }
 
-input[type=text]:focus~.enter {
+input:focus~.label {
+  display:block;
+  color: black;
+  top: -5px;
+  font-size: 14px;
+}
+
+input:focus~.enter {
   background-color: #0F1F7A;
   position: absolute;
   content: ' ';
   height: 1px;
   right: 45%;
-  top: 42px;
+  top: 52px;
   transform: scaleX(5)
 
 }
@@ -41,8 +55,7 @@ input[type=text]:focus~.enter {
 .enter{
   transition: all ease 0.5s;
   width: 10.1%;
-  transform: scaleX(1)
-
+  transform: scaleX(1);
 }
 
 textarea, input { 
@@ -51,8 +64,22 @@ textarea, input {
   border-bottom: 1px solid #cecece;
   height: 40px;
   width: 50%;
+  font-size: 18px;
+}
+
+.icon {
+  position: absolute;
+  right: 25%;
+  top: 2.5px;
+  cursor: pointer;
+  width: 20px;
+  transform: translateY(80%);
 }
 
 input:focus::before{
-  content: 'some content';
+  content: 'content';
+}
+
+.hidden-label {
+  display: none;
 }
