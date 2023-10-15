@@ -99,15 +99,13 @@ router.get("/editArticle/:id", async (req, res) => {
 
   res.locals.article_id = article_id
 
-
   res.render("editArticle");
 });
 
 router.get('/api/currentEditArticleDelta', async (req, res) => {
   const article_id = req.query.article_id;
-  console.log("Article_id: " + article_id);
   const article = await articleDao.getArticlesByID(article_id);
-  console.log(article);
+
   if(article) {
     res.status(200).json(article);
   } else {
@@ -115,10 +113,11 @@ router.get('/api/currentEditArticleDelta', async (req, res) => {
   }
 });
 
-router.post("/api/updateArticle", uploadTempFolder.single("imageFile"), async function (req, res) {
+router.post("/api/updateArticle", uploadTempFolder.single("imageKey"), async function (req, res) {
   const updateArticle = req.body;
+  const user_id = res.locals.user.id;
 
-  const article_id = updateArticle.article_idKey;
+  const article_id = updateArticle.article_id_key;
   const title = updateArticle.titleKey;
   const genre = updateArticle.genreKey;
   const content = updateArticle.contentKey;
@@ -138,8 +137,28 @@ router.post("/api/updateArticle", uploadTempFolder.single("imageFile"), async fu
 
     const html = converter.convert();
 
+    //Get article image
+    const fileInfo = req.file;
+    const imagePath = user_id + fileInfo.originalname;
+    // Move the image into the images folder
+    const oldFileName = fileInfo.path;
+    const newFileName = `./public/images/article-images/${imagePath}`;
+    fs.renameSync(oldFileName, newFileName);
+
+    //Create and save thumbnail
+    const image = await jimp.read(newFileName);
+    image.resize(320, jimp.AUTO);
+    image.fade(0.5);
+    image.sepia();
+    const font = await jimp.loadFont(jimp.FONT_SANS_32_WHITE);
+    let name = fileInfo.originalname.substring(0, fileInfo.originalname.lastIndexOf("."));
+    name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+    image.print(font, 10, 10, name);
+
+    await image.write(`./public/images/article-images/thumbnails/${imagePath}`);
+
     let done = undefined;
-    done = await articleDao.updateArticleToArticleTable(article_id, title, genre, html, delta_obj_string);
+    done = await articleDao.updateArticleToArticleTable(article_id, title, genre, html, delta_obj_string, imagePath);
 
     if (done) {
       res.status(200).send("Article updated");

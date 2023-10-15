@@ -169,12 +169,12 @@ async function insertNewArticleToArticleTable(user_id, title, genre, content_htm
         (${title}, ${content_html}, ${content_delta}, ${genre}, ${image}, datetime('now'), ${user_id})`);
 }
 
-async function updateArticleToArticleTable(article_id, title, genre, content_html, content_delta) {
+async function updateArticleToArticleTable(article_id, title, genre, content_html, content_delta, image) {
     const db = await getDatabase();
 
     return await db.run(SQL`
         UPDATE articles 
-        SET title = ${title}, genre = ${genre}, content_html = ${content_html}, content_delta = ${content_delta}, date_of_publish = datetime('now')
+        SET title = ${title}, genre = ${genre}, content_html = ${content_html}, content_delta = ${content_delta}, image = ${image}, date_of_publish = datetime('now')
         WHERE id = ${article_id}`);
 }
 

@@ -43,30 +43,39 @@ async function setUpQuillEditor() {
         const title = document.getElementById("update_article_title").value;
         const genre = document.getElementById("update_article_genre").value;
         const article_id = document.getElementById("article_id_temp_storage").value;
+        const image = document.getElementById("update_article_image").files[0];
+
         //Convert content into json object.
         // const actualContent = JSON.parse(content.value);
         const actualContent = content.value;
 
-        const updatedArticleData = {
-            article_idKey: article_id,
-            titleKey: title,
-            genreKey: genre,
-            contentKey: actualContent
-        }
+        // const updatedArticleData = {
+        //     article_idKey: article_id,
+        //     titleKey: title,
+        //     genreKey: genre,
+        //     contentKey: actualContent
+        // }
 
-        const toastMessage = document.getElementById("updated-article-toast-message");
+        const formData = new FormData();
+        formData.append("article_id_key", article_id)
+        formData.append("titleKey", title);
+        formData.append("genreKey", genre);
+        formData.append("contentKey", actualContent);
+        formData.append("imageKey", image);
+
+        // const toastMessage = document.getElementById("updated-article-toast-message");
 
         try {
             const response = await fetch('/api/updateArticle', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedArticleData)
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // },
+                body: formData
             });
 
             if (!response.ok) {
-                throw new Error('Request failed with status: ' + response.status);
+                throw new Error('Request failed with status: ' + response.status + " " + response.statusText);
             }
 
             const responseData = await response.text();
@@ -100,6 +109,7 @@ async function fetchArticleDelta() {
     const article_id = document.getElementById("article_id_temp_storage").value;
     const title_input = document.getElementById("update_article_title");
     const genere_select = document.getElementById("update_article_genre");
+
 
     const response = await fetch(`/api/currentEditArticleDelta?article_id=${article_id}`);
     const article = await response.json();
