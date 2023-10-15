@@ -1,15 +1,17 @@
 const express = require('express');
 const router = express.Router();
-
 const articleDao = require('../models/articles-dao.js');
-
 const QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
+const uploadTempFolder = require("../middleware/multer-uploader.js");
+const fs = require("fs");
+const jimp = require("jimp");
+
 
 router.get("/writeArticle", function (req, res) {
   res.render("writeArticle");
 })
 
-router.post("/api/postNewArticle", async function (req, res) {
+router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async function (req, res) {
   const newArticle = req.body;
 
   const user_id = res.locals.user.id;
@@ -32,8 +34,28 @@ router.post("/api/postNewArticle", async function (req, res) {
 
     const html = converter.convert();
 
+    //Get article image
+    const fileInfo = req.file;
+
+    // Move the image into the images folder
+    const oldFileName = fileInfo.path;
+    const newFileName = `./public/images/article-images/${fileInfo.originalname}`;
+    fs.renameSync(oldFileName, newFileName);
+
+    // TODO Create and save thumbnail
+    const image = await jimp.read(newFileName);
+    image.resize(320, jimp.AUTO);
+    image.fade(0.5);
+    image.sepia();
+    const font = await jimp.loadFont(jimp.FONT_SANS_32_WHITE);
+    let name = fileInfo.originalname.substring(0, fileInfo.originalname.lastIndexOf("."));
+    name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+    image.print(font, 10, 10, name);
+
+    await image.write(`./public/images/article-images/thumbnails/${fileInfo.originalname}`);
+
     let done = undefined;
-    done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string);
+    done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string, fileInfo.originalname);
 
     if (done) {
       res.status(200).send("New Article Created!");
@@ -93,7 +115,7 @@ router.get('/api/currentEditArticleDelta', async (req, res) => {
   }
 });
 
-router.post("/api/updateArticle", async function (req, res) {
+router.post("/api/updateArticle", uploadTempFolder.single("imageFile"), async function (req, res) {
   const updateArticle = req.body;
 
   const article_id = updateArticle.article_idKey;
@@ -128,5 +150,7 @@ router.post("/api/updateArticle", async function (req, res) {
   }
 
 });
+
+router.post("/articleImage", uploadTempFolder.single())
 
 module.exports = router;
