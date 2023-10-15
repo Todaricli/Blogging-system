@@ -45,16 +45,7 @@ async function setUpQuillEditor() {
         const article_id = document.getElementById("article_id_temp_storage").value;
         const image = document.getElementById("update_article_image").files[0];
 
-        //Convert content into json object.
-        // const actualContent = JSON.parse(content.value);
         const actualContent = content.value;
-
-        // const updatedArticleData = {
-        //     article_idKey: article_id,
-        //     titleKey: title,
-        //     genreKey: genre,
-        //     contentKey: actualContent
-        // }
 
         const formData = new FormData();
         formData.append("article_id_key", article_id)
@@ -63,14 +54,10 @@ async function setUpQuillEditor() {
         formData.append("contentKey", actualContent);
         formData.append("imageKey", image);
 
-        // const toastMessage = document.getElementById("updated-article-toast-message");
 
         try {
             const response = await fetch('/api/updateArticle', {
                 method: 'POST',
-                // headers: {
-                //     'Content-Type': 'application/json'
-                // },
                 body: formData
             });
 
@@ -88,11 +75,6 @@ async function setUpQuillEditor() {
             // Handle the response from the server
             alert(responseData + ' URL after response:' + window.location.href);
 
-            const directTimer = setTimeout(() => {
-                window.location.assign(`/editArticle/${article_id}`);
-                clearTimeout(directTimer);
-            }, 1000);
-
 
         } catch (error) {
             // Handle any errors that occur during the request
@@ -102,6 +84,11 @@ async function setUpQuillEditor() {
             //remove other user input
             document.getElementById("update_article_title").value = "";
         }
+
+        const directTimer = setTimeout(() => {
+            window.location.assign(`/editArticle/${article_id}`);
+            clearTimeout(directTimer);
+        }, 500);
     });
 }
 

@@ -36,7 +36,8 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
 
     //Get article image
     const fileInfo = req.file;
-    const imagePath = "user"+ user_id + "/" + fileInfo.originalname;
+    const imagePath = "user"+ user_id + "-" + fileInfo.originalname;
+    console.log(imagePath);
     // Move the image into the images folder
     const oldFileName = fileInfo.path;
     const newFileName = `./public/images/article-images/${imagePath}`;
@@ -139,7 +140,7 @@ router.post("/api/updateArticle", uploadTempFolder.single("imageKey"), async fun
 
     //Get article image
     const fileInfo = req.file;
-    const imagePath = "user"+ user_id + "/" + fileInfo.originalname;
+    const imagePath = "user"+ user_id + "-" + fileInfo.originalname;
     // Move the image into the images folder
     const oldFileName = fileInfo.path;
     const newFileName = `./public/images/article-images/${imagePath}`;
