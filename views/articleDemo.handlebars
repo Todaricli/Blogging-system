@@ -7,6 +7,9 @@
     <div id="article-div">
         <p id="article_title"><strong>Title:</strong> {{article.[0].title}}</p>
 
+        <div>
+            <img src="/images/article-images/thumbnails/{{article.[0].image}}" alt="{{article.[0].image}}">
+        </div>
         <div id="author_details">
             <div id="author_icon">{{author_icon}}</div>
             <p id="author_name"> <strong>By</strong> {{authorName.[0].author_fname}} {{authorName.[0].author_lname}}</p>
