@@ -36,9 +36,7 @@ router.get("/removeSubscription", verifyAuthenticated, async function (req, res)
 
 router.get("/addSubscription", verifyAuthenticated, async function (req, res) {
   const subscriber_id = req.query.id;
-  console.log(subscriber_id);
   const user_id = res.locals.user.id;
-  console.log(user_id);
 
   if (user_id) {
       await subDao.addSpecificSubscriptionByID(user_id, subscriber_id);
