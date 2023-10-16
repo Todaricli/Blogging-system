@@ -28,6 +28,14 @@ router.post('/api/validate-password-format', async function (req, res) {
   } else res.status(400).send('invalid');
 });
 
+router.post('/api/validate-email-format', async function (req, res) {
+  const email = req.body.email;
+  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i; // i make this case insensitive
+  if (emailRegex.test(email) || email === '') {
+    res.status(200).send('valid');
+  } else res.status(400).send('invalid');
+});
+
 router.post('/api/checkIfSub', async function (req, res) {
   const user_id = req.body.user_id;
   const author_id = req.body.author_id;
