@@ -6,21 +6,17 @@ const genericDao = require('../models/generic-dao.js');
 const subDao = require('../models/sub-dao.js');
 const commentDao = require('../models/comments-dao.js');
 const comment = require('../middleware/comments.js')
+const userDao = require('../models/user-dao.js');
 
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
-router.get('/', verifyAuthenticated, async function (req, res) {
+router.get('/', async function (req, res) {
 
     res.locals.top5Articles = await articleDao.getTopFiveArticles();
     res.locals.articleData = await articleDao.getAllArticles();
 
     res.render('articlesHome');
-});
-
-
-router.get('/article', async function (req, res) {
-    res.render('articleDemo');
 });
 
 router.get('/sub', verifyAuthenticated, async function (req, res) {
@@ -34,7 +30,7 @@ router.get('/sub', verifyAuthenticated, async function (req, res) {
     }
 })
 
-router.get('/profile', verifyAuthenticated, async function (req, res) {
+router.get('/profile', async function (req, res) {
     const id = req.query.id;
     if (id) {
         const profileData = await genericDao.getUserDataById(id);
@@ -49,32 +45,64 @@ router.get('/profile', verifyAuthenticated, async function (req, res) {
     }
 
 })
-router.get('/my_profile', async function (req, res) {
-    const user = res.locals.user;
-    console.log(user);
 
-    res.locals.details = user;
+router.get('/my_profile', verifyAuthenticated, async function (req, res) {
+    const id = res.locals.user.id;
 
-    //Get subscribers
-    const userData = await subDao.getSubscribersByUserID(user.id);
-    //console.log(userData);
+    const userData = await genericDao.getUserDataById(id);
+    if (!userData) {
+        res.redirect("/");
+    }
+    res.locals.userData = userData;
 
-    res.locals.subscribers = userData;
+    res.render('myProfile');
+})
 
-    const totalSubscribers = userData.length;
-    res.locals.total_subscribers = totalSubscribers;
+router.post('/update_info', async function (req, res) {
+    const user_id = res.locals.user.id;
+    const info = req.body;
+    const fname = info.my_profile_fname;
+    const lname = info.my_profile_lname;
+    const email = info.my_profile_email;
+    const DOB = info.my_profile_DOB;
+    const desc = info.my_profile_desc;
+    try {
+        if (!info.icon) {
+            const sqlReponse = await userDao.updateUserProfileWithoutIconUpdate(user_id, email, fname, lname, DOB, desc);
+            if (sqlReponse) { 
+                res.setToastMessage("Information updated!")
+            }
+            console.log(sqlReponse);
+            res.redirect('/my_profile');
+        } else {
+            const iconPath = `/images/avatars/${info.icon}.png`;
+            const sqlReponse = await userDao.updateUserProfile(user_id, email, fname, lname, DOB, desc, iconPath);
+            if (sqlReponse) { 
+                res.setToastMessage("Information updated!")
+            }
+            console.log(sqlReponse);
+            res.redirect('/my_profile');
+        }
+    } catch (e) {
+        res.setToastMessage('Updating error: ' + e);
+        res.redirect('/my_profile');
+    }
+})
 
-    //Get followings
-    const userFollowings = await subDao.getSubscriptionsByUserID(user.id);
-    //console.log("Followings:" + userFollowings);
-
-    res.locals.followings = userFollowings;
-
-    const totalFollowings = userFollowings.length;
-    res.locals.total_followings = totalFollowings;
-
-    res.render('myProfile')
-});
+router.get('/my-page', async function (req, res) {
+    const user_id = res.locals.user.id
+    if (user_id) {
+        const profileData = await genericDao.getUserDataById(user_id);
+        res.locals.profile_icon = profileData.icon_path;
+        res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
+        res.locals.profile_DOB = profileData.DOB;
+        res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);
+        res.locals.profile_articles = await articleDao.getArticlesByID(profileData.id);
+        res.render('profile');
+    } else {
+        res.status(404).send("Page not found 404!");
+    }
+})
 
 router.get('/my_post', verifyAuthenticated, async function (_, res) {
     const user = res.locals.user;
@@ -117,46 +145,6 @@ router.get('/deleteComment/:id', async function(req,res) {
     }
 
 })
-
-router.post('/update_info', function (req, res) {
-    const { bio, gender, address } = req.body;
-
-    const updateInfo = {
-        bio: bio ? true : false,
-        gender: gender ? true : false,
-        address: address ? true : false
-    };
-
-    res.locals.bio = bio;
-    res.locals.gender = gender;
-    res.locals.address = address;
-
-    res.render('myProfile', { this: res.locals, information: updateInfo });
-})
-
-// router.post("/postNewArticle", function(req, res) {
-//     const newArticle = req.body;
-
-//     const user_id = res.locals.user.id;
-//     const title = newArticle.titleKey;
-//     const genre = newArticle.genreKey;
-//     const content = newArticle.contentKey;
-
-//     console.log(user_id);
-//     console.log(title);
-//     console.log(genre);
-//     console.log(content);
-
-//     let done = undefined;
-//     done = writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, content);
-
-//     if(done) {
-//         res.setToastMessage("New Article created!");
-//     } else {
-//         res.setToastMessage("Submitting error, try again!");
-//     }
-
-//     res.redirect('/writeArticle');
 
 router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res) {
     const subscription_id = req.query.id;
@@ -203,9 +191,6 @@ router.get("/analytics-Dashboard", async (req, res) => {
 })
 
 router.get('/analytics', function (req, res) {
-
-
-
     res.render('analyticsDashboard');
 });
 
