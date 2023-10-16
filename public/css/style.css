@@ -1,3 +1,36 @@
+.register {
+    margin-right: 80px;
+}
+
+.login {
+    margin-left: auto;
+    margin-right: 50px;
+}
+
+.logout{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.nav-panel {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+.left-panel {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+
+
+
+
+
 nav {
     background-color: white;
     position: sticky;
@@ -8,19 +41,19 @@ nav {
     height: 60px;
     z-index: 1;
 }
-
+/* 
 .nav_list {
-    display: flex;
     gap: 50px;
     align-items: center;
     width: 200px;
     list-style: none;
     margin-right: 20px;
-}
+} */
 
 .logo img {
-    width: auto;
     height: 60px;
+    margin-right: auto;
+    justify-self: flex-start;
 }
 
 .search_bar {
