@@ -53,6 +53,11 @@ nav {
     width: 30px;
 }
 
+.dropbtn:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
