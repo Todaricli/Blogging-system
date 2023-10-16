@@ -19,11 +19,6 @@ router.get('/', async function (req, res) {
     res.render('articlesHome');
 });
 
-
-// router.get('/article', async function (req, res) {
-//     res.render('articleDemo');
-// });
-
 router.get('/sub', verifyAuthenticated, async function (req, res) {
     const user_id = res.locals.user.id;
     if (user_id) {
@@ -151,46 +146,6 @@ router.get('/deleteComment/:id', async function(req,res) {
 
 })
 
-router.post('/update_info', function (req, res) {
-    const { bio, gender, address } = req.body;
-
-    const updateInfo = {
-        bio: bio ? true : false,
-        gender: gender ? true : false,
-        address: address ? true : false
-    };
-
-    res.locals.bio = bio;
-    res.locals.gender = gender;
-    res.locals.address = address;
-
-    res.render('myProfile', { this: res.locals, information: updateInfo });
-})
-
-// router.post("/postNewArticle", function(req, res) {
-//     const newArticle = req.body;
-
-//     const user_id = res.locals.user.id;
-//     const title = newArticle.titleKey;
-//     const genre = newArticle.genreKey;
-//     const content = newArticle.contentKey;
-
-//     console.log(user_id);
-//     console.log(title);
-//     console.log(genre);
-//     console.log(content);
-
-//     let done = undefined;
-//     done = writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, content);
-
-//     if(done) {
-//         res.setToastMessage("New Article created!");
-//     } else {
-//         res.setToastMessage("Submitting error, try again!");
-//     }
-
-//     res.redirect('/writeArticle');
-
 router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res) {
     const subscription_id = req.query.id;
     const user_id = res.locals.user.id;
@@ -204,9 +159,6 @@ router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res)
     }
 })
 
-router.get("/analytics-Dashboard", async (req, res) => {
-    console.log("skeet")
-    res.render("analyticsDashboard")
 router.get("/removeSubscription", verifyAuthenticated, async function (req, res) {
     const subscription_id = req.query.id;
     const user_id = res.locals.user.id;
@@ -239,9 +191,6 @@ router.get("/analytics-Dashboard", async (req, res) => {
 })
 
 router.get('/analytics', function (req, res) {
-
-
-
     res.render('analyticsDashboard');
 });
 
