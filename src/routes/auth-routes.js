@@ -32,4 +32,8 @@ router.post(
     }
 );
 
+router.get('/admin-interface', login.authorizeAdmin, (req, res) => {
+    res.render('adminInterface');
+});
+
 module.exports = router;

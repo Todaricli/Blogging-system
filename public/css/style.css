@@ -140,6 +140,7 @@ nav {
 
 #register_fillinbox {
     padding: 0px 30px 0px 30px;
+    
 }
 
 #register_fillinbox>div {
@@ -217,7 +218,7 @@ nav {
 }
 /* login page css end*/
 
-#home_container {
+/* #home_container {
     display: grid;
     margin: 20px;
     padding: 5px;
@@ -226,8 +227,8 @@ nav {
     grid-template-areas:
         "header header header header"
         "top5 top5 top5 top5"
-        "articles articles articles sidebar"; */
-}
+        "articles articles articles sidebar"; 
+}*/
 
 /* #category_nav {
     grid-area: header;
