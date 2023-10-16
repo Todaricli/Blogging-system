@@ -102,6 +102,7 @@ nav {
     font-size: 12px;
 }
 
+/* register page css start*/
 #register_page_body {
     width: 700px;
     display: flex;
@@ -161,7 +162,9 @@ nav {
     display: flex;
     justify-content: center;
 }
+/* register page css end*/
 
+/* login page css start*/
 #login_toast {
     color: rgb(12, 175, 17);
 }
@@ -212,6 +215,7 @@ nav {
 #login_body_container a:visited {
     color: rgb(12, 175, 17);
 }
+/* login page css end*/
 
 #home_container {
     display: grid;
@@ -257,13 +261,16 @@ nav {
     font-size: 20px;
 }
 
+/* sub page css start*/
 #sub_container {
     display: grid;
+    min-height: 100vh;
     grid-template-rows: auto;
     grid-template-columns: 4fr 1fr 4fr;
     grid-template-areas:
         "subscription . subscriber";
     padding: 20px;
+    background-color: rgb(241, 248, 248);
 }
 
 #subscription_container {
@@ -271,6 +278,8 @@ nav {
     border: 1px solid lightgray;
     border-radius: 10px;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    height: auto;
 }
 
 #subscription_title >*{
@@ -327,6 +336,7 @@ nav {
     border: 1px solid lightgray;
     border-radius: 10px;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
 }
 
 #subscription_container>* {
@@ -385,7 +395,10 @@ nav {
     background-color: lightgray;
     cursor: pointer;
 }
+/* sub page css end*/
 
+
+/* profile page css start*/
 #profile_container {
     margin: 20px;
     border: 1px solid lightgray;
@@ -435,7 +448,9 @@ nav {
 #profile_articles_container>* {
     padding: 10px;
 }
+/* profile page css end*/
 
+/* register page css start*/
 #icon_container {
     padding: 10px 30px 10px 30px;
 }
@@ -486,59 +501,10 @@ nav {
 
     }
 }
+/* register page css end*/
 
 
 
-#icon_container {
-    padding: 10px 30px 10px 30px;
-}
-
-#icon_select_container {
-    display: flex;
-    flex-wrap: wrap;
-    border: 1px solid lightgrey;
-    justify-content: center;
-    margin-bottom: 10px;
-    width: 600px;
-    height: 400px;
-    overflow: scroll;
-}
-
-#icon_select_container>* {
-    display: flex;
-    justify-content: center;
-}
-
-#icon_select_container img {
-    width: 100px;
-    padding: 5px;
-}
-
-#icon_select_container img:hover {
-    background-color: lightgray;
-    cursor: pointer;
-}
-
-:checked+label img {
-    background-color: lightgray;
-}
-
-.icon_select>input {
-    opacity: 0;
-}
-
-@media only screen and (max-width:800px) {
-    #register_page_body {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-width:600px) {
-    #icon_select_container {
-        width: 100%;
-
-    }
-}
 
 #user_avatar {
     width: 40px;
@@ -645,9 +611,9 @@ nav {
     font-size: 40px;
 }
 
-.indvTopArticles {
+/* .indvTopArticles {
 
-}
+} */
 
 .furtherData {
     /* display: flex; */
@@ -671,3 +637,33 @@ nav {
 }
 
 /* ANAYTICS DASHBOARD END*/
+
+/* home page css start*/
+#author_icon img{
+    width: 50px;
+}
+
+.btn_sub_option {
+    cursor: pointer;
+    background-color: rgb(255, 255, 204, 0);
+    border: 0px;
+    position: relative;
+    display: inline-block;
+}
+
+.btn_subscribe{
+    position: absolute;
+    top: 20px;
+    left: 80px;
+    z-index: 2;
+    width: 100px;
+}
+
+/* .sub_option a {
+    display: block;
+    text-decoration: none;
+} */
+
+.btn_subscribe img {
+    width: 10px;
+}
