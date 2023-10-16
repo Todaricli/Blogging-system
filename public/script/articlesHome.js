@@ -27,7 +27,7 @@ window.addEventListener("load", function () {
             //         isClick = 0;
             //     }
             // });
-            
+
         });
     }
 
