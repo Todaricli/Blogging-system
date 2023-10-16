@@ -73,11 +73,9 @@ router.get('/my_profile', async function (req, res) {
 
     const totalFollowings = userFollowings.length;
     res.locals.total_followings = totalFollowings;
-});
 
-router.get('/my_profile', function (req, res) {
-    res.render('myProfile');
-})
+    res.render('myProfile')
+});
 
 router.get('/my_post', comment.generateComments,async function (_, res) {
     const user = res.locals.user;
