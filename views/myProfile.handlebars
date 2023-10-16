@@ -1,13 +1,10 @@
-<div>
-    <img src="{{this.avatar}}" alt="avatar" style="width: 110px">
-    <p><strong>{{this.name}}</strong></p>
-</div>
+<div style="border: 1px solid">
+    <img src="{{user.icon_path}}" alt="avatar" style="width: 90px">
+    <p><strong>{{user.fname}} {{user.lname}}</strong></p>
 
-<div>
     <ul>
-        <li>Name: {{this.username}}</li>
-        <li>{{this.total_followers}} Follower</li>
-        <li>Email: {{this.email}}</li>
+        <li>DOB: {{user.DOB}}</li>
+        <li>Email: {{user.email}}</li>
         {{#if information}}
         {{#if bio}}
         <li>Bio: {{this.bio}}</li>
@@ -21,15 +18,32 @@
         {{/if}}
 
         <li>
-            <a href="/my_posts">My posts</a>
+            <a href="/my_post">My posts</a>
         </li>
     </ul>
 </div>
+
+
 {{!-- Following sections on the right side --}}
-<div>
-    <h2>Following</h2>
+<div style="border: 1px solid; margin=10px">
+    <h2>Subscribers</h2>
     {{#if subscribers}}
     <div>
+        <p>You have {{this.total_subscribers}} subscribers in total.</p>
+        <a href="/sub">See all!</a>
+    </div>
+    {{else}}
+    <p>You have no subscribers!</p>
+    {{/if}}
+</div>
+
+<div style="border: 1px solid red; margin=10px">
+    <h2>Following</h2>
+    {{#if followings}}
+    <div>
+        <p>You are following {{this.total_followings}} people.</p>
+
+        <a href="/sub">See all!</a>
         {{#each subscribers}}
         <img src="{{this.user_avatar}}" alt="subsciber avatar">
         <p>{{this.username}}</p>
@@ -53,10 +67,11 @@
 </div>
         <a href="/sub">See all ({{this.total_subscribers}})</a>
 
+
 {{!-- Options section --}}
 <div id="inforForm">
-    <button type="submit">Update information</button> 
-    
+    <button type="submit">Update information</button>
+
     <form action="/update_info" method="post" id="information">
         <p><strong>Update information</strong></p>
 

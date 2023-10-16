@@ -16,7 +16,7 @@
             <img src="{{this.draft_img}}" alt="my draft image" id="draft_img">
             <p id="draft_create_time">Created on {{this.draft_created_time}}</p>
             <p id="draft_title">{{this.draft_title}}</p>
-            <p id="draft_content">{{this.draft_content}}</p>
+            <p id="draft_content">{{{this.draft_content}}}</p>
             {{#if tags}}
             {{#each tags}}
             <p id="tag">{{this.draft_tag}}</p>
@@ -39,10 +39,11 @@
     <ul>
         {{#each posts}}
         <div class="each_posts">
-            <img src="/images/nature.avif" alt="my post image" id="post_img" width="200px">
+            <img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}" id="post_img" width="200px">
             <h3 id="post_title">{{this.title}}</h3>
             <p id="post_publish_time"><strong>Published on </strong>{{this.date_of_publish}}</p>
-            <p id="post_content">{{this.content}}</p>
+            <p id="post_content">{{{this.content_html}}}</p>
+            <a href="/editArticle/{{this.article_id}}">Edit</a>
             {{#if tags}}
             {{#each tags}}
             <p id="tag">{{this.post_tag}}</p>
@@ -64,12 +65,25 @@
     <ul>
         {{#each responses}}
         <div class="each_responses">
-            <img src="/images/Dragonite.png" alt="user avatar" id="user_avatar" width="20px">
+            <img src="/images/icon_path" alt="user avatar" id="user_avatar" width="20px">
             <p id="username"><strong>{{this.commentor_fname}} {{this.commentor_lname}}</strong></p>
             <p><strong>Replied on </strong>{{this.time_of_comment}}</p>
             <p><strong>Articles:</strong> {{this.article_title}}</p>
             <p><strong>Comment: </strong>{{this.content}}</p>
+            {{#if replies}}
+            {{#each replies}}
+            <div>
+                <img src="/images/icon_path" alt="user avatar" id="user_avatar" width="20px">
+                <p id="username"><strong>{{this.commentor_fname}} {{this.commentor_lname}}</strong></p>
+                <p><strong>Replied on </strong>{{this.time_of_comment}}</p>
+                <p><strong>Replies: </strong>{{this.content}}</p>
+            </div>
+            {{/each}}
+            {{/if}}
             <a href="/reply">Reply</a>
+            <a href="/deleteComment/{{this.id}}">
+                <button>Delete Comment</button>
+            </a>
         </div>
         {{/each}}
     </ul>
@@ -77,4 +91,3 @@
 {{else}}
 <p>You have no responses</p>
 {{/if}}
-
