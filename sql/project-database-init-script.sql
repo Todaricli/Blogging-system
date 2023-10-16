@@ -46,20 +46,24 @@ VALUES
     (7, 'user7', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'David', 'Wilson', '1996-06-25', 'User 7', '/images/avatars/guy4.png', 0),
     (8, 'user8', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Grace', 'Miller', '1991-11-15', 'User 8', '/images/avatars/girl4.png', 0),
     (9, 'user9', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Frank', 'Martinez', '1987-02-08', 'User 9', '/images/avatars/guy5.png', 0),
-    (10, 'user10', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Olivia', 'Jones', '1994-08-12', 'User 10', '/images/avatars/girl6.png', 0);
+    (10, 'user10', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Olivia', 'Jones', '1994-08-12', 'User 10', '/images/avatars/girl6.png', 0),
+    (11, 'ADMIN', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'ADMIN', 'ADMIN', '1994-08-12', 'ADMIN', '/images/avatars/girl6.png', 1);
 
 CREATE TABLE articles
 (
     id              INTEGER       NOT NULL PRIMARY KEY,
     title           VARCHAR(88)   NOT NULL,
-    content         VARCHAR(8000) NOT NULL,
+    content_html    VARCHAR(8000) NOT NULL,
+    content_delta   VARCHAR(8000) NOT NULL,
     genre           VARCHAR(20),
+    image           VARCHAR(8000),
     date_of_publish TIMESTAMP     NOT NULL,
     author_id       INTEGER       NOT NULL,
     FOREIGN KEY (author_id) REFERENCES user (id)
 );
 
 -- Inserting 15 rows of sample data into the articles table
+<<<<<<< HEAD
 INSERT INTO articles (id, title, content, date_of_publish, author_id)
 VALUES (1, 'Introduction to Fabric Types',
         '{"ops":[{"insert":"Lorem Ipsum"},{"attributes":{"align":"center","header":1},"insert":"\n"},{"attributes":{"italic":true},"insert":"\"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\""},{"attributes":{"align":"center","header":4},"insert":"\n"},{"insert":"\"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...\""},{"attributes":{"align":"center","header":5},"insert":"\n"},{"insert":"Lorem ipsum dolor sit amet, consectetur adipiscing elit."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Sed pellentesque nibh eget cursus sollicitudin."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Praesent vestibulum massa in felis pellentesque feugiat."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Ut finibus nulla dignissim diam luctus elementum."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Morbi eget lorem tempor, finibus lectus vitae, suscipit felis."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Duis fringilla nisl et tincidunt euismod."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Praesent nec lectus lacinia, lobortis urna interdum, pharetra risus."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Maecenas sollicitudin augue eu nunc maximus tempor."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Nulla aliquam nunc ac felis placerat, quis consequat quam imperdiet."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Nullam suscipit velit eget orci molestie, eu convallis felis tincidunt."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Mauris accumsan ligula et massa posuere, a interdum arcu rhoncus."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Cras rutrum orci a vestibulum auctor."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Praesent non tortor ac nunc tempus pulvinar id non est."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Pellentesque efficitur lacus in velit tristique, nec convallis neque interdum."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"insert":"Ut aliquam justo quis porta euismod."},{"attributes":{"align":"justify","list":"bullet"},"insert":"\n"},{"attributes":{"bold":true},"insert":"Generated 5 paragraphs, 111 words, 855 bytes of "},{"attributes":{"bold":true,"color":"#000000","link":"https://www.lipsum.com/"},"insert":"Lorem Ipsum"},{"attributes":{"align":"center"},"insert":"\n"},{"insert":"\n"}]}',
@@ -147,7 +151,11 @@ VALUES (1, 1, 1, 'Great article!', '2023-10-10 10:15:00', NULL),
        (19, 4, 10, 'Sustainability is important.', '2023-10-11 17:45:00', NULL),
        (20, 5, 10, 'I support eco-friendly fabrics.', '2023-10-11 19:00:00', NULL),
        (21, 2, 1, 'shalom.', '2023-12-11 19:00:00', NULL),
+<<<<<<< HEAD
        (22, 2, 16, 'skeetyeet.', '2023-14-11 19:00:00', NULL);
+=======
+       (22, 2, 15, 'skeetyeet.', '2023-14-11 19:00:00', NULL);
+>>>>>>> 4127805408b57895e6127c2b25c1723a6b18b847
 
 CREATE TABLE likes
 (
@@ -161,27 +169,26 @@ CREATE TABLE likes
 
 -- Inserting 20 rows of sample data into the likes table
 INSERT INTO likes (id, user_id, article_id)
-VALUES
-    (1, 1, 1),
-    (2, 2, 1),
-    (3, 3, 2),
-    (4, 4, 2),
-    (5, 5, 3),
-    (6, 1, 3),
-    (7, 2, 4),
-    (8, 3, 4),
-    (9, 4, 5),
-    (10, 5, 5),
-    (11, 1, 6),
-    (12, 2, 6),
-    (13, 3, 7),
-    (14, 4, 7),
-    (15, 5, 8),
-    (16, 1, 8),
-    (17, 2, 9),
-    (18, 3, 9),
-    (19, 4, 10),
-    (20, 5, 10);
+VALUES (1, 1, 1),
+       (2, 2, 1),
+       (3, 3, 2),
+       (4, 4, 2),
+       (5, 5, 3),
+       (6, 1, 3),
+       (7, 2, 4),
+       (8, 3, 4),
+       (9, 4, 5),
+       (10, 5, 5),
+       (11, 1, 6),
+       (12, 2, 6),
+       (13, 3, 7),
+       (14, 4, 7),
+       (15, 5, 8),
+       (16, 1, 8),
+       (17, 2, 9),
+       (18, 3, 9),
+       (19, 4, 10),
+       (20, 5, 10);
 
 CREATE TABLE likes_comments
 (
@@ -313,8 +320,10 @@ VALUES (1, 1, 2),
        (20, 20, 1);
 
 -- creating a view that shows articles likes, comments and popularity
+
 DROP VIEW IF EXISTS articles_info;
 
+<<<<<<< HEAD
 create view [Articles_info]as 
 select articles.author_id as user_id,articles.id as article_id,user.fname, user.lname, articles.title, count(likes.id) as like_count, comments_count, (count(likes.id) + comments_count*2) as popularity
 	from articles
@@ -326,3 +335,33 @@ select articles.author_id as user_id,articles.id as article_id,user.fname, user.
 	) on articles.id = comment_articles_id
 	left join user on user.id = articles.author_id
  group by articles.id;
+=======
+create view [Articles_info] as
+select articles.author_id                     as user_id,
+       articles.id                            as article_id,
+       user.fname,
+       user.lname,
+       articles.title,
+       count(likes.id)                        as like_count,
+       comments_count,
+       (count(likes.id) + comments_count * 2) as popularity
+from articles
+         left join likes on articles.id = likes.article_id
+         left join (select article_id as comment_articles_id, count(comments.id) as comments_count
+                    from comments
+                    group by article_id) on articles.id = comment_articles_id
+         left join user on user.id = articles.author_id
+group by articles.id;
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 4127805408b57895e6127c2b25c1723a6b18b847

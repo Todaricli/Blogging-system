@@ -5,13 +5,6 @@ const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 const subDao = require('../models/sub-dao.js');
 
-const writeArticleDao = require('../models/writeArticle-dao.js');
-
-// router.get('/', async function (req, res) {
-//     res.locals.title = 'My route title!';
-//     res.locals.allTestData = await testDao.retrieveAllTestData();
-//     res.render('home');
-// });
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
@@ -25,32 +18,8 @@ router.get('/', verifyAuthenticated, async function (req, res) {
 
 
 router.get('/article', async function (req, res) {
-
     res.render('articleDemo');
 });
-
-// router.get('/article/:id', async function (req,res) {
-//     const articleId = req.params.id;
-//     console.log("Article ID:", articleId);
-
-//     const article = await articleDao.getArticlesByID(articleId);
-//     console.log(article);
-//     res.locals.article = article;
-
-//     const authorName = await articleDao.getAuthorByArticle(articleId);
-//     console.log(authorName);
-//     res.locals.authorName = authorName;
-
-//     const comments = await articleDao.getAllCommentsFromArticle(articleId);
-//     console.log(comments);
-//     res.locals.comments = comments;
-
-//     const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
-//     console.log(likeCounts);
-//     res.locals.like_count = likeCounts;
-
-//     res.render('articleDemo');
-// })
 
 router.get('/sub', verifyAuthenticated, async function (req, res) {
     const user_id = res.locals.user.id;
@@ -78,8 +47,8 @@ router.get('/profile', verifyAuthenticated, async function (req, res) {
     }
 
 })
-router.get('/my_profile', function (req, res) {
 
+router.get('/my_profile', function (req, res) {
     res.render('myProfile');
 })
 
@@ -123,30 +92,6 @@ router.post('/update_info', function (req, res) {
     res.render('myProfile', { this: res.locals, information: updateInfo });
 })
 
-// router.post("/postNewArticle", function(req, res) {
-//     const newArticle = req.body;
-
-//     const user_id = res.locals.user.id;
-//     const title = newArticle.titleKey;
-//     const genre = newArticle.genreKey;
-//     const content = newArticle.contentKey;
-
-//     console.log(user_id);
-//     console.log(title);
-//     console.log(genre);
-//     console.log(content);
-    
-//     let done = undefined;
-//     done = writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, content);
-
-//     if(done) {
-//         res.setToastMessage("New Article created!");
-//     } else {
-//         res.setToastMessage("Submitting error, try again!");
-//     }
-    
-//     res.redirect('/writeArticle');
-
 router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res) {
     const subscription_id = req.query.id;
     const user_id = res.locals.user.id;
@@ -160,7 +105,6 @@ router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res)
     }
 })
 
-// <<<<<<< HEAD
 router.get("/analytics-Dashboard", async (req,res) =>{
     console.log("skeet")
     res.render("analyticsDashboard")
@@ -178,5 +122,9 @@ router.get("/subscriberRemove", verifyAuthenticated, async function (req, res) {
         res.redirect('/login');
     }
 })
+
+router.get('/analytics', function(req, res){
+    res.render('analyticsDashboard');
+});
 
 module.exports = router;

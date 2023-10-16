@@ -6,6 +6,4 @@ const uploadTempFolder = multer({
 });
 
 // Export the "upload" object, which we can use to actually accept file uploads.
-module.exports = {
-    uploadTempFolder,
-};
+module.exports = uploadTempFolder;
