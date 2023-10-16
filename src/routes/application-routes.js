@@ -32,7 +32,7 @@ router.get('/sub', verifyAuthenticated, async function (req, res) {
     }
 })
 
-router.get('/profile', verifyAuthenticated, async function (req, res) {
+router.get('/profile', verifyAuthenticated, authorizeAdmin, async function (req, res) {
     const id = req.query.id;
     if (id) {
         const profileData = await genericDao.getUserDataById(id);
