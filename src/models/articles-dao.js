@@ -179,6 +179,7 @@ async function updateArticleToArticleTable(article_id, title, genre, content_htm
 }
 
 
+
 module.exports = {
     getArticlesByUserID,
     getArticlesByID,

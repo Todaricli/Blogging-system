@@ -32,43 +32,68 @@
                 {{like_count.[0].like_count}}
             </button>
         </div>
-    </div>
+        {{!-- This anchor tag for testing purpose only --}}
+        <a href="/writeArticle">Write article</a>
+        <hr>
 
-    <hr>
-    
-    {{!-- Displaying comment section  --}}
-    <button id="open-comment">Comment</button>
+        {{!-- Displaying like button --}}
+        <div id="like_section">
+            <div id="like">
 
-    <div class="comment hidden">
-        <form class="comment-form">
-            <button id="close-comment">Cancel</button>
-            <textarea name="comments" id="comments_id" placeholder="Add your comment here..." rows="5"
-                cols="60"></textarea>
-            <input type="submit" name="submit_button" value="Respond!" />
+                <button class="like-btn">
+                    <i class="fa-regular fa-thumbs-up" id="like-icon"></i>
+                    {{like_count.[0].like_count}}
+                </button>
+            </div>
+        </div>
 
-        </form>
+        <hr>
 
-        <div>
-            {{#if comments}}
+        {{!-- Displaying comment section --}}
+        <button id="open-comment">Comment
+        </button>
+
+        <div class="comment hidden">
+            <form class="comment-form">
+                <button id="close-comment">Cancel</button>
+                <textarea name="comments" id="comments_id" placeholder="Add your comment here..." rows="5"
+                    cols="60"></textarea>
+                <input type="submit" name="submit_button" value="Respond!" />
+
+            </form>
+
+            <div>
+                {{#if comments}}
                 {{#each comments}}
                 <div class="comment_details">
-                    <p class="comment_content">{{this.content}}</p>
+                    <p class="comment_content"><strong>Comment:</strong> {{this.content}}</p>
                     <p class="comment_by_name">{{this.comment.name}}</p>
                     <div class="comment_by_icon">{{this.comment.icon}}</div>
-                    <p class="comment_by_timestamp">{{this.time_of_comment}}</p>
+                    <p class="comment_by_timestamp"><strong>Time:</strong> {{this.time_of_comment}}</p>
+                    <div>
+                        {{#if replies}}
+                        {{#each replies}}
+                        <div style="border: 1px solid red; margin-left: 20px">
+                            <p><strong>Replied on </strong>{{this.time_of_comment}}</p>
+                            <p><strong>Replies: </strong>{{this.content}}</p>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+                    </div>
                 </div>
                 {{/each}}
-            {{else}}
-            <div id="comments_title">Comments (0)</div>
-            <div id="comments_container">This article has not had comment yet...</div>
-            {{/if}}
+                {{else}}
+                <div id="comments_title">Comments (0)</div>
+                <div id="comments_container">This article has not had comment yet...</div>
+                {{/if}}
+            </div>
         </div>
+
     </div>
 
-</div>
+    {{!-- JS linked to button effects --}}
+    <script src="/script/button.js"></script>
 
-{{!-- JS linked to button effects --}}
-<script src="/script/button.js"></script>
 
-{{!-- 
-<script src="/script/display-single-article.js"></script> --}}
+    {{!--
+    <script src="/script/display-single-article.js"></script> --}}
