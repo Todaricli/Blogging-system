@@ -17,15 +17,17 @@ window.addEventListener("load", function () {
                     option.innerHTML = `<a href="/addSubscription?id=${author_id.value}"><button><img src="/images/subscribe.png">Subscribe</button></a>`;
                 }
             }
-            btn.addEventListener("click",  function () {
-                if (!isClick) {
-                    btn_subscribe.appendChild(option);
-                    isClick = 1;
-                } else {
-                    btn_subscribe.removeChild(option);
-                    isClick = 0;
-                }
-            });
+            btn_subscribe.appendChild(option);
+            // btn.addEventListener("click",  function () {
+            //     if (!isClick) {
+            //         btn_subscribe.appendChild(option);
+            //         isClick = 1;
+            //     } else {
+            //         btn_subscribe.removeChild(option);
+            //         isClick = 0;
+            //     }
+            // });
+            
         });
     }
 
