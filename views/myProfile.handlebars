@@ -44,11 +44,28 @@
         <p>You are following {{this.total_followings}} people.</p>
 
         <a href="/sub">See all!</a>
+        {{#each subscribers}}
+        <img src="{{this.user_avatar}}" alt="subsciber avatar">
+        <p>{{this.username}}</p>
+        <button>
+            <div>
+                <img src="{{this.user_avatar}}" alt="subsciber avatar">
+                <p>{{this.username}}</p>
+                <p>{{this.bio}}</p>
+                <p>{{this.total_followers}} Followers</p>
+                <button>Following</button>
+            </div>
+        </button>
+        <div>
+        </div>
+
+        {{/each}}
     </div>
     {{else}}
     <p>You are not following anyone!</p>
     {{/if}}
 </div>
+        <a href="/sub">See all ({{this.total_subscribers}})</a>
 
 
 {{!-- Options section --}}
