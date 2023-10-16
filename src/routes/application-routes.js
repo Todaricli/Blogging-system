@@ -9,7 +9,6 @@ const comment = require('../middleware/comments.js')
 
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
-const { subscribe } = require('./application-routes.js');
 
 router.get('/', verifyAuthenticated, async function (req, res) {
 
@@ -77,16 +76,16 @@ router.get('/my_profile', async function (req, res) {
     res.render('myProfile')
 });
 
-router.get('/my_post', comment.generateComments,async function (_, res) {
+router.get('/my_post', verifyAuthenticated, async function (_, res) {
     const user = res.locals.user;
 
     const data = await getUserArticles(user.id)
-    //console.log(data)
+    console.log(data)
     const totalPosts = data.length;
     res.locals.posts = data;
     res.locals.total_posts = totalPosts;
 
-    const article_id = data.article_id;
+    const article_id = data[0].article_id;
     console.log(article_id)
 
     const comments = await commentDao.getAllCommentsByArticles(article_id);

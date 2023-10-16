@@ -4,7 +4,6 @@ const analyticsDao = require(`../../models/analytics-dao`)
 
 router.get('/api/get-analytics', async function (req, res) {
     const user = res.locals.user
-    console.log(user)
     if (user !== undefined) {
         const userId = user["id"]
         const numberOfFollowers = await analyticsDao.getNumFollowers(userId);
