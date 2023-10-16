@@ -72,3 +72,35 @@
 #calendar-body td:hover::before {
     background-color: #f2f2f2;
 }
+
+#calendar-close {
+    position: relative;
+    font-size: 25px;
+    color: #333;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+#calendar-close:hover {
+    color: #FF0000;
+}
+
+.btn-month {
+    height: 30px;
+    width: 30px;
+    margin: 0 1px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+}
+
+.btn-month:hover {
+    background: #f2f2f2;
+}

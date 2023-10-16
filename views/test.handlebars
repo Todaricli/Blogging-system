@@ -2,9 +2,9 @@
 
 <div id="calendar-container">
     <div id="calendar-header">
-        <button class="btn prev-month" id="prev" onclick="prevMonth()">&#9664;</button>
+        <button class="btn-month" id="prev" onclick="prevMonth()"><i class="fa-solid fa-chevron-left"></i></button>
         <span id="current-date" onclick="generateArticlesByMonth()"></span>
-        <button class="btn next-month" id="next" onclick="nextMonth()">&#9654;</button>
+        <button class="btn-month" id="next" onclick="nextMonth()"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
     <table id="calendar-dates">
         <thead>
@@ -21,13 +21,20 @@
         <tbody id="calendar-body">
         </tbody>
     </table>
+    <div>
+     <button id="calendar-close">
+        <a href="/">
+            <i class="fa-regular fa-circle-xmark"></i>
+    </button>
+    </div>
+
 </div>
-<div id="alert-modal" class="modal">
+{{!-- <div id="alert-modal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
+
         <p id="modal-text"></p>
     </div>
-</div>
+</div> --}}
 
 <form action="/filtered-articles" method="GET">
     <label for="startDate">Start Date:</label>
@@ -36,7 +43,7 @@
     <label for="endDate">End Date:</label>
     <input type="date" name="endDate" id="endDate">
 
-    <button type="submit">Filter Articles</button>
+    <button type="submit" id="dateInput">Filter Articles</button>
 </form>
 
 
