@@ -12,7 +12,7 @@ const writeArticleDao = require('../models/writeArticle-dao.js');
 //     res.locals.allTestData = await testDao.retrieveAllTestData();
 //     res.render('home');
 // });
-const { verifyAuthenticated, authorizeAdmin } = require('../middleware/auth-middleware/login-auth.js');
+const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
 router.get('/', verifyAuthenticated, async function (req, res) {
@@ -63,7 +63,7 @@ router.get('/sub', verifyAuthenticated, async function (req, res) {
     }
 })
 
-router.get('/profile', verifyAuthenticated, authorizeAdmin, async function (req, res) {
+router.get('/profile', verifyAuthenticated, async function (req, res) {
     const id = req.query.id;
     if (id) {
         const profileData = await genericDao.getUserDataById(id);
