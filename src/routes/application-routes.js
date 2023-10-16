@@ -118,11 +118,44 @@ router.get('/deleteComment/:id', async function(req,res) {
 })
 
 router.post('/update_info', function (req, res) {
+    const { bio, gender, address } = req.body;
 
-  
+    const updateInfo = {
+        bio: bio ? true : false,
+        gender: gender ? true : false,
+        address: address ? true : false
+    };
 
-    res.render('myProfile');
+    res.locals.bio = bio;
+    res.locals.gender = gender;
+    res.locals.address = address;
+
+    res.render('myProfile', { this: res.locals, information: updateInfo });
 })
+
+// router.post("/postNewArticle", function(req, res) {
+//     const newArticle = req.body;
+
+//     const user_id = res.locals.user.id;
+//     const title = newArticle.titleKey;
+//     const genre = newArticle.genreKey;
+//     const content = newArticle.contentKey;
+
+//     console.log(user_id);
+//     console.log(title);
+//     console.log(genre);
+//     console.log(content);
+
+//     let done = undefined;
+//     done = writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, content);
+
+//     if(done) {
+//         res.setToastMessage("New Article created!");
+//     } else {
+//         res.setToastMessage("Submitting error, try again!");
+//     }
+
+//     res.redirect('/writeArticle');
 
 router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res) {
     const subscription_id = req.query.id;
@@ -137,25 +170,41 @@ router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res)
     }
 })
 
-router.get("/analytics-Dashboard", async (req,res) =>{
-    console.log("skeet")
-    res.render("analyticsDashboard")
-})
-
-router.get("/subscriberRemove", verifyAuthenticated, async function (req, res) {
-    const subscriber_id = req.query.id;
+router.get("/removeSubscription", verifyAuthenticated, async function (req, res) {
+    const subscription_id = req.query.id;
     const user_id = res.locals.user.id;
     if (user_id) {
-        await subDao.removeSpecificSubscriberByID(user_id, subscriber_id);
-        res.locals.subscriptionList = await subDao.getSubscriptionsByUserID(user_id);
-        res.locals.subscriberList = await subDao.getSubscribersByUserID(user_id);
-        res.render('subscription&subscriber');
+        await subDao.removeSpecificSubscriptionByID(user_id, subscription_id);
+        res.locals.top5Articles = await articleDao.getTopFiveArticles();
+        res.locals.articleData = await articleDao.getAllArticles();
+        res.render('articlesHome');
     } else {
         res.redirect('/login');
     }
 })
 
-router.get('/analytics', function(req, res){
+router.get("/addSubscription", verifyAuthenticated, async function (req, res) {
+    const subscriber_id = req.query.id;
+    const user_id = res.locals.user.id;
+    if (user_id) {
+        await subDao.addSpecificSubscriptionByID(user_id, subscriber_id);
+        res.locals.top5Articles = await articleDao.getTopFiveArticles();
+        res.locals.articleData = await articleDao.getAllArticles();
+        res.render('articlesHome');
+    } else {
+        res.redirect('/login');
+    }
+})
+
+router.get("/analytics-Dashboard", async (req, res) => {
+    console.log("skeet")
+    res.render("analyticsDashboard")
+})
+
+router.get('/analytics', function (req, res) {
+
+
+
     res.render('analyticsDashboard');
 });
 
