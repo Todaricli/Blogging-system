@@ -6,7 +6,7 @@ window.addEventListener("load", function () {
             //let isClick = 0;
             const author_id = btn.querySelector('.article_author_id');
             const btn_subscribe = btn.querySelector('.btn_subscribe');
-            if (user_id.value != author_id.value) {
+            if ((user_id.value != author_id.value) && user_id.value != null) {
                 const option = document.createElement("button");
                 const isSubscribe = await checkIfSubscribe(user_id.value, author_id.value);
                 const subscription_id = author_id.value;
@@ -79,6 +79,14 @@ window.addEventListener("load", function () {
     }
 
     displaySubOption();
+
+    // articlesHome.registerHelper('isEqual', function(user_id, author_id, options) {
+    //     if (user_id === author_id) {
+    //       return options.fn(this);
+    //     } else {
+    //       return options.inverse(this);
+    //     }
+    //   });
 
 })
 

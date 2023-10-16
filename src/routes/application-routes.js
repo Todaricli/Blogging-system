@@ -10,10 +10,11 @@ const comment = require('../middleware/comments.js')
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
-router.get('/', verifyAuthenticated, async function (req, res) {
+router.get('/', async function (req, res) {
 
     res.locals.top5Articles = await articleDao.getTopFiveArticles();
     res.locals.articleData = await articleDao.getAllArticles();
+    
 
     res.render('articlesHome');
 });
@@ -34,7 +35,7 @@ router.get('/sub', verifyAuthenticated, async function (req, res) {
     }
 })
 
-router.get('/profile', verifyAuthenticated, async function (req, res) {
+router.get('/profile', async function (req, res) {
     const id = req.query.id;
     if (id) {
         const profileData = await genericDao.getUserDataById(id);
@@ -42,7 +43,6 @@ router.get('/profile', verifyAuthenticated, async function (req, res) {
         res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
         res.locals.profile_DOB = profileData.DOB;
         res.locals.profile_id = id;
-        res.locals.user.id
         res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);
         res.locals.profile_articles = await articleDao.getArticlesByID(profileData.id);
         res.render('profile');

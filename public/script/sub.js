@@ -1,5 +1,5 @@
 window.addEventListener("load", function () {
-    
+
     const btn_unsubscription = document.querySelectorAll(".btn_unsubscription");
     btn_unsubscription.forEach(async (btn) => {
         const idValue = btn.querySelector(".subscription_id");
@@ -8,7 +8,7 @@ window.addEventListener("load", function () {
             removeSubscription(subscription_id);
         });
     })
-    
+
     const btn_unsubscriber = document.querySelectorAll(".btn_unsubscriber");
     btn_unsubscriber.forEach(async (btn) => {
         const idValue = btn.querySelector(".subscriber_id");
@@ -47,5 +47,5 @@ window.addEventListener("load", function () {
                 console.error('Network error:', error);
             });
     }
-    
+
 })

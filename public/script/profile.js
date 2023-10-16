@@ -3,7 +3,7 @@ window.addEventListener("load", function () {
         const user_id = document.querySelector("#user_id");
         const profile_id = document.querySelector('#profile_id');
         const profile_related_info = document.querySelector('#profile_related_info');
-        if (user_id.value != profile_id.value) {
+        if ((user_id.value != profile_id.value) && user_id.value != null) {
             const option = document.createElement("button");
             const isSubscribe = await checkIfSubscribe(user_id.value, profile_id.value);
             const subscription_id = profile_id.value;
