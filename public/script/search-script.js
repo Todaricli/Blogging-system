@@ -4,6 +4,8 @@ window.addEventListener(`load`, function () {
     const searchByTitleContainer = document.querySelector("#searchByTitle")
     const searchByAuthorContainer = document.querySelector("#searchByAuthor")
     const searchNavBar = document.querySelector(".search_bar")
+    const searchAllButton = document.querySelector("#viewAllSearchResults")
+
 
     window.addEventListener(`click`, (e)=>{
         console.log(e.target)
@@ -21,12 +23,17 @@ window.addEventListener(`load`, function () {
 
     })
 
+    searchBarForm.addEventListener(`keyup`, (e)=>{
+        if(e.key ==="Enter"){
+            window.location.href = `/searched-Article?search=${searchBarForm.value}`
+        }
+    })
 
     searchBarForm.addEventListener(`input`, async (e) => {
         searchNavBar.style.overflow = "visible"
         searchByTitleContainer.innerHTML = ""
         searchByAuthorContainer.innerHTML = ""
-        console.log(searchBarForm.value)
+        viewAllSearchResults.setAttribute("href", `/searched-Article?search=${searchBarForm.value}`)
         const results = await getSearchResults(searchBarForm.value)
 
         const resultByTitle = results["articlesByTitle"]
@@ -64,7 +71,7 @@ window.addEventListener(`load`, function () {
                     
                     
                     //add user route here, 
-                    window.location.href = `/`
+                    window.location.href = `/profile?id=3`
                 })
                 searchResultDiv.append(searchResult)
                 searchByAuthorContainer.append(searchResultDiv)

@@ -36,7 +36,7 @@ nav {
     height: 30px;
     max-height: 400px;
     display: flex;
-    overflow-y: visible;
+    overflow-y: hidden;
     flex-direction: column;
 }
 
@@ -688,3 +688,36 @@ nav {
 }
 
 /* ANAYTICS DASHBOARD END*/
+.allArticles{
+    text-align: center;
+    margin: auto;
+    padding: auto;
+}
+
+.eachArticleDiv, .userProfileSnippet{
+    text-align: center;
+    margin: 30px;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#readMoreDiv{
+    margin: 10px;
+}
+
+#descriptionDiv{
+    margin: 10px;
+    font-style: italic;
+}
+
+#likes_icon{
+    height: 20px;
+    width: 20px;
+}
+
+#comments_icon{
+    height: 20px;
+    width: 20px;
+}
+

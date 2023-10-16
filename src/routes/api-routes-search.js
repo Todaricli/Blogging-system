@@ -20,4 +20,12 @@ router.get(`/test`, (req,res)=>{
     res.render("test")
 })
 
+router.get("/searched-Article", async (req,res) =>{
+    const search = req.query.search
+    res.locals.search = search
+    res.locals.articles = await searchDao.getArticlesByTitleForSearch(search);
+    res.locals.users= await searchDao.getArticlesByAuthorNameForSearch(search);
+
+    res.render("searchedArticles")
+})
 module.exports = router
