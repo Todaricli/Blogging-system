@@ -1,25 +1,28 @@
-<div style="border: 1px solid">
-    <img src="{{user.icon_path}}" alt="avatar" style="width: 90px">
-    <p><strong>{{user.fname}} {{user.lname}}</strong></p>
+<link rel="stylesheet" href="/css/nav.css">
+
+<div style="border: 1px solid " class="user-container">
+    <div class="user-label">
+        <img src="{{user.icon_path}}" alt="avatar">
+        <p><strong>{{user.fname}} {{user.lname}}</strong></p>
+    </div>
 
     <ul>
-        <li>DOB: {{user.DOB}}</li>
+        <div>
+            <p id="infor-label"><strong>Basic information</strong></p>
+            <li>DOB: {{user.DOB}}</li>
+            {{#if gender}}
+            <li>Gender: Female{{this.gender}}</li>
+            {{/if}}
+        </div>
         <li>Email: {{user.email}}</li>
         {{#if information}}
         {{#if bio}}
         <li>Bio: {{this.bio}}</li>
         {{/if}}
-        {{#if gender}}
-        <li>Gender: {{this.gender}}</li>
-        {{/if}}
         {{#if address}}
         <li>Address: {{this.address}}</li>
         {{/if}}
         {{/if}}
-
-        <li>
-            <a href="/my_post">My posts</a>
-        </li>
     </ul>
 </div>
 
@@ -37,39 +40,8 @@
     {{/if}}
 </div>
 
-<div style="border: 1px solid red; margin=10px">
-    <h2>Following</h2>
-    {{#if followings}}
-    <div>
-        <p>You are following {{this.total_followings}} people.</p>
-
-        <a href="/sub">See all!</a>
-        {{#each subscribers}}
-        <img src="{{this.user_avatar}}" alt="subsciber avatar">
-        <p>{{this.username}}</p>
-        <button>
-            <div>
-                <img src="{{this.user_avatar}}" alt="subsciber avatar">
-                <p>{{this.username}}</p>
-                <p>{{this.bio}}</p>
-                <p>{{this.total_followers}} Followers</p>
-                <button>Following</button>
-            </div>
-        </button>
-        <div>
-        </div>
-
-        {{/each}}
-    </div>
-    {{else}}
-    <p>You are not following anyone!</p>
-    {{/if}}
-</div>
-        <a href="/sub">See all ({{this.total_subscribers}})</a>
-
-
 {{!-- Options section --}}
-<div id="inforForm">
+<div id="inforForm" style="border: 1px solid green">
     <button type="submit">Update information</button>
 
     <form action="/update_info" method="post" id="information">
@@ -94,7 +66,29 @@
 
 </div>
 
-<div>
+<div style="border: 1px solid red; margin=10px">
+    <h2>Following</h2>
+    {{#if followings}}
+    <div>
+        <p>You are following {{this.total_followings}} people.</p>
+
+        <a href="/sub">See all!</a>
+        {{#each subscribers}}
+        <div style="border: 1px solid blue;">
+            <img src="{{this.icon_path}}" alt="subsciber avatar" width="20px">
+            <p>{{this.username}}</p>
+            <p>{{this.bio}}</p>
+            <p>{{this.total_followers}} Followers</p>
+            <button>Following</button>
+        </div>
+        {{/each}}
+    </div>
+    {{else}}
+    <p>You are not following anyone!</p>
+    {{/if}}
+</div>
+
+<div style="border: 1px solid green;">
     <button type="submit">Update password</button>
     <button type="submit">Delete account</button>
 </div>
