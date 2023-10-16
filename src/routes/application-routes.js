@@ -8,7 +8,7 @@ const subDao = require('../models/sub-dao.js');
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
-router.get('/', verifyAuthenticated, async function (req, res) {
+router.get('/', async function (req, res) {
 
     res.locals.top5Articles = await articleDao.getTopFiveArticles();
     res.locals.articleData = await articleDao.getAllArticles();
@@ -32,7 +32,7 @@ router.get('/sub', verifyAuthenticated, async function (req, res) {
     }
 })
 
-router.get('/profile', verifyAuthenticated, async function (req, res) {
+router.get('/profile', async function (req, res) {
     const id = req.query.id;
     if (id) {
         const profileData = await genericDao.getUserDataById(id);
@@ -48,7 +48,7 @@ router.get('/profile', verifyAuthenticated, async function (req, res) {
 
 })
 
-router.get('/my_profile', function (req, res) {
+router.get('/my_profile', verifyAuthenticated, function (req, res) {
     res.render('myProfile');
 })
 
