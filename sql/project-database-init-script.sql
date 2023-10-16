@@ -117,18 +117,20 @@ CREATE TABLE comments
     time_of_comment TIMESTAMP NOT NULL,
     comments_id     INTEGER,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES user (id),
-    FOREIGN KEY (article_id) REFERENCES articles (id)
+    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE,
+    FOREIGN KEY (article_id) REFERENCES articles (id)  ON DELETE CASCADE,
+    FOREIGN KEY (comments_id) REFERENCES comments (id)  ON DELETE CASCADE
 );
 
 -- Inserting 20 rows of sample data into the comments table with NULL comments_id
 INSERT INTO comments (id, user_id, article_id, content, time_of_comment, comments_id)
 VALUES (1, 1, 1, 'Great article!', '2023-10-10 10:15:00', NULL),
-       (2, 2, 1, 'I learned a lot from this.', '2023-10-10 11:30:00', NULL),
-       (3, 3, 2, 'Silk fabric is so elegant!', '2023-10-10 12:45:00', NULL),
-       (4, 4, 2, 'I love wearing silk!', '2023-10-10 14:00:00', NULL),
+       (2, 2, 1, 'I learned a lot from this.', '2023-10-10 11:30:00', 1),
+       (3, 3, 2, 'Silk fabric is so elegant!', 
+       '2023-10-10 12:45:00', NULL),
+       (4, 4, 2, 'I love wearing silk!', '2023-10-10 14:00:00', 3),
        (5, 5, 3, 'Cotton is my favorite fabric.', '2023-10-10 15:15:00', NULL),
-       (6, 1, 3, 'Polyester is versatile.', '2023-10-10 16:30:00', NULL),
+       (6, 1, 3, 'Polyester is versatile.', '2023-10-10 16:30:00', 5),
        (7, 2, 4, 'Wool keeps you warm in winter.', '2023-10-10 17:45:00', NULL),
        (8, 3, 4, 'I have a wool sweater.', '2023-10-10 19:00:00', NULL),
        (9, 4, 5, 'Linen is great for summer.', '2023-10-10 20:15:00', NULL),
@@ -142,7 +144,7 @@ VALUES (1, 1, 1, 'Great article!', '2023-10-10 10:15:00', NULL),
        (17, 2, 9, 'Polyester is easy to care for.', '2023-10-11 15:15:00', NULL),
        (18, 3, 9, 'I prefer natural fabrics.', '2023-10-11 16:30:00', NULL),
        (19, 4, 10, 'Sustainability is important.', '2023-10-11 17:45:00', NULL),
-       (20, 5, 10, 'I support eco-friendly fabrics.', '2023-10-11 19:00:00', NULL);
+       (20, 5, 10, 'I support eco-friendly fabrics.', '2023-10-11 19:00:00', 19);
 
 CREATE TABLE likes
 (

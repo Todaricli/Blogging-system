@@ -4,6 +4,8 @@ const router = express.Router();
 const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 const subDao = require('../models/sub-dao.js');
+const commentDao = require('../models/comments-dao.js');
+const comment = require('../middleware/comments.js')
 
 const writeArticleDao = require('../models/writeArticle-dao.js');
 
@@ -29,29 +31,6 @@ router.get('/article', async function (req, res) {
 
     res.render('articleDemo');
 });
-
-// router.get('/article/:id', async function (req,res) {
-//     const articleId = req.params.id;
-//     console.log("Article ID:", articleId);
-
-//     const article = await articleDao.getArticlesByID(articleId);
-//     console.log(article);
-//     res.locals.article = article;
-
-//     const authorName = await articleDao.getAuthorByArticle(articleId);
-//     console.log(authorName);
-//     res.locals.authorName = authorName;
-
-//     const comments = await articleDao.getAllCommentsFromArticle(articleId);
-//     console.log(comments);
-//     res.locals.comments = comments;
-
-//     const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
-//     console.log(likeCounts);
-//     res.locals.like_count = likeCounts;
-
-//     res.render('articleDemo');
-// })
 
 router.get('/sub', verifyAuthenticated, async function (req, res) {
     const user_id = res.locals.user.id;
@@ -106,7 +85,7 @@ router.get('/my_profile', async function (req, res) {
     res.render('myProfile');
 })
 
-router.get('/my_post', async function (_, res) {
+router.get('/my_post', comment.generateComments,async function (_, res) {
     const user = res.locals.user;
 
     const data = await getUserArticles(user.id)
@@ -115,7 +94,10 @@ router.get('/my_post', async function (_, res) {
     res.locals.posts = data;
     res.locals.total_posts = totalPosts;
 
-    const comments = await getAllCommentsByArticles(user.id)
+    const article_id = data[0].article_id;
+    //console.log(article_id)
+
+    const comments = await commentDao.getAllCommentsByArticles(article_id);
     console.log(comments)
 
     const filteredComments = comments.filter(comment => comment.comment_id !== null);
@@ -125,8 +107,24 @@ router.get('/my_post', async function (_, res) {
     res.locals.responses = filteredComments;
     res.locals.total_responses = totalResponses;
 
-
     res.render('myPost');
+})
+
+router.get('/deleteComment/:id', async function(req,res) {
+    const user = res.locals.user;
+    const comment_id = req.params.id;
+
+    const data = await getUserArticles(user.id);
+    const article_id = data[0].article_id;
+
+    if (comment_id) {
+        await commentDao.deleteComments(comment_id,article_id);
+        const responses = await commentDao.getAllCommentsByArticles(article_id);
+        console.log("Responses:");
+        console.log(responses);
+        res.redirect("/my_post")
+    }
+
 })
 
 router.post('/update_info', function (req, res) {

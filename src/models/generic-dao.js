@@ -35,24 +35,6 @@ async function getUserArticles(userId) {
     return allArticles;
 }
 
-async function getAllCommentsByArticles(userId) {
-    const db = await getDatabase();
-    const allComments = await db.all(SQL `
-    SELECT 
-    comments.id AS comment_id, comments.content, comments.time_of_comment,
-    articles.id AS article_id, articles.title AS article_title,
-    user.fname AS commentor_fname,
-    user.lname AS commentor_lname,
-    user.username AS commentor_username
-    FROM articles
-    LEFT JOIN comments ON articles.id = comments.article_id
-    LEFT JOIN user ON comments.user_id = user.id
-    WHERE articles.author_id = ${userId};
-    `);
-    return allComments;
-}
-
-
 async function getUserIdByUsername(username) {
     const db = await getDatabase();
     const testData = await db.get(SQL`
@@ -68,7 +50,6 @@ module.exports = {
     getUserDataByUsername,
     getAllUserData,
     getUserArticles,
-    getAllCommentsByArticles,
     getUserIdByUsername
 };
 
