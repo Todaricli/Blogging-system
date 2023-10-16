@@ -13,7 +13,7 @@ function verifyAuthenticated(req, res, next) {
     if (res.locals.user) {
         next();
     } else {
-        res.render('articlesHome');
+        res.redirect('/');
     }
 }
 

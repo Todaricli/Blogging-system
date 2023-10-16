@@ -10,11 +10,10 @@ const comment = require('../middleware/comments.js')
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
-router.get('/', verifyAuthenticated, async function (req, res) {
+router.get('/', async function (req, res) {
 
     res.locals.top5Articles = await articleDao.getTopFiveArticles();
     res.locals.articleData = await articleDao.getAllArticles();
-
     res.render('articlesHome');
 });
 
