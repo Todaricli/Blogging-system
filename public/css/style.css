@@ -442,6 +442,10 @@ nav {
     padding: 10px;
 }
 
+#profile_related_info img{
+    width: 15px;
+}
+
 #profile_articles_container>* {
     padding: 10px;
 }
@@ -644,18 +648,25 @@ nav {
     cursor: pointer;
     background-color: rgb(255, 255, 204, 0);
     border: 0px;
-    position: relative;
     display: inline-block;
 }
 
+.btn_sub_option a{
+    text-decoration: none;
+    color: black;
+}
+
+
+.btn_sub_option a:hover{
+    color: rgb(113, 113, 113);
+}
+
 .btn_subscribe{
-    position: absolute;
-    top: 20px;
-    left: 80px;
-    z-index: 2;
-    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn_subscribe img {
-    width: 10px;
+    width: 15px;
 }
