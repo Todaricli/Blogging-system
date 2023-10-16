@@ -135,7 +135,7 @@ router.post('/update_info', function (req, res) {
 //     console.log(title);
 //     console.log(genre);
 //     console.log(content);
-    
+
 //     let done = undefined;
 //     done = writeArticleDao.insertNewArticleToArticleTable(user_id, title, genre, content);
 
@@ -144,7 +144,7 @@ router.post('/update_info', function (req, res) {
 //     } else {
 //         res.setToastMessage("Submitting error, try again!");
 //     }
-    
+
 //     res.redirect('/writeArticle');
 
 router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res) {
@@ -160,25 +160,38 @@ router.get("/subscriptionRemove", verifyAuthenticated, async function (req, res)
     }
 })
 
-router.get("/analytics-Dashboard", async (req,res) =>{
-    console.log("skeet")
-    res.render("analyticsDashboard")
-})
-
-router.get("/subscriberRemove", verifyAuthenticated, async function (req, res) {
-    const subscriber_id = req.query.id;
+router.get("/removeSubscription", verifyAuthenticated, async function (req, res) {
+    const subscription_id = req.query.id;
     const user_id = res.locals.user.id;
     if (user_id) {
-        await subDao.removeSpecificSubscriberByID(user_id, subscriber_id);
-        res.locals.subscriptionList = await subDao.getSubscriptionsByUserID(user_id);
-        res.locals.subscriberList = await subDao.getSubscribersByUserID(user_id);
-        res.render('subscription&subscriber');
+        await subDao.removeSpecificSubscriptionByID(user_id, subscription_id);
+        res.locals.top5Articles = await articleDao.getTopFiveArticles();
+        res.locals.articleData = await articleDao.getAllArticles();
+        res.render('articlesHome');
     } else {
         res.redirect('/login');
     }
 })
 
-router.get('/analytics', function(req, res){
+router.get("/addSubscription", verifyAuthenticated, async function (req, res) {
+    const subscriber_id = req.query.id;
+    const user_id = res.locals.user.id;
+    if (user_id) {
+        await subDao.addSpecificSubscriptionByID(user_id, subscriber_id);
+        res.locals.top5Articles = await articleDao.getTopFiveArticles();
+        res.locals.articleData = await articleDao.getAllArticles();
+        res.render('articlesHome');
+    } else {
+        res.redirect('/login');
+    }
+})
+
+router.get("/analytics-Dashboard", async (req, res) => {
+    console.log("skeet")
+    res.render("analyticsDashboard")
+})
+
+router.get('/analytics', function (req, res) {
 
 
 
