@@ -65,12 +65,25 @@
     <ul>
         {{#each responses}}
         <div class="each_responses">
-            <img src="/images/Dragonite.png" alt="user avatar" id="user_avatar" width="20px">
+            <img src="{{this.commentor_icon_path}}" alt="user avatar" id="user_avatar" width="20px">
             <p id="username"><strong>{{this.commentor_fname}} {{this.commentor_lname}}</strong></p>
             <p><strong>Replied on </strong>{{this.time_of_comment}}</p>
             <p><strong>Articles:</strong> {{this.article_title}}</p>
             <p><strong>Comment: </strong>{{this.content}}</p>
+            {{#if replies}}
+            {{#each replies}}
+            <div>
+                <img src="/images/icon_path" alt="user avatar" id="user_avatar" width="20px">
+                <p id="username"><strong>{{this.commentor_fname}} {{this.commentor_lname}}</strong></p>
+                <p><strong>Replied on </strong>{{this.time_of_comment}}</p>
+                <p><strong>Replies: </strong>{{this.content}}</p>
+            </div>
+            {{/each}}
+            {{/if}}
             <a href="/reply">Reply</a>
+            <a href="/deleteComment/{{this.id}}">
+                <button>Delete Comment</button>
+            </a>
         </div>
         {{/each}}
     </ul>
@@ -78,4 +91,3 @@
 {{else}}
 <p>You have no responses</p>
 {{/if}}
-

@@ -1,23 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const articleDao = require('../models/articles-dao.js');
-const QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
+const commentDao = require('../models/comments-dao.js');
+const { generateComments } = require('../middleware/comments.js');
+const comment = require('../middleware/comments.js')
+
+const QuillDeltaToHtmlConverter =
+    require('quill-delta-to-html').QuillDeltaToHtmlConverter;
 const uploadTempFolder = require("../middleware/multer-uploader.js");
 const fs = require("fs");
 const jimp = require("jimp");
 
 
-router.get("/writeArticle", function (req, res) {
-  res.render("writeArticle");
-})
+router.get('/writeArticle', function (req, res) {
+    res.render('writeArticle');
+});
 
 router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async function (req, res) {
   const newArticle = req.body;
 
-  const user_id = res.locals.user.id;
-  const title = newArticle.titleKey;
-  const genre = newArticle.genreKey;
-  const content = newArticle.contentKey;
+    const user_id = res.locals.user.id;
+    const title = newArticle.titleKey;
+    const genre = newArticle.genreKey;
+    const content = newArticle.contentKey;
 
   try {
     const contentArray = convertDeltaToHtml(content);
@@ -42,7 +47,7 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
 
 });
 
-router.get('/article/:id', async function (req, res) {
+router.get('/article/:id',comment.generateComments ,async function (req, res) {
   const article_id = req.params.id;
 
   const article = await articleDao.getArticlesByID(article_id);
@@ -55,8 +60,8 @@ router.get('/article/:id', async function (req, res) {
     const authorName = await articleDao.getAuthorByArticle(articleId);
     res.locals.authorName = authorName;
 
-    const comments = await articleDao.getAllCommentsFromArticle(articleId);
-    res.locals.comments = comments;
+    // const comments = await articleDao.getAllCommentsFromArticle(articleId);
+    // res.locals.comments = comments;
 
     const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
     res.locals.like_count = likeCounts
@@ -161,5 +166,45 @@ function convertDeltaToHtml(content) {
 
   return contentArray;
 }
+
+// router.get('/article/:id', comment.generateComments,async function (req, res) {
+//     const article_id = req.params.id;
+
+//     const article = await articleDao.getArticlesByID(article_id);
+//     //console.log(article)
+//     res.locals.article = article;
+//     const content = article[0].content;
+
+//     try {
+//         const content_obj = JSON.parse(content);
+
+//         const delta_obj = content_obj.ops;
+
+//         const cfg = {
+//             inlineStyles: true,
+//             multiLineBlockquote: true,
+//             multiLineHeader: true,
+//         };
+
+//         //const converter = new QuillDeltaToHtmlConverter(delta_obj, cfg);
+
+//         const html = converter.convert();
+//         res.locals.article_content = html;
+//     } catch (error) {
+//         const html = '<p>Article loading error! refresh the page.<p>';
+//         res.locals.article_content = html;
+//     }
+
+//     const authorName = await articleDao.getAuthorByArticle(article_id);
+//     //console.log(authorName);
+//     res.locals.authorName = authorName;
+    
+//     const likeCounts = await articleDao.getNumberOfLikesFromArticle(article_id);
+//     //console.log(likeCounts);
+//     res.locals.like_count = likeCounts;
+
+//     res.render('articleDemo');
+// });
+
 
 module.exports = router;

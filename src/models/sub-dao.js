@@ -42,10 +42,34 @@ async function removeSpecificSubscriberByID(userid, subscriber_id) {
     `)
 }
 
+async function addSpecificSubscriptionByID(userid, subscription_id) {
+    const db = await getDatabase();
+    await db.all(SQL`
+        INSERT INTO subscription (being_subscribed_id, follower_id)
+        VALUES (${subscription_id}, ${userid})
+    `)
+}
+
+
+async function checkIfSubscribe(userid, subscriptionId) {
+    const db = await getDatabase();
+    const output = await db.all(SQL`
+        select exists (
+            select * from subscription
+            where being_subscribed_id = ${subscriptionId}
+            and follower_id = ${userid}
+        ) as output
+    `)
+    const isSubscribe = JSON.stringify(output);
+    return isSubscribe[11];
+}
+
 
 module.exports = {
     getSubscriptionsByUserID,
     getSubscribersByUserID,
     removeSpecificSubscriptionByID,
-    removeSpecificSubscriberByID
+    removeSpecificSubscriberByID,
+    checkIfSubscribe,
+    addSpecificSubscriptionByID
 }
