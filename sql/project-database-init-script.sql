@@ -16,9 +16,9 @@ DROP TABLE IF EXISTS likes_comments;
 DROP TABLE IF EXISTS likes;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS articles;
-DROP TABLE IF EXISTS "user";
+DROP TABLE IF EXISTS user;
 
-CREATE TABLE "user"
+CREATE TABLE user
 (
     id          INTEGER     NOT NULL PRIMARY KEY,
     username    VARCHAR(28) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE "user"
     CHECK (admin >= 0 AND admin <= 1)
 );
 
-INSERT INTO "user"
+INSERT INTO user
     (id, username, password, fname, lname, DOB, description, icon_path, admin)
 VALUES
     (1, 'user1', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'John', 'Doe', '1990-01-01', 'User 1', '/images/avatars/guy1.png', 0),
@@ -59,7 +59,7 @@ CREATE TABLE articles
     image           VARCHAR(8000),
     date_of_publish TIMESTAMP     NOT NULL,
     author_id       INTEGER       NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES "user" (id)
+    FOREIGN KEY (author_id) REFERENCES user (id)
 );
 
 -- Inserting 15 rows of sample data into the articles table
@@ -136,7 +136,7 @@ CREATE TABLE comments
     time_of_comment TIMESTAMP NOT NULL,
     comments_id     INTEGER,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES "user" (id),
+    FOREIGN KEY (user_id) REFERENCES user (id),
     FOREIGN KEY (article_id) REFERENCES articles (id)
 );
 
@@ -163,7 +163,7 @@ VALUES (1, 1, 1, 'Great article!', '2023-10-10 10:15:00', NULL),
        (19, 4, 10, 'Sustainability is important.', '2023-10-11 17:45:00', NULL),
        (20, 5, 10, 'I support eco-friendly fabrics.', '2023-10-11 19:00:00', NULL),
        (21, 2, 1, 'shalom.', '2023-12-11 19:00:00', NULL),
-       (22, 2, 16, 'skeetyeet.', '2023-14-11 19:00:00', NULL);
+       (22, 2, 15, 'skeetyeet.', '2023-14-11 19:00:00', NULL);
 
 CREATE TABLE likes
 (
@@ -171,7 +171,7 @@ CREATE TABLE likes
     user_id    INTEGER NOT NULL,
     article_id INTEGER NOT NULL,
     PRIMARY KEY (id, user_id, article_id),
-    FOREIGN KEY (user_id) REFERENCES "user" (id),
+    FOREIGN KEY (user_id) REFERENCES user (id),
     FOREIGN KEY (article_id) REFERENCES articles (id)
 );
 
@@ -203,7 +203,7 @@ CREATE TABLE likes_comments
     user_id     INTEGER NOT NULL,
     comments_id INTEGER NOT NULL,
     PRIMARY KEY (user_id, comments_id),
-    FOREIGN KEY (user_id) REFERENCES "user" (id),
+    FOREIGN KEY (user_id) REFERENCES user (id),
     FOREIGN KEY (comments_id) REFERENCES comments (id)
 );
 
@@ -235,8 +235,8 @@ CREATE TABLE subscription
     being_subscribed_id INTEGER NOT NULL,
     follower_id         INTEGER NOT NULL,
     PRIMARY KEY (being_subscribed_id, follower_id),
-    FOREIGN KEY (being_subscribed_id) REFERENCES "user" (id),
-    FOREIGN KEY (follower_id) REFERENCES "user" (id)
+    FOREIGN KEY (being_subscribed_id) REFERENCES user (id),
+    FOREIGN KEY (follower_id) REFERENCES user (id)
 );
 
 -- Inserting 20 rows of sample data into the subscription table
@@ -268,7 +268,7 @@ CREATE TABLE notifications
     host_id INTEGER   NOT NULL,
     time    TIMESTAMP NOT NULL,
     content VARCHAR(88),
-    FOREIGN KEY (host_id) REFERENCES "user" (id)
+    FOREIGN KEY (host_id) REFERENCES user (id)
 );
 
 -- Inserting 20 rows of sample data into the notifications table
@@ -301,7 +301,7 @@ CREATE TABLE notify
     follower_id     INTEGER NOT NULL,
     PRIMARY KEY (id, notification_id, follower_id),
     FOREIGN KEY (notification_id) REFERENCES notifications (id),
-    FOREIGN KEY (follower_id) REFERENCES "user" (id)
+    FOREIGN KEY (follower_id) REFERENCES user (id)
 );
 
 -- Inserting 20 rows of sample data into the notify table
@@ -328,7 +328,8 @@ VALUES (1, 1, 2),
        (20, 20, 1);
 
 -- creating a view that shows articles likes, comments and popularity
--- DROP VIEW IF EXISTS articles_info;
+
+DROP VIEW IF EXISTS articles_info;
 
 create view [Articles_info] as
 select articles.author_id                     as user_id,
