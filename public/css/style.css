@@ -264,13 +264,11 @@ nav {
 /* sub page css start*/
 #sub_container {
     display: grid;
-    min-height: 100vh;
     grid-template-rows: auto;
     grid-template-columns: 4fr 1fr 4fr;
     grid-template-areas:
         "subscription . subscriber";
     padding: 20px;
-    background-color: rgb(241, 248, 248);
 }
 
 #subscription_container {
@@ -278,7 +276,6 @@ nav {
     border: 1px solid lightgray;
     border-radius: 10px;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: white;
     height: auto;
 }
 
@@ -336,7 +333,6 @@ nav {
     border: 1px solid lightgray;
     border-radius: 10px;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: white;
 }
 
 #subscription_container>* {
@@ -658,11 +654,6 @@ nav {
     z-index: 2;
     width: 100px;
 }
-
-/* .sub_option a {
-    display: block;
-    text-decoration: none;
-} */
 
 .btn_subscribe img {
     width: 10px;
