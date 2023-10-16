@@ -44,23 +44,23 @@
   -webkit-animation-timing-function: ease-in-out;
           animation-timing-function: ease-in-out;
 }
-.bell-icon:focus, .bell-icon:hover {
+.activate {
   outline: none;
   box-shadow: 0 0 12px -8px rgba(0, 0, 0, 0.6);
 }
-.bell-icon:focus .bell-icon__group, .bell-icon:hover .bell-icon__group {
+.activate .bell-icon__group {
   -webkit-animation: animateGroup 2.3s;
           animation: animateGroup 2.3s;
 }
-.bell-icon:focus .bell-icon__ball, .bell-icon:hover .bell-icon__ball {
+.activate .bell-icon__ball {
   -webkit-animation: animateBall 2.3s;
           animation: animateBall 2.3s;
 }
-.bell-icon:focus .notification-amount, .bell-icon:hover .notification-amount {
+.activate .notification-amount {
   opacity: 1;
   visibility: visible;
 }
-.bell-icon:focus .notification-amount::before, .bell-icon:hover .notification-amount::before {
+.activate .notification-amount::before {
   -webkit-animation-name: bounce;
           animation-name: bounce;
   -webkit-animation-delay: 450ms;
@@ -82,6 +82,8 @@
   justify-content: center;
   font-family: "Copse", serif;
   font-size: 11px;
+  
+  transition: transform 0.3s;
 }
 .notification-amount span {
   position: relative;

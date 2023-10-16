@@ -1,6 +1,6 @@
-
-
 window.addEventListener("load", function () {
+    displaySubOptionByClick();
+    
     function displaySubOptionByClick() {
         const btn_option = document.querySelectorAll(".btn_sub_option");
         const user_id = document.querySelector("#current_user_id");
@@ -43,7 +43,6 @@ window.addEventListener("load", function () {
         return isSubscribe;
     }
 
-    displaySubOptionByClick();
 
 })
 

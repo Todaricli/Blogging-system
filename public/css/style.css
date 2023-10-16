@@ -25,6 +25,29 @@
     gap: 20px;
 }
 
+.notify-content {
+    display: none;
+    position: absolute;
+    width: 100px;
+    background-color: bisque;
+    z-index: 2;
+
+}
+
+.notify-content a {
+    display: block;
+    height: 20px;
+}
+
+.notify-content a:hover {
+    background-color: grey;
+}
+
+.notify-drop:hover .notify-content {
+    top: 50px;
+    left: 10px;
+    display: block;
+}
 
 
 

@@ -62,6 +62,15 @@ async function getUserIdByUsername(username) {
     return userId;
 }
 
+async function getUsernameById(userId) {
+    const db = await getDatabase();
+    const username = await db.get(SQL`
+      select username from user
+      where id = ${userId}`);
+
+    return username;
+}
+
 async function deleteUserById(userId) {
     const db = await getDatabase();
     await db.get(SQL`
@@ -76,5 +85,6 @@ module.exports = {
     getUserArticles,
     getAllCommentsByArticles,
     getUserIdByUsername,
+    getUsernameById,
     deleteUserById,
 };

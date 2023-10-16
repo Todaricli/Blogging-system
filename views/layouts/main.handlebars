@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/popup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <link rel="stylesheet" href="/css/animations/notification-animation.css">
-
+    <script src="/script/notification-script.js"></script>
 </head>
 
 <body>
@@ -45,7 +45,7 @@
             </div>
 
             {{!-- notify bell icon --}}
-            <div class="bell-icon" tabindex="0">
+            <div class="bell-icon notify-drop" tabindex="0">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                     y="0px" width="50px" height="30px" viewBox="0 0 50 30" enable-background="new 0 0 50 30"
                     xml:space="preserve">
@@ -59,7 +59,13 @@
                     </g>
                 </svg>
                 <div class="notification-amount">
-                    <span>1</span>
+                    <span>2</span>
+                </div>
+                <div class="notify-content">
+                    <a href="/my_profile">My Profile</a>
+                    <a href="/my_post">My Post</a>
+                    <a href="/analytics">Analytics</a>
+                    <a href="/sub">Subscription</a>
                 </div>
             </div>
 
