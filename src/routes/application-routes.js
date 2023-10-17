@@ -5,7 +5,6 @@ const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 const subDao = require('../models/sub-dao.js');
 const commentDao = require('../models/comments-dao.js');
-const comment = require('../middleware/comments.js')
 const userDao = require('../models/user-dao.js');
 
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
