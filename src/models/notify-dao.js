@@ -21,6 +21,7 @@ async function getAllNotificationsById(userId) {
     select *
     from notifications
     where notifications.receiver_id = ${userId}
+    order by time desc;
 `);
     return notifications;
 }
