@@ -145,12 +145,12 @@ CREATE TABLE comments
 INSERT INTO comments (id, user_id, article_id, content, time_of_comment, comments_id)
 VALUES (1, 1, 1, 'Great article!', '2023-10-10 10:15:00', NULL),
        (2, 2, 1, 'I learned a lot from this.', '2023-10-10 11:30:00', 1),
-       (3, 3, 2, 'Silk fabric is so elegant!', 
-       '2023-10-10 12:45:00', NULL),
-       (4, 4, 2, 'I love wearing silk!', '2023-10-10 14:00:00', 3),
-       (5, 5, 3, 'Cotton is my favorite fabric.', '2023-10-10 15:15:00', NULL),
-       (6, 1, 3, 'Polyester is versatile.', '2023-10-10 16:30:00', 5),
-       (7, 2, 4, 'Wool keeps you warm in winter.', '2023-10-10 17:45:00', NULL),
+       (3, 3, 2, 'Silk fabric is so elegant!',
+       '2023-10-10 12:45:00', 2),
+       (4, 8, 1, 'I love wearing silk!', '2023-10-10 14:00:00', 2),
+       (5, 7, 1, 'Cotton is my favorite fabric.', '2023-10-10 15:15:00', 1),
+       (6, 9, 3, 'Polyester is versatile.', '2023-10-10 16:30:00', 5),
+       (7, 1, 1, 'Wool keeps you warm in winter.', '2023-10-10 17:45:00', 2),
        (8, 3, 4, 'I have a wool sweater.', '2023-10-10 19:00:00', NULL),
        (9, 4, 5, 'Linen is great for summer.', '2023-10-10 20:15:00', NULL),
        (10, 5, 5, 'I need linen sheets.', '2023-10-10 21:30:00', NULL),
@@ -348,11 +348,11 @@ from articles
          left join user on user.id = articles.author_id
 group by articles.id;
 
-
-
-
-
-
+SELECT comments.*, user.id, user.username, user.fname, user.lname
+    FROM comments, user
+    WHERE comments.article_id = 1
+    AND user.id = comments.user_id
+    AND comments.comments_id = 1;
 
 
 
