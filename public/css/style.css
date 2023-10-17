@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Allerta+Stencil&family=Bagel+Fat+One&family=Berkshire+Swash&family=Bubblegum+Sans&family=Calistoga&family=Chakra+Petch:wght@600&family=Chewy&family=Comfortaa:wght@300&family=Delicious+Handrawn&family=Dosis:wght@300;700&family=Handjet:wght@300&family=Pixelify+Sans&family=Press+Start+2P&family=Satisfy&family=Short+Stack&family=Tilt+Neon&family=Titan+One&family=VT323&family=Yatra+One&display=swap');    
-    
-#page_body{
-    margin: 20px;
+:root {
+    --nav-user-size: 18px;
 }
 
-nav{
-    background-color: white;
+nav {
+    background-color: yellowgreen;
     position: sticky;
     top: 0px;
     display: flex;
@@ -19,7 +17,7 @@ nav{
     display: flex;
     gap: 50px;
     align-items: center;
-    width: 200px;
+
     list-style: none;
     margin-right: 20px;
 }
@@ -77,8 +75,32 @@ nav{
     display: inline-block;
 }
 
-.dropbtn {
-    width: 30px;
+.dropdown-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.dropdown .dropbtn {
+    background-color: transparent;
+    color: white;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    text-align: center;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    color: black;
+
+}
+
+.dropdown .username {
+    font-size: var(--nav-user-size);
+    color: black;
+    margin-right: 8px;
 }
 
 .dropbtn:hover {
@@ -89,23 +111,32 @@ nav{
 .dropdown-content {
     display: none;
     position: absolute;
-    width: 100px;
-    background-color: bisque;
+    background-color: #f9f9f9;
+    min-width: 160px;
     z-index: 2;
-
+    top: 52px;
+    right: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-content a {
     display: block;
-    height: 20px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+#signout {
+    padding: 12px 16px;
+    border-top: 1px solid #ccc;
+    color: #f00;
 }
 
 .dropdown-content a:hover {
-    background-color: grey;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
+    background-color: #f0f0f0;
 }
 
 #page_body {
@@ -136,8 +167,121 @@ nav{
     font-size: 12px;
 }
 
+/* register page css start*/
+#register_page_body {
+    width: 700px;
+    display: flex;
+    justify-content: center;
+    border: 2px solid lightgray;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
+#register_title {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 30px 0px 30px;
+}
 
+#register_title a {
+    color: rgb(12, 175, 17);
+    text-decoration: none;
+}
+
+#register_title p {
+    color: rgb(105, 105, 105);
+}
+
+#register_title a:visited {
+    color: rgb(12, 175, 17);
+}
+
+#register_page_container>p {
+    padding: 0px 30px 0px 30px;
+}
+
+#register_fillinbox {
+    padding: 0px 30px 0px 30px;
+
+}
+
+#register_fillinbox>div {
+    padding: 10px 0px 10px 0px;
+}
+
+#register_page_container button {
+    background-color: rgb(12, 175, 17);
+    color: white;
+    font-size: medium;
+    border: transparent;
+    cursor: pointer;
+    width: 200px;
+    height: 35px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+#register_button {
+    display: flex;
+    justify-content: center;
+}
+/* register page css end*/
+
+/* login page css start*/
+#login_toast {
+    color: rgb(12, 175, 17);
+}
+
+#login_container {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    border: 2px solid lightgray;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#login_username {
+    padding-bottom: 20px;
+}
+
+#login_body_container button {
+    background-color: rgb(12, 175, 17);
+    color: white;
+    font-size: medium;
+    border: transparent;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#login_button {
+    display: flex;
+    justify-content: center;
+}
+
+#login_body_container a {
+    color: rgb(12, 175, 17);
+    text-decoration: none;
+}
+
+#login_body_container p {
+    color: rgb(105, 105, 105);
+    margin-bottom: 30px;
+}
+
+#login_body_container a:visited {
+    color: rgb(12, 175, 17);
+}
+/* login page css end*/
 
 /* #home_container {
     display: grid;
@@ -183,7 +327,137 @@ nav{
     font-size: 20px;
 }
 
+/* sub page css start*/
+#sub_container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 4fr 1fr 4fr;
+    grid-template-areas:
+        "subscription . subscriber";
+    padding: 20px;
+}
 
+#subscription_container {
+    grid-area: subscription;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    height: auto;
+}
+
+#subscription_title>* {
+    display: flex;
+    align-self: center;
+    padding: 10px;
+}
+
+.subscription_rows {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid lightgray;
+}
+
+.subscription_rows a:hover {
+    color: rgb(113, 113, 113);
+}
+
+.subscription_icon img {
+    width: 40px;
+}
+
+.subscription_rows button {
+    height: 25px;
+    background-color: white;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+}
+
+.subscription_rows button:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.subscriber_icon img {
+    width: 40px;
+}
+
+.subscription_rows a {
+    text-decoration: none;
+    display: flex;
+    color: black;
+    gap: 10px;
+}
+
+.subscription_name {
+    display: flex;
+    align-self: center;
+    font-size: 18px;
+}
+
+#subscriber_container {
+    grid-area: subscriber;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#subscription_container>* {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+#subscriber_container>* {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+#sub_container input {
+    width: 200px;
+}
+
+#subscriber_title>* {
+    display: flex;
+    align-self: center;
+    padding: 10px;
+}
+
+.subscriber_name {
+    display: flex;
+    align-self: center;
+    font-size: 18px;
+}
+
+.subscriber_rows {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid lightgray;
+}
+
+.subscriber_rows>a {
+    display: flex;
+    text-decoration: none;
+    color: black;
+    gap: 10px;
+}
+
+.subscriber_rows>a:hover {
+    color: rgb(113, 113, 113);
+}
+
+.subscriber_rows button {
+    height: 25px;
+    background-color: white;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+}
+
+.subscriber_rows button:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+/* sub page css end*/
 
 
 /* profile page css start*/
@@ -242,6 +516,60 @@ nav{
 }
 /* profile page css end*/
 
+/* register page css start*/
+#icon_container {
+    padding: 10px 30px 10px 30px;
+}
+
+#icon_select_container {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid lightgrey;
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 600px;
+    height: 400px;
+    overflow: scroll;
+}
+
+#icon_select_container>* {
+    display: flex;
+    justify-content: center;
+}
+
+#icon_select_container img {
+    width: 100px;
+    padding: 5px;
+}
+
+#icon_select_container img:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+:checked+label img {
+    background-color: lightgray;
+}
+
+.icon_select>input {
+    opacity: 0;
+}
+
+@media only screen and (max-width:800px) {
+    #register_page_body {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    #icon_select_container {
+        width: 100%;
+
+    }
+}
+/* register page css end*/
+
+
 
 
 #user_avatar {
@@ -263,71 +591,119 @@ nav{
     padding: 10px;
 }
 
-
-
-/* WRITE ARTICLE PAGE */
-.writeArticlePage {
-    margin-top: 0;
+/* ANAYTICS DASHBOARD START*/
+.analyticsDashboard {
+    background-color: rgb(241, 248, 248);
+    margin-bottom: 20px;
 }
 
-.titleArea {
+#keyMetricsTitle {
+    color: rgb(130, 130, 198);
+    font-size: 60px;
+}
+
+.keyMetricsDiv {
+    display: flex;
     margin: 20px;
-    margin-top: 0;
-    border-radius: 10px;
-    background-color: rgb(248, 182, 247);
-    padding: 15px;
 }
 
-#flexTitle {
-    font-family: "Bagel Fat One";
-    padding: 5px;
-    text-align: center;
-    font-size: 40px;
-    color: rgb(240, 248, 253);
-    border-radius: 15px;
-    text-shadow: 3px 3px 1px #abeeff;
-}
-
-#whipTitle {
-    font-family: "Berkshire Swash";
-    padding: auto;
-    padding-top: 0;
+.keyMetricsDiv>* {
     margin: auto;
-    margin-top: 0;
-    text-align: center;
-    font-size: 15px;
-    color: rgb(250, 229, 232);
-}
-
-.formContainer {
-    margin: 20px;
-    border-color: white;
-    border-radius: 10px;
-    background-color: rgb(255, 252, 222);
-    text-align: center;
-}
-
-#writeIcon {
-    margin: auto;
-    margin-top: 20px;
     padding: auto;
-    padding-top: 20px;
-    padding-left: 30px;
     text-align: center;
 }
 
-.inputAreas {
-    margin: 20px;
+#keyMetricsTitle {
+    margin: auto;
     padding: 20px;
+    text-align: center;
 }
 
-.inputTitles {
+.indvKeyMetrics {
+    padding: 20px;
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.divTitles {
+    font-size: 30px;
+}
+
+#followersDiv {
+    padding-left: 50px;
+    padding-right: 50px;
+    background: rgb(255, 133, 244);
+    background: linear-gradient(90deg, rgba(255, 133, 244, 1) 0%, rgba(252, 176, 69, 1) 98%);
+    color: aliceblue;
+}
+
+#followerNumber {
+    font-size: 55px;
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+
+#commentsDiv,
+#likesDiv {
+    padding: 40px;
+    font-size: larger;
+}
+
+.articleWithComments {
+    font-style: italic;
+}
+
+.topThreeDiv,
+#commentsDiv,
+#likesDiv {
+    background-color: white;
+    color: rgb(130, 130, 198);
+}
+
+.topThreeDiv {
+    padding: 20px;
+    margin: 30px;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.topThreeDiv>* {
+    margin: auto;
+    padding: auto;
+    text-align: center;
+}
+
+#topThreeTitle {
+    margin: 20px;
+    margin-top: 0;
+    font-size: 40px;
+}
+
+.indvTopArticles {}
+/* .indvTopArticles {
+
+} */
+
+.furtherData {
+    /* display: flex; */
+    background-color: white;
+    margin: 30px;
+}
+
+#dataIcon {
+    margin: 20px;
     margin-top: 20px;
-    margin-bottom: 15px;
-    margin-left: 20px;
-    color: #30cb9a;
-    font-family: "Bubblegum Sans";
-    font-size: 20px;
+    padding-top: 20px;
+    padding-left: 5px;
+}
+
+#plot {
+    margin: auto;
+    margin-bottom: 50px;
+    padding: auto;
+    border: 2px solid white;
+    border-radius: 10px;
 }
 
 /* ANAYTICS DASHBOARD END*/
@@ -368,274 +744,29 @@ nav{
     width: 50px;
 }
 
-/* SRC:  */
-#titleInput, #genreDropdown, #bioInput, #genderDropdown, #addressInput {
-    position: relative;
-    background: linear-gradient(21deg, #10abff, #1beabd);
-    padding: 3px;
-    display: inline-block;
-    border-radius: 10px;
-
-    *:not(span) {
-        position: relative;
-        display: inherit;
-        border-radius: inherit;
-        margin: 0;
-        border: none;
-        outline: none;
-        padding: 0 .325em;
-        z-index: 1;
-
-        &:focus+span {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-}
-
-.dropdownTexts{
-    color: rgb(120, 131, 255);
-    font-family: "Comfortaa";
-}
-
-#write_article_content{
-    border-radius: 10px;
-}
-
-/* PUBLISH BUTTON */
-/* SRC: https://codepen.io/tylersticka/pen/MWVbdzo */
-:root {
-    --motion-ease: cubic-bezier(0.68, -0.6, 0.32, 1.6);
-    --motion-duration: 0.3s;
-  }
-  
-  button {
-    appearance: none;
-    background: blue;
-    border: 0;
-    color: #fff;
+.btn_sub_option {
     cursor: pointer;
-    font: inherit;
-    font-weight: 500;
-    line-height: 1;
-    padding: 1em 1.5em;
-    position: relative;
-    transition: filter var(--motion-duration);
-  }
-  
-  button.articleWithComments {
-    filter: brightness(1.1);
-  }
-  
-  button:active {
-    filter: brightness(0.9);
-  }
-  
-  button > span {
-    display: block;
-    position: relative;
-    transition: transform var(--motion-duration) var(--motion-ease);
-    z-index: 1;
-  }
-  
-  button:hover > span {
-    transform: scale(1.05);
-  }
-  
-  button:active > span {
-    transform: scale(0.95);
-  }
-  
-  button > svg {
-    fill: #5e9ca0;
-    position: absolute;
-    top: -5%;
-    left: -5%;
-    width: 110%;
-    height: 110%;
-  }
-  
-  button > svg > path {
-    transition: var(--motion-duration) var(--motion-ease);
-  }
-  
-  button:hover > svg > path {
-    d: path("M0,0 C0,-5 100,-5 100,0 C105,0 105,100 100,100 C100,105 0,105 0,100 C-5,100 -5,0 0,0");
-  }
-  
-  button:active > svg > path {
-    d: path("M0,0 C30,10 70,10 100,0 C95,30 95,70 100,100 C70,90 30,90 0,100 C5,70 5,30 0,0");
-  }
+    background-color: rgb(255, 255, 204, 0);
+    border: 0px;
+    display: inline-block;
+}
 
-  #publishButton{
-    margin: 10px;
-  }
-  
-  /* ARTICLE LINKS */
-  /* SRC: https://codepen.io/team/css-tricks/pen/gOXMgxR */
-  #newArticleLink, #viewMyPostsLink{
-    font-size: 15px;
-    color: rgb(147, 137, 200);
+.btn_sub_option a{
     text-decoration: none;
-  }
-  
-  #newArticleLink, #viewMyPostsLink{
-    background:
-      linear-gradient(
-        to right,
-        rgba(100, 200, 200, 1),
-        rgba(100, 200, 200, 1)
-      ),
-      linear-gradient(
-        to right,
-        rgba(255, 0, 0, 1),
-        rgba(255, 0, 180, 1),
-        rgba(0, 100, 200, 1)
-    );
-    background-size: 100% 3px, 0 3px;
-    background-position: 100% 100%, 0 100%;
-    background-repeat: no-repeat;
-    transition: background-size 400ms;
-  }
-  
-  #newArticleLink:hover, #viewMyPostsLink:hover {
-    background-size: 0 3px, 100% 3px;
-  }
-  
-/* WRITE ARTICLE PAGE ENDS */
-
-/* MY PROFILE PAGE */
-
-#profileTitleDiv{
-    margin: 20px;
-    /* margin-left: 50px; */
-    padding: auto;
-    text-align: center;
-    /* padding-left: 400px;
-    padding-right: 400px; */
-    background-color: rgb(61, 143, 132);
-    border: 2px solid white;
-    border-radius: 10px;
+    color: black;
 }
 
-#profileTitle{
-    font-family: "ADLaM Display";
-    font-size: 70px;
-    color: #dffdff;
-    text-shadow: #f5eaff 5px 0 5px;
+
+.btn_sub_option a:hover{
+    color: rgb(113, 113, 113);
 }
 
-.aboutAndFollowingDiv{
+.btn_subscribe{
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#aboutUserAvatar{
-    text-align: center;
-    margin-left: 60px;
-    padding-left: 60px;
-}
-
-/* WRITE ARTICLE PAGE ENDS */
-
-/* MY PROFILE PAGE */
-
-
-
-/* MY PROFILE PAGE */
-
-#profileTitleDiv{
-    margin: 20px;
-    /* margin-left: 50px; */
-    padding: auto;
-    text-align: center;
-    /* padding-left: 400px;
-    padding-right: 400px; */
-    background-color: rgb(61, 143, 132);
-    border: 2px solid white;
-    border-radius: 10px;
-}
-#aboutSection {
-    color: rgb(0, 83, 124);
-    padding: 20px;
-    padding-right:500px;
-    font-family: "ADLaM Display";
-}
-.aboutInfo{
-    margin: 10px;
-}
-
-/* SRC: https://codepen.io/thebabydino/pen/QWMaPQb */
-#aboutSection {
-	--b: .3em; /* border width */
-	--c: 3em; /* corner size */
-	--r: 2em; /* corner rounding */
-	position: relative;
-	margin: 1em auto;
-	border: solid var(--b) transparent;
-	max-width: 10em;
-	/* font: 1.25em ubuntu, sans-serif; */
-	
-	&::before {
-		position: absolute;
-		z-index: -1;
-		inset: calc(-1*var(--b));
-		border: inherit;
-		border-radius: var(--r);
-		background: linear-gradient(rgb(152, 255, 219), rgb(255, 188, 255), rgb(0, 13, 255)) border-box;
-		--corner: 
-			conic-gradient(from -90deg at var(--c) var(--c), red 25%, #0000 0) 
-				0 0/ calc(100% - var(--c))  calc(100% - var(--c)) border-box;
-		--inner: conic-gradient(red 0 0) padding-box;
-		-webkit-mask: var(--corner), var(--inner);
-		-webkit-mask-composite: source-out;
-						mask: var(--corner) subtract, var(--inner);
-		content: ''
-	}
-}
-
-#followingTitle{
-    text-decoration: rgb(0, 255, 145) wavy underline;
-    text-shadow: #adffe4 10px 0 10px;
-    color: rgb(97, 111, 165);
-}
-
-#profileFollowingDiv{
-    margin-right: 150px;
-    padding: 30px;
-    border: 2px solid white;
-    border-radius: 10px;
-    background: rgb(138,173,196);
-    background: linear-gradient(310deg, rgba(138,173,196,1) 0%, rgba(160,255,254,1) 55%, rgba(233,255,253,1) 100%);
-    text-align: center;
-    color: rgb(135, 148, 200);
-    font-family: "ADLaM Display";
-}
-
-#inforForm{
-    background-color: rgb(244, 255, 253);
-    margin: 20px;
-    text-align: center;
-    color: rgb(77, 143, 140);
-}
-
-#updateTitle{
-    font-size: 30px;
-    font-family: "ADLaM Display";
-}
-
-.updateSubtitles{
-    text-align: center;
-    margin: 10px;
-}
-
-#addressInput{
-    /* margin-left: 100px; */
-}
-
-#saveChanges{
-    margin: 20px;
-}
-
-#deleteAccount{
-    margin-bottom: 20px;
+.btn_subscribe img {
+    width: 15px;
 }

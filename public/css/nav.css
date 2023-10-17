@@ -1,0 +1,37 @@
+:root {
+    --user-name-size: 30px;
+    --infor-label-size: 20px;
+}
+
+div {
+    margin: 20px;
+}
+
+#page_body {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.user-container {
+    border-radius: 30px;
+    padding: 15px;
+}
+
+.user-container ul {
+    list-style: none;
+}
+
+.user-label {
+    text-align: center;
+    margin: 0;
+    border-bottom: 1px solid grey;
+}
+
+.user-label p {
+    font-size: var(--user-name-size);
+    margin: 0;
+}
+
+.user-label img {
+    width: 150px;
+}
