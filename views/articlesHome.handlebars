@@ -1,6 +1,7 @@
 <div id="home_container">
 
     {{#if user}}
+    <input value="{{user.id}}" name="user_id" id="current_user_id" hidden>
     <div>
         <h1>Hello, {{user.fname}}!</h1>
         <p>This is your homepage!</p>
@@ -56,11 +57,17 @@
             <h2 id="main_block_title">Explore More Articles</h2>
             {{#each articleData}}
             <div id="each-articleData">
-                <div id="authorData">
-                    {{!-- No author icon yet --}}
-                    {{!-- <div id="author_icon">{{this.author_icon}}</div> --}}
-                    <div id="author_name">{{this.fname}} {{this.lname}}</div>
-                </div>
+
+                <button type="button" name="btn_sub_option" class="btn_sub_option">
+                    <div id="authorData">
+                        <div id="author_icon"><img src="{{this.icon_path}}"></div>
+                        <div id="author_name">{{this.fname}} {{this.lname}}</div>
+                    </div>
+                    <div class="btn_subscribe">
+                        <input value="{{this.author_id}}" name="author_id" class="article_author_id" hidden>
+                    </div>
+                </button>
+
 
                 <div id="article_title">{{this.title}}</div>
                 <div id="article_description">{{{this.content_html}}}</div>
@@ -86,4 +93,8 @@
             </div>
 
 
-<script src="/script/calendar.js"></script>
+        </div>
+    </div>
+</div>
+
+<script src="/script/articlesHome.js"></script>

@@ -19,7 +19,7 @@ async function getAllArticles(){
     const db = await getDatabase();
 
     const articles = await db.all(SQL`
-    select articles.*, user.fname, user.lname 
+    select articles.*, user.fname, user.lname, user.icon_path 
     from articles left join user on articles.author_id = user.id
     `);
 
