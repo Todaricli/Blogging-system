@@ -1,20 +1,28 @@
 {{#if articles}}
 {{#each articles}}
-<div id="article-div" style="border: 1px solid green; padding: 20px; margin: 20px">
-    <p id="article_title"><strong>Title:</strong> {{this.title}}</p>
+<div id="article-div">
+    <div>
+        <p id="article_title"><strong>Title:</strong> {{this.title}}</p>
 
-    <img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}">
+        <div id="author_details">
+            <p id="author_name"> <strong>By</strong> {{this.fname}} {{this.lname}}</p>
+            <p id="article_timestamp"><strong>Published on</strong> {{this.date_of_publish}}</p>
+            <p><strong>Genre:</strong> {{this.genre}}</p>
+        </div>
 
-    <div id="author_details">
-        <p id="author_name"> <strong>By</strong> {{this.fname}} {{this.lname}}</p>
-        <p id="article_timestamp"><strong>Published on</strong> {{this.date_of_publish}}</p>
-        <p><strong>Genre:</strong> {{this.genre}}</p>
+        <div id="article-content">
+        {{{this.content_html}}}
+        </div>
     </div>
 
-    {{{this.content_html}}}
+    <div>
+        <img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}">
+    </div>
 
 </div>
 {{/each}}
 {{else}}
 <p>There are no articles based on your search.</p>
 {{/if}}
+
+<link rel="stylesheet" href="/css/filteredArticle.css">;
