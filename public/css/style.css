@@ -25,12 +25,26 @@ nav{
     height: 60px;
 }
 
+#viewAllDiv{
+    text-align: center;
+    background-color: pink;
+}
+
 .search_bar {
     border: 1px solid black;
     border-radius: 20px;
+    padding-top: 10px;
     height: 30px;
-    display: flex;
+    max-height: 400px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.search_bar div {
+    background-color: lightblue;
+    border: 1px solid black;
+    border-radius: 15px;
 }
 
 .search_bar img {
@@ -43,7 +57,16 @@ nav{
     width: 500px;
     height: 28px;
     border: transparent;
+    margin-bottom: 20px;
 }
+
+#searchResultContainer{
+    border: transparent;
+    height: 100px;
+    max-height: 100px;
+    z-index: 1000;
+}
+
 
 .dropdown {
     position: relative;
@@ -763,6 +786,44 @@ nav{
     color: #30cb9a;
     font-family: "Bubblegum Sans";
     font-size: 20px;
+}
+
+/* ANAYTICS DASHBOARD END*/
+.allArticles{
+    text-align: center;
+    margin: auto;
+    padding: auto;
+}
+
+.eachArticleDiv, .userProfileSnippet{
+    text-align: center;
+    margin: 30px;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#readMoreDiv{
+    margin: 10px;
+}
+
+#descriptionDiv{
+    margin: 10px;
+    font-style: italic;
+}
+
+#likes_icon{
+    height: 20px;
+    width: 20px;
+}
+
+#comments_icon{
+    height: 20px;
+    width: 20px;
+}
+/* home page css start*/
+#author_icon img{
+    width: 50px;
 }
 
 /* SRC:  */
