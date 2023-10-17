@@ -117,15 +117,15 @@ router.get('/my_post', verifyAuthenticated, async function (_, res) {
     const article_id = data[0].article_id;
     console.log(article_id)
 
-    const comments = await commentDao.getAllCommentsByArticles(article_id);
-    console.log(comments)
+    // const comments = await commentDao.getAllCommentsByArticles(article_id);
+    // console.log(comments)
 
-    const filteredComments = comments.filter(comment => comment.comment_id !== null);
+    // const filteredComments = comments.filter(comment => comment.comment_id !== null);
 
 
-    const totalResponses = filteredComments.length;
-    res.locals.responses = filteredComments;
-    res.locals.total_responses = totalResponses;
+    // const totalResponses = filteredComments.length;
+    // res.locals.responses = filteredComments;
+    // res.locals.total_responses = totalResponses;
 
     res.render('myPost');
 })
