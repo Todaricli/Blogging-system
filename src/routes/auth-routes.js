@@ -32,4 +32,19 @@ router.post(
     }
 );
 
+router.get('/admin-interface', login.authorizeAdmin, (req, res) => {
+    res.render('adminInterface');
+});
+
+router.post('/update-username', (req, res) => {
+    const username = req.body.my_profile_username;
+    console.log(username);
+})
+
+router.post('/update-password', (req, res) => {
+    const password = req.body.my_profile_password;
+    const confirm_password = req.body.my_profile_comfirm_password;
+    console.log(password + " confirmed: " + confirm_password);
+})
+
 module.exports = router;

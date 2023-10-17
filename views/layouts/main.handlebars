@@ -25,6 +25,7 @@
 
         {{!-- Navigation search bar--}}
         <div class="search_bar">
+            <img src="/images/search-icon.png">
             <input type="text" id="searchInput" placeholder="Search...">
         </div>
 
@@ -36,15 +37,18 @@
             </li>
             <li>
                 <div class="dropdown">
-                    <button class="dropbtn">...</button>
+                    <div class="dropbtn"><img src="{{user.icon_path}}" alt="user_avatar" id="user_avatar"></div>
                     <div class="dropdown-content">
                         <a href="/my_profile">My Profile</a>
+                        <a href="/my-page">My Page View</a>
                         <a href="/my_post">My Post</a>
+                        <a href="/analytics">Analytics</a>
+                        <a href="/sub">Subscription</a>
+                        <a href="/writeArticle">New Article</a>
                     </div>
                 </div>
             </li>
             <li>
-                <img src="{{user.icon_path}}" alt="user_avatar" id="user_avatar">
             </li>
             {{else}}
             <li class="login">
@@ -56,16 +60,16 @@
             {{/if}}
         </ul>
     </nav>
-    
+
     <div id="page_body">
         {{{body}}}
     </div>
-    
+
 
     <footer>
         <div id="footer">
-        <img src="images/footer-logo.png">
-        <span> &copy 2023 UOA-PGCIT-S2 Group 2</span>
+            <img src="/images/footer-logo.png">
+            <span> &copy 2023 UOA-PGCIT-S2 Group 2</span>
         </div>
     </footer>
 </body>

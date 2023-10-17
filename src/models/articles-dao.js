@@ -19,7 +19,7 @@ async function getAllArticles(){
     const db = await getDatabase();
 
     const articles = await db.all(SQL`
-    select articles.*, user.fname, user.lname 
+    select articles.*, user.fname, user.lname, user.icon_path 
     from articles left join user on articles.author_id = user.id
     `);
 
@@ -161,6 +161,24 @@ async function getNumberOfLikesFromArticle(articleId) {
     return likeCounts;
 }
 
+async function insertNewArticleToArticleTable(user_id, title, genre, content_html, content_delta, image) {
+    const db = await getDatabase();
+    
+    return await db.run(SQL`
+        INSERT INTO articles (title, content_html, content_delta, genre, image, date_of_publish, author_id) VALUES 
+        (${title}, ${content_html}, ${content_delta}, ${genre}, ${image}, datetime('now'), ${user_id})`);
+}
+
+async function updateArticleToArticleTable(article_id, title, genre, content_html, content_delta, image) {
+    const db = await getDatabase();
+
+    return await db.run(SQL`
+        UPDATE articles 
+        SET title = ${title}, genre = ${genre}, content_html = ${content_html}, content_delta = ${content_delta}, image = ${image}, date_of_publish = datetime('now')
+        WHERE id = ${article_id}`);
+}
+
+
 
 module.exports = {
     getArticlesByUserID,
@@ -175,5 +193,7 @@ module.exports = {
     getAllArticles,
     getAllCommentsFromArticle,
     getNumberOfLikesFromArticle,
-    getAuthorByArticle
+    getAuthorByArticle,
+    insertNewArticleToArticleTable,
+    updateArticleToArticleTable
 };

@@ -27,7 +27,7 @@ async function getAllUserData() {
 async function getUserArticles(userId) {
     const db = await getDatabase();
     const allArticles = await db.all(SQL`
-    SELECT articles.id AS article_id, articles.title, articles.content, articles.date_of_publish, user.id AS author_id, user.username AS author_username
+    SELECT articles.id AS article_id, articles.title, articles.content_html, articles.content_delta, articles.image, articles.date_of_publish, user.id AS author_id, user.username AS author_username
     FROM articles
     INNER JOIN user ON articles.author_id = user.id
     WHERE user.id = ${userId}
@@ -37,13 +37,14 @@ async function getUserArticles(userId) {
 
 async function getAllCommentsByArticles(userId) {
     const db = await getDatabase();
-    const allComments = await db.all(SQL `
+    const allComments = await db.all(SQL`
     SELECT 
     comments.id AS comment_id, comments.content, comments.time_of_comment,
     articles.id AS article_id, articles.title AS article_title,
     user.fname AS commentor_fname,
     user.lname AS commentor_lname,
-    user.username AS commentor_username
+    user.username AS commentor_username,
+    user.icon_path AS commentor_icon_path
     FROM articles
     LEFT JOIN comments ON articles.id = comments.article_id
     LEFT JOIN user ON comments.user_id = user.id
@@ -52,16 +53,21 @@ async function getAllCommentsByArticles(userId) {
     return allComments;
 }
 
-
 async function getUserIdByUsername(username) {
     const db = await getDatabase();
-    const testData = await db.get(SQL`
+    const userId = await db.get(SQL`
       select id from user
       where username = ${username}`);
 
     return userId;
 }
 
+async function deleteUserById(userId) {
+    const db = await getDatabase();
+    await db.get(SQL`
+      delete from user
+      where id = ${userId}`);
+}
 
 module.exports = {
     getUserDataById,
@@ -69,6 +75,6 @@ module.exports = {
     getAllUserData,
     getUserArticles,
     getAllCommentsByArticles,
-    getUserIdByUsername
+    getUserIdByUsername,
+    deleteUserById,
 };
-
