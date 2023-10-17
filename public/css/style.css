@@ -808,7 +808,7 @@ nav{
   
   button {
     appearance: none;
-    background: transparent;
+    background: blue;
     border: 0;
     color: #fff;
     cursor: pointer;
