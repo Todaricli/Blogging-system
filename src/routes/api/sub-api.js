@@ -57,6 +57,7 @@ router.get('/addSubscription', verifyAuthenticated, async function (req, res) {
                 n.receiverId,
                 n.timestamp,
                 n.content,
+                n.type,
                 n.isRead,
             );
             res.status(200).json({
@@ -98,6 +99,7 @@ async function createSubscriptionNotification(receiverId, senderId) {
         receiverId: receiverId,
         timestamp: utcString,
         content: `${sender.username} just subscribed to you!`,
+        type: 'sub',
         isRead: 0,
     };
     return notification;

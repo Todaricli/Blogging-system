@@ -70,16 +70,21 @@ window.addEventListener('load', async function () {
             notifyDropMenu.appendChild(divTag);
 
             function addLinkToNotificationDiv() {
-                divTag.addEventListener('click', function () {
-                    const profileRoute = `/profile?id=${indvNotif.host_id}`;
-                    const articleRoute = `/article/${indvNotif.host_id}`;
-                    let route;
-                    if (indvNotif.type === 'like' || indvNotif.type === 'sub') {
-                        route = profileRoute;
-                    } else {
-                        route = articleRoute;
+                divTag.addEventListener('click', function (event) {
+                    if (event.target.tagName.toLowerCase() !== 'img') {
+                        const profileRoute = `/profile?id=${indvNotif.host_id}`;
+                        const articleRoute = `/article/${indvNotif.host_id}`;
+                        let route;
+                        if (
+                            indvNotif.type === 'like' ||
+                            indvNotif.type === 'sub'
+                        ) {
+                            route = profileRoute;
+                        } else {
+                            route = articleRoute;
+                        }
+                        window.location.href = route;
                     }
-                    window.location.href = route;
                 });
             }
 
@@ -96,25 +101,28 @@ window.addEventListener('load', async function () {
 
             function createTrashButton() {
                 let svgImgTag = document.createElement('img');
-                svgImgTag.classList.add('svg-trash');
-                svgImgTag.setAttribute('src', '/images/svg/trash.svg');
+                svgImgTag.classList.add('svg-trash', 'clicked');
+                svgImgTag.setAttribute('src', '/images/svg/empty.svg');
                 svgImgTag.setAttribute('alt', 'trash icon');
                 divTag.appendChild(svgImgTag);
 
-                svgImgTag.addEventListener('click', () => {
-                  console.log("clicked");
-                });
+                svgImgTag.addEventListener('click', async (event) => {
+                    // visually update
+                    const parentElement = event.target.parentElement;
+                    if (parentElement) {
+                        parentElement.remove();
+                    }
 
-                //     let svgImgTag = document.createElement("img");
-                // svgImgTag.classList.add("svg-trash");
-                // svgImgTag.setAttribute("src", "../images/svg/empty.svg");
-                // svgImgTag.setAttribute("alt", "trash icon");
-                // svgImgTag.addEventListener("click", (event) => {
-                //   const tabSibling = event.target.previousElementSibling;
-                //   if (tabSibling) {
-                //     const pokemonName = tabSibling.getAttribute("title");
-                //     pokemonLocalStorage.removeFav(pokemonName);
-                //   }
+                    // update database
+                    const res = await fetch(
+                        `/api/delete-notification?id=${indvNotif.id}`,
+                        {
+                            method: 'DELETE',
+                        }
+                    );
+                    if (res.status === 204) console.log('Notification deleted successfully');
+                    else console.log('Error deleting notification');
+                });
             }
         }
     }
