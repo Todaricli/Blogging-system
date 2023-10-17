@@ -8,7 +8,6 @@ const QuillDeltaToHtmlConverter =
 const uploadTempFolder = require("../middleware/multer-uploader.js");
 const fs = require("fs");
 const jimp = require("jimp");
-const { get } = require('http');
 const { error } = require('console');
 
 
@@ -53,6 +52,10 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
 
 router.get('/article/:id', async function (req, res) {
   try {
+    if(res.locals.user) {
+      res.locals.user_id = res.locals.user.id
+    }
+    
     const article_id = req.params.id;
 
     const article = await articleDao.getArticlesByID(article_id);
