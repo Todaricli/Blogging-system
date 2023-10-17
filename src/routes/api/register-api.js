@@ -36,12 +36,4 @@ router.post('/api/validate-email-format', async function (req, res) {
   } else res.status(400).send('invalid');
 });
 
-router.post('/api/checkIfSub', async function (req, res) {
-  const user_id = req.body.user_id;
-  const author_id = req.body.author_id;
-  const result = await subDao.checkIfSubscribe(user_id, author_id);
-  res.status(200).send(result);
-});
-
-
 module.exports = router;

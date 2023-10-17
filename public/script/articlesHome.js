@@ -1,6 +1,4 @@
 window.addEventListener("load", function () {
-    displaySubOption();
-    checkIfSubscribe();
 
     function displaySubOption() {
         const btn_option = document.querySelectorAll(".btn_sub_option");
@@ -13,12 +11,12 @@ window.addEventListener("load", function () {
                 const option = document.createElement("button");
                 const isSubscribe = await checkIfSubscribe(user_id.value, author_id.value);
                 const subscription_id = author_id.value;
-                if (isSubscribe == 1) {
+                if (isSubscribe) {
                     option.innerHTML = `<img src="/images/unsubscribe.png">Unsubscribe`;
                     option.addEventListener("click", function () {
                         removeSubscription(subscription_id);
                     });
-                } else if (isSubscribe == 0) {
+                } else if (!isSubscribe) {
                     option.innerHTML = `<img src="/images/subscribe.png">Subscribe`;
                     option.addEventListener("click", function () {
                         addSubscription(subscription_id);
@@ -48,7 +46,7 @@ window.addEventListener("load", function () {
             body: JSON.stringify({ user_id, check_id }),
         });
         const isSubscribe = await response.text();
-        return isSubscribe;
+        return (isSubscribe === '1');
     }
 
     async function removeSubscription(subscription_id) {
@@ -80,6 +78,7 @@ window.addEventListener("load", function () {
                 console.error('Network error:', error);
             });
     }
+    displaySubOption();
 
 
     // articlesHome.registerHelper('isEqual', function(user_id, author_id, options) {

@@ -21,7 +21,7 @@ window.addEventListener('load', async function () {
         const response = await fetch(
             `/api/get-all-notifications`
         );
-        let data = await response.json();
+        let data = makeArray(await response.json());
         console.log(data);
     }
 

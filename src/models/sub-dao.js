@@ -53,15 +53,20 @@ async function addSpecificSubscriptionByID(userid, subscription_id) {
 
 async function checkIfSubscribe(userid, subscriptionId) {
     const db = await getDatabase();
-    const output = await db.all(SQL`
+    const res = await db.get(SQL`
         select exists (
             select * from subscription
             where being_subscribed_id = ${subscriptionId}
             and follower_id = ${userid}
         ) as output
     `)
-    const isSubscribe = JSON.stringify(output);
-    return isSubscribe[11];
+    // console.log(res);
+    // console.log(res.output);
+    // const isSubscribe = JSON.stringify(res);
+    // console.log(isSubscribe);
+    // console.log(isSubscribe[11]);
+ 
+    return res?.output === 1;
 }
 
 
