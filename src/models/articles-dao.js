@@ -19,7 +19,7 @@ async function getAllArticles(){
     const db = await getDatabase();
 
     const articles = await db.all(SQL`
-    select articles.*, user.fname, user.lname 
+    select articles.*, user.fname, user.lname, user.icon_path 
     from articles left join user on articles.author_id = user.id
     `);
 
@@ -177,6 +177,7 @@ async function updateArticleToArticleTable(article_id, title, genre, content_htm
         SET title = ${title}, genre = ${genre}, content_html = ${content_html}, content_delta = ${content_delta}, image = ${image}, date_of_publish = datetime('now')
         WHERE id = ${article_id}`);
 }
+
 
 
 module.exports = {

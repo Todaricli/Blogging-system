@@ -14,9 +14,7 @@
                 <span class="subscription_icon"><img src="{{this.icon_path}}"></span>
                 <span class="subscription_name">{{this.fname}} {{this.lname}}</span>
             </a>
-            <a href="/subscriptionRemove?id={{this.id}}">
-                <button type="button" name="btn_unsubscription" class="btn_unsubscription">Remove</button>
-            </a>
+            <button type="button" name="btn_unsubscription" class="btn_unsubscription">Remove<input value="{{this.id}}" class="subscription_id" hidden></button>
         </div>
         {{/each}}
         {{else}}
@@ -38,9 +36,8 @@
                 <span class="subscriber_icon"><img src="{{this.icon_path}}"></span>
                 <span class="subscriber_name">{{this.fname}} {{this.lname}}</span>
             </a>
-            <a href="/subscriberRemove?id={{this.id}}">
-            <button type="submit" name="btn_unsubscriber" class="btn_unsubscriber">Remove</button>
-            </a>
+
+            <button type="button" name="btn_unsubscriber" class="btn_unsubscriber">Remove<input value="{{this.id}}" class="subscriber_id" hidden></button>
         </div>
         {{/each}}
 

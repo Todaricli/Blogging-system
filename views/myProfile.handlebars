@@ -1,85 +1,203 @@
-<div>
-    <img src="{{this.avatar}}" alt="avatar" style="width: 110px">
-    <p><strong>{{this.name}}</strong></p>
-</div>
-
-<div>
-    <ul>
-        <li>Name: {{this.username}}</li>
-        <li>{{this.total_followers}} Follower</li>
-        <li>Email: {{this.email}}</li>
-        {{#if information}}
-        {{#if bio}}
-        <li>Bio: {{this.bio}}</li>
-        {{/if}}
-        {{#if gender}}
-        <li>Gender: {{this.gender}}</li>
-        {{/if}}
-        {{#if address}}
-        <li>Address: {{this.address}}</li>
-        {{/if}}
+{{#if toastMessage}}
+        <p id="my_profile_toast">{{toastMessage}}</p>
         {{/if}}
 
-        <li>
-            <a href="/my_post">My posts</a>
-        </li>
-    </ul>
-</div>
-{{!-- Following sections on the right side --}}
-<div>
-    <h2>Following</h2>
-    {{#if subscribers}}
-    <div>
-        {{#each subscribers}}
-        <img src="{{this.user_avatar}}" alt="subsciber avatar">
-        <p>{{this.username}}</p>
-        <button>
-            <div>
-                <img src="{{this.user_avatar}}" alt="subsciber avatar">
-                <p>{{this.username}}</p>
-                <p>{{this.bio}}</p>
-                <p>{{this.total_followers}} Followers</p>
-                <button>Following</button>
-            </div>
-        </button>
+<div id="my_profile_container">
+    {{#if userData}}
+    <input id="user_id_temp_storage" name="user_id_temp_storage" value="{{userData.id}}">
         <div>
-        </div>
+        <form action="/update-username" method="POST">
+            <div>
+                <label for="my_profile_username">Username:</label>
+                <input id="my_profile_username" name="my_profile_username" type="text" value="{{userData.username}}">
+            </div>
+            <p id="usernamePromptMessage"></p>
+            <button id="update-username" type="submit">Update username</button>
+            <!-- this p is for developing purpose -->
+            <p style="font-size: larger; color:red">This feature need to complete</p>
+        </form>
+        <hr>
+        <form action="/update-password" method="POST">
+            <div>
+                <label for="my_profile_password">Password:</label>
+                <input id="my_profile_passoword" name="my_profile_password" type="password">
+            </div>
+            <p id="passwordPromptMessage"></p>
+            <div>
+                <label for="my_profile_comfirm_password">Confirm password:</label>
+                <input id="my_profile_comfirm_password" name="my_profile_comfirm_password" type="password">
+            </div>
+            <p id="passwordPromptMessage"></p>
+            <button id="update-password" type="submit">Update password</button>
+            <!-- this p is for developing purpose -->
+            <p style="font-size: larger; color:red">This feature need to complete</p>
+        </form>
+        <hr>
+    </div>
+    <div id="my_profile_info">
+        <form action="/update_info" method="POST">
+            <div id="my_profile_icon">
+                <img id="my-profile-icon-image" src="{{userData.icon_path}}" style="width: 200px;">
+                <span id="update-icon-btn" class="collapse">Update Icon</span>
+                <br>
+                <br>
+                <hr>
+                <div id='icon_container'>
+                    <label for='icon' id='icon_container_label'>Choose your icon</label>
+                    <div id='icon_select_container'>
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_girl1' value='girl1'><label
+                                for='icon_girl1'>
+                                <img src='/images/avatars/girl1.png'>
+                            </label>
+                        </div>
 
-        {{/each}}
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_girl2' value='girl2'><label for='icon_girl2'>
+                                <img src='/images/avatars/girl2.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_girl3' value='girl3'><label for='icon_girl3'>
+                                <img src='/images/avatars/girl3.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_girl4' value='girl4'><label for='icon_girl4'>
+                                <img src='/images/avatars/girl4.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_girl5' value='girl5'><label for='icon_girl5'>
+                                <img src='/images/avatars/girl5.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_girl6' value='girl6'><label for='icon_girl6'>
+                                <img src='/images/avatars/girl6.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_girl7' value='girl7'><label for='icon_girl7'>
+                                <img src='/images/avatars/girl7.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_girl8' value='girl8'><label for='icon_girl8'>
+                                <img src='/images/avatars/girl8.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_girl9' value='girl9'><label for='icon_girl9'>
+                                <img src='/images/avatars/girl9.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_girl10' value='girl10'><label for='icon_girl10'>
+                                <img src='/images/avatars/girl10.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_guy1' value='guy1'><label for='icon_guy1'>
+                                <img src='/images/avatars/guy1.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_guy2' value='guy2'><label for='icon_guy2'>
+                                <img src='/images/avatars/guy2.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_guy3' value='guy3'><label for='icon_guy3'>
+                                <img src='/images/avatars/guy3.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_guy4' value='guy4'><label for='icon_guy4'>
+                                <img src='/images/avatars/guy4.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_guy5' value='guy5'><label for='icon_guy5'>
+                                <img src='/images/avatars/guy5.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_guy6' value='guy6'><label for='icon_guy6'>
+                                <img src='/images/avatars/guy6.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_guy7' value='guy7'><label for='icon_guy7'>
+                                <img src='/images/avatars/guy7.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_guy8' value='guy8'><label for='icon_guy8'>
+                                <img src='/images/avatars/guy8.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_guy9' value='guy9'><label for='icon_guy9'>
+                                <img src='/images/avatars/guy9.png'>
+                            </label>
+                        </div>
+
+                        <div class='icon_select'>
+                            <input type='radio' name='icon' id='icon_guy10' value='guy10'><label for='icon_guy10'>
+                                <img src='/images/avatars/guy10.png'>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label for="my_profile_fname">First Name:</label>
+                        <input id="my_profile_fname" name="my_profile_fname" value="{{userData.fname}}" required>
+                    </div>
+                    <div>
+                        <label for="my_profile_lname">Last Name:</label>
+                        <input id="my_profile_lname" name="my_profile_lname" value="{{userData.lname}}" required>
+                    </div>
+                    <div>
+                        <label for="my_profile_email">Email:</label>
+                        <input id="my_profile_email" name="my_profile_email" value="{{userData.email}}">
+                    </div>
+                    <div>
+                        <label for="my_profile_DOB">Date of birth:</label>
+                        <input id="my_profile_DOB" name="my_profile_DOB" type="date" value="{{userData.DOB}}" required>
+                    </div>
+                    <div>
+                        <label for="my_profile_desc">Description:</label>
+                        <input id="my_profile_desc" name="my_profile_desc" value="{{userData.description}}">
+                    </div>
+                </div>
+            </div>
+            <button id="my_profile_submit_btn" type="submit">Update</button>
+        </form>
     </div>
     {{else}}
-    <p>You are not following anyone!</p>
+    <p style="color: red;">Profile loading error, please try again!</p>
+    <a href="/">Home</a>
     {{/if}}
 </div>
-        <a href="/sub">See all ({{this.total_subscribers}})</a>
 
-{{!-- Options section --}}
-<div id="inforForm">
-    <button type="submit">Update information</button> 
-    
-    <form action="/update_info" method="post" id="information">
-        <p><strong>Update information</strong></p>
-
-        <label for="bio">Bio:</label>
-        <textarea name="bio" id="bio" cols="30" rows="10" maxlength="160"></textarea>
-
-        <label for="gender">Gender:</label>
-        <select name="gender" id="gender">
-            <option value=""></option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Non-binary">Non-Binary</option>
-        </select>
-
-        <label for="address">Address</label>
-        <input type="text" name="address" id="address">
-
-        <button type="submit">Save changes</button>
-    </form>
-
-</div>
-
-<div>
-    <button type="submit">Update password</button>
-    <button type="submit">Delete account</button>
-</div>
+<link href="/css/myProfile.css" rel="stylesheet">
+<script src="/script/myProfile.js"></script>
