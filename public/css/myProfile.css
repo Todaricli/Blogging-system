@@ -1,0 +1,42 @@
+.collapse {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+  
+  #update-icon-btn:hover {
+    background-color: #555;
+  }
+
+  .active {
+    background-color: #555;
+  }
+  
+ #icon_container {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+  }
+
+  #my_profile_desc {
+    width: 300px;
+    height: 100px;
+  }
+
+  form {
+    border: solid 2px green;
+    padding: 10px;
+  }
+
+  #my_profile_toast {
+    color: red;
+    font-size: x-large;
+    font-weight: bolder;
+  }
+

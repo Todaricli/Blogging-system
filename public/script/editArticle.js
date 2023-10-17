@@ -8,8 +8,8 @@ async function setUpQuillEditor() {
         [{ 'color': [] }, { 'background': [] }],
         [{ 'font': [] }],
         [{ 'align': [] }],
-        ['clean'],
-        ['image', 'code-block']
+        ['clean']
+        // ['image', 'code-block']
     ];
 
     const quill = new Quill('#update_article_content', {

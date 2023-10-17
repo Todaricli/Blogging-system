@@ -7,8 +7,8 @@ window.addEventListener("load", function () {
         [{ 'color': [] }, { 'background': [] }],       
         [{ 'font': [] }],
         [{ 'align': [] }],
-        ['clean'],
-        ['image', 'code-block']
+        ['clean']
+        // ['image', 'code-block']
     ];
 
     const quill = new Quill('#write_article_content', {
