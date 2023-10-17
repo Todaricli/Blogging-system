@@ -27,12 +27,26 @@ nav {
     height: 60px;
 }
 
+#viewAllDiv{
+    text-align: center;
+    background-color: pink;
+}
+
 .search_bar {
     border: 1px solid black;
     border-radius: 20px;
+    padding-top: 10px;
     height: 30px;
-    display: flex;
+    max-height: 400px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.search_bar div {
+    background-color: lightblue;
+    border: 1px solid black;
+    border-radius: 15px;
 }
 
 .search_bar img {
@@ -45,7 +59,16 @@ nav {
     width: 500px;
     height: 28px;
     border: transparent;
+    margin-bottom: 20px;
 }
+
+#searchResultContainer{
+    border: transparent;
+    height: 100px;
+    max-height: 100px;
+    z-index: 1000;
+}
+
 
 .dropdown {
     position: relative;
@@ -484,6 +507,10 @@ nav {
     padding: 10px;
 }
 
+#profile_related_info img{
+    width: 15px;
+}
+
 #profile_articles_container>* {
     padding: 10px;
 }
@@ -680,8 +707,38 @@ nav {
 }
 
 /* ANAYTICS DASHBOARD END*/
-/* ANAYTICS DASHBOARD END*/
+.allArticles{
+    text-align: center;
+    margin: auto;
+    padding: auto;
+}
 
+.eachArticleDiv, .userProfileSnippet{
+    text-align: center;
+    margin: 30px;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#readMoreDiv{
+    margin: 10px;
+}
+
+#descriptionDiv{
+    margin: 10px;
+    font-style: italic;
+}
+
+#likes_icon{
+    height: 20px;
+    width: 20px;
+}
+
+#comments_icon{
+    height: 20px;
+    width: 20px;
+}
 /* home page css start*/
 #author_icon img{
     width: 50px;
@@ -691,18 +748,25 @@ nav {
     cursor: pointer;
     background-color: rgb(255, 255, 204, 0);
     border: 0px;
-    position: relative;
     display: inline-block;
 }
 
+.btn_sub_option a{
+    text-decoration: none;
+    color: black;
+}
+
+
+.btn_sub_option a:hover{
+    color: rgb(113, 113, 113);
+}
+
 .btn_subscribe{
-    position: absolute;
-    top: 20px;
-    left: 80px;
-    z-index: 2;
-    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn_subscribe img {
-    width: 10px;
+    width: 15px;
 }
