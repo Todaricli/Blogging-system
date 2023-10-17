@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const subDao = require('../../models/sub-dao');
 const userDb = require('../../models/generic-dao');
 
 router.get('/api/check-username', async function (req, res) {
@@ -27,13 +26,5 @@ router.post('/api/validate-password-format', async function (req, res) {
     res.status(200).send('valid');
   } else res.status(400).send('invalid');
 });
-
-router.post('/api/checkIfSub', async function (req, res) {
-  const user_id = req.body.user_id;
-  const author_id = req.body.author_id;
-  const result = await subDao.checkIfSubscribe(user_id, author_id);
-  res.status(200).send(result);
-});
-
 
 module.exports = router;
