@@ -3,7 +3,7 @@
         <div id="profile_icon"><img src="{{profile_icon}}"></div>
         <div id="profile_name">{{profile_name}}</div>
         <div id="profile_DOB">{{profile_DOB}}</div>
-
+        <input value="{{profile_id}}" id="profile_id" hidden>
     <div id="profile_related_info">
         {{#if profile_subscribers}}
         <div id="profile_subscribers">{{profile_subscribers.length}} subscribers</div>
@@ -14,6 +14,9 @@
         <div id="profile_articles_number">{{profile_articles.length}} articles</div>
         {{else}}
         <div id="profile_articles_number">0 article</div>
+        {{/if}}
+        {{#if user}}
+        <input value="{{user.id}}" id="user_id" hidden>
         {{/if}}
     </div>
     </div>
@@ -36,3 +39,5 @@
     </div>
 
 </div>
+
+<script src="/script/profile.js"></script>
