@@ -1,4 +1,7 @@
 window.addEventListener("load", function () {
+    displaySubOption();
+    checkIfSubscribe();
+
     function displaySubOption() {
         const btn_option = document.querySelectorAll(".btn_sub_option");
         const user_id = document.querySelector("#current_user_id");
@@ -78,7 +81,6 @@ window.addEventListener("load", function () {
             });
     }
 
-    displaySubOption();
 
     // articlesHome.registerHelper('isEqual', function(user_id, author_id, options) {
     //     if (user_id === author_id) {

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const userDb = require('../../models/generic-dao');
+const subDao = require('../../models/sub-dao');
 
 router.get('/api/check-username', async function (req, res) {
   const username = req.query.username
