@@ -40,6 +40,7 @@ window.addEventListener(`load`, function () {
         const resultByTitle = results["articlesByTitle"]
         const resultsByUser = results["articlesByUser"]
 
+
         if (resultByTitle != undefined) {
             const byTitleHeader = document.createElement("div")
             byTitleHeader.innerHTML = "<h2>Matching Title</h2>"
@@ -65,15 +66,12 @@ window.addEventListener(`load`, function () {
             searchByTitleContainer.append(byUserHeader)
             for (let i = 0; i < resultsByUser.length; i++) {
                 const searchResultDiv = document.createElement("div")
-                searchResultDiv.setAttribute("id", `${resultsByUser[i]["user_id"]}`)
+                searchResultDiv.setAttribute("id", `${resultsByUser[i]["id"]}`)
                 const searchResult = document.createElement("p")
-                searchResult.setAttribute("id", `${resultsByUser[i]["user_id"]}`)
+                searchResult.setAttribute("id", `${resultsByUser[i]["id"]}`)
                 searchResult.innerText = `${resultsByUser[i]["fname"]} ${resultsByUser[i]["lname"]}`
                 searchResultDiv.addEventListener(`click`, (e)=>{
-                    
-                    
-                    //add user route here, 
-                    window.location.href = `/profile?id=3`
+                    window.location.href = `/profile?id=${e.target.id}`
                 })
                 searchResultDiv.append(searchResult)
                 searchByAuthorContainer.append(searchResultDiv)
@@ -88,8 +86,4 @@ window.addEventListener(`load`, function () {
 
         return list
     }
-
-    document.querySelector("#calender").calendarsPicker({ 
-        rangeSelect: true, showTrigger: '#calImg'});;
-
 })
