@@ -45,7 +45,6 @@ async function setUpQuillEditor() {
         const article_id = document.getElementById("article_id_temp_storage").value;
         const image = document.getElementById("update_article_image").files[0];
 
-        console.log(image)
         const actualContent = content.value;
 
         const formData = new FormData();
