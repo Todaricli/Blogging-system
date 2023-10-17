@@ -1,0 +1,60 @@
+<div class="allArticles">
+    <div>
+        <h1>Search Results of "{{search}}"</h1>
+    </div>
+    <h2>Matching Articles</h2>
+    {{#if articles}}
+    {{#each articles}}
+    <div class="eachArticleDiv">
+        <h2>{{this.title}}</h2>
+        <div>
+            {{!-- <img src="{{articleImage}}"> --}}
+        </div>
+        <div id="authorDiv">
+            <p>by:</p>
+            <p>{{this.fname}} {{this.lname}}</p>
+        </div>
+        <div>
+            {{content}}
+        </div>
+        <div id="readMoreDiv">
+            <a href="/article/{{this.article_id}}">Read more</a>
+        </div>
+        <div id="likesAndComments">
+            {{this.like_count}}<img id="likes_icon" src="https://clipground.com/images/like-icon-png-7.png">
+            {{#if this.comments_count}}
+            {{this.comments_count}}
+            {{else}}
+            0
+            {{/if}}
+            <img id="comments_icon" src="https://th.bing.com/th/id/OIP.lz0PD7yQ7pVgkawuXKsK3wHaHa?pid=ImgDet&rs=1">
+        </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <p><i>There are no Articles matching "{{search}}"</i></p>
+    {{/if}}
+
+    <h2>Matching Users</h2>
+    {{#if users}}
+    {{#each users}}
+    <div class="userProfileSnippet">
+        <div id="userUsername">
+            <h2>{{this.username}}</h2>
+        </div>
+        <div id="userIcon">
+            <img src="{{this.icon_path}}" alt="profile avatar icon" width="70px" height="70px">
+        </div>
+        <div>
+            <p>{{this.fname}} {{this.lname}}</p>
+        </div>
+        
+        <div>
+            <a href="/profile?id={{this.id}}">View full profile</a>
+        </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <p><i>There are no users matching "{{search}}"</i></p>
+    {{/if}}
+</div>

@@ -332,12 +332,12 @@ VALUES (1, 1, 2),
 DROP VIEW IF EXISTS articles_info;
 
 create view [Articles_info] as
-select articles.author_id                     as user_id,
-       articles.id                            as article_id,
+select articles.author_id as user_id,
+       articles.id as article_id,
        user.fname,
        user.lname,
        articles.title,
-       count(likes.id)                        as like_count,
+       count(likes.id) as like_count,
        comments_count,
        (count(likes.id) + comments_count * 2) as popularity
 from articles
@@ -347,15 +347,3 @@ from articles
                     group by article_id) on articles.id = comment_articles_id
          left join user on user.id = articles.author_id
 group by articles.id;
-
-
-
-
-
-
-
-
-
-
-
-

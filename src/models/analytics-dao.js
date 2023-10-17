@@ -46,7 +46,7 @@ async function getNumberOfComments(user_id){
 
 async function getMostPopularArticles(user_id){
     const db = await getDatabase();
-    
+
     const mostPopular =await db.all(SQL`
         select * from [Articles_info]
         where user_id = ${user_id}
