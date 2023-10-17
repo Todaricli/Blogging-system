@@ -8,6 +8,8 @@ const QuillDeltaToHtmlConverter =
 const uploadTempFolder = require("../middleware/multer-uploader.js");
 const fs = require("fs");
 const jimp = require("jimp");
+const { get } = require('http');
+const { error } = require('console');
 
 
 router.get('/writeArticle', function (req, res) {
@@ -29,12 +31,16 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
 
     //Get article image
     const fileInfo = req.file;
-    const imagePath = "user" + user_id + "-" + fileInfo.originalname;
-
-    processAndStoreImage(fileInfo, imagePath);
-
     let done = undefined;
-    done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string, imagePath);
+    let imagePath;
+
+    if (fileInfo) {
+      imagePath = "user" + user_id + "-" + fileInfo.originalname;
+      processAndStoreImage(fileInfo, imagePath);
+      done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string, imagePath);
+    } else {
+      done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string)
+    }
 
     if (done) {
       res.status(200).send("New Article Created!");
@@ -46,30 +52,59 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
 });
 
 router.get('/article/:id', async function (req, res) {
-  const article_id = req.params.id;
-
-  const article = await articleDao.getArticlesByID(article_id);
-  const articleId = article[0].id;
-
   try {
+    const article_id = req.params.id;
 
+    const article = await articleDao.getArticlesByID(article_id);
+    const articleId = article[0].id;
     res.locals.article = article;
 
     const authorName = await articleDao.getAuthorByArticle(articleId);
     res.locals.authorName = authorName;
 
-    // const comments = await articleDao.getAllCommentsFromArticle(articleId);
-    // res.locals.comments = comments;
+    const comments = await commentDao.getAllFirstLevelCommentsByArticleID(articleId);
 
-    const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
-    res.locals.like_count = likeCounts
+    async function getAllComments(comments) {
+      try {
+        const processedComments = await Promise.all(comments.map(async (comment) => {
+          try {
+            const secondLevelComments = await commentDao.getAllSecondOrThirdLevelCommentsByComment_id(comment.id, article_id);
+            comment["second_level_comments"] = secondLevelComments;
+
+            const secondLevelComment = comment.second_level_comments;
+
+            await Promise.all(secondLevelComment.map(async (comment) => {
+              try {
+                const thirdLevelComments = await commentDao.getAllSecondOrThirdLevelCommentsByComment_id(comment.id, article_id);
+                comment["third_level_comments"] = thirdLevelComments;
+              } catch (e) {
+                throw new error("Comments loading failed");
+              }
+            }));
+
+            return comment;
+          } catch (e) {
+            throw new error("Comments loading failed.")
+          }
+
+        }));
+
+        return processedComments;
+      } catch (e) {
+        throw new error("Comments loading failed.")
+      }
+    }
+
+    const commentsForThisAriticle = await getAllComments(comments);
+    res.locals.comments = commentsForThisAriticle;
+
+    // res.json(commentsForThisAriticle);
+    res.render("articleDemo")
 
   } catch (error) {
-    const html = "<p>Article loading error! refresh the page.<p>"
-    res.locals.article_content = html;
+    const html = "<p>Error occured: <p>"
+    res.locals.article_content = html + error;
   }
-
-  res.render("articleDemo");
 
 });
 
@@ -108,12 +143,16 @@ router.post("/api/updateArticle", uploadTempFolder.single("imageKey"), async fun
 
     //Get article image
     const fileInfo = req.file;
-    const imagePath = "user" + user_id + "-" + fileInfo.originalname;
-
-    processAndStoreImage(fileInfo, imagePath);
-
     let done = undefined;
-    done = await articleDao.updateArticleToArticleTable(article_id, title, genre, html, delta_obj_string, imagePath);
+    let imagePath;
+
+    if (fileInfo) {
+      imagePath = "user" + user_id + "-" + fileInfo.originalname;
+      processAndStoreImage(fileInfo, imagePath);
+      done = await articleDao.updateArticleToArticleTable(article_id, title, genre, html, delta_obj_string, imagePath);
+    } else {
+      done = await articleDao.updateArticleToArticleTableWithoutImage(user_id, title, genre, html, delta_obj_string)
+    }
 
     if (done) {
       res.status(200).send("Article updated");
