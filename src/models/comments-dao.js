@@ -11,15 +11,30 @@ async function getAllCommentsByUserId(userId) {
     return allComments;
 }
 
-async function getAllCommentsByArticles(articleId) {
+async function getAllFirstLevelCommentsByArticleID(articleId) {
     const db = await getDatabase();
-    const allComments = await db.all(SQL`
-    SELECT comments.*, articles.title AS article_title
-    FROM comments
-    JOIN articles ON comments.article_id = articles.id
-    WHERE comments.article_id = ${articleId};
+    const allFirstLevelComments = await db.all(SQL`
+    SELECT comments.*, user.username, user.fname, user.lname
+    FROM comments, user
+    WHERE comments.article_id = ${articleId}
+    AND user.id = comments.user_id
+    AND comments.comments_id IS NULL
     `);
-    return allComments;
+
+    return allFirstLevelComments;
+}
+
+async function getAllSecondOrThirdLevelCommentsByComment_id(comment_id, article_id) {
+    const db = await getDatabase();
+    const allFirstLevelComments = await db.all(SQL`
+    SELECT comments.*, user.username, user.fname, user.lname
+    FROM comments, user
+    WHERE comments.article_id = ${article_id}
+    AND user.id = comments.user_id
+    AND comments.comments_id = ${comment_id}
+    `);
+
+    return allFirstLevelComments;
 }
 
 async function getCommentAndReplies(articleId) {
@@ -77,7 +92,8 @@ async function deleteComments(commentId, articleId) {
 }
 
 module.exports = {
-    getAllCommentsByArticles,
+    getAllFirstLevelCommentsByArticleID,
+    getAllSecondOrThirdLevelCommentsByComment_id,
     getAllCommentsByUserId,
     deleteComments,
     getCommentAndReplies,
