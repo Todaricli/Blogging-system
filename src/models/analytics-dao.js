@@ -4,12 +4,14 @@ const { getDatabase } = require('../db/database.js');
 const { getAllUserData } = require('./generic-dao.js');
 
 async function getNumFollowers(user_id) {
+    console.log("skeetskeet")
     const db = await getDatabase()
 
     const numFollowers = await db.all(SQL`
     select count(being_subscribed_id) as counts from subscription 
     where being_subscribed_id = ${user_id}
     `)
+    console.log("skatskat")
 
     return numFollowers
 
@@ -19,8 +21,8 @@ async function getArticleLikes(user_id) {
     const db = await getDatabase();
 
     const numLikes = await db.all(SQL`
-    select user_id, article_id, title, like_count from [Articles_info]
-    where user_id = ${user_id}
+    select title, like_count from [Articles_info]
+    where user_id = ${user_id} 
     `)
     return numLikes;
 }
@@ -28,9 +30,10 @@ async function getArticleLikes(user_id) {
 async function getNumberOfComments(user_id){
     const db = await getDatabase();
 
-    // const numOfComments = await db.all(SQL`
-    // `)
-    const numOfComments = "hi"
+    const numOfComments = await db.all(SQL`
+    select title, comments_count from [Articles_info]
+    where user_id = ${user_id} 
+    `)
 
     return numOfComments
 }
@@ -44,6 +47,10 @@ async function getMostPopularArticles(user_id){
         order by popularity desc
         limit 3
     `)
+
+    for(let i =0; i<mostPopular.length; i++){
+        mostPopular[i]["index"] = i+1
+    }
 
     return mostPopular;
 }

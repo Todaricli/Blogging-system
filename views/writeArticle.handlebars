@@ -1,5 +1,6 @@
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
+
 <br>
 
 
@@ -7,50 +8,88 @@
 
 <hr>
 
-<!-- Create the editor container -->
-<div id="form-container" class="container">
-    <form id="write_article_form">
-        <div>
-            <div>
-                <div>
-                    <label for="write_article_title">Title</label>
-                    <input id="write_article_title" name="write_article_title" type="text" style="height: 20px; width: 500px;" required>
+<div class="writeArticlePage">
+    <div class="titleArea">
+        <div id="flexTitle">
+            <h1>"In the mood to create?"</h1>
+        </div>
+        <div id="whipTitle">
+            <h2> Whip up an original article here.</h2>
+        </div>
+        <div id="writeIcon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="rgb(250, 229, 232)"
+                class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path
+                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                <path fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Create the editor container -->
+    <div id="form-container" class="formContainer">
+        <div class="newArticleForm">
+            <form id="write_article_form">
+                <div class="inputAreas">
+                    <div class="inputTitles">
+                        <label for="write_article_title">Title*</label>
+                    </div>
+                    <span id="titleInput">
+                        <input id="write_article_title" name="write_article_title" type="text"
+                            style="height: 20px; width: 500px;" required>
+                    </span>
                 </div>
-                <div>
-                    <label for="write_article_genre">Genre</label>
-                    <select name="write_article_genre" id="write_article_genre">
-                        <option value="News Articles">News Articles</option>
-                        <option value="Opinion Pieces">Opinion Pieces</option>
-                        <option value="Feature Stories">Feature Stories</option>
-                        <option value="How-to Guides">How-to Guides</option>
-                        <option value="Product Reviews">Product Reviews</option>
-                        <option value="Travelogues">Travelogues</option>
-                        <option value="Health and Wellness Articles">Health and Wellness Articles</option>
-                        <option value="Technology Trends">Technology Trends</option>
-                        <option value="Entertainment and Pop Culture">Entertainment and Pop Culture</option>
-                        <option value="Historical Analysis">Historical Analysis</option>
-                    </select>
+
+                <div class="inputAreas">
+                    <div class="inputTitles">
+                        <label for="write_article_genre">Genre</label>
+                    </div>
+                    <div id="genreDropdown">
+                        <select name="write_article_genre" id="write_article_genre">
+                            <option value="News Articles" class="dropdownTexts">News Articles</option>
+                            <option value="Opinion Pieces" class="dropdownTexts">Opinion Pieces</option>
+                            <option value="Feature Stories" class="dropdownTexts">Feature Stories</option>
+                            <option value="How-to Guides" class="dropdownTexts">How-to Guides</option>
+                            <option value="Product Reviews" class="dropdownTexts">Product Reviews</option>
+                            <option value="Travelogues" class="dropdownTexts">Travelogues</option>
+                            <option value="Health and Wellness Articles" class="dropdownTexts">Health and Wellness
+                                Articles</option>
+                            <option value="Technology Trends" class="dropdownTexts">Technology Trends</option>
+                            <option value="Entertainment and Pop Culture" class="dropdownTexts">Entertainment and Pop
+                                Culture</option>
+                            <option value="Historical Analysis" class="dropdownTexts">Historical Analysis</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
+
+                <div class="inputAreas">
+                    <div class="inputTitles">
+                        <label for="write_article_content">Content:</label>
+                    </div>
+                    <input name="write_article_content" type="hidden">
+                    <div id="write_article_content" style="height: 300px">
+                    </div>
+                </div>
+
+                <div id="publishButton">
+                    <button type="submit">
+                        <span>Publish</span>
+                        <svg viewBox="-5 -5 110 110" preserveAspectRatio="none" aria-hidden="true">
+                            <path
+                                d="M0,0 C0,0 100,0 100,0 C100,0 100,100 100,100 C100,100 0,100 0,100 C0,100 0,0 0,0" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+
+            <!-- these two anchor tags for trialling purpose only -->
+            <a href="/article/16" id="newArticleLink">View my new article!</a>
         </div>
-        <div>
-            <label for="write_article_content">Content:</label>
-            <input name="write_article_content" type="hidden">
-        </div>
-        <div id="write_article_content" style="height: 300px">
-        </div>
-        <div>
-            <button type="submit">Publish!</button>
-        </div>
-    </form>
 
-    <!-- these two anchor tags for trialling purpose only -->
+    </div>
 
-    <a href="/article/16">Single article!</a>
-</div>
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-
-<!-- Include the Quill library -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-<script src="/script/writeArticle.js"></script>
+    <script src="/script/writeArticle.js"></script>

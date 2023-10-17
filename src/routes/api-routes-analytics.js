@@ -12,6 +12,12 @@ router.get('/api/get-analytics', async function (req, res) {
 
         const top3Articles = await analyticsDao.getMostPopularArticles(userId);
 
+        res.locals.followers = numberOfFollowers;
+        // res.locals.comments = 
+        
+
+
+
         const sendObj = {
             numberOfFollowers,
             numberOfComments,
