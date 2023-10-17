@@ -42,7 +42,7 @@ async function getAuthorByArticle(articleId) {
     const db = await getDatabase();
 
     const author = await db.all(SQL `
-    SELECT user.fname AS author_fname, user.lname AS author_lname
+    SELECT user.fname AS author_fname, user.lname AS author_lname, user.*
     FROM articles
     INNER JOIN user ON articles.author_id = user.id
     WHERE articles.id = ${articleId};
@@ -190,6 +190,18 @@ async function filterArticlesBySelectedDates(startDate, endDate) {
     return articles;
 }
 
+async function filterArticlesByGenre(genre) {
+    const db = await getDatabase();
+
+    const articles = await db.all(SQL `
+    select articles.*, user.*
+    from articles
+    inner join user on articles.author_id = user.id
+    where genre = ${genre}
+    `)
+
+    return articles;
+}
 
 module.exports = {
     getArticlesByUserID,
@@ -207,5 +219,6 @@ module.exports = {
     getAuthorByArticle,
     insertNewArticleToArticleTable,
     updateArticleToArticleTable,
-    filterArticlesBySelectedDates
+    filterArticlesBySelectedDates,
+    filterArticlesByGenre
 };

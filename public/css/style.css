@@ -281,39 +281,10 @@ nav {
 #login_body_container a:visited {
     color: rgb(12, 175, 17);
 }
-/* login page css end*/
-
-/* #home_container {
-    display: grid;
-    margin: 20px;
-    padding: 5px;
-    /* grid-template-columns: 1fr 1fr 2fr 1fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-        "header header header header"
-        "top5 top5 top5 top5"
-        "articles articles articles sidebar"; 
-}*/
-
-/* #category_nav {
-    grid-area: header;
-}
-
-#top5_articles {
-    grid-area: top5;
-    height: 400px;
-}
-
-#all_articles {
-    grid-area: articles;
-    height: 800px;
-    background-color: bisque;
-} */
 
 #sidebar {
     grid-area: sidebar;
     height: 50px;
-
 }
 
 #sidebar_title {
