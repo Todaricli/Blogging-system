@@ -90,6 +90,7 @@ router.get('/article/:id', async function (req, res) {
         }));
 
         return processedComments;
+
       } catch (e) {
         throw new error("Comments loading failed.")
       }
@@ -98,7 +99,6 @@ router.get('/article/:id', async function (req, res) {
     const commentsForThisAriticle = await getAllComments(comments);
     res.locals.comments = commentsForThisAriticle;
 
-    // res.json(commentsForThisAriticle);
     res.render("articleDemo")
 
   } catch (error) {
