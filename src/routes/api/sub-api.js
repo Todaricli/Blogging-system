@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const subDao = require('../../models/sub-dao');
+const genericDao = require('../../models/generic-dao');
+const notifyDao = require('../../models/notify-dao');
 const {
     verifyAuthenticated,
 } = require('../../middleware/auth-middleware/login-auth.js');
@@ -40,11 +42,23 @@ router.get(
 );
 
 router.get('/addSubscription', verifyAuthenticated, async function (req, res) {
-    const subscription_id = req.query.id;
+    const subscriber_id = req.query.id;
     const user_id = res.locals.user.id;
     if (user_id) {
         try {
-            await subDao.addSpecificSubscriptionByID(user_id, subscription_id);
+            await subDao.addSpecificSubscriptionByID(user_id, subscriber_id);
+            
+            const n = await createSubscriptionNotification(
+                subscriber_id,
+                user_id
+            );
+            await notifyDao.storeNotificationToUser(
+                n.senderId,
+                n.receiverId,
+                n.timestamp,
+                n.content,
+                n.isRead,
+            );
             res.status(200).json({
                 message: 'Subscription add successfully',
             });
@@ -73,5 +87,20 @@ router.get('/removeSubscriber', verifyAuthenticated, async function (req, res) {
         res.status(403).json({ message: 'Unauthorized' });
     }
 });
+
+async function createSubscriptionNotification(receiverId, senderId) {
+    const now = new Date();
+    const utcString = now.toISOString();
+    const sender = await genericDao.getUserDataById(senderId);
+    console.log(sender.username);
+    const notification = {
+        senderId: senderId,
+        receiverId: receiverId,
+        timestamp: utcString,
+        content: `${sender.username} just subscribed to you!`,
+        isRead: 0,
+    };
+    return notification;
+}
 
 module.exports = router;

@@ -26,6 +26,15 @@ async function getAllNotificationsById(userId) {
     return notifications;
 }
 
+async function updateIsRead(id) {
+    const db = await getDatabase();
+    await db.all(SQL`
+    UPDATE notifications
+    SET isRead = 1
+    WHERE id = ${id};
+`);
+}
+
 // async function getSubscriptionsByUserID(userid) {
 //     const db = await getDatabase();
 //     const subscription = await db.all(SQL`
@@ -39,4 +48,5 @@ async function getAllNotificationsById(userId) {
 module.exports = {
     storeNotificationToUser,
     getAllNotificationsById,
+    updateIsRead,
 };

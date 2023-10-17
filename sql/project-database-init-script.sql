@@ -279,34 +279,36 @@ CREATE TABLE notifications
     receiver_id INTEGER NOT NULL,
     time TIMESTAMP NOT NULL,
     content VARCHAR(88),
+    type TEXT NOT NULL,
     isRead INTEGER NOT NULL,
     FOREIGN KEY (host_id) REFERENCES user (id)
 );
 
 -- Inserting 20 rows of sample data into the notifications table
 INSERT INTO notifications
-    (id, host_id, receiver_id, time, content, isRead)
+    (id, host_id, receiver_id, time, content, type, isRead)
 VALUES
-    (1, 2, 1, '2023-10-10 10:15:00', 'You have a new follower.', 0),
-    (2, 1, 2, '2023-10-10 11:30:00', 'New article published: "Introduction to Fabric Types"', 0),
-    (3, 1, 3, '2023-10-10 12:45:00', 'Someone liked your comment.', 0),
-    (4, 1, 4, '2023-10-10 14:00:00', 'New article published: "Silk Fabric Production"', 0),
-    (5, 1, 5, '2023-10-10 15:15:00', 'You have a new follower.', 0),
-    (6, 1, 1, '2023-10-10 16:30:00', 'Your article received a comment.', 0),
-    (7, 1, 2, '2023-10-10 17:45:00', 'New article published: "Cotton vs. Polyester"', 0),
-    (8, 1, 3, '2023-10-10 19:00:00', 'Someone liked your article.', 0),
-    (9, 1, 4, '2023-10-10 20:15:00', 'You have a new follower.', 0),
-    (10, 1, 5, '2023-10-10 21:30:00', 'New article published: "Wool Fabric Properties"', 0),
-    (11, 1, 1, '2023-10-10 22:45:00', 'Someone liked your comment.', 0),
-    (12, 1, 2, '2023-10-10 23:59:00', 'You have a new follower.', 0),
-    (13, 1, 3, '2023-10-11 10:15:00', 'New article published: "Linen Fabric Uses"', 0),
-    (14, 1, 4, '2023-10-11 11:30:00', 'Your article received a comment.', 0),
-    (15, 1, 5, '2023-10-11 12:45:00', 'Someone liked your article.', 0),
-    (16, 1, 1, '2023-10-11 14:00:00', 'You have a new follower.', 0),
-    (17, 1, 2, '2023-10-11 15:15:00', 'New article published: "Satin Fabric Elegance"', 0),
-    (18, 1, 3, '2023-10-11 16:30:00', 'Your comment was mentioned in an article.', 0),
-    (19, 1, 4, '2023-10-11 17:45:00', 'New article published: "Denim Fabric History"', 0),
-    (20, 1, 5, '2023-10-11 19:00:00', 'Your article was shared by a follower.', 0);
+    (1, 2, 1, '2023-10-10 10:15:00', 'user2 just subscribed to you!', 'sub', 0),
+    (6, 3, 1, '2023-10-10 16:30:00', 'user3 just liked your article!', 'like', 0),
+    (16, 4, 1, '2023-10-11 14:00:00', 'user4 just wrote a new article!', 'write', 0),
+    (11, 5, 1, '2023-10-10 22:45:00', 'user4 just wrote a new article!', 'write', 0);
+
+-- (2, 1, 2, '2023-10-10 11:30:00', 'New article published: "Introduction to Fabric Types"', 0),
+-- (3, 1, 3, '2023-10-10 12:45:00', 'Someone liked your comment.', 0),
+-- (4, 1, 4, '2023-10-10 14:00:00', 'New article published: "Silk Fabric Production"', 0),
+-- (5, 1, 5, '2023-10-10 15:15:00', 'You have a new follower.', 0),
+-- (7, 1, 2, '2023-10-10 17:45:00', 'New article published: "Cotton vs. Polyester"', 0),
+-- (8, 1, 3, '2023-10-10 19:00:00', 'Someone liked your article.', 0),
+-- (9, 1, 4, '2023-10-10 20:15:00', 'You have a new follower.', 0),
+-- (10, 1, 5, '2023-10-10 21:30:00', 'New article published: "Wool Fabric Properties"', 0),
+-- (12, 1, 2, '2023-10-10 23:59:00', 'You have a new follower.', 0),
+-- (13, 1, 3, '2023-10-11 10:15:00', 'New article published: "Linen Fabric Uses"', 0),
+-- (14, 1, 4, '2023-10-11 11:30:00', 'Your article received a comment.', 0),
+-- (15, 1, 5, '2023-10-11 12:45:00', 'Someone liked your article.', 0),
+-- (17, 1, 2, '2023-10-11 15:15:00', 'New article published: "Satin Fabric Elegance"', 0),
+-- (18, 1, 3, '2023-10-11 16:30:00', 'Your comment was mentioned in an article.', 0),
+-- (19, 1, 4, '2023-10-11 17:45:00', 'New article published: "Denim Fabric History"', 0),
+-- (20, 1, 5, '2023-10-11 19:00:00', 'Your article was shared by a follower.', 0);
 
 -- CREATE TABLE notify
 -- (
@@ -345,19 +347,21 @@ VALUES
 
 DROP VIEW IF EXISTS articles_info;
 
-create view [Articles_info] as
-select articles.author_id as user_id,
-       articles.id as article_id,
-       user.fname,
-       user.lname,
-       articles.title,
-       count(likes.id) as like_count,
-       comments_count,
-       (count(likes.id) + comments_count * 2) as popularity
-from articles
-         left join likes on articles.id = likes.article_id
-         left join (select article_id as comment_articles_id, count(comments.id) as comments_count
-                    from comments
-                    group by article_id) on articles.id = comment_articles_id
-         left join user on user.id = articles.author_id
+create view [Articles_info]
+as
+    select articles.author_id as user_id,
+        articles.id as article_id,
+        user.fname,
+        user.lname,
+        articles.title,
+        count(likes.id) as like_count,
+        comments_count,
+        (count(likes.id) + comments_count * 2) as popularity
+    from articles
+        left join likes on articles.id = likes.article_id
+        left join (select article_id as comment_articles_id, count(comments.id) as comments_count
+        from comments
+        group by article_id) on articles.id = comment_articles_id
+        left join  user
+on user.id = articles.author_id
 group by articles.id;

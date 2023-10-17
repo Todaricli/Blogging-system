@@ -28,4 +28,11 @@ router.get('/api/get-all-notifications', async function (req, res) {
     res.status(200).json(notifications);
 });
 
+router.get('/api/update-isRead', async function (req, res) {
+    const noteId = req.query.id;
+    await notifyDao.updateIsRead(noteId);
+    res.sendStatus(204);
+});
+
+
 module.exports = router;
