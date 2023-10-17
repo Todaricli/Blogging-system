@@ -10,18 +10,19 @@
 
 .bell-icon {
   position: relative;
-  width: 55px;
-  height: 55px;
+  width: 40px;
+  height: 40px;
   background: #fff;
   border-radius: 50%;
   display: flex;
+  min-width: 40px;
+  min-height: 40px;
 }
 .bell-icon svg {
-  margin: auto;
   position: relative;
   right: 2%;
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   stroke: rgba(0, 0, 0, 0.75);
 }
 .bell-icon .bell-icon__group {
@@ -71,8 +72,8 @@
   opacity: 0;
   visibility: hidden;
   position: absolute;
-  top: 20%;
-  right: 10%;
+  top: 5%;
+  right: 0%;
   width: 25px;
   height: 25px;
   color: white;
@@ -81,7 +82,7 @@
   align-items: center;
   justify-content: center;
   font-family: "Copse", serif;
-  font-size: 11px;
+  font-size: 10px;
   
   transition: transform 0.3s;
 }

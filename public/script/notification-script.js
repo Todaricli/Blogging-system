@@ -7,13 +7,11 @@ window.addEventListener('load', async function () {
         setTimeout(activateBell, 100);
     });
 
-    const userNotifications = await getAllSubscribers();
+    const userNotifications = await getAllNotifications();
     console.log(userNotifications);
     setNotificationDropDownMenu();
 
     activateBell();
-    setTimeout(deactivateBell, 5000);
-    await getAllSubscribers();
 
     function activateBell() {
         notificationBell.classList.add('activate');
@@ -23,7 +21,7 @@ window.addEventListener('load', async function () {
         notificationBell.classList.remove('activate');
     }
 
-    async function getAllSubscribers() {
+    async function getAllNotifications() {
         const response = await fetch(`/api/get-all-notifications`);
         let data = makeArray(await response.json());
         return data;
@@ -32,15 +30,20 @@ window.addEventListener('load', async function () {
     function setNotificationDropDownMenu() {
         const notifyDropMenu = document.querySelector('.notify-content');
         for (notification of userNotifications) {
-            let aTag = document.createElement('a');
+            let divTag = document.createElement('div');
+            divTag.classList.add('clicked');
+
             let p1Tag = document.createElement('p');
+            p1Tag.classList.add('clicked');
             p1Tag.innerHTML = notification.content;
+
             let p2Tag = document.createElement('p');
+            p2Tag.classList.add('clicked');
             p2Tag.innerHTML = `Time recieved: ${notification.time}`;
 
-            aTag.appendChild(p1Tag);
-            aTag.appendChild(p2Tag);
-            notifyDropMenu.appendChild(aTag);
+            divTag.appendChild(p1Tag);
+            divTag.appendChild(p2Tag);
+            notifyDropMenu.appendChild(divTag);
         }
     }
 

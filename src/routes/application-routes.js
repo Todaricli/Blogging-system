@@ -147,7 +147,6 @@ router.get('/deleteComment/:id', async function(req,res) {
 })
 
 router.get("/analytics-Dashboard", async (req, res) => {
-    console.log("skeet")
     res.render("analyticsDashboard")
 })
 
