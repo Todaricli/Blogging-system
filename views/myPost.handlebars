@@ -8,13 +8,13 @@
         <p>You have <strong>{{this.total_posts}} posts</strong> in total.</p>
         {{#each posts}}
         <div class="each_posts">
-                <div class="each-posts-content">
-                    <h3 id="post_title">{{this.title}}</h3>
-                    <p id="post_publish_time"><strong>Published on </strong>{{this.date_of_publish}}</p>
-                    <div id="post_content">
-                        <p>{{{this.content_html}}}</p>
-                    </div>
-                    <div class="each-posts-links">
+            <div class="each-posts-content">
+                <h3 id="post_title">{{this.title}}</h3>
+                <p id="post_publish_time"><strong>Published on </strong>{{this.date_of_publish}}</p>
+                <div id="post_content">
+                    <p>{{{this.content_html}}}</p>
+                </div>
+                <div class="each-posts-links">
                     <a href="/editArticle/{{this.article_id}}">Edit</a>
                     {{#if tags}}
                     {{#each tags}}
@@ -22,18 +22,20 @@
                     {{/each}}
                     {{/if}}
                     <a href="/article/{{posts.article_id}}">Read more</a>
-                    </div>
                 </div>
-                <div class="each-posts-img">
-                    <img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}" id="post_img"
-                        width="200px">
-                </div>
+            </div>
+            <div class="each-posts-img">
+                <img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}" id="post_img"
+                    width="200px">
+            </div>
         </div>
         {{/each}}
     </div>
     {{else}}
     <p>You have no posts</p>
     {{/if}}
+</div>
+
 
 {{!-- Responses section only if user received them --}}
 <h2>Responses</h2>
@@ -72,10 +74,10 @@
                 </a>
             </div>
             {{/each}}
-        </ul>
-    </div>
-    {{else}}
-    <p>You have no responses</p>
-    {{/if}}
+            {{/if}}
+        {{/each}}
+    </ul>
 </div>
-
+{{else}}
+<p>You have no responses</p>
+{{/if}}
