@@ -49,7 +49,7 @@ window.addEventListener('load', async function () {
             createNotification(notification);
         }
 
-        function createNotification(notification) {
+        function createNotification(indvNotif) {
             let divTag = document.createElement('div');
             divTag.classList.add('clicked');
             addLinkToNotificationDiv();
@@ -57,11 +57,13 @@ window.addEventListener('load', async function () {
 
             let p1Tag = document.createElement('p');
             p1Tag.classList.add('clicked');
-            p1Tag.innerHTML = notification.content;
+            p1Tag.innerHTML = indvNotif.content;
 
             let p2Tag = document.createElement('p');
             p2Tag.classList.add('clicked');
-            p2Tag.innerHTML = `Time recieved: ${notification.time}`;
+            p2Tag.innerHTML = `Time recieved: ${indvNotif.time}`;
+
+            createTrashButton();
 
             divTag.appendChild(p1Tag);
             divTag.appendChild(p2Tag);
@@ -69,13 +71,10 @@ window.addEventListener('load', async function () {
 
             function addLinkToNotificationDiv() {
                 divTag.addEventListener('click', function () {
-                    const profileRoute = `/profile?id=${notification.host_id}`;
-                    const articleRoute = `/article/${notification.host_id}`;
+                    const profileRoute = `/profile?id=${indvNotif.host_id}`;
+                    const articleRoute = `/article/${indvNotif.host_id}`;
                     let route;
-                    if (
-                        notification.type === 'like' ||
-                        notification.type === 'sub'
-                    ) {
+                    if (indvNotif.type === 'like' || indvNotif.type === 'sub') {
                         route = profileRoute;
                     } else {
                         route = articleRoute;
@@ -85,14 +84,37 @@ window.addEventListener('load', async function () {
             }
 
             function checkAndUpdateIsRead() {
-                if (notification.isRead === 1) {
+                if (indvNotif.isRead === 1) {
                     divTag.classList.add('read');
                 }
                 divTag.addEventListener('click', async function () {
-                    if (notification.isRead === 0) {
-                        await fetch(`/api/update-isRead?id=${notification.id}`);
+                    if (indvNotif.isRead === 0) {
+                        await fetch(`/api/update-isRead?id=${indvNotif.id}`);
                     }
                 });
+            }
+
+            function createTrashButton() {
+                let svgImgTag = document.createElement('img');
+                svgImgTag.classList.add('svg-trash');
+                svgImgTag.setAttribute('src', '/images/svg/trash.svg');
+                svgImgTag.setAttribute('alt', 'trash icon');
+                divTag.appendChild(svgImgTag);
+
+                svgImgTag.addEventListener('click', () => {
+                  console.log("clicked");
+                });
+
+                //     let svgImgTag = document.createElement("img");
+                // svgImgTag.classList.add("svg-trash");
+                // svgImgTag.setAttribute("src", "../images/svg/empty.svg");
+                // svgImgTag.setAttribute("alt", "trash icon");
+                // svgImgTag.addEventListener("click", (event) => {
+                //   const tabSibling = event.target.previousElementSibling;
+                //   if (tabSibling) {
+                //     const pokemonName = tabSibling.getAttribute("title");
+                //     pokemonLocalStorage.removeFav(pokemonName);
+                //   }
             }
         }
     }

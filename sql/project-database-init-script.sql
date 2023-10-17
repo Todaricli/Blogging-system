@@ -291,7 +291,7 @@ VALUES
     (1, 2, 1, '2023-10-10 10:15:00', 'user2 just subscribed to you!', 'sub', 0),
     (6, 3, 1, '2023-10-10 16:30:00', 'user3 just liked your article!', 'like', 0),
     (16, 4, 1, '2023-10-11 14:00:00', 'user4 just wrote a new article!', 'write', 0),
-    (11, 5, 1, '2023-10-10 22:45:00', 'user4 just wrote a new article!', 'write', 0);
+    (11, 5, 1, '2023-10-10 22:45:00', 'user5 just wrote a new article!', 'write', 0);
 
 -- (2, 1, 2, '2023-10-10 11:30:00', 'New article published: "Introduction to Fabric Types"', 0),
 -- (3, 1, 3, '2023-10-10 12:45:00', 'Someone liked your comment.', 0),
