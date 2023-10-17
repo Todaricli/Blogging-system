@@ -9,8 +9,6 @@ const comment = require('../middleware/comments.js')
 const userDao = require('../models/user-dao.js');
 const analyticsDao = require('../models/analytics-dao.js')
 
-const writeArticleDao = require('../models/writeArticle-dao.js');
-
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
 
