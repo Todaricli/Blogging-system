@@ -1,5 +1,8 @@
+<link rel="stylesheet" href="/css/articleDemo.css">
+
+<input id="user_id_temp_storage" name="user_id_temp_storage" value="{{user_id}}" hidden>
+
 <div id="article_container">
-    <input id="user_id_temp_storage" name="user_id_temp_storage" value="${{user_id}}" hidden>
     <div id="specific_category_title"><span id="articles_home"><a href="/">All</a></span> / <span
             id="current_category">{{current_category}}</span>
     </div>
@@ -20,58 +23,62 @@
         <div id="article_content" style="border: red solid 2px;">
             {{{article.[0].content_html}}}
         </div>
+        <input id="article_id_temp_storage" name="article_id_temp_storage" value="{{article.[0].id}}" hidden>
+
         <hr>
         {{#if comments}}
+
         <div id="comments-div">
+            <div>
+                <form id="comment_on_article_form">
+                    <textarea name="comment_content" placeholder="comment on this article!"></textarea>
+                    <button id="commentOnArticleButton">Submit</button>
+                </form>
+            </div>
             {{#each comments}}
             <div>
-                <span>{{comments.username}}</span>
-                <span>{{comments.fname}}</span>
-                <span>{{comments.lname}}</span>
-                <span>{{comments.content}}</span>
-                <span>{{comments.timeOfComment}}</span>
+                <span>{{this.username}}</span>
+                <span>{{this.fname}}</span>
+                <span>{{this.lname}}</span>
+                <span>{{this.content}}</span>
+                <span>{{this.time_of_comment}}</span>
                 <button class="textareaOpener">Comment</button>
                 <div>
-                    <form>
-                        <textarea placeholder="leave your comments here"></textarea>
+                    <form class="comment_on_comment_form">
+                        <input name="comment_id_storage" value="{{this.id}}">
+                        <textarea name="comment_content" placeholder="leave your comments here"></textarea>
                         <button class="commentSubmitButton">Submit</button>
                     </form>
                 </div>
-                {{#if nestedComment}}
+                {{#if this.second_level_comments}}
+                {{#each this.second_level_comments}}
                 <div>
-                    {{#each nestedcomments}}
-                    <span>{{comments.username}}</span>
-                    <span>{{comments.fname}}</span>
-                    <span>{{comments.lname}}</span>
-                    <span>{{comments.content}}</span>
-                    <span>{{comments.timeOfComments}}</span>
+                    <span>{{this.username}}</span>
+                    <span>{{this.fname}}</span>
+                    <span>{{this.lname}}</span>
+                    <span>{{this.content}}</span>
+                    <span>{{this.time_of_comment}}</span>
                     <button class="textareaOpener">Comment</button>
                     <div>
-                        <form>
-                            <textarea placeholder="leave your comments here"></textarea>
-                            <button class="nestedCommentSubmitButton" type="submit">Submit</button>
+                        <form class="comment_on_comment_form">
+                            <input name="comment_id_storage" value="{{this.id}}">
+                            <textarea name="comment_content" placeholder="leave your comments here"></textarea>
+                            <button class="commentSubmitButton">Submit</button>
                         </form>
                     </div>
-                    {{#if secondNestedComment}}
+                    {{#if this.third_level_comments}}
+                    {{#each this.third_level_comments}}
                     <div>
-                        {{#each secondNestedComment}}
-                        <span>{{comments.username}}</span>
-                        <span>{{comments.fname}}</span>
-                        <span>{{comments.lname}}</span>
-                        <span>{{comments.content}}</span>
-                        <span>{{comments.timeOfComments}}</span>
-                        <button class="textareaOpener">Comment</button>
-                        <div>
-                            <form>
-                                <textarea placeholder="leave your comments here"></textarea>
-                                <button class="secondNestedCommentSubmitButton" type="submit">Submit</button>
-                            </form>
-                        </div>
-                        {{/each}}
+                        <span>{{this.username}}</span>
+                        <span>{{this.fname}}</span>
+                        <span>{{this.lname}}</span>
+                        <span>{{this.content}}</span>
+                        <span>{{this.time_of_comment}}</span>
                     </div>
-                    {{/if}}
                     {{/each}}
+                    {{/if}}
                 </div>
+                {{/each}}
                 {{/if}}
             </div>
             {{/each}}
