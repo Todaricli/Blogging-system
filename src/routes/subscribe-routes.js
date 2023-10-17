@@ -57,9 +57,11 @@ async function createSubscriptionNotification(receiverId, senderId) {
   const sender = await genericDao.getUserDataById(senderId);
   console.log(sender.username);
   const notification = {
+    senderId: senderId,
     receiverId: receiverId,
     timestamp: utcString,
     content: `${sender.username} just subscribed to you!`,
+    read: 0,
   }
   return notification;
 }

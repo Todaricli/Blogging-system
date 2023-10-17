@@ -1,12 +1,28 @@
 const SQL = require('sql-template-strings');
 const { getDatabase } = require('../db/database.js');
 
-async function storeNotificationToUser(receiver, timestamp, content) {
+async function storeNotificationToUser(
+    sender,
+    receiver,
+    timestamp,
+    content,
+    isRead
+) {
     const db = await getDatabase();
     await db.all(SQL`
-  insert into notifications (host_id, time, content)
-  values (${receiver}, ${timestamp}, ${content})
+  insert into notifications (host_id, receiver_id, time, content, isRead)
+  values (${sender}, ${receiver}, ${timestamp}, ${content},${isRead})
 `);
+}
+
+async function getAllNotificationsById(userId) {
+    const db = await getDatabase();
+    const notifications = await db.all(SQL`
+    select *
+    from notifications
+    where notifications.receiver_id = ${userId}
+`);
+    return notifications;
 }
 
 // async function getSubscriptionsByUserID(userid) {
@@ -19,4 +35,7 @@ async function storeNotificationToUser(receiver, timestamp, content) {
 //     return subscription;
 // }
 
-module.exports = { storeNotificationToUser };
+module.exports = {
+    storeNotificationToUser,
+    getAllNotificationsById,
+};
