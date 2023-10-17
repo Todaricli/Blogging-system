@@ -1,7 +1,6 @@
 <div id="home_container">
-
-    {{#if user}}
     <input value="{{user.id}}" name="user_id" id="current_user_id" hidden>
+    {{#if user}}
     <div>
         <h1>Hello, {{user.fname}}!</h1>
         <p>This is your homepage!</p>
