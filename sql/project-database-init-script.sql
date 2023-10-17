@@ -167,8 +167,8 @@ VALUES (1, 1, 1, 'Great article!', '2023-10-10 10:15:00', NULL),
 
 CREATE TABLE likes
 (
-    id         INTEGER NOT NULL,
-    user_id    INTEGER NOT NULL,
+    id         INTEGER AUTO_INCREMENT,
+    user_id    INTEGER NOT NULL ,
     article_id INTEGER NOT NULL,
     PRIMARY KEY (id, user_id, article_id),
     FOREIGN KEY (user_id) REFERENCES user (id),

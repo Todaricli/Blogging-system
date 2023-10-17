@@ -4,6 +4,7 @@ const articleDao = require('../models/articles-dao.js');
 const commentDao = require('../models/comments-dao.js');
 const { generateComments } = require('../middleware/comments.js');
 const comment = require('../middleware/comments.js')
+const likeDao = require('../models/like-dao.js');
 
 const QuillDeltaToHtmlConverter =
     require('quill-delta-to-html').QuillDeltaToHtmlConverter;
@@ -55,15 +56,12 @@ router.get('/article/:id',comment.generateComments ,async function (req, res) {
 
   try {
 
-    res.locals.article = article;
+    res.locals.article = article[0];
 
     const authorName = await articleDao.getAuthorByArticle(articleId);
-    res.locals.authorName = authorName;
+    res.locals.authorName = authorName[0];
 
-    // const comments = await articleDao.getAllCommentsFromArticle(articleId);
-    // res.locals.comments = comments;
-
-    const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
+    const likeCounts = await likeDao.getNumberOfLikesFromArticle(articleId);
     res.locals.like_count = likeCounts
 
   } catch (error) {

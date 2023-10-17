@@ -1,38 +1,98 @@
-//Create effect for comment 
-//Be default: comment box will be hidden
-//If the user click on button, comment box will appear
-const openComment = document.getElementById("open-comment");
-const closeComment = document.getElementById("close-comment");
-const modal = document.querySelector(".comment")
+window.addEventListener("load", function () {
 
-const openModal = function () {
+  //Create effect for comment 
+  //Be default: comment box will be hidden
+  //If the user click on button, comment box will appear
+  const openComment = document.getElementById("open-comment");
+  const closeComment = document.getElementById("close-comment");
+  const modal = document.querySelector(".comment")
+
+  const openModal = function () {
     modal.classList.remove("hidden");
   };
 
-openComment.addEventListener("click", openModal)
+  openComment.addEventListener("click", openModal)
 
-const closeModal = function () {
+  const closeModal = function () {
     modal.classList.add("hidden");
   };
 
-closeComment.addEventListener("click", closeModal)
+  closeComment.addEventListener("click", closeModal)
 
 
-//Create effect for like button
+  //Create effect for like button
+  displayLikeButton();
 
-const likeBtn = document.querySelector(".like-btn");
-const likeIcon = document.getElementById("like-icon");
+  async function displayLikeButton() {
+    const likeBtn = document.querySelector(".like-btn");
+    const likeIcon = document.getElementById("like-icon");
 
-let isLiked = false;
+    const user_id = document.querySelector("#user_id")
+    const article_id = document.querySelector("#article_id")
 
-likeBtn.addEventListener("click", () => {
-  isLiked = !isLiked;
+    let isLiked = await checkIfLiked(user_id.value, article_id.value);
 
- if (isLiked) {
-        likeIcon.classList.replace("fa-regular", "fa-solid");
-        likeIcon.classList.add("liked");
+    if (isLiked == 1) {
+      likeIcon.classList.add("fa-solid");
+      likeIcon.classList.add("liked");
     } else {
+      likeIcon.classList.add("fa-regular");
+      likeIcon.classList.remove("liked");
+    }
+
+    likeBtn.addEventListener("click", () => {
+      if (isLiked == 1) {
         likeIcon.classList.replace("fa-solid", "fa-regular");
         likeIcon.classList.remove("liked");
-    }
+        removeLike(article_id.value)
+      } else {
+        likeIcon.classList.replace("fa-regular", "fa-solid");
+        likeIcon.classList.add("liked");
+        addLike(article_id.value)
+      }
+    })
+
+  }
+
+  async function checkIfLiked(user_id, article_id) {
+    const response = await fetch(`/api/checkIfLiked`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user_id, article_id }),
+    });
+    const isLiked = await response.text();
+    return isLiked;
+  }
+
+  async function removeLike(article_id) {
+    fetch(`/removeLike?id=${article_id}`)
+      .then(response => {
+        if (response.status === 200) {
+          location.reload();
+        } else {
+          console.error('Error removing like');
+        }
+      })
+      .catch(error => {
+        console.error('Network error:', error);
+      });
+  }
+
+  async function addLike(article_id) {
+    fetch(`/addLike?id=${article_id}`)
+      .then(response => {
+        if (response.status === 200) {
+          location.reload();
+        } else {
+          console.error('Error adding like');
+        }
+      })
+      .catch(error => {
+        console.error('Network error:', error);
+      });
+  }
+
+
 })

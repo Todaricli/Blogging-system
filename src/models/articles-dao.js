@@ -149,18 +149,6 @@ async function getAllCommentsFromArticle(articleId) {
     return comments;
 }
 
-async function getNumberOfLikesFromArticle(articleId) {
-    const db = await getDatabase();
-
-    const likeCounts = await db.all(SQL `
-    select count(*) as like_count
-    from likes
-    where article_id = ${articleId}
-    `)
-
-    return likeCounts;
-}
-
 async function insertNewArticleToArticleTable(user_id, title, genre, content_html, content_delta, image) {
     const db = await getDatabase();
     
@@ -179,7 +167,6 @@ async function updateArticleToArticleTable(article_id, title, genre, content_htm
 }
 
 
-
 module.exports = {
     getArticlesByUserID,
     getArticlesByID,
@@ -192,7 +179,6 @@ module.exports = {
     getAllArticlesByPublishDate,
     getAllArticles,
     getAllCommentsFromArticle,
-    getNumberOfLikesFromArticle,
     getAuthorByArticle,
     insertNewArticleToArticleTable,
     updateArticleToArticleTable
