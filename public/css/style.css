@@ -54,8 +54,12 @@
 
 
 
+:root {
+    --nav-user-size: 18px;
+}
+
 nav {
-    background-color: white;
+    background-color: yellowgreen;
     position: sticky;
     top: 0px;
     display: flex;
@@ -68,23 +72,43 @@ nav {
 .nav_list {
     gap: 50px;
     align-items: center;
-    width: 200px;
+
     list-style: none;
     margin-right: 20px;
 } */
 
 .logo img {
+    width: auto;
     height: 60px;
     margin-right: auto;
     justify-self: flex-start;
 }
 
+#viewAllDiv{
+    text-align: center;
+    background-color: pink;
+}
+
+#viewAllDiv{
+    text-align: center;
+    background-color: pink;
+}
+
 .search_bar {
     border: 1px solid black;
     border-radius: 20px;
+    padding-top: 10px;
     height: 30px;
-    display: flex;
+    max-height: 400px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.search_bar div {
+    background-color: lightblue;
+    border: 1px solid black;
+    border-radius: 15px;
 }
 
 .search_bar img {
@@ -97,15 +121,48 @@ nav {
     width: 500px;
     height: 28px;
     border: transparent;
+    margin-bottom: 20px;
 }
+
+#searchResultContainer{
+    border: transparent;
+    height: 100px;
+    max-height: 100px;
+    z-index: 1000;
+}
+
 
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-.dropbtn {
-    width: 30px;
+.dropdown-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.dropdown .dropbtn {
+    background-color: transparent;
+    color: white;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    text-align: center;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    color: black;
+
+}
+
+.dropdown .username {
+    font-size: var(--nav-user-size);
+    color: black;
+    margin-right: 8px;
 }
 
 .dropbtn:hover {
@@ -116,23 +173,32 @@ nav {
 .dropdown-content {
     display: none;
     position: absolute;
-    width: 100px;
-    background-color: bisque;
+    background-color: #f9f9f9;
+    min-width: 160px;
     z-index: 2;
-
+    top: 52px;
+    right: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-content a {
     display: block;
-    height: 20px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+#signout {
+    padding: 12px 16px;
+    border-top: 1px solid #ccc;
+    color: #f00;
 }
 
 .dropdown-content a:hover {
-    background-color: grey;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
+    background-color: #f0f0f0;
 }
 
 #page_body {
@@ -157,7 +223,7 @@ nav {
     height: 30px;
 }
 
-#footer > span {
+#footer>span {
     display: flex;
     align-self: center;
     font-size: 12px;
@@ -201,7 +267,7 @@ nav {
 
 #register_fillinbox {
     padding: 0px 30px 0px 30px;
-    
+
 }
 
 #register_fillinbox>div {
@@ -341,7 +407,7 @@ nav {
     height: auto;
 }
 
-#subscription_title >*{
+#subscription_title>* {
     display: flex;
     align-self: center;
     padding: 10px;
@@ -357,27 +423,27 @@ nav {
     color: rgb(113, 113, 113);
 }
 
-.subscription_icon img{
+.subscription_icon img {
     width: 40px;
 }
 
-.subscription_rows button{
+.subscription_rows button {
     height: 25px;
     background-color: white;
     border: 2px solid lightgray;
     border-radius: 5px;
 }
 
-.subscription_rows button:hover{
+.subscription_rows button:hover {
     background-color: lightgray;
     cursor: pointer;
 }
 
-.subscriber_icon img{
+.subscriber_icon img {
     width: 40px;
 }
 
-.subscription_rows a{
+.subscription_rows a {
     text-decoration: none;
     display: flex;
     color: black;
@@ -413,7 +479,7 @@ nav {
     width: 200px;
 }
 
-#subscriber_title >*{
+#subscriber_title>* {
     display: flex;
     align-self: center;
     padding: 10px;
@@ -438,18 +504,18 @@ nav {
     gap: 10px;
 }
 
-.subscriber_rows>a:hover{
+.subscriber_rows>a:hover {
     color: rgb(113, 113, 113);
 }
 
-.subscriber_rows button{
+.subscriber_rows button {
     height: 25px;
     background-color: white;
     border: 2px solid lightgray;
     border-radius: 5px;
 }
 
-.subscriber_rows button:hover{
+.subscriber_rows button:hover {
     background-color: lightgray;
     cursor: pointer;
 }
@@ -482,7 +548,7 @@ nav {
     width: 100px;
     background-color: white;
     box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
-    
+
     border-radius: 50%;
     padding: 5px;
 }
@@ -629,8 +695,8 @@ nav {
 #followersDiv {
     padding-left: 50px;
     padding-right: 50px;
-    background: rgb(255,133,244);
-    background: linear-gradient(90deg, rgba(255,133,244,1) 0%, rgba(252,176,69,1) 98%);
+    background: rgb(255, 133, 244);
+    background: linear-gradient(90deg, rgba(255, 133, 244, 1) 0%, rgba(252, 176, 69, 1) 98%);
     color: aliceblue;
 }
 
@@ -640,7 +706,8 @@ nav {
     margin-top: 15px;
 }
 
-#commentsDiv, #likesDiv {
+#commentsDiv,
+#likesDiv {
     padding: 40px;
     font-size: larger;
 }
@@ -649,7 +716,9 @@ nav {
     font-style: italic;
 }
 
-.topThreeDiv, #commentsDiv, #likesDiv {
+.topThreeDiv,
+#commentsDiv,
+#likesDiv {
     background-color: white;
     color: rgb(130, 130, 198);
 }
@@ -661,7 +730,7 @@ nav {
     border-radius: 10px;
 }
 
-.topThreeDiv > * {
+.topThreeDiv>* {
     margin: auto;
     padding: auto;
     text-align: center;
@@ -673,6 +742,7 @@ nav {
     font-size: 40px;
 }
 
+.indvTopArticles {}
 /* .indvTopArticles {
 
 } */
@@ -683,8 +753,8 @@ nav {
     margin: 30px;
 }
 
-#dataIcon{
-    margin:20px;
+#dataIcon {
+    margin: 20px;
     margin-top: 20px;
     padding-top: 20px;
     padding-left: 5px;
@@ -699,7 +769,38 @@ nav {
 }
 
 /* ANAYTICS DASHBOARD END*/
+.allArticles{
+    text-align: center;
+    margin: auto;
+    padding: auto;
+}
 
+.eachArticleDiv, .userProfileSnippet{
+    text-align: center;
+    margin: 30px;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#readMoreDiv{
+    margin: 10px;
+}
+
+#descriptionDiv{
+    margin: 10px;
+    font-style: italic;
+}
+
+#likes_icon{
+    height: 20px;
+    width: 20px;
+}
+
+#comments_icon{
+    height: 20px;
+    width: 20px;
+}
 /* home page css start*/
 #author_icon img{
     width: 50px;

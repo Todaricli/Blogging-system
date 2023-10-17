@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <link rel="stylesheet" href="/css/animations/notification-animation.css">
     <script src="/script/notification-script.js"></script>
+    <script src="/script/search-script.js"></script>
+
 </head>
 
 <body>
@@ -24,22 +26,42 @@
             </a>
         </div>
 
+
+
         {{!-- Navigation search bar--}}
-        <div class="search_bar">
-            <img src="/images/search-icon.png">
-            <input type="text" id="searchInput" placeholder="Search...">
+        <div class="search_bar search">
+            <input type="text" id="searchInput" placeholder="Search..." class="search">
+            <div id="searchResultContainer">
+                <div class="dropdownsearch search" id="searchByTitle">
+                </div>
+                <div class="dropdownsearch search" id="searchByAuthor">
+                </div>
+                <div id="viewAllDiv search">
+                    <a id="viewAllSearchResults">view all search results</a>
+                </div>
+
+            </div>
         </div>
 
         {{!-- Nav login and dropdown button --}}
         <span class="left-panel">
             {{#if user}}
-            <a href="/logout">Logout</a>
-            <div class="dropdown">
-                <button class="dropbtn">...</button>
-                <div class="dropdown-content">
+
+            <div class="dropdown skeet">
+                <button class="dropbtn skeet">
+                    <img class="dropdown-avatar skeet" src="{{user.icon_path}}" alt="user photo">
+                    <span class="username skeet">{{user.fname}} {{user.lname}}</span>
+                    <i class="fa fa-caret-down skeet"></i>
+                </button>
+                <div class="dropdown-content skeet">
+                    <a href="/my_profile">My Profile</a>
+                    <a href="/my-page">My Page View</a>
+                    <a href="/my_post">My Post</a>
+                    <a href="/analytics">Analytics</a>
+                    <a href="/sub">Subscription</a>
+                    <a href="/logout" id="signout">Sign out</a>
                 </div>
             </div>
-
             {{!-- notify bell icon --}}
             <div class="bell-icon notify-drop" tabindex="0">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
@@ -58,11 +80,13 @@
                     <span>2</span>
                 </div>
                 <div class="notify-content">
-                    
+
                 </div>
             </div>
 
-            <img src="{{user.icon_path}}" alt="user_avatar" id="user_avatar">
+            <a href="/writeArticle">New Article</a>
+            </div>
+            </div>
             {{else}}
             <a class="login" href="/login">Login</a>
             <a class="register" href="/register">Register</a>
@@ -70,17 +94,21 @@
         </span>
     </nav>
 
+
     <div id="page_body">
         {{{body}}}
     </div>
 
-
     <footer>
         <div id="footer">
-            <img src="/images/footer-logo.png">
+
+            <img src="images/footer-logo.png">
             <span> &copy 2023 UOA-PGCIT-S2 Group 2</span>
+
         </div>
     </footer>
+
+    <script src="/script/main.js"></script>
 </body>
 
 </html>

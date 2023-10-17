@@ -1,53 +1,24 @@
 {{#if toastMessage}}
-        <p id="my_profile_toast">{{toastMessage}}</p>
-        {{/if}}
+<p id="my_profile_toast">{{toastMessage}}</p>
+{{/if}}
 
 <div id="my_profile_container">
     {{#if userData}}
-    <input id="user_id_temp_storage" name="user_id_temp_storage" value="{{userData.id}}">
-        <div>
-        <form action="/update-username" method="POST">
-            <div>
-                <label for="my_profile_username">Username:</label>
-                <input id="my_profile_username" name="my_profile_username" type="text" value="{{userData.username}}">
-            </div>
-            <p id="usernamePromptMessage"></p>
-            <button id="update-username" type="submit">Update username</button>
-            <!-- this p is for developing purpose -->
-            <p style="font-size: larger; color:red">This feature need to complete</p>
-        </form>
-        <hr>
-        <form action="/update-password" method="POST">
-            <div>
-                <label for="my_profile_password">Password:</label>
-                <input id="my_profile_passoword" name="my_profile_password" type="password">
-            </div>
-            <p id="passwordPromptMessage"></p>
-            <div>
-                <label for="my_profile_comfirm_password">Confirm password:</label>
-                <input id="my_profile_comfirm_password" name="my_profile_comfirm_password" type="password">
-            </div>
-            <p id="passwordPromptMessage"></p>
-            <button id="update-password" type="submit">Update password</button>
-            <!-- this p is for developing purpose -->
-            <p style="font-size: larger; color:red">This feature need to complete</p>
-        </form>
-        <hr>
-    </div>
+    <input id="user_id_temp_storage" name="user_id_temp_storage" value="{{userData.id}}" style="display: none;">
     <div id="my_profile_info">
         <form action="/update_info" method="POST">
             <div id="my_profile_icon">
-                <img id="my-profile-icon-image" src="{{userData.icon_path}}" style="width: 200px;">
-                <span id="update-icon-btn" class="collapse">Update Icon</span>
-                <br>
-                <br>
-                <hr>
+                <div class="my_profile_container">
+                    <img id="my-profile-icon-image" src="{{userData.icon_path}}" style="width: 200px;">
+                    <span id="update-icon-btn" class="collapse">
+                        <i class="fa-solid fa-circle-user"></i>
+                    </span>
+                </div>
                 <div id='icon_container'>
                     <label for='icon' id='icon_container_label'>Choose your icon</label>
                     <div id='icon_select_container'>
                         <div class='icon_select'>
-                            <input type='radio' name='icon' id='icon_girl1' value='girl1'><label
-                                for='icon_girl1'>
+                            <input type='radio' name='icon' id='icon_girl1' value='girl1'><label for='icon_girl1'>
                                 <img src='/images/avatars/girl1.png'>
                             </label>
                         </div>
@@ -167,7 +138,8 @@
                         </div>
                     </div>
                 </div>
-                <div>
+
+                <div id="update-container">
                     <div>
                         <label for="my_profile_fname">First Name:</label>
                         <input id="my_profile_fname" name="my_profile_fname" value="{{userData.fname}}" required>
@@ -192,6 +164,38 @@
             </div>
             <button id="my_profile_submit_btn" type="submit">Update</button>
         </form>
+    </div>
+
+    <hr>
+
+    <div>
+        <form action="/update-username" method="POST">
+            <div>
+                <label for="my_profile_username">Username:</label>
+                <input id="my_profile_username" name="my_profile_username" type="text" value="{{userData.username}}">
+            </div>
+            <p id="usernamePromptMessage"></p>
+            <button id="update-username" type="submit">Update</button>
+            <!-- this p is for developing purpose -->
+            <p style="font-size: larger; color:red">This feature need to complete</p>
+        </form>
+        <hr>
+        <form action="/update-password" method="POST">
+            <div>
+                <label for="my_profile_password">Password:</label>
+                <input id="my_profile_passoword" name="my_profile_password" type="password">
+            </div>
+            <p id="passwordPromptMessage"></p>
+            <div>
+                <label for="my_profile_comfirm_password">Confirm password:</label>
+                <input id="my_profile_comfirm_password" name="my_profile_comfirm_password" type="password">
+            </div>
+            <p id="passwordPromptMessage"></p>
+            <button id="update-password" type="submit">Update</button>
+            <!-- this p is for developing purpose -->
+            <p style="font-size: larger; color:red">This feature need to complete</p>
+        </form>
+    
     </div>
     {{else}}
     <p style="color: red;">Profile loading error, please try again!</p>
