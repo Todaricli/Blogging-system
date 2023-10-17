@@ -112,10 +112,6 @@ nav {
     background-color: #f0f0f0;
 }
 
-/* .dropdown:hover .dropdown-content {
-    display: block;
-} */
-
 #page_body {
     min-height: 100vh;
     display: flex;

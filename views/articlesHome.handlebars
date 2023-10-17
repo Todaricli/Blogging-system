@@ -9,7 +9,18 @@
 
     <a href="/writeArticle">Write a new article</a>
     <br>
-    <a href="/calendar">Search articles by date</a>
+    
+    <div>
+    <form action="/filtered-articles" method="GET">
+    <label for="startDate">Start Date:</label>
+    <input type="date" name="startDate" id="startDate">
+
+    <label for="endDate">End Date:</label>
+    <input type="date" name="endDate" id="endDate">
+
+    <button type="submit" id="dateInput">Filter Articles</button>
+    </form>
+    </div>
 
 
     <h1 id="category_nav">
