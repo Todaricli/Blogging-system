@@ -6,24 +6,23 @@ window.addEventListener("load", function () {
             //let isClick = 0;
             const author_id = btn.querySelector('.article_author_id');
             const btn_subscribe = btn.querySelector('.btn_subscribe');
-            if (user_id.value) {
-                if ((user_id.value != author_id.value)) {
-                    const option = document.createElement("button");
-                    const isSubscribe = await checkIfSubscribe(user_id.value, author_id.value);
-                    const subscription_id = author_id.value;
-                    if (isSubscribe == 1) {
-                        option.innerHTML = `<img src="/images/unsubscribe.png">Unsubscribe`;
-                        option.addEventListener("click", function () {
-                            removeSubscription(subscription_id);
-                        });
-                    } else if (isSubscribe == 0) {
-                        option.innerHTML = `<img src="/images/subscribe.png">Subscribe`;
-                        option.addEventListener("click", function () {
-                            addSubscription(subscription_id);
-                        });
-                    }
-                    btn_subscribe.appendChild(option);
+            if ((user_id.value != author_id.value) && user_id.value != null) {
+                const option = document.createElement("button");
+                option.setAttribute("class", "subscribe-button")
+                const isSubscribe = await checkIfSubscribe(user_id.value, author_id.value);
+                const subscription_id = author_id.value;
+                if (isSubscribe == 1) {
+                    option.innerHTML = `<img src="/images/unsubscribe.png">Unsubscribe`;
+                    option.addEventListener("click", function () {
+                        removeSubscription(subscription_id);
+                    });
+                } else if (isSubscribe == 0) {
+                    option.innerHTML = `<img src="/images/subscribe.png">Subscribe`;
+                    option.addEventListener("click", function () {
+                        addSubscription(subscription_id);
+                    });
                 }
+                btn_subscribe.appendChild(option);
             }
             // btn.addEventListener("click",  function () {
             //     if (!isClick) {

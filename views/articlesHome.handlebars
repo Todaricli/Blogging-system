@@ -1,59 +1,63 @@
 <div id="home_container">
     <input value="{{user.id}}" name="user_id" id="current_user_id" hidden>
-    {{#if user}}
-    <div>
-        <h1>Hello, {{user.fname}}!</h1>
-        <p>This is your homepage!</p>
+    <div id="greetingDiv">
+        <h1>Welcome to your homepage, {{user.fname}}!</h1>
     </div>
     {{/if}}
 
-    <a href="/writeArticle">Write a new article</a>
+    {{!-- <a href="/writeArticle">Write a new article</a> --}}
     <br>
-    
-    <div>
-    <form action="/filtered-articles" method="GET">
-    <label for="startDate">Start Date:</label>
-    <input type="date" name="startDate" id="startDate">
 
-    <label for="endDate">End Date:</label>
-    <input type="date" name="endDate" id="endDate">
+    <div class="filterDiv">
+        <form action="/filtered-articles" method="GET">
+            <label for="startDate">Start Date:</label>
+            <input type="date" name="startDate" id="startDate">
 
-    <button type="submit" id="dateInput">Filter Articles</button>
-    </form>
+            <label for="endDate">End Date:</label>
+            <input type="date" name="endDate" id="endDate">
+
+            <button type="submit" id="dateInput">Filter Articles</button>
+        </form>
     </div>
 
 
-    <h1 id="category_nav">
+    <h2 id="category_nav">
         {{#if current_category}}
         <div id="specific_category_title">
             <span id="all_articles_category"><a href="/">All Articles</a></span> / <span
                 id="current_category">{{current_category}}</span>
         </div>
         {{else}}
-        <div id="home_title">Explore All Articles</div>
+        <div id="home_title">
+            {{!-- <h3>Explore All Articles</h3> --}}
+        </div>
         {{/if}}
-    </h1>
+    </h2>
 
     <div id="articles">
         <div id="top5_articles">
-            <h2 id="top5_block_title">Top 5 Popular Articles</h2>
+            <h1 id="top5_block_title">Top 5 Popular Articles</h1>
             {{#each top5Articles}}
             <div class="each-top5Articles">
                 <div id="background_image"></div>
-                <div id="article_title">{{this.title}}</div>
-                <div><img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}"></div>
+                <div><img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}" width="150px">
+                </div>
+                <div id="article_title">
+                    <h2>"{{this.title}}"</h2>
+                </div>
                 <div id="article_description">{{{this.content_html}}}</div>
                 {{!-- No category data? --}}
                 {{!-- <div id="article_category">{{this.article_category}}</div> --}}
-                <div id="btn_readmore">
-                    <a href="/article/{{this.id}}">Read more</a>
-                </div>
+                <button type="submit">
+                    <a href="/article/{{this.id}}" id="readMoreLink">Read more</a>
+                </button>
             </div>
             {{/each}}
         </div>
+        <hr>
 
         <div id="all_articles">
-            <h2 id="main_block_title">Explore More Articles</h2>
+            <h1 id="main_block_title">Explore More Articles</h1>
             {{#each articleData}}
             <div id="each-articleData">
                 <div class="btn_sub_option">
@@ -62,6 +66,7 @@
                         <div id="author_icon"><img src="{{this.icon_path}}"></div>
                         <div id="author_name">{{this.fname}} {{this.lname}}</div>
                     </a>
+                    <div id="article_timestamp">{{this.date_of_publish}}</div>
                     {{!-- {{else}}
                     <a href="/my_profile" id="authorData">
                         <div id="author_icon"><img src="{{this.icon_path}}"></div>
@@ -72,16 +77,15 @@
                         <input value="{{this.author_id}}" name="author_id" class="article_author_id" hidden>
                     </div>
                 </div>
-
-
-                <div id="article_title">{{this.title}}</div>
+                <div id="article_title">
+                    <h2>"{{this.title}}"</h2>
+                </div>
                 <div id="article_description">{{{this.content_html}}}</div>
                 {{!-- No category information yet --}}
                 {{!-- <div id="article_category">{{this.article_category}}</div> --}}
-                <div id="article_timestamp">{{this.date_of_publish}}</div>
-                <div id="btn_readmore">
-                    <a href="/article/{{this.id}}">Read more</a>
-                </div>
+                <button type="submit">
+                    <a href="/article/{{this.id}}" id="readMoreLink">Read more</a>
+                </button>
             </div>
             {{/each}}
 
