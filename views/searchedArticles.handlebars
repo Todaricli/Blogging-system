@@ -1,60 +1,100 @@
-<div class="allArticles">
-    <div>
-        <h1>Search Results of "{{search}}"</h1>
+<div class="allArticles {{#if articlesByDate}}search-by-date{{/if}}">
+
+    <div id="search-left">
+    <div id="search-header">
+        {{#if articlesByDate}}
+        <div class="search-word-date"> 
+        <h1>Search Results for articles from <div id="search-word-date"> "{{startDate}}"</div> to <div id="search-word-date"> "{{endDate}}"</div></h1>
+        </div>
+        {{else}}
+        <h1>Search Results of 
+            <div id="search-word"> "{{search}}"</div>
+        </h1>
+        {{/if}}
     </div>
-    <h2>Matching Articles</h2>
+
+    <div id="search-articles">
     {{#if articles}}
+    <div id="articles-length">
+        <h2>Matching Articles ({{this.articlesLength}})</h2>
+    </div>
+
     {{#each articles}}
     <div class="eachArticleDiv">
+        <div id="eachArticleDiv-container">
+        <div id="eachArticleDiv-title">
         <h2>{{this.title}}</h2>
+        </div>
         <div>
             {{!-- <img src="{{articleImage}}"> --}}
         </div>
         <div id="authorDiv">
-            <p>by:</p>
-            <p>{{this.fname}} {{this.lname}}</p>
+            <div id="author-icon">
+                <img src="{{this.icon_path}}" alt="author avatar">
+            </div>
+            <div id="author-nam">
+                <strong>
+                <a href="/profile?id={{this.author_id}}">{{this.fname}} {{this.lname}}</a>
+                </strong>
+            </div>
         </div>
-        <div>
-            {{content}}
+
+        <div id="eachArticleDiv-content">
+           {{{this.content_html}}}
         </div>
+
         <div id="readMoreDiv">
-            <a href="/article/{{this.article_id}}">Read more</a>
+            <a href="/article/{{this.id}}">Read more</a>
         </div>
         <div id="likesAndComments">
-            {{this.like_count}}<img id="likes_icon" src="https://clipground.com/images/like-icon-png-7.png">
+            <div>
+            <i class="fa-regular fa-thumbs-up" id="like-icon"></i>
+            {{this.like_count}}
+            </div>
+            <div>
+                <i class="fa-regular fa-comment-dots"></i>
             {{#if this.comments_count}}
             {{this.comments_count}}
             {{else}}
             0
             {{/if}}
-            <img id="comments_icon" src="https://th.bing.com/th/id/OIP.lz0PD7yQ7pVgkawuXKsK3wHaHa?pid=ImgDet&rs=1">
+            </div>
+        </div>
+        </div>
+
+        <div id="eachArticleDiv-img">
+            <img src="/images/article-images/{{this.image}}" alt="article image">
         </div>
     </div>
     {{/each}}
     {{else}}
     <p><i>There are no Articles matching "{{search}}"</i></p>
     {{/if}}
+    </div>
+    </div>
 
-    <h2>Matching Users</h2>
+    {{#if articlesByDate}}
+    {{else}}
+    <div id="search-users">
+    <div id="users-length">
+    <h2>Matching Users ({{this.usersLength}})</h2>
+    </div>
     {{#if users}}
     {{#each users}}
-    <div class="userProfileSnippet">
-        <div id="userUsername">
-            <h2>{{this.username}}</h2>
-        </div>
+    <div class="user">
         <div id="userIcon">
             <img src="{{this.icon_path}}" alt="profile avatar icon" width="70px" height="70px">
         </div>
-        <div>
-            <p>{{this.fname}} {{this.lname}}</p>
-        </div>
-        
-        <div>
-            <a href="/profile?id={{this.id}}">View full profile</a>
+        <div id="userName">
+            <a href="/profile?id={{this.id}}">{{this.fname}} {{this.lname}}</a>
         </div>
     </div>
     {{/each}}
     {{else}}
     <p><i>There are no users matching "{{search}}"</i></p>
     {{/if}}
+    </div>
+    {{/if}}
 </div>
+
+<link rel="stylesheet" href="/css/searchArticles.css">

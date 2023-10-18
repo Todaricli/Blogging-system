@@ -32,7 +32,7 @@
     background-color:bisque;
 }
 
-.each-top5Articles, #each-articleData, #article_container {
+.each-top5Articles, #each-articleData{
     background-color: bisque;
     margin: 20px;
     padding: 15px;
