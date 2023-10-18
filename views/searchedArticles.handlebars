@@ -1,9 +1,11 @@
-<div class="allArticles">
+<div class="allArticles {{#if articlesByDate}}search-by-date{{/if}}">
 
     <div id="search-left">
     <div id="search-header">
         {{#if articlesByDate}}
-        <h1>Search Results for articles from {{startDate}} to {{endDate}}</h1>
+        <div class="search-word-date"> 
+        <h1>Search Results for articles from <div id="search-word-date"> "{{startDate}}"</div> to <div id="search-word-date"> "{{endDate}}"</div></h1>
+        </div>
         {{else}}
         <h1>Search Results of 
             <div id="search-word"> "{{search}}"</div>
@@ -30,7 +32,7 @@
             <div id="author-icon">
                 <img src="{{this.icon_path}}" alt="author avatar">
             </div>
-            <div id="author-name">
+            <div id="author-nam">
                 <strong>
                 <a href="/profile?id={{this.author_id}}">{{this.fname}} {{this.lname}}</a>
                 </strong>
@@ -71,6 +73,8 @@
     </div>
     </div>
 
+    {{#if articlesByDate}}
+    {{else}}
     <div id="search-users">
     <div id="users-length">
     <h2>Matching Users ({{this.usersLength}})</h2>
@@ -90,6 +94,7 @@
     <p><i>There are no users matching "{{search}}"</i></p>
     {{/if}}
     </div>
+    {{/if}}
 </div>
 
 <link rel="stylesheet" href="/css/searchArticles.css">

@@ -166,6 +166,28 @@ img {
     color: blue;
 }
 
+.search-word-date {
+    font-size: 13px;
+}
+
+#search-word-date {
+    color: black;
+}
+
+.search-by-date {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 1000px;
+    /* background-color: bisque; */
+    margin-top: 40px;
+}
+
+.search-by-date #search-left {
+    border-right: none;
+}
+
+
+
 
 
 
