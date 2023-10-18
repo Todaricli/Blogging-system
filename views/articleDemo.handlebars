@@ -1,3 +1,18 @@
+<link rel="stylesheet" href="/css/articleDemo.css">
+
+<div id="specific_category_title">
+    <span id="articles_home">
+        <i class="fa-solid fa-arrow-left"></i>
+        <a href="/">Back to Home</a>
+    </span>
+
+    <span id="current_category">
+        <a href="/genre/{{article.[0].genre}}">
+            {{article.[0].genre}}
+        </a>
+    </span>
+</div>
+
 <div id="article_container">
     {{!-- Displaying article content --}}
     <div id="article_title">
