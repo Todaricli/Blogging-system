@@ -59,7 +59,7 @@ CREATE TABLE articles
     image           VARCHAR(8000),
     date_of_publish TIMESTAMP     NOT NULL,
     author_id       INTEGER       NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES user (id)
+    FOREIGN KEY (author_id) REFERENCES user (id) ON DELETE CASCADE
 );
 
 -- Inserting 15 rows of sample data into the articles table

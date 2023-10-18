@@ -1,17 +1,21 @@
-window.addEventListener(`click`, (e)=>{
+window.addEventListener(`load`, () => {
 
-    const dropdown = document.querySelector(".dropdown")
-    const dropDownContent = document.querySelector(".dropdown-content")
-    window.addEventListener(`click`, (e)=>{
-        if(!e.target.classList.contains("skeet")){
-            dropDownContent.style.display = "none"
-        }
+    window.addEventListener(`click`, (e) => {
+
+        const dropdown = document.querySelector(".dropdown")
+        const dropDownContent = document.querySelector(".dropdown-content")
+        window.addEventListener(`click`, (e) => {
+            if (!e.target.classList.contains("skeet")) {
+                dropDownContent.style.display = "none"
+            }
+        })
+
+        dropdown.addEventListener(`click`, (e) => {
+
+            if (e.target.classList.contains("skeet")) {
+                dropDownContent.style.display = "block"
+            }
+        })
     })
 
-    dropdown.addEventListener(`click`, (e)=>{
-
-        if(e.target.classList.contains("skeet")){
-            dropDownContent.style.display = "block"
-        }
-    })
 })

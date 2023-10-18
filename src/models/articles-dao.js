@@ -203,6 +203,14 @@ async function filterArticlesByGenre(genre) {
 
     return articles;
 }
+async function deleteArticle(article_id){
+    const db = await getDatabase();
+
+    const article = await db.run(SQL`
+    DELETE from articles
+    where id = ${article_id}
+    `)
+}
 
 module.exports = {
     getArticlesByUserID,
@@ -221,5 +229,6 @@ module.exports = {
     insertNewArticleToArticleTable,
     updateArticleToArticleTable,
     filterArticlesBySelectedDates,
-    filterArticlesByGenre
+    filterArticlesByGenre,
+    deleteArticle
 };
