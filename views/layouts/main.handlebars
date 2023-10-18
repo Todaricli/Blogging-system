@@ -33,7 +33,7 @@
         <ul class="nav_list">
             {{#if user}}
             <li>
-                <a href="/logout">Logout</a>
+                <a href="/logout" class="logout">Logout</a>
             </li>
             <li>
                 <div class="dropdown">
@@ -51,12 +51,12 @@
             <li>
             </li>
             {{else}}
-            <li class="login">
-                <a href="/login">Login</a>
-            </li>
-            <li class="register">
+            <div class="login">
+            <div class="register">
                 <a href="/register">Register</a>
-            </li>
+            </div>
+                <a href="/login">Login</a>
+            </div>
             {{/if}}
         </ul>
     </nav>
