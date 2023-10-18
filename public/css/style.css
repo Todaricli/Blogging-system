@@ -438,14 +438,6 @@ nav {
     padding: auto;
 }
 
-.eachArticleDiv, .userProfileSnippet{
-    text-align: center;
-    margin: 30px;
-    padding: 20px;
-    border: 2px solid black;
-    border-radius: 10px;
-}
-
 #readMoreDiv{
     margin: 10px;
 }

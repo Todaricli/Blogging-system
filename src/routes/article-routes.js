@@ -51,6 +51,7 @@ router.get('/article/:id',comment.generateComments ,async function (req, res) {
   const article_id = req.params.id;
 
   const article = await articleDao.getArticlesByID(article_id);
+  console.log(article)
   const articleId = article[0].id;
 
   try {
@@ -59,6 +60,7 @@ router.get('/article/:id',comment.generateComments ,async function (req, res) {
 
     const authorName = await articleDao.getAuthorByArticle(articleId);
     res.locals.authorName = authorName;
+    console.log(authorName)
 
     // const comments = await articleDao.getAllCommentsFromArticle(articleId);
     // res.locals.comments = comments;
@@ -178,10 +180,26 @@ router.get('/filtered-articles', async function(req, res) {
   console.log(endDate);
 
   const articles = await articleDao.filterArticlesBySelectedDates(startDate, endDate);
+  console.log(articles)
+
+  res.locals.articles = articles;
+  res.locals.articlesByDate = articles;
+  res.locals.articlesLength = articles.length;
+  res.locals.startDate = startDate;
+  res.locals.endDate = endDate;
+  res.render("searchedArticles")
+
+})
+
+router.get('/genre/:genreType', async function (req,res) {
+  const genreType = req.params.genreType;
+  console.log(genreType);
+
+  const articles = await articleDao.filterArticlesByGenre(genreType);
+  console.log(articles);
 
   res.locals.articles = articles
-  res.render("filteredArticle")
-
+  res.render("searchedArticles")
 })
 
 module.exports = router;
