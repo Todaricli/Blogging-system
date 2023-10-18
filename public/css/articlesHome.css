@@ -1,0 +1,164 @@
+#home_container {
+    color: #357a84;
+    text-align: center;
+}
+
+#greetingDiv {
+    text-align: center;
+    margin: auto;
+    font-size: x-large;
+}
+
+.filterDiv {
+    background-color: rgb(241, 241, 241);
+    padding: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 20px;
+    margin-top: 0;
+}
+
+.each-top5Articles,
+#each-articleData {
+    background-color: rgb(241, 255, 253);
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+#article_description {
+    background-color: white;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin: 10px;
+    font-size: smaller;
+    color: grey;
+}
+
+#article_title {
+    margin: 10px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+#main_block_title {
+    margin: 30px;
+}
+
+#author_icon img {
+    width: 50px;
+    margin: auto
+}
+
+#author_name {
+    color: #357a84
+}
+
+;
+
+.btn_sub_option {
+    cursor: pointer;
+    background-color: rgb(255, 255, 204, 0);
+    border: 0px;
+    display: inline-block;
+    background-color: #70adb0;
+}
+
+.btn_sub_option a {
+    text-decoration: none;
+    color: black;
+}
+
+
+.btn_sub_option a:hover {
+    color: #ffffff;
+    background-color: #70adb0;
+}
+
+.btn_subscribe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subscribe-button>img {
+    width: 15px;
+    margin: auto;
+    color: white;
+}
+
+#author_name:hover {
+    color: rgb(0, 205, 205);
+}
+
+.subscribe-button {
+    background-color: #7fc7cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 10px;
+    font-size: smaller;
+}
+
+.subscribe-button:hover {
+    background-color: #70adb0;
+}
+
+hr {
+    color: rgb(60, 188, 188);
+}
+
+button[type=submit] {
+    width: 15%;
+    max-height: 40px;
+    background-color: #7fc7cc;
+    color: white;
+    padding: 14px 20px;
+    margin: auto;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button[type=submit]:hover {
+    background-color: #70adb0;
+}
+
+#readMoreLink {
+    text-decoration: none;
+    color: white;
+}
+
+img {
+    margin: 20px;
+    margin-top: 0px;
+}
+
+/* Genre section */
+#genre-container {
+    /* background-color: bisque; */
+    border-bottom: 1px solid lightgrey;
+}
+
+#genre-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#genre-list li a {
+    color: black;
+}
+
+#genre-list li a:hover {
+    color: blue;
+}

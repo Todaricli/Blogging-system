@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/popup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <script src="/script/search-script.js"></script>
+    <link rel="stylesheet" href="/css/analyticsDashboard.css">
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/subscription&subscriber.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/articlesHome.css">
+
+
 
 </head>
 
@@ -23,32 +31,47 @@
             </a>
         </div>
 
+        
+
         {{!-- Navigation search bar--}}
-        <div class="search_bar">
-            <img src="/images/search-icon.png">
-            <input type="text" id="searchInput" placeholder="Search...">
+        <div class="search_bar search">
+            {{!-- <img src="/images/search-icon.png"> --}}
+            <input type="text" id="searchInput" placeholder="Search..." class = "search">
+            <div id = "searchResultContainer">
+                <div class="dropdownsearch search" id = "searchByTitle">
+                </div>
+                <div class="dropdownsearch search" id = "searchByAuthor">
+                </div>
+                <div id="viewAllDiv search">
+                    <a id = "viewAllSearchResults">view all search results</a>
+                </div>
+                
+            </div>
         </div>
 
         {{!-- Nav login and dropdown button --}}
         <ul class="nav_list">
             {{#if user}}
             <li>
-                <a href="/logout" class="logout">Logout</a>
-            </li>
-            <li>
-                <div class="dropdown">
-                    <div class="dropbtn"><img src="{{user.icon_path}}" alt="user_avatar" id="user_avatar"></div>
-                    <div class="dropdown-content">
+                <div class="dropdown skeet">
+                    <button class="dropbtn skeet">
+                        <img class="dropdown-avatar skeet" src="{{user.icon_path}}" alt="user photo">
+                        <span class="username skeet">{{user.fname}} {{user.lname}}</span>
+                        <i class="fa fa-caret-down skeet"></i>
+                    </button>
+                    <div class="dropdown-content skeet">
                         <a href="/my_profile">My Profile</a>
                         <a href="/my-page">My Page View</a>
                         <a href="/my_post">My Post</a>
                         <a href="/analytics">Analytics</a>
                         <a href="/sub">Subscription</a>
-                        <a href="/writeArticle">New Article</a>
+                        <a href="/logout" id="signout">Sign out</a>
                     </div>
                 </div>
             </li>
-            <li>
+                        <a href="/writeArticle" id="newArticleLink">New Article</a>
+                    </div>
+                </div>
             </li>
             {{else}}
             <div class="login">
@@ -61,17 +84,16 @@
         </ul>
     </nav>
 
+
     <div id="page_body">
         {{{body}}}
     </div>
-
-
     <footer>
         <div id="footer">
-            <img src="/images/footer-logo.png">
-            <span> &copy 2023 UOA-PGCIT-S2 Group 2</span>
+        <img src="/images/footer-logo.png">
+        <span> &copy 2023 UOA-PGCIT-S2 Group 2</span>
         </div>
-    </footer>
+    <script src="/script/main.js"></script>
 </body>
 
 </html>

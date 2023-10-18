@@ -5,8 +5,8 @@ const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 const subDao = require('../models/sub-dao.js');
 const commentDao = require('../models/comments-dao.js');
-const comment = require('../middleware/comments.js')
 const userDao = require('../models/user-dao.js');
+const analyticsDao = require('../models/analytics-dao.js')
 
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
@@ -14,8 +14,10 @@ const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = requ
 router.get('/', async function (req, res) {
 
     res.locals.top5Articles = await articleDao.getTopFiveArticles();
-    res.locals.articleData = await articleDao.getAllArticles();
+    const articleData = await articleDao.getAllArticles();
+    //console.log(articleData)
     
+    res.locals.articleData = articleData;
 
     res.render('articlesHome');
 });
@@ -118,15 +120,15 @@ router.get('/my_post', verifyAuthenticated, async function (_, res) {
     const article_id = data[0].article_id;
     console.log(article_id)
 
-    const comments = await commentDao.getAllCommentsByArticles(article_id);
-    console.log(comments)
+    // const comments = await commentDao.getAllCommentsByArticles(article_id);
+    // console.log(comments)
 
-    const filteredComments = comments.filter(comment => comment.comment_id !== null);
+    // const filteredComments = comments.filter(comment => comment.comment_id !== null);
 
 
-    const totalResponses = filteredComments.length;
-    res.locals.responses = filteredComments;
-    res.locals.total_responses = totalResponses;
+    // const totalResponses = filteredComments.length;
+    // res.locals.responses = filteredComments;
+    // res.locals.total_responses = totalResponses;
 
     res.render('myPost');
 })
@@ -139,7 +141,7 @@ router.get('/deleteComment/:id', async function(req,res) {
     const article_id = data[0].article_id;
 
     if (comment_id) {
-        await commentDao.deleteComments(comment_id,article_id);
+        await commentDao.deleteComments(comment_id, article_id);
         const responses = await commentDao.getAllCommentsByArticles(article_id);
         console.log("Responses:");
         console.log(responses);
@@ -148,13 +150,97 @@ router.get('/deleteComment/:id', async function(req,res) {
 
 })
 
+router.get("/removeSubscription", verifyAuthenticated, async function (req, res) {
+    const subscription_id = req.query.id;
+    const user_id = res.locals.user.id;
+    if (user_id) {
+        try {
+          await subDao.removeSpecificSubscriptionByID(user_id, subscription_id);
+          res.status(200).json({ message: 'Subscription removed successfully' });
+        } catch (error) {
+          res.status(500).json({ message: 'Error removing subscription' });
+        }
+      } else {
+        res.status(403).json({ message: 'Unauthorized' });
+      }
+})
+
+router.get("/analytics-Dashboard", async (req,res) =>{
+    const user = res.locals.user
+    const userId = user["id"]
+    const response = await analyticsDao.getNumFollowers(userId)
+    const response1 = await genericDao.getUserDataById(userId)
+    const comments = await analyticsDao.getNumberOfComments(userId)
+    const likes = await analyticsDao.getArticleLikes(userId)
+    const top3Articles = await analyticsDao.getMostPopularArticles(userId)
+
+    console.log(top3Articles)
+
+    // const yuh = await response.json()
+    const followerNumber = response[0]["counts"]
+    res.locals.followers = followerNumber
+    res.locals.user = response1
+    res.locals.comments = comments
+    res.locals.likes = likes
+    res.locals.topArticles = top3Articles
+    res.render("analyticsDashboard")
+
+});
+router.get("/addSubscription", verifyAuthenticated, async function (req, res) {
+    const subscription_id = req.query.id;
+    const user_id = res.locals.user.id;
+    if (user_id) {
+        try {
+          await subDao.addSpecificSubscriptionByID(user_id, subscription_id);
+          res.status(200).json({ message: 'Subscription removed successfully' });
+        } catch (error) {
+          res.status(500).json({ message: 'Error removing subscription' });
+        }
+      } else {
+        res.status(403).json({ message: 'Unauthorized' });
+      }
+})
+
+router.get("/removeSubscriber", verifyAuthenticated, async function (req, res) {
+    const subscriber_id = req.query.id;
+    const user_id = res.locals.user.id;
+    if (user_id) {
+        try {
+          await subDao.removeSpecificSubscriberByID(user_id, subscriber_id);
+          res.status(200).json({ message: 'Subscription removed successfully' });
+        } catch (error) {
+          res.status(500).json({ message: 'Error removing subscription' });
+        }
+      } else {
+        res.status(403).json({ message: 'Unauthorized' });
+      }
+})
+
 router.get("/analytics-Dashboard", async (req, res) => {
     console.log("skeet")
     res.render("analyticsDashboard")
 })
 
-router.get('/analytics', function (req, res) {
-    res.render('analyticsDashboard');
+router.get('/analytics', async function (req, res) {
+    
+    const user = res.locals.user
+    const userId = user["id"]
+    const response = await analyticsDao.getNumFollowers(userId)
+    const response1 = await genericDao.getUserDataById(userId)
+    const comments = await analyticsDao.getNumberOfCommentsPerArticle(userId)
+    const likes = await analyticsDao.getArticleLikesPerArticle(userId)
+    const top3Articles = await analyticsDao.getMostPopularArticles(userId)
+    console.log("skeetskeet")
+    console.log(comments)
+
+    // const yuh = await response.json()
+    const followerNumber = response[0]["counts"]
+    res.locals.followers = followerNumber
+    res.locals.user = response1
+    res.locals.comments = comments
+    res.locals.likes = likes
+    res.locals.topArticles = top3Articles
+    res.render("analyticsDashboard")
 });
 
 module.exports = router;

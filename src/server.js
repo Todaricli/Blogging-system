@@ -59,8 +59,8 @@ async function startExpress() {
 
     app.use(require('./routes/application-routes.js'));
     app.use(require('./routes/auth-routes.js'));
-    app.use(require('./routes/api/register-api.js'));
     app.use(require('./routes/api/api-routes-analytics.js'));
+    app.use(require('./routes/api-routes-search.js'));
     app.use(require('./routes/article-routes.js'));
 
     // Setup api routes
@@ -69,6 +69,7 @@ async function startExpress() {
     app.use(require('./routes/api/admin-api'));
     app.use(require('./routes/api/sub-api.js'));
     app.use(require('./routes/api/like-api.js'));
+    app.use(require('./routes/api/comments-api.js'));
 
     // Make the "public" folder available statically
     const publicFolder = path.join(process.cwd(), 'public');

@@ -1,25 +1,5 @@
 window.addEventListener("load", function () {
 
-  //Create effect for comment 
-  //Be default: comment box will be hidden
-  //If the user click on button, comment box will appear
-  const openComment = document.getElementById("open-comment");
-  const closeComment = document.getElementById("close-comment");
-  const modal = document.querySelector(".comment")
-
-  const openModal = function () {
-    modal.classList.remove("hidden");
-  };
-
-  openComment.addEventListener("click", openModal)
-
-  const closeModal = function () {
-    modal.classList.add("hidden");
-  };
-
-  closeComment.addEventListener("click", closeModal)
-
-
   //Create effect for like button
   displayLikeButton();
 
@@ -27,8 +7,11 @@ window.addEventListener("load", function () {
     const likeBtn = document.querySelector(".like-btn");
     const likeIcon = document.getElementById("like-icon");
 
+
     const user_id = document.querySelector("#user_id")
     const article_id = document.querySelector("#article_id")
+
+    console.log(article_id.value)
 
     let isLiked = await checkIfLiked(user_id.value, article_id.value);
 
@@ -96,3 +79,4 @@ window.addEventListener("load", function () {
 
 
 })
+
