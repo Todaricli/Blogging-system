@@ -59,7 +59,7 @@ CREATE TABLE articles
     image           VARCHAR(8000),
     date_of_publish TIMESTAMP     NOT NULL,
     author_id       INTEGER       NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES user (id) ON DELETE CASCADE
+    FOREIGN KEY (author_id) REFERENCES user (id) on DELETE CASCADE
 );
 
 -- Inserting 15 rows of sample data into the articles table
@@ -216,7 +216,7 @@ CREATE TABLE likes
     user_id    INTEGER NOT NULL,
     article_id INTEGER NOT NULL,
     PRIMARY KEY (id, user_id, article_id),
-    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (user_id) REFERENCES user (id), 
     FOREIGN KEY (article_id) REFERENCES articles (id)
 );
 

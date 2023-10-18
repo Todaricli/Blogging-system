@@ -5,6 +5,7 @@ const articlesDao = require('../../models/articles-dao');
 
 router.get("/api/delete-article", async (req,res)=>{
     const articleId = req.query.articleId
+    console.log(articleId)
     articlesDao.deleteArticle(articleId)
 })
 

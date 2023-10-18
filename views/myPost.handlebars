@@ -21,7 +21,7 @@
         <div class="each_posts" article-id = "{{this.article_id}}">
 
             <div class="each-posts-content">
-                <button type="button" class="delete-button">delete article</button>
+                <button type="button" class="delete-button" article-id = "{{this.article_id}}">delete article</button>
                 <h3 id="post_title">{{this.title}}</h3>
                 <p id="post_publish_time"><strong>Published on </strong>{{this.date_of_publish}}</p>
                 <div id="post_content">
@@ -48,4 +48,4 @@
     <p>You have no posts</p>
     {{/if}}
 </div>
-<script type="application/javascript" src="/public/script/myPost.js"></script>
+<script type="application/javascript" src="/script/myPost.js"></script>
