@@ -11,14 +11,14 @@ window.addEventListener(`load`, function () {
     window.addEventListener(`click`, (e)=>{
         console.log(e.target)
         if(e.target.className != "search"){
-            searchNavBar.style.overflow = "hidden"
+            searchResultContainer.style.display = "none"
             searchNavBar.style.border="1px solid black"
         }
      
     })
 
     searchNavBar.addEventListener(`click`,()=>{
-        searchNavBar.style.overflow = "visible"
+        searchResultContainer.style.display = "flex"
         searchNavBar.style.border = "7px solid purple"
         searchBarForm.style.border = "transparent"
 
