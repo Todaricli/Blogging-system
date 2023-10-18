@@ -15,31 +15,20 @@ router.post('/api/checkIfSub', async function (req, res) {
     res.status(200).send(result === true ? '1' : '0');
 });
 
-router.get(
-    '/removeSubscription',
-    verifyAuthenticated,
-    async function (req, res) {
-        const subscription_id = req.query.id;
-        const user_id = res.locals.user.id;
-        if (user_id) {
-            try {
-                await subDao.removeSpecificSubscriptionByID(
-                    user_id,
-                    subscription_id
-                );
-                res.status(200).json({
-                    message: 'Subscription removed successfully',
-                });
-            } catch (error) {
-                res.status(500).json({
-                    message: 'Error removing subscription',
-                });
-            }
-        } else {
-            res.status(403).json({ message: 'Unauthorized' });
+router.get("/removeSubscription", verifyAuthenticated, async function (req, res) {
+    const subscription_id = req.query.id;
+    const user_id = res.locals.user.id;
+    if (user_id) {
+        try {
+            await subDao.removeSpecificSubscriptionByID(user_id, subscription_id);
+            res.status(200).json({ message: 'Subscription removed successfully' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error removing subscription' });
         }
+    } else {
+        res.status(403).json({ message: 'Unauthorized' });
     }
-);
+})
 
 router.get('/addSubscription', verifyAuthenticated, async function (req, res) {
     const subscriber_id = req.query.id;
@@ -81,11 +70,10 @@ router.get('/removeSubscriber', verifyAuthenticated, async function (req, res) {
     if (user_id) {
         try {
             await subDao.removeSpecificSubscriberByID(user_id, subscriber_id);
-            res.status(200).json({
-                message: 'Subscription removed successfully',
-            });
-        } catch (error) {
-            res.status(500).json({ message: 'Error removing subscription' });
+            res.status(200).json({ message: 'Subscriber removed successfully' });
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ message: 'Error removing subscriber' });
         }
     } else {
         res.status(403).json({ message: 'Unauthorized' });

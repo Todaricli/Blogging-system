@@ -62,6 +62,8 @@ window.addEventListener("load", function () {
             //remove other user input
             document.getElementById("write_article_title").value = "";
 
+            alert("New article added!")
+
             // send and create notifications to subscribers
             await fetch('/api/create-new-article-notif-for-subs', {
                 method: 'POST',

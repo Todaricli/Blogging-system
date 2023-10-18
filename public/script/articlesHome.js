@@ -9,6 +9,7 @@ window.addEventListener("load", function () {
             const btn_subscribe = btn.querySelector('.btn_subscribe');
             if ((user_id.value != author_id.value) && user_id.value != null) {
                 const option = document.createElement("button");
+                option.setAttribute("class", "subscribe-button")
                 const isSubscribe = await checkIfSubscribe(user_id.value, author_id.value);
                 const subscription_id = author_id.value;
                 if (isSubscribe) {

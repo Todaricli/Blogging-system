@@ -71,6 +71,8 @@ async function startExpress() {
     app.use(require('./routes/api/articles-api.js'));
     app.use(require('./routes/api/admin-api'));
     app.use(require('./routes/api/sub-api.js'));
+    app.use(require('./routes/api/like-api.js'));
+    app.use(require('./routes/api/comments-api.js'));
 
     // Make the "public" folder available statically
     const publicFolder = path.join(process.cwd(), 'public');

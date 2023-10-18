@@ -2,85 +2,121 @@ const express = require('express');
 const router = express.Router();
 const articleDao = require('../models/articles-dao.js');
 const commentDao = require('../models/comments-dao.js');
-const { generateComments } = require('../middleware/comments.js');
-const comment = require('../middleware/comments.js');
+const searchDao = require('../models/search-dao.js');
+const likeDao = require('../models/like-dao.js');
 
 const QuillDeltaToHtmlConverter =
-    require('quill-delta-to-html').QuillDeltaToHtmlConverter;
-const uploadTempFolder = require('../middleware/multer-uploader.js');
-const fs = require('fs');
-const jimp = require('jimp');
+  require('quill-delta-to-html').QuillDeltaToHtmlConverter;
+const uploadTempFolder = require("../middleware/multer-uploader.js");
+const fs = require("fs");
+const jimp = require("jimp");
+
 
 router.get('/writeArticle', function (req, res) {
-    res.render('writeArticle');
+  res.render('writeArticle');
 });
 
-router.post(
-    '/api/postNewArticle',
-    uploadTempFolder.single('imageKey'),
-    async function (req, res) {
-        const newArticle = req.body;
+router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async function (req, res) {
+  const newArticle = req.body;
 
-        const user_id = res.locals.user.id;
-        const title = newArticle.titleKey;
-        const genre = newArticle.genreKey;
-        const content = newArticle.contentKey;
+  const user_id = res.locals.user.id;
+  const title = newArticle.titleKey;
+  const genre = newArticle.genreKey;
+  const content = newArticle.contentKey;
 
         try {
             const contentArray = convertDeltaToHtml(content);
             const html = contentArray[0];
             const delta_obj_string = contentArray[1];
 
-            //Get article image
-            const fileInfo = req.file;
-            const imagePath = 'user' + user_id + '-' + fileInfo.originalname;
+    //Get article image
+    const fileInfo = req.file;
+    let done = undefined;
+    let imagePath;
 
-            processAndStoreImage(fileInfo, imagePath);
-
-            let done = undefined;
-            done = await articleDao.insertNewArticleToArticleTable(
-                user_id,
-                title,
-                genre,
-                html,
-                delta_obj_string,
-                imagePath
-            );
-            
-            if (done) {
-                const articleId = done.lastID;
-                res.status(200).send(`${articleId}`);
-            }
-        } catch (e) {
-            res.status(404).send('Publishing error, try again!');
-        }
+    if (fileInfo) {
+      imagePath = "user" + user_id + "-" + fileInfo.originalname;
+      processAndStoreImage(fileInfo, imagePath);
+      done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string, imagePath);
+    } else {
+      done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string)
     }
-);
 
-router.get('/article/:id', comment.generateComments, async function (req, res) {
-    const article_id = req.params.id;
+    if (done) {
+      res.status(200).send("New Article Created!");
+    }
+  } catch (e) {
+    res.status(404).send("Publishing error, try again!");
+  }
+
+});
+
+router.get('/article/:id', async function (req, res) {
+
+  if (res.locals.user) {
+    res.locals.user_id = res.locals.user.id
+  }
+
+  const article_id = req.params.id;
+
+  try {
 
     const article = await articleDao.getArticlesByID(article_id);
     const articleId = article[0].id;
 
-    try {
-        res.locals.article = article;
+    res.locals.article = article;
+
 
         const authorName = await articleDao.getAuthorByArticle(articleId);
         res.locals.authorName = authorName;
 
-        // const comments = await articleDao.getAllCommentsFromArticle(articleId);
-        // res.locals.comments = comments;
+    const likeCounts = await likeDao.getNumberOfLikesFromArticle(articleId);
+    res.locals.like_count = likeCounts;
 
-        const likeCounts =
-            await articleDao.getNumberOfLikesFromArticle(articleId);
-        res.locals.like_count = likeCounts;
-    } catch (error) {
-        const html = '<p>Article loading error! refresh the page.<p>';
-        res.locals.article_content = html;
+
+    const comments = await commentDao.getAllFirstLevelCommentsByArticleID(articleId);
+
+    async function getAllComments(comments) {
+      try {
+        const processedComments = await Promise.all(comments.map(async (comment) => {
+          try {
+            const secondLevelComments = await commentDao.getAllSecondOrThirdLevelCommentsByComment_id(comment.id, article_id);
+            comment["second_level_comments"] = secondLevelComments;
+
+            const secondLevelComment = comment.second_level_comments;
+
+            await Promise.all(secondLevelComment.map(async (comment) => {
+              try {
+                const thirdLevelComments = await commentDao.getAllSecondOrThirdLevelCommentsByComment_id(comment.id, article_id);
+                comment["third_level_comments"] = thirdLevelComments;
+              } catch (e) {
+                throw new Error("Comments loading failed");
+              }
+            }));
+
+            return comment;
+          } catch (e) {
+            throw new Error("Comments loading failed.")
+          }
+
+        }));
+        return processedComments;
+
+      } catch (e) {
+        throw new Error("Comments loading failed.")
+      }
     }
 
-    res.render('articleDemo');
+    const commentsForThisAriticle = await getAllComments(comments);
+    res.locals.comments = commentsForThisAriticle;
+
+    res.render("articleDemo")
+
+  } catch (error) {
+    const html = "<p>Error occured: <p>"
+    res.locals.article_content = html + error;
+  }
+
 });
 
 router.get('/editArticle/:id', async (req, res) => {
@@ -119,21 +155,18 @@ router.post(
             const html = contentArray[0];
             const delta_obj_string = contentArray[1];
 
-            //Get article image
-            const fileInfo = req.file;
-            const imagePath = 'user' + user_id + '-' + fileInfo.originalname;
+    //Get article image
+    const fileInfo = req.file;
+    let done = undefined;
+    let imagePath;
 
-            processAndStoreImage(fileInfo, imagePath);
-
-            let done = undefined;
-            done = await articleDao.updateArticleToArticleTable(
-                article_id,
-                title,
-                genre,
-                html,
-                delta_obj_string,
-                imagePath
-            );
+    if (fileInfo) {
+      imagePath = "user" + user_id + "-" + fileInfo.originalname;
+      processAndStoreImage(fileInfo, imagePath);
+      done = await articleDao.updateArticleToArticleTable(article_id, title, genre, html, delta_obj_string, imagePath);
+    } else {
+      done = await articleDao.updateArticleToArticleTableWithoutImage(user_id, title, genre, html, delta_obj_string)
+    }
 
             if (done) {
                 res.status(200).send('Article updated');
@@ -187,43 +220,25 @@ function convertDeltaToHtml(content) {
     return contentArray;
 }
 
-// router.get('/article/:id', comment.generateComments,async function (req, res) {
-//     const article_id = req.params.id;
+router.get("/calendar", async function (req, res) {
 
-//     const article = await articleDao.getArticlesByID(article_id);
-//     //console.log(article)
-//     res.locals.article = article;
-//     const content = article[0].content;
+  res.render("test");
+})
 
-//     try {
-//         const content_obj = JSON.parse(content);
+router.get('/genre/:genreType', async function (req, res) {
+  const genreType = req.params.genreType;
+  console.log(genreType);
 
-//         const delta_obj = content_obj.ops;
+  const articles = await searchDao.filterArticlesByGenre(genreType)
+  console.log(articles);
 
-//         const cfg = {
-//             inlineStyles: true,
-//             multiLineBlockquote: true,
-//             multiLineHeader: true,
-//         };
+  res.locals.articles = articles
+  res.render("searchedArticles")
+})
 
-//         //const converter = new QuillDeltaToHtmlConverter(delta_obj, cfg);
+router.get("/genre", async function (req, res) {
 
-//         const html = converter.convert();
-//         res.locals.article_content = html;
-//     } catch (error) {
-//         const html = '<p>Article loading error! refresh the page.<p>';
-//         res.locals.article_content = html;
-//     }
-
-//     const authorName = await articleDao.getAuthorByArticle(article_id);
-//     //console.log(authorName);
-//     res.locals.authorName = authorName;
-
-//     const likeCounts = await articleDao.getNumberOfLikesFromArticle(article_id);
-//     //console.log(likeCounts);
-//     res.locals.like_count = likeCounts;
-
-//     res.render('articleDemo');
-// });
+  res.render("searchedArticles")
+})
 
 module.exports = router;

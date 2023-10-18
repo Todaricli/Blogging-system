@@ -60,13 +60,6 @@ async function checkIfSubscribe(userid, subscriptionId) {
             and follower_id = ${userid}
         ) as output
     `)
-    // const isSubscribe = JSON.stringify(res);
-    // console.log(isSubscribe[11]);
-
-    // console.log(res);
-    // console.log(res.output);
-    // console.log(isSubscribe);
- 
     return res?.output === 1;
 }
 
