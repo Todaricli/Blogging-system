@@ -37,16 +37,6 @@ async function getAllSecondOrThirdLevelCommentsByComment_id(comment_id, article_
     return allFirstLevelComments;
 }
 
-async function deleteLikesCommnents(commentId) {
-    const db = await getDatabase();
-
-    await db.all(SQL`
-        DELETE 
-        FROM likes_comments
-        WHERE comments_id = ${commentId}
-    `);
-}
-
 async function deleteComments(comment_id, article_id) {
     const childComments = await getAllSecondOrThirdLevelCommentsByComment_id(comment_id, article_id);
 
@@ -113,10 +103,8 @@ module.exports = {
     getAllSecondOrThirdLevelCommentsByComment_id,
     getAllCommentsByUserId,
     deleteComments,
-    deleteLikesCommnents,
     insertNewCommentOnArticle,
     insertNewCommentOnComment,
-    deleteComments,
     deleteThisComment,
     getCommentById
 };

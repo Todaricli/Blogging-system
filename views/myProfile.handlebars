@@ -5,8 +5,9 @@
 <div id="my_profile_container">
     {{#if userData}}
     <input id="user_id_temp_storage" name="user_id_temp_storage" value="{{userData.id}}" style="display: none;">
+    <input id="icon_id_temp_storage" name="icon_id_temp_storage" style="display: none;">
     <div id="my_profile_info">
-        <form action="/update_info" method="POST">
+        <form id="updateInfo">
             <div id="my_profile_icon">
                 <div class="my_profile_container">
                     <img id="my-profile-icon-image" src="{{userData.icon_path}}" style="width: 200px;">
