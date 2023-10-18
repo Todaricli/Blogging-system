@@ -138,7 +138,7 @@ CREATE TABLE comments
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE,
     FOREIGN KEY (article_id) REFERENCES articles (id)  ON DELETE CASCADE,
-    FOREIGN KEY (comments_id) REFERENCES comments (id)  ON DELETE CASCADE
+	FOREIGN KEY (comments_id) REFERENCES comments (id) ON DELETE CASCADE
 );
 
 -- Inserting 20 rows of sample data into the comments table with NULL comments_id
@@ -204,7 +204,7 @@ CREATE TABLE likes_comments
     comments_id INTEGER NOT NULL,
     PRIMARY KEY (user_id, comments_id),
     FOREIGN KEY (user_id) REFERENCES user (id),
-    FOREIGN KEY (comments_id) REFERENCES comments (id)
+    FOREIGN KEY (comments_id) REFERENCES comments (id) ON DELETE CASCADE
 );
 
 -- Insert 20 rows of data into the likes_comments table
