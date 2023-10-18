@@ -42,7 +42,7 @@ async function getAuthorByArticle(articleId) {
     const db = await getDatabase();
 
     const author = await db.all(SQL `
-    SELECT user.fname AS author_fname, user.lname AS author_lname
+    SELECT user.fname AS author_fname, user.lname AS author_lname, user.*
     FROM articles
     INNER JOIN user ON articles.author_id = user.id
     WHERE articles.id = ${articleId};
@@ -187,6 +187,40 @@ async function updateArticleToArticleTableWithoutImage(article_id, title, genre,
         WHERE id = ${article_id}`);
 }
 
+async function updateArticleToArticleTableWithoutImage(article_id, title, genre, content_html, content_delta) {
+    const db = await getDatabase();
+
+    return await db.run(SQL`
+        UPDATE articles 
+        SET title = ${title}, genre = ${genre}, content_html = ${content_html}, content_delta = ${content_delta}, date_of_publish = datetime('now')
+        WHERE id = ${article_id}`);
+}
+
+async function filterArticlesBySelectedDates(startDate, endDate) {
+    const db = await getDatabase();
+
+    const articles = await db.all(SQL `
+        select articles.*, user.*
+        from articles 
+        inner join user on articles.author_id = user.id
+        where date_of_publish >= ${startDate} and date_of_publish <= ${endDate}
+    `)
+    return articles;
+}
+
+async function filterArticlesByGenre(genre) {
+    const db = await getDatabase();
+
+    const articles = await db.all(SQL `
+    select articles.*, user.*
+    from articles
+    inner join user on articles.author_id = user.id
+    where genre = ${genre}
+    `)
+
+    return articles;
+}
+
 
 
 module.exports = {
@@ -204,6 +238,9 @@ module.exports = {
     getNumberOfLikesFromArticle,
     getAuthorByArticle,
     insertNewArticleToArticleTable,
+    updateArticleToArticleTable,
+    filterArticlesBySelectedDates,
+    filterArticlesByGenre
     updateArticleToArticleTable,
     updateArticleToArticleTableWithoutImage
 };

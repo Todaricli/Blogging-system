@@ -7,6 +7,22 @@
     </div>
     {{/if}}
 
+    <a href="/writeArticle">Write a new article</a>
+    <br>
+    
+    <div>
+    <form action="/filtered-articles" method="GET">
+    <label for="startDate">Start Date:</label>
+    <input type="date" name="startDate" id="startDate">
+
+    <label for="endDate">End Date:</label>
+    <input type="date" name="endDate" id="endDate">
+
+    <button type="submit" id="dateInput">Filter Articles</button>
+    </form>
+    </div>
+
+
     <h1 id="category_nav">
         {{#if current_category}}
         <div id="specific_category_title">
@@ -58,12 +74,12 @@
                 </div>
 
 
-            <div id="article_title">{{this.title}}</div>
-            <div id="article_description">{{{this.content_html}}}</div>
-            {{!-- No category information yet --}}
-            {{!-- <div id="article_category">{{this.article_category}}</div> --}}
-            <div id="article_timestamp">{{this.date_of_publish}}</div>
-            <div id="btn_readmore">
+                <div id="article_title">{{this.title}}</div>
+                <div id="article_description">{{{this.content_html}}}</div>
+                {{!-- No category information yet --}}
+                {{!-- <div id="article_category">{{this.article_category}}</div> --}}
+                <div id="article_timestamp">{{this.date_of_publish}}</div>
+                <div id="btn_readmore">
                     <a href="/article/{{this.id}}">Read more</a>
                 </div>
             </div>

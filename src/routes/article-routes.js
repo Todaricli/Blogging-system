@@ -60,6 +60,12 @@ router.get('/article/:id', async function (req, res) {
 
     const article = await articleDao.getArticlesByID(article_id);
     const articleId = article[0].id;
+  const article = await articleDao.getArticlesByID(article_id);
+  console.log(article)
+  const articleId = article[0].id;
+
+  try {
+
     res.locals.article = article;
 
     const authorName = await articleDao.getAuthorByArticle(articleId);
@@ -206,5 +212,37 @@ function convertDeltaToHtml(content) {
   return contentArray;
 }
 
+router.get("/calendar", async function(req,res) {
+
+  res.render("test");
+})
+
+router.get('/filtered-articles', async function(req, res) {
+  const {startDate, endDate}  = req.query;
+  console.log(startDate);
+  console.log(endDate);
+
+  const articles = await articleDao.filterArticlesBySelectedDates(startDate, endDate);
+  console.log(articles)
+
+  res.locals.articles = articles;
+  res.locals.articlesByDate = articles;
+  res.locals.articlesLength = articles.length;
+  res.locals.startDate = startDate;
+  res.locals.endDate = endDate;
+  res.render("searchedArticles")
+
+})
+
+router.get('/genre/:genreType', async function (req,res) {
+  const genreType = req.params.genreType;
+  console.log(genreType);
+
+  const articles = await articleDao.filterArticlesByGenre(genreType);
+  console.log(articles);
+
+  res.locals.articles = articles
+  res.render("searchedArticles")
+})
 
 module.exports = router;

@@ -2,3 +2,139 @@ div {
     border: 2px greenyellow solid;
     margin: 0px 0px 20px 30px;
 }
+#page_body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#specific_category_title{
+    width: 100%;
+    float: left;
+    margin: 15px;
+    font-size: 16px;
+    color: black;
+}
+
+#specific_category_title a {
+    color: black;
+    text-decoration: none;
+}
+
+#specific_category_title a:hover {
+    color: blue;
+}
+
+#articles_home i {
+    font-size: 12px;
+}
+
+#article_container {
+    width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 25px;
+}
+
+#article_title {
+    width: 100%;
+    padding: 10px;
+    height: 20%;
+    margin-bottom: 10px;
+    margin: 0;
+}
+
+#article_title h1 {
+    float: left;
+    margin: 0;
+    font-weight: bold;
+    padding-left: 10px;
+    font-size: 2.9rem;
+}
+
+#author_details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-height: 60px;
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 30px;
+    margin-top: 10px;
+
+}
+
+#author_details_left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 100%;
+}
+
+#author_details div {
+    padding: 10px;
+}
+
+#author-name {
+    max-height: 2%;
+    margin: 0;
+    font-size: 1rem;
+}
+
+#author-name div{
+    padding: 0;
+}
+
+#author_icon {
+    padding: 0;
+    margin: 0;
+}
+
+#author_icon img {
+    width: 45px;
+}
+
+#author_name {
+    margin: 5px 0;
+}
+
+#author_name a {
+    color: black;
+}
+
+#author_name a:hover {
+    color: blue;
+}
+
+#article_timestamp {
+    margin: 5px 0;
+}
+
+#like_section {
+    display: flex;
+    justify-content: flex-start;
+    margin: 15px;
+}
+
+#like {
+    margin-right: 15px;
+}
+
+.like-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+}
+
+#open-comment {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+}
+
+#article-img {
+    margin-bottom: 20px;
+}
+

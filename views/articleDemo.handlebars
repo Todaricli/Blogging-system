@@ -1,12 +1,22 @@
+<div id="specific_category_title">
+    <span id="articles_home">
+        <i class="fa-solid fa-arrow-left"></i>
+        <a href="/">Back to Home</a>
+    </span>
+    /
+    <span id="current_category">
+        <a href="/genre/{{article.[0].genre}}">
+            {{article.[0].genre}}
+        </a>
+    </span>
+</div>
+
+
 <link rel="stylesheet" href="/css/articleDemo.css">
 
 <input id="user_id_temp_storage" name="user_id_temp_storage" value="{{user_id}}" hidden>
 
 <div id="article_container">
-    <div id="specific_category_title"><span id="articles_home"><a href="/">All</a></span> / <span
-            id="current_category">{{current_category}}</span>
-    </div>
-
     {{!-- Displaying article content --}}
     <div id="article-div">
         <p id="article_title"><strong>Title:</strong> {{article.[0].title}}</p>
@@ -132,20 +142,51 @@
         {{!-- This anchor tag for testing purpose only --}}
         {{!-- <a href="/writeArticle">Write article</a>
         <hr> --}}
+    <div id="article_title">
+        <h1>{{article.[0].title}}</h1>
+    </div>
+
+    <div id="author_details">
+        <div id="author_details_left">
+            <div id="author_icon">
+                <img src="{{authorName.[0].icon_path}}" alt="author avatar">
+            </div>
+            <div id="author-name">
+                <div>
+                    <p id="author_name">
+                        <a href="/profile?id={{authorName.[0].id}}">{{authorName.[0].author_fname}}
+                            {{authorName.[0].author_lname}}</a>
+                    </p>
+                </div>
+                <div>
+                    <p id="article_timestamp">{{article.[0].date_of_publish}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div id="like_section">
+                <div id="like">
+                    <button class="like-btn">
+                        <i class="fa-regular fa-thumbs-up" id="like-icon"></i>
+                        {{like_count.[0].like_count}}
+                    </button>
+                </div>
 
         {{!-- Displaying comment section --}}
 
         {{!-- <button id="open-comment">Comment
         </button>
 
-        <div class="comment hidden">
-            <form class="comment-form">
-                <button id="close-comment">Cancel</button>
-                <textarea name="comments" id="comments_id" placeholder="Add your comment here..." rows="5"
-                    cols="60"></textarea>
-                <input type="submit" name="submit_button" value="Respond!" />
+                {{!-- Displaying like button --}}
+                <div class="comment hidden">
+                    <form class="comment-form">
+                        <button id="close-comment">Cancel</button>
+                        <textarea name="comments" id="comments_id" placeholder="Add your comment here..." rows="5"
+                            cols="60"></textarea>
+                        <input type="submit" name="submit_button" value="Respond!" />
 
-            </form>
+                    </form>
 
             <div>
                 {{#if comments}}
