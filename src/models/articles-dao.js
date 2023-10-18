@@ -201,12 +201,13 @@ async function filterArticlesBySelectedDates(startDate, endDate) {
 
 async function filterArticlesByGenre(genre) {
     const db = await getDatabase();
+    const genre1 = `${genre}`
 
     const articles = await db.all(SQL `
     select articles.*, user.*
     from articles
     inner join user on articles.author_id = user.id
-    where genre = ${genre}
+    where genre like ${genre1}
     `)
 
     return articles;
