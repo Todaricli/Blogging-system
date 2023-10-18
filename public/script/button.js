@@ -1,23 +1,25 @@
+window.addEventListener(`load`, function () {
 //Create effect for comment 
 //Be default: comment box will be hidden
 //If the user click on button, comment box will appear
 
 
-//Create effect for like button
+  //Create effect for like button
 
-const likeBtn = document.querySelector(".like-btn");
-const likeIcon = document.getElementById("like-icon");
+  const likeBtn = document.querySelector(".like-btn");
+  const likeIcon = document.getElementById("like-icon");
 
-let isLiked = false;
+  let isLiked = false;
 
-likeBtn.addEventListener("click", () => {
-  isLiked = !isLiked;
+  likeBtn.addEventListener("click", () => {
+    isLiked = !isLiked;
 
- if (isLiked) {
-        likeIcon.classList.replace("fa-regular", "fa-solid");
-        likeIcon.classList.add("liked");
+    if (isLiked) {
+      likeIcon.classList.replace("fa-regular", "fa-solid");
+      likeIcon.classList.add("liked");
     } else {
-        likeIcon.classList.replace("fa-solid", "fa-regular");
-        likeIcon.classList.remove("liked");
+      likeIcon.classList.replace("fa-solid", "fa-regular");
+      likeIcon.classList.remove("liked");
     }
-})
+  })
+});

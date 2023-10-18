@@ -5,7 +5,6 @@ const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 const subDao = require('../models/sub-dao.js');
 const commentDao = require('../models/comments-dao.js');
-const comment = require('../middleware/comments.js')
 const userDao = require('../models/user-dao.js');
 const analyticsDao = require('../models/analytics-dao.js')
 
@@ -121,15 +120,15 @@ router.get('/my_post', verifyAuthenticated, async function (_, res) {
     const article_id = data[0].article_id;
     console.log(article_id)
 
-    const comments = await commentDao.getAllCommentsByArticles(article_id);
-    console.log(comments)
+    // const comments = await commentDao.getAllCommentsByArticles(article_id);
+    // console.log(comments)
 
-    const filteredComments = comments.filter(comment => comment.comment_id !== null);
+    // const filteredComments = comments.filter(comment => comment.comment_id !== null);
 
 
-    const totalResponses = filteredComments.length;
-    res.locals.responses = filteredComments;
-    res.locals.total_responses = totalResponses;
+    // const totalResponses = filteredComments.length;
+    // res.locals.responses = filteredComments;
+    // res.locals.total_responses = totalResponses;
 
     res.render('myPost');
 })
@@ -142,7 +141,7 @@ router.get('/deleteComment/:id', async function(req,res) {
     const article_id = data[0].article_id;
 
     if (comment_id) {
-        await commentDao.deleteComments(comment_id,article_id);
+        await commentDao.deleteComments(comment_id, article_id);
         const responses = await commentDao.getAllCommentsByArticles(article_id);
         console.log("Responses:");
         console.log(responses);

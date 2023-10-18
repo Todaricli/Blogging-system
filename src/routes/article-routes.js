@@ -3,28 +3,26 @@ const router = express.Router();
 const articleDao = require('../models/articles-dao.js');
 const commentDao = require('../models/comments-dao.js');
 const searchDao = require('../models/search-dao.js');
-const { generateComments } = require('../middleware/comments.js');
-const comment = require('../middleware/comments.js')
 
 const QuillDeltaToHtmlConverter =
-    require('quill-delta-to-html').QuillDeltaToHtmlConverter;
+  require('quill-delta-to-html').QuillDeltaToHtmlConverter;
 const uploadTempFolder = require("../middleware/multer-uploader.js");
 const fs = require("fs");
 const jimp = require("jimp");
-const { filterArticlesByGenre } = require('../models/search-dao.js');
 
 
 router.get('/writeArticle', function (req, res) {
-    res.render('writeArticle');
+  res.render('writeArticle');
 });
 
 router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async function (req, res) {
   const newArticle = req.body;
+  console.log(newArticle);
 
-    const user_id = res.locals.user.id;
-    const title = newArticle.titleKey;
-    const genre = newArticle.genreKey;
-    const content = newArticle.contentKey;
+  const user_id = res.locals.user.id;
+  const title = newArticle.titleKey;
+  const genre = newArticle.genreKey;
+  const content = newArticle.contentKey;
 
   try {
     const contentArray = convertDeltaToHtml(content);
@@ -33,12 +31,16 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
 
     //Get article image
     const fileInfo = req.file;
-    const imagePath = "user" + user_id + "-" + fileInfo.originalname;
-
-    processAndStoreImage(fileInfo, imagePath);
-
     let done = undefined;
-    done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string, imagePath);
+    let imagePath;
+
+    if (fileInfo) {
+      imagePath = "user" + user_id + "-" + fileInfo.originalname;
+      processAndStoreImage(fileInfo, imagePath);
+      done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string, imagePath);
+    } else {
+      done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string)
+    }
 
     if (done) {
       res.status(200).send("New Article Created!");
@@ -49,33 +51,71 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
 
 });
 
-router.get('/article/:id',comment.generateComments ,async function (req, res) {
+router.get('/article/:id', async function (req, res) {
+
+  if (res.locals.user) {
+    res.locals.user_id = res.locals.user.id
+  }
+
   const article_id = req.params.id;
 
-  const article = await articleDao.getArticlesByID(article_id);
-  console.log(article)
-  const articleId = article[0].id;
-
   try {
+
+    const article = await articleDao.getArticlesByID(article_id);
+    console.log(article)
+    const articleId = article[0].id;
 
     res.locals.article = article;
 
     const authorName = await articleDao.getAuthorByArticle(articleId);
     res.locals.authorName = authorName;
-    console.log(authorName)
-
-    // const comments = await articleDao.getAllCommentsFromArticle(articleId);
-    // res.locals.comments = comments;
 
     const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
     res.locals.like_count = likeCounts
 
-  } catch (error) {
-    const html = "<p>Article loading error! refresh the page.<p>"
-    res.locals.article_content = html;
-  }
 
-  res.render("articleDemo");
+    const comments = await commentDao.getAllFirstLevelCommentsByArticleID(articleId);
+
+    async function getAllComments(comments) {
+      try {
+        const processedComments = await Promise.all(comments.map(async (comment) => {
+          try {
+            const secondLevelComments = await commentDao.getAllSecondOrThirdLevelCommentsByComment_id(comment.id, article_id);
+            comment["second_level_comments"] = secondLevelComments;
+
+            const secondLevelComment = comment.second_level_comments;
+
+            await Promise.all(secondLevelComment.map(async (comment) => {
+              try {
+                const thirdLevelComments = await commentDao.getAllSecondOrThirdLevelCommentsByComment_id(comment.id, article_id);
+                comment["third_level_comments"] = thirdLevelComments;
+              } catch (e) {
+                throw new Error("Comments loading failed");
+              }
+            }));
+
+            return comment;
+          } catch (e) {
+            throw new Error("Comments loading failed.")
+          }
+
+        }));
+        return processedComments;
+
+      } catch (e) {
+        throw new Error("Comments loading failed.")
+      }
+    }
+
+    const commentsForThisAriticle = await getAllComments(comments);
+    res.locals.comments = commentsForThisAriticle;
+
+    res.render("articleDemo")
+
+  } catch (error) {
+    const html = "<p>Error occured: <p>"
+    res.locals.article_content = html + error;
+  }
 
 });
 
@@ -114,12 +154,16 @@ router.post("/api/updateArticle", uploadTempFolder.single("imageKey"), async fun
 
     //Get article image
     const fileInfo = req.file;
-    const imagePath = "user" + user_id + "-" + fileInfo.originalname;
-
-    processAndStoreImage(fileInfo, imagePath);
-
     let done = undefined;
-    done = await articleDao.updateArticleToArticleTable(article_id, title, genre, html, delta_obj_string, imagePath);
+    let imagePath;
+
+    if (fileInfo) {
+      imagePath = "user" + user_id + "-" + fileInfo.originalname;
+      processAndStoreImage(fileInfo, imagePath);
+      done = await articleDao.updateArticleToArticleTable(article_id, title, genre, html, delta_obj_string, imagePath);
+    } else {
+      done = await articleDao.updateArticleToArticleTableWithoutImage(user_id, title, genre, html, delta_obj_string)
+    }
 
     if (done) {
       res.status(200).send("Article updated");
@@ -171,12 +215,12 @@ function convertDeltaToHtml(content) {
   return contentArray;
 }
 
-router.get("/calendar", async function(req,res) {
+router.get("/calendar", async function (req, res) {
 
   res.render("test");
 })
 
-router.get('/genre/:genreType', async function (req,res) {
+router.get('/genre/:genreType', async function (req, res) {
   const genreType = req.params.genreType;
   console.log(genreType);
 
