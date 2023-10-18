@@ -1,4 +1,7 @@
 window.addEventListener(`load`, function () {
+//Create effect for comment 
+//Be default: comment box will be hidden
+//If the user click on button, comment box will appear
 
 
   //Create effect for like button

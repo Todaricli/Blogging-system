@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const articleDao = require('../models/articles-dao.js');
 const commentDao = require('../models/comments-dao.js');
+const searchDao = require('../models/search-dao.js');
 
 const QuillDeltaToHtmlConverter =
   require('quill-delta-to-html').QuillDeltaToHtmlConverter;
 const uploadTempFolder = require("../middleware/multer-uploader.js");
 const fs = require("fs");
 const jimp = require("jimp");
+const { filterArticlesByGenre } = require('../models/search-dao.js');
 
 
 router.get('/writeArticle', function (req, res) {
@@ -219,31 +221,19 @@ router.get("/calendar", async function (req, res) {
   res.render("test");
 })
 
-router.get('/filtered-articles', async function (req, res) {
-  const { startDate, endDate } = req.query;
-  console.log(startDate);
-  console.log(endDate);
-
-  const articles = await articleDao.filterArticlesBySelectedDates(startDate, endDate);
-  console.log(articles)
-
-  res.locals.articles = articles;
-  res.locals.articlesByDate = articles;
-  res.locals.articlesLength = articles.length;
-  res.locals.startDate = startDate;
-  res.locals.endDate = endDate;
-  res.render("searchedArticles")
-
-})
-
 router.get('/genre/:genreType', async function (req, res) {
   const genreType = req.params.genreType;
   console.log(genreType);
 
-  const articles = await articleDao.filterArticlesByGenre(genreType);
+  const articles = await searchDao.filterArticlesByGenre(genreType)
   console.log(articles);
 
   res.locals.articles = articles
+  res.render("searchedArticles")
+})
+
+router.get("/genre", async function (req, res) {
+
   res.render("searchedArticles")
 })
 

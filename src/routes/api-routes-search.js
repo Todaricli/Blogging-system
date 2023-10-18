@@ -67,4 +67,22 @@ router.get("/searched-Article", async (req,res) =>{
 
     res.render("searchedArticles")
 })
+
+router.get('/filtered-articles', async function(req, res) {
+    const {startDate, endDate}  = req.query;
+    console.log(startDate);
+    console.log(endDate);
+  
+    const articles = await searchDao.filterArticlesBySelectedDates(startDate, endDate)
+    console.log(articles)
+  
+    res.locals.articles = articles;
+    res.locals.articlesByDate = articles;
+    res.locals.articlesLength = articles.length;
+    res.locals.startDate = startDate;
+    res.locals.endDate = endDate;
+    res.render("searchedArticles")
+  
+})
+
 module.exports = router

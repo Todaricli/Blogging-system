@@ -14,8 +14,10 @@ const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = requ
 router.get('/', async function (req, res) {
 
     res.locals.top5Articles = await articleDao.getTopFiveArticles();
-    res.locals.articleData = await articleDao.getAllArticles();
+    const articleData = await articleDao.getAllArticles();
+    //console.log(articleData)
     
+    res.locals.articleData = articleData;
 
     res.render('articlesHome');
 });
