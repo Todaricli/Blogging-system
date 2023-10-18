@@ -187,6 +187,30 @@ async function filterArticlesBySelectedDates(startDate, endDate) {
     return articles;
 }
 
+async function getArticleTitleById(articleId) {
+    const db = await getDatabase();
+
+    const title = await db.all(SQL `
+    select title
+    from articles
+    where id = ${articleId}
+    `)
+
+    return title;
+}
+
+async function getAuthorIdByArticleId(articleId) {
+    const db = await getDatabase();
+
+    const authorId = await db.all(SQL `
+    SELECT articles.author_id
+    FROM articles
+    WHERE articles.id = ${articleId};
+    `)
+
+    return authorId;
+}
+
 module.exports = {
     getArticlesByUserID,
     getArticlesByID,
@@ -201,5 +225,8 @@ module.exports = {
     getAllCommentsFromArticle,
     getAuthorByArticle,
     insertNewArticleToArticleTable,
-    updateArticleToArticleTable
+    updateArticleToArticleTable,
+    filterArticlesBySelectedDates,
+    getArticleTitleById,
+    getAuthorIdByArticleId
 };

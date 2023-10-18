@@ -20,17 +20,17 @@ DROP TABLE IF EXISTS user;
 
 CREATE TABLE user
 (
-    id          INTEGER     NOT NULL PRIMARY KEY,
-    username    VARCHAR(28) NOT NULL,
-    password    VARCHAR(28) NOT NULL,
-    auth_token  VARCHAR(100),
-    email       VARCHAR(28),
-    fname       VARCHAR(28),
-    lname       VARCHAR(28),
-    DOB         DATE,
+    id INTEGER NOT NULL PRIMARY KEY,
+    username VARCHAR(28) NOT NULL,
+    password VARCHAR(28) NOT NULL,
+    auth_token VARCHAR(100),
+    email VARCHAR(28),
+    fname VARCHAR(28),
+    lname VARCHAR(28),
+    DOB DATE,
     description VARCHAR(120),
-    icon_path   VARCHAR(20),
-    admin       INTEGER     NOT NULL,
+    icon_path VARCHAR(20),
+    admin INTEGER NOT NULL,
     CHECK (admin >= 0 AND admin <= 1)
 );
 
@@ -51,14 +51,14 @@ VALUES
 
 CREATE TABLE articles
 (
-    id              INTEGER       NOT NULL PRIMARY KEY,
-    title           VARCHAR(88)   NOT NULL,
-    content_html    VARCHAR(8000) NOT NULL,
-    content_delta   VARCHAR(8000) NOT NULL,
-    genre           VARCHAR(20),
-    image           VARCHAR(8000),
-    date_of_publish TIMESTAMP     NOT NULL,
-    author_id       INTEGER       NOT NULL,
+    id INTEGER NOT NULL PRIMARY KEY,
+    title VARCHAR(88) NOT NULL,
+    content_html VARCHAR(8000) NOT NULL,
+    content_delta VARCHAR(8000) NOT NULL,
+    genre VARCHAR(20),
+    image VARCHAR(8000),
+    date_of_publish TIMESTAMP NOT NULL,
+    author_id INTEGER NOT NULL,
     FOREIGN KEY (author_id) REFERENCES user (id)
 );
 
@@ -163,12 +163,12 @@ VALUES (1, 'Stunningly Beautiful - Abel Tasman Coast Track',
 
 CREATE TABLE comments
 (
-    id              INTEGER   NOT NULL,
-    user_id         INTEGER   NOT NULL,
-    article_id      INTEGER   NOT NULL,
-    content         VARCHAR(1000),
+    id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    article_id INTEGER NOT NULL,
+    content VARCHAR(1000),
     time_of_comment TIMESTAMP NOT NULL,
-    comments_id     INTEGER,
+    comments_id INTEGER,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE,
     FOREIGN KEY (article_id) REFERENCES articles (id)  ON DELETE CASCADE,
@@ -210,31 +210,33 @@ CREATE TABLE likes
 );
 
 -- Inserting 20 rows of sample data into the likes table
-INSERT INTO likes (id, user_id, article_id)
-VALUES (1, 1, 1),
-       (2, 2, 1),
-       (3, 3, 2),
-       (4, 4, 2),
-       (5, 5, 3),
-       (6, 1, 3),
-       (7, 2, 4),
-       (8, 3, 4),
-       (9, 4, 5),
-       (10, 5, 5),
-       (11, 1, 6),
-       (12, 2, 6),
-       (13, 3, 7),
-       (14, 4, 7),
-       (15, 5, 8),
-       (16, 1, 8),
-       (17, 2, 9),
-       (18, 3, 9),
-       (19, 4, 10),
-       (20, 5, 10);
+INSERT INTO likes
+    (id, user_id, article_id)
+VALUES
+    (1, 1, 1),
+    (2, 2, 1),
+    (3, 3, 2),
+    (4, 4, 2),
+    (5, 5, 3),
+    (6, 1, 3),
+    (7, 2, 4),
+    (8, 3, 4),
+    (9, 4, 5),
+    (10, 5, 5),
+    (11, 1, 6),
+    (12, 2, 6),
+    (13, 3, 7),
+    (14, 4, 7),
+    (15, 5, 8),
+    (16, 1, 8),
+    (17, 2, 9),
+    (18, 3, 9),
+    (19, 4, 10),
+    (20, 5, 10);
 
 CREATE TABLE likes_comments
 (
-    user_id     INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
     comments_id INTEGER NOT NULL,
     PRIMARY KEY (user_id, comments_id),
     FOREIGN KEY (user_id) REFERENCES user (id),
@@ -242,124 +244,135 @@ CREATE TABLE likes_comments
 );
 
 -- Insert 20 rows of data into the likes_comments table
-INSERT INTO likes_comments (user_id, comments_id)
-VALUES (1, 1),
-       (1, 2),
-       (1, 3),
-       (2, 4),
-       (2, 5),
-       (2, 6),
-       (3, 7),
-       (3, 8),
-       (3, 9),
-       (4, 10),
-       (4, 11),
-       (4, 12),
-       (5, 13),
-       (5, 14),
-       (5, 15),
-       (6, 16),
-       (6, 17),
-       (6, 18),
-       (7, 19),
-       (7, 20);
+INSERT INTO likes_comments
+    (user_id, comments_id)
+VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (2, 4),
+    (2, 5),
+    (2, 6),
+    (3, 7),
+    (3, 8),
+    (3, 9),
+    (4, 10),
+    (4, 11),
+    (4, 12),
+    (5, 13),
+    (5, 14),
+    (5, 15),
+    (6, 16),
+    (6, 17),
+    (6, 18),
+    (7, 19),
+    (7, 20);
 
 CREATE TABLE subscription
 (
     being_subscribed_id INTEGER NOT NULL,
-    follower_id         INTEGER NOT NULL,
+    follower_id INTEGER NOT NULL,
     PRIMARY KEY (being_subscribed_id, follower_id),
     FOREIGN KEY (being_subscribed_id) REFERENCES user (id),
     FOREIGN KEY (follower_id) REFERENCES user (id)
 );
 
 -- Inserting 20 rows of sample data into the subscription table
-INSERT INTO subscription (being_subscribed_id, follower_id)
-VALUES (1, 2),
-       (1, 3),
-       (1, 4),
-       (2, 3),
-       (2, 4),
-       (2, 5),
-       (3, 4),
-       (3, 5),
-       (3, 1),
-       (4, 5),
-       (4, 1),
-       (4, 2),
-       (5, 1),
-       (5, 2),
-       (5, 3),
-       (1, 5),
-       (2, 1),
-       (3, 2),
-       (4, 3),
-       (5, 4);
+INSERT INTO subscription
+    (being_subscribed_id, follower_id)
+VALUES
+    (1, 2),
+    (1, 3),
+    (1, 4),
+    (2, 3),
+    (2, 4),
+    (2, 5),
+    (3, 4),
+    (3, 5),
+    (3, 1),
+    (4, 5),
+    (4, 1),
+    (4, 2),
+    (5, 1),
+    (5, 2),
+    (5, 3),
+    (1, 5),
+    (2, 1),
+    (3, 2),
+    (4, 3),
+    (5, 4);
 
 CREATE TABLE notifications
 (
-    id      INTEGER   NOT NULL PRIMARY KEY,
-    host_id INTEGER   NOT NULL,
-    time    TIMESTAMP NOT NULL,
+    id INTEGER NOT NULL PRIMARY KEY,
+    host_id INTEGER NOT NULL,
+    receiver_id INTEGER NOT NULL,
+    time TIMESTAMP NOT NULL,
     content VARCHAR(88),
+    article_id INTEGER,
+    type TEXT NOT NULL,
+    isRead INTEGER NOT NULL,
     FOREIGN KEY (host_id) REFERENCES user (id)
 );
 
 -- Inserting 20 rows of sample data into the notifications table
-INSERT INTO notifications (id, host_id, time, content)
-VALUES (1, 1, '2023-10-10 10:15:00', 'You have a new follower.'),
-       (2, 2, '2023-10-10 11:30:00', 'New article published: "Introduction to Fabric Types"'),
-       (3, 3, '2023-10-10 12:45:00', 'Someone liked your comment.'),
-       (4, 4, '2023-10-10 14:00:00', 'New article published: "Silk Fabric Production"'),
-       (5, 5, '2023-10-10 15:15:00', 'You have a new follower.'),
-       (6, 1, '2023-10-10 16:30:00', 'Your article received a comment.'),
-       (7, 2, '2023-10-10 17:45:00', 'New article published: "Cotton vs. Polyester"'),
-       (8, 3, '2023-10-10 19:00:00', 'Someone liked your article.'),
-       (9, 4, '2023-10-10 20:15:00', 'You have a new follower.'),
-       (10, 5, '2023-10-10 21:30:00', 'New article published: "Wool Fabric Properties"'),
-       (11, 1, '2023-10-10 22:45:00', 'Someone liked your comment.'),
-       (12, 2, '2023-10-10 23:59:00', 'You have a new follower.'),
-       (13, 3, '2023-10-11 10:15:00', 'New article published: "Linen Fabric Uses"'),
-       (14, 4, '2023-10-11 11:30:00', 'Your article received a comment.'),
-       (15, 5, '2023-10-11 12:45:00', 'Someone liked your article.'),
-       (16, 1, '2023-10-11 14:00:00', 'You have a new follower.'),
-       (17, 2, '2023-10-11 15:15:00', 'New article published: "Satin Fabric Elegance"'),
-       (18, 3, '2023-10-11 16:30:00', 'Your comment was mentioned in an article.'),
-       (19, 4, '2023-10-11 17:45:00', 'New article published: "Denim Fabric History"'),
-(20, 5, '2023-10-11 19:00:00', 'Your article was shared by a follower.');
+INSERT INTO notifications
+    (id, host_id, receiver_id, time, content, article_Id, type, isRead)
+VALUES
+    (1, 2, 1, '2023-10-10 10:15:00', 'user2 just subscribed to you!', null, 'sub', 0),
+    (6, 3, 1, '2023-10-10 16:30:00', 'user3 just liked your article!', null, 'like', 0),
+    (16, 4, 1, '2023-10-11 14:00:00', 'user4 just wrote a new article: "Textiles Through the Ages"!', 4, 'write', 0),
+    (11, 5, 1, '2023-10-10 22:45:00', 'user5 just wrote a new article: "Dyeing Techniques"!', 5, 'write', 0);
 
-CREATE TABLE notify
-(
-    id              INTEGER NOT NULL,
-    notification_id INTEGER NOT NULL,
-    follower_id     INTEGER NOT NULL,
-    PRIMARY KEY (id, notification_id, follower_id),
-    FOREIGN KEY (notification_id) REFERENCES notifications (id),
-    FOREIGN KEY (follower_id) REFERENCES user (id)
-);
+-- (2, 1, 2, '2023-10-10 11:30:00', 'New article published: "Introduction to Fabric Types"', 0),
+-- (3, 1, 3, '2023-10-10 12:45:00', 'Someone liked your comment.', 0),
+-- (4, 1, 4, '2023-10-10 14:00:00', 'New article published: "Silk Fabric Production"', 0),
+-- (5, 1, 5, '2023-10-10 15:15:00', 'You have a new follower.', 0),
+-- (7, 1, 2, '2023-10-10 17:45:00', 'New article published: "Cotton vs. Polyester"', 0),
+-- (8, 1, 3, '2023-10-10 19:00:00', 'Someone liked your article.', 0),
+-- (9, 1, 4, '2023-10-10 20:15:00', 'You have a new follower.', 0),
+-- (10, 1, 5, '2023-10-10 21:30:00', 'New article published: "Wool Fabric Properties"', 0),
+-- (12, 1, 2, '2023-10-10 23:59:00', 'You have a new follower.', 0),
+-- (13, 1, 3, '2023-10-11 10:15:00', 'New article published: "Linen Fabric Uses"', 0),
+-- (14, 1, 4, '2023-10-11 11:30:00', 'Your article received a comment.', 0),
+-- (15, 1, 5, '2023-10-11 12:45:00', 'Someone liked your article.', 0),
+-- (17, 1, 2, '2023-10-11 15:15:00', 'New article published: "Satin Fabric Elegance"', 0),
+-- (18, 1, 3, '2023-10-11 16:30:00', 'Your comment was mentioned in an article.', 0),
+-- (19, 1, 4, '2023-10-11 17:45:00', 'New article published: "Denim Fabric History"', 0),
+-- (20, 1, 5, '2023-10-11 19:00:00', 'Your article was shared by a follower.', 0);
 
--- Inserting 20 rows of sample data into the notify table
-INSERT INTO notify (id, notification_id, follower_id)
-VALUES (1, 1, 2),
-       (2, 2, 3),
-       (3, 3, 4),
-       (4, 4, 5),
-       (5, 5, 1),
-       (6, 6, 2),
-       (7, 7, 3),
-       (8, 8, 4),
-       (9, 9, 5),
-       (10, 10, 1),
-       (11, 11, 2),
-       (12, 12, 3),
-       (13, 13, 4),
-       (14, 14, 5),
-       (15, 15, 1),
-       (16, 16, 2),
-       (17, 17, 3),
-       (18, 18, 4),
-       (19, 19, 5),
-       (20, 20, 1);
+-- CREATE TABLE notify
+-- (
+--     id              INTEGER NOT NULL,
+--     notification_id INTEGER NOT NULL,
+--     follower_id     INTEGER NOT NULL,
+--     PRIMARY KEY (id, notification_id, follower_id),
+--     FOREIGN KEY (notification_id) REFERENCES notifications (id),
+--     FOREIGN KEY (follower_id) REFERENCES user (id)
+-- );
+
+-- -- Inserting 20 rows of sample data into the notify table
+-- INSERT INTO notify (id, notification_id, follower_id)
+-- VALUES (1, 1, 2),
+--        (2, 2, 3),
+--        (3, 3, 4),
+--        (4, 4, 5),
+--        (5, 5, 1),
+--        (6, 6, 2),
+--        (7, 7, 3),
+--        (8, 8, 4),
+--        (9, 9, 5),
+--        (10, 10, 1),
+--        (11, 11, 2),
+--        (12, 12, 3),
+--        (13, 13, 4),
+--        (14, 14, 5),
+--        (15, 15, 1),
+--        (16, 16, 2),
+--        (17, 17, 3),
+--        (18, 18, 4),
+--        (19, 19, 5),
+--        (20, 20, 1);
 
 -- creating a view that shows articles likes, comments and popularity
 

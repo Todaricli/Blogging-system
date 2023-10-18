@@ -1,30 +1,43 @@
 const express = require('express');
 const router = express.Router();
 
-const articlesDao = require('../../models/articles-dao');
+const subDao = require('../../models/sub-dao');
+const notifyDao = require('../../models/notify-dao');
 
-// router.get('/api/get-all-articles-from-db', async function (req, res) {
-//   const allArticles = await articlesDao.getAllArticles();
-  
-//   res.json(allArticles);
-// });
+router.post(
+    '/api/create-new-article-notif-for-subs',
+    async function (req, res) {
+        const userId = res.locals.user.id;
+        const articleId = parseInt(req.body.articleId);
+        console.log(userId);
+        console.log(articleId);
 
-// router.get('/api/get-top5-articles-from-db', async function (req, res) {
-//   const top5Articles = await articlesDao.getTopFiveArticles();
-//   res.json(top5Articles);
-// });
+        const subscribers = await subDao.getSubscribersByUserID(userId);
+        try {
+            for (subscriber of subscribers) {
+                const n = await notifyDao.createNotification(
+                    subscriber.id,
+                    userId,
+                    articleId,
+                    'write'
+                );
+                await notifyDao.storeNotificationToUser(
+                    n.senderId,
+                    n.receiverId,
+                    n.timestamp,
+                    n.content,
+                    n.articleId,
+                    n.type,
+                    n.isRead
+                );
 
-// router.get('/api/get-article-by-id', async function (req, res) {
-//   const id  = req.query.id;
-//   const article = await articlesDao.getArticlesByID(id);
-//   res.json(article);
-// });
-
-// router.get('/api/render-full-article', async function (req, res) {
-//   const article = req.query.article;
-//   console.log(article);
-//   res.locals.article = article;
-//   res.render("article");
-// });
+            }
+            res.sendStatus(204);
+        } catch (err) {
+            console.error(err);
+            res.sendStatus(500);
+        }
+    }
+);
 
 module.exports = router;
