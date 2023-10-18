@@ -67,6 +67,8 @@
 <hr>
 
 {{#if comments}}
+<input id="user_id_temp_storage" name="user_id_temp_storage" value="{{user_id}}">
+<input id="article_id_temp_storage" name="article_id_temp_storage" value="{{article.[0].author_id}}">
 
 <div id="comments-div">
     <div>
@@ -148,3 +150,4 @@
 
 {{!-- JS linked to button effects --}}
 <script src="/script/button.js"></script>
+<script src="/script/comment.js"></script>

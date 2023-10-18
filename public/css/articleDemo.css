@@ -1,7 +1,9 @@
-/* div {
+
+/** this div effect for developing purpose only **/
+div {
     border: 2px greenyellow solid;
     margin: 0px 0px 20px 30px;
-} */
+}
 
 #page_body {
     display: flex;

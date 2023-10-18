@@ -105,7 +105,7 @@ async function commentsOnArticle() {
 
       console.log(responseData);
 
-      addNewCommentElement(comments_div, responseData.username, responseData.fname, responseData.lname, responseData.content, responseData.time_of_comment, responseData.id)
+      // addNewCommentElement(comments_div, responseData.username, responseData.fname, responseData.lname, responseData.content, responseData.time_of_comment, responseData.id)
 
       alert("Comment added!");
 
@@ -118,11 +118,18 @@ async function commentsOnArticle() {
     } catch (e) {
       alert(e);
     }
+
+    const directTimer = setTimeout(() => {
+      window.location.assign(`/article/${article_id}`);
+      clearTimeout(directTimer);
+    }, 500);
+
   })
 }
 
 async function commentOnComment() {
   const forms = document.querySelectorAll(".comment_on_comment_form");
+  console.log(forms);
 
   forms.forEach(await attachListenerToForm);
 
@@ -158,7 +165,7 @@ async function commentOnComment() {
           throw new Error('Request failed with status: ' + response.status + " " + responseData);
         }
 
-        addNewCommentElement(comments_div, responseData.username, responseData.fname, responseData.lname, responseData.content, responseData.time_of_comment, responseData.id)
+        // addNewCommentElement(comments_div, responseData.username, responseData.fname, responseData.lname, responseData.content, responseData.time_of_comment, responseData.id)
 
         alert("Comment added!");
 
@@ -168,9 +175,16 @@ async function commentOnComment() {
           textarea.value = "";
         })
 
+
       } catch (e) {
         alert(e);
       }
+
+      const directTimer = setTimeout(() => {
+        window.location.assign(`/article/${article_id}`);
+        clearTimeout(directTimer);
+      }, 500);
+
     })
   }
 }

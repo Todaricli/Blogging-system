@@ -1,19 +1,5 @@
 window.addEventListener(`load`, function () {
 
-  const modal = document.querySelector(".comment")
-
-  const openModal = function () {
-    modal.classList.remove("hidden");
-  };
-
-  openComment.addEventListener("click", openModal)
-
-  const closeModal = function () {
-    modal.classList.add("hidden");
-  };
-
-  closeComment.addEventListener("click", closeModal)
-
 
   //Create effect for like button
 
