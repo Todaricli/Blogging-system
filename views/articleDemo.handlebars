@@ -13,7 +13,6 @@
     </span>
 </div>
 
-
 <div id="article_container">
     {{!-- Displaying article content --}}
     <div id="article_title">
@@ -38,14 +37,15 @@
             </div>
         </div>
 
-        <div>
-            <div id="like_section">
-                <div id="like">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-thumbs-up" id="like-icon"></i>
-                        {{like_count.[0].like_count}}
-                    </button>
-                </div>
+        <div id="like_section">
+            <div id="like">
+                <input value="{{user.id}}" id="user_id" hidden>
+                <input value="{{article.[0].id}}" id="article_id" hidden>
+
+                <button class="like-btn">
+                    <i class="fa-thumbs-up" id="like-icon"></i>
+                    {{like_count}}
+                </button>
             </div>
         </div>
 
