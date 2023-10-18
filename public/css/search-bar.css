@@ -30,7 +30,7 @@
     background-color: white;
     position: absolute;
     width: 480px;
-    display: flex;
+    display: none;
     flex-direction: column;
     max-height: 350px;
     overflow: scroll;

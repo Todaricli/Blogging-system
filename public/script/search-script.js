@@ -6,6 +6,7 @@ window.addEventListener(`load`, function () {
     const searchNavBar = document.querySelector(".search_bar")
     const searchAllButton = document.querySelector("#viewAllSearchResults")
     const searchResultContainer = document.querySelector("#searchResultContainer")
+    
 
 
     window.addEventListener(`click`, (e)=>{
