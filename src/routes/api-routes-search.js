@@ -39,15 +39,26 @@ router.get("/searched-Article", async (req,res) =>{
     let search = req.query.search
     res.locals.search = search;
     console.log(search)
+    let articlesLength = ""
+    let usersLength = ""
 
     const articles = await searchDao.getArticlesByTitleForSearch(search);
     console.log(articles)
-
-    const articlesLength = articles.length;
+    if(articles != undefined){
+        articlesLength = articles.length;
+    }else{
+        articlesLength = 0
+    }
+    
 
     const users = await searchDao.getArticlesByAuthorNameForSearch(search);
 
-    const usersLength = users.length;
+    if(articles != undefined){
+        usersLength = users.length;
+    }else{
+        usersLength = 0
+    }
+
 
     res.locals.articles = articles;
     res.locals.users = users;

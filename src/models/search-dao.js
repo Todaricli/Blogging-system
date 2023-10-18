@@ -37,7 +37,7 @@ async function getArticlesBySingleDate(date){
     const db = await getDatabase();
     const dateS = `${date}`
     const articles = await db.all(SQL`
-        SELECT articles.title, comments_count, date(date_of_publish) as date from Articles_info left join articles on Articles_info.article_id = articles.id
+        SELECT articles.title, comments_count, date(articles.date_of_publish) as date from Articles_info left join articles on Articles_info.article_id = articles.id
         where date = ${dateS}
     `)
     return articles
