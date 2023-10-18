@@ -26,13 +26,16 @@
         <input id="article_id_temp_storage" name="article_id_temp_storage" value="{{article.[0].id}}" hidden>
 
         <hr>
+        <div>
+            <button id="comment-section-opener">See comments</button>
+        </div>
         {{#if comments}}
 
         <div id="comments-div">
             <div>
                 <form id="comment_on_article_form">
-                    <textarea name="comment_content" placeholder="comment on this article!"></textarea>
-                    <button id="commentOnArticleButton">Submit</button>
+                    <textarea name="comment_content" placeholder="comment on this article!" required></textarea>
+                    <button id="commentOnArticleButton" type="submit">Submit</button>
                 </form>
             </div>
             {{#each comments}}
@@ -45,10 +48,16 @@
                 <button class="textareaOpener">Comment</button>
                 <div>
                     <form class="comment_on_comment_form">
-                        <input name="comment_id_storage" value="{{this.id}}">
-                        <textarea name="comment_content" placeholder="leave your comments here"></textarea>
+                        <input name="comment_id_storage" value="{{this.id}}" hidden>
+                        <textarea name="comment_content" placeholder="leave your comments here" required></textarea>
                         <button class="commentSubmitButton">Submit</button>
                     </form>
+                </div>
+                <div>
+                    <!-- these three element in the div must next to each other, if anyone modify CSS, should keep this in mind -->
+                    <input name="comment_id_temp_storage" value="{{this.id}}" hidden>
+                    <button class="deleteCommentButton">delete</button>
+                    <input name="commenter_id_temp_storage" value="{{this.user_id}}" hidden>
                 </div>
                 {{#if this.second_level_comments}}
                 {{#each this.second_level_comments}}
@@ -61,10 +70,16 @@
                     <button class="textareaOpener">Comment</button>
                     <div>
                         <form class="comment_on_comment_form">
-                            <input name="comment_id_storage" value="{{this.id}}">
-                            <textarea name="comment_content" placeholder="leave your comments here"></textarea>
+                            <input name="comment_id_storage" value="{{this.id}}" hidden>
+                            <textarea name="comment_content" placeholder="leave your comments here" required></textarea>
                             <button class="commentSubmitButton">Submit</button>
                         </form>
+                    </div>
+                    <div>
+                        <!-- these three element in the div must next to each other, if anyone modify CSS, should keep this in mind -->
+                        <input name="comment_id_temp_storage" value="{{this.id}}" hidden>
+                        <button class="deleteCommentButton">delete</button>
+                        <input name="commenter_id_temp_storage" value="{{this.user_id}}" hidden>
                     </div>
                     {{#if this.third_level_comments}}
                     {{#each this.third_level_comments}}
@@ -74,6 +89,12 @@
                         <span>{{this.lname}}</span>
                         <span>{{this.content}}</span>
                         <span>{{this.time_of_comment}}</span>
+                        <div>
+                            <!-- these three element in the div must next to each other, if anyone modify CSS, should keep this in mind -->
+                            <input name="comment_id_temp_storage" value="{{this.id}}" hidden>
+                            <button class="deleteCommentButton">delete</button>
+                            <input name="commenter_id_temp_storage" value="{{this.user_id}}" hidden>
+                        </div>
                     </div>
                     {{/each}}
                     {{/if}}
@@ -83,6 +104,8 @@
             </div>
             {{/each}}
         </div>
+        {{else}}
+        <p>This article has no comments</p>
         {{/if}}
     </div>
 

@@ -8,7 +8,6 @@ const QuillDeltaToHtmlConverter =
 const uploadTempFolder = require("../middleware/multer-uploader.js");
 const fs = require("fs");
 const jimp = require("jimp");
-const { error } = require('console');
 
 
 router.get('/writeArticle', function (req, res) {
@@ -17,6 +16,7 @@ router.get('/writeArticle', function (req, res) {
 
 router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async function (req, res) {
   const newArticle = req.body;
+  console.log(newArticle);
 
   const user_id = res.locals.user.id;
   const title = newArticle.titleKey;
@@ -55,7 +55,7 @@ router.get('/article/:id', async function (req, res) {
     if(res.locals.user) {
       res.locals.user_id = res.locals.user.id
     }
-    
+
     const article_id = req.params.id;
 
     const article = await articleDao.getArticlesByID(article_id);
@@ -81,21 +81,20 @@ router.get('/article/:id', async function (req, res) {
                 const thirdLevelComments = await commentDao.getAllSecondOrThirdLevelCommentsByComment_id(comment.id, article_id);
                 comment["third_level_comments"] = thirdLevelComments;
               } catch (e) {
-                throw new error("Comments loading failed");
+                throw new Error("Comments loading failed");
               }
             }));
 
             return comment;
           } catch (e) {
-            throw new error("Comments loading failed.")
+            throw new Error("Comments loading failed.")
           }
 
         }));
-
         return processedComments;
 
       } catch (e) {
-        throw new error("Comments loading failed.")
+        throw new Error("Comments loading failed.")
       }
     }
 

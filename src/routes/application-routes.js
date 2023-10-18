@@ -138,7 +138,7 @@ router.get('/deleteComment/:id', async function(req,res) {
     const article_id = data[0].article_id;
 
     if (comment_id) {
-        await commentDao.deleteComments(comment_id,article_id);
+        await commentDao.deleteComments(comment_id, article_id);
         const responses = await commentDao.getAllCommentsByArticles(article_id);
         console.log("Responses:");
         console.log(responses);
