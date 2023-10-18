@@ -241,40 +241,6 @@ VALUES
     (19, 4, 10),
     (20, 5, 10);
 
-CREATE TABLE likes_comments
-(
-    user_id INTEGER NOT NULL,
-    comments_id INTEGER NOT NULL,
-    PRIMARY KEY (user_id, comments_id),
-    FOREIGN KEY (user_id) REFERENCES user (id),
-    FOREIGN KEY (comments_id) REFERENCES comments (id) ON DELETE CASCADE
-);
-
--- Insert 20 rows of data into the likes_comments table
-INSERT INTO likes_comments
-    (user_id, comments_id)
-VALUES
-    (1, 1),
-    (1, 2),
-    (1, 3),
-    (2, 4),
-    (2, 5),
-    (2, 6),
-    (3, 7),
-    (3, 8),
-    (3, 9),
-    (4, 10),
-    (4, 11),
-    (4, 12),
-    (5, 13),
-    (5, 14),
-    (5, 15),
-    (6, 16),
-    (6, 17),
-    (6, 18),
-    (7, 19),
-    (7, 20);
-
 CREATE TABLE subscription
 (
     being_subscribed_id INTEGER NOT NULL,

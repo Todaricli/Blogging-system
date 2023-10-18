@@ -39,8 +39,9 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
       }
   
       if (done) {
-        res.status(200).send("New Article Created!");
-      }
+        const articleId = done.lastID;
+        res.status(200).send(`${articleId}`);
+    }
     } catch (e) {
       res.status(404).send("Publishing error, try again!" + e);
     }

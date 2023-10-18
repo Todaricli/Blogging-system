@@ -62,8 +62,6 @@ window.addEventListener("load", function () {
             //remove other user input
             document.getElementById("write_article_title").value = "";
 
-            alert("New article added!")
-
             // send and create notifications to subscribers
             await fetch('/api/create-new-article-notif-for-subs', {
                 method: 'POST',
@@ -72,6 +70,9 @@ window.addEventListener("load", function () {
                 },
                 body: JSON.stringify({ articleId }),
             });
+
+            alert("New article added!")
+            
         } catch (error) {
             // Handle any errors that occur during the request
             alert(error + ". Potential cause: Image uploading is not supported yet.");

@@ -204,6 +204,7 @@ async function getArticleTitleById(articleId) {
     where id = ${articleId}
     `)
 
+    console.log(title);
     return title;
 }
 
@@ -236,7 +237,7 @@ module.exports = {
     updateArticleToArticleTable,
     filterArticlesBySelectedDates,
     getArticleTitleById,
-    getAuthorIdByArticleId
+    getAuthorIdByArticleId,
     updateArticleToArticleTable,
     updateArticleToArticleTableWithoutImage,
     insertNewArticleToArticleTableWithoutImage
