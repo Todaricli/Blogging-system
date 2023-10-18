@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/css/subscription&subscriber.css">
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/css/articlesHome.css">
+    <link rel="stylesheet" href="/css/search-bar.css">
 
 
 
@@ -31,22 +32,27 @@
             </a>
         </div>
 
-        
+
 
         {{!-- Navigation search bar--}}
-        <div class="search_bar search">
-            {{!-- <img src="/images/search-icon.png"> --}}
-            <input type="text" id="searchInput" placeholder="Search..." class = "search">
-            <div id = "searchResultContainer">
-                <div class="dropdownsearch search" id = "searchByTitle">
+        <div id="search_bar_container">
+            <img id="search-icon" src="/images/search-icon.png">
+            <div id="search_bar_content">
+                <div class="search_bar search">
+                    <input type="text" id="searchInput" placeholder="Search..." class="search">
                 </div>
-                <div class="dropdownsearch search" id = "searchByAuthor">
+                <div id="searchResultContainer">
+                    <div class="dropdownsearch search" id="searchByTitle">
+                    </div>
+                    <div class="dropdownsearch search" id="searchByAuthor">
+                    </div>
+                    <div id="viewAllDiv search">
+                        <a id="viewAllSearchResults">view all search results</a>
+                    </div>
+
                 </div>
-                <div id="viewAllDiv search">
-                    <a id = "viewAllSearchResults">view all search results</a>
-                </div>
-                
             </div>
+
         </div>
 
         {{!-- Nav login and dropdown button --}}
@@ -69,15 +75,15 @@
                     </div>
                 </div>
             </li>
-                        <a href="/writeArticle" id="newArticleLink">New Article</a>
-                    </div>
-                </div>
+            <a href="/writeArticle" id="newArticleLink">New Article</a>
+            </div>
+            </div>
             </li>
             {{else}}
             <div class="login">
-            <div class="register">
-                <a href="/register">Register</a>
-            </div>
+                <div class="register">
+                    <a href="/register">Register</a>
+                </div>
                 <a href="/login">Login</a>
             </div>
             {{/if}}
@@ -90,10 +96,10 @@
     </div>
     <footer>
         <div id="footer">
-        <img src="/images/footer-logo.png">
-        <span> &copy 2023 UOA-PGCIT-S2 Group 2</span>
+            <img src="/images/footer-logo.png">
+            <span> &copy 2023 UOA-PGCIT-S2 Group 2</span>
         </div>
-    <script src="/script/main.js"></script>
+        <script src="/script/main.js"></script>
 </body>
 
 </html>
