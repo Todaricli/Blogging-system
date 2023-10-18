@@ -17,6 +17,10 @@ async function updateUserProfileWithoutIconUpdate(user_id, email, fname, lname, 
     WHERE id = ${user_id}`);
 }
 
+async function removeAccount(user_id) {
+    const db = await getDatabase()
+}
+
 module.exports = {
     updateUserProfile,
     updateUserProfileWithoutIconUpdate

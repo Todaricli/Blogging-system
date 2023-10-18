@@ -51,7 +51,7 @@ window.addEventListener("load", function () {
             });
 
             if (!response.ok) {
-                throw new Error('Request failed with status: ' + response.status);
+                throw new Error('Request failed with status: ' + response.status + JSON.stringify(response.text()));
             }
 
             const responseData = await response.text();
@@ -67,7 +67,7 @@ window.addEventListener("load", function () {
 
         } catch (error) {
             // Handle any errors that occur during the request
-            toastMessage.innerText = error + ". Potential cause: Image uploading is not supported yet.";
+            alert(error + ". Potential cause: Image uploading is not supported yet.");
             //remove user input from text editor
             quill.deleteText(0, quill.getLength());
             //remove other user input
