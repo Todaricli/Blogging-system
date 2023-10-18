@@ -33,7 +33,20 @@ async function getArticlesByAuthorNameForSearch(author){
     return articles
 }
 
+async function filterArticlesBySelectedDates(startDate, endDate) {
+    const db = await getDatabase();
+
+    const articles = await db.all(SQL `
+        select Articles_info.*, user.*
+        from Articles_info 
+        inner join user on Articles_info.author_id = user.id
+        where date_of_publish >= ${startDate} and date_of_publish <= ${endDate}
+    `)
+    return articles;
+}
+
 module.exports = {
     getArticlesByTitleForSearch,
-    getArticlesByAuthorNameForSearch
+    getArticlesByAuthorNameForSearch,
+    filterArticlesBySelectedDates
 }

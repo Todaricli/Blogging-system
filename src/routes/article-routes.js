@@ -174,23 +174,6 @@ router.get("/calendar", async function(req,res) {
   res.render("test");
 })
 
-router.get('/filtered-articles', async function(req, res) {
-  const {startDate, endDate}  = req.query;
-  console.log(startDate);
-  console.log(endDate);
-
-  const articles = await articleDao.filterArticlesBySelectedDates(startDate, endDate);
-  console.log(articles)
-
-  res.locals.articles = articles;
-  res.locals.articlesByDate = articles;
-  res.locals.articlesLength = articles.length;
-  res.locals.startDate = startDate;
-  res.locals.endDate = endDate;
-  res.render("searchedArticles")
-
-})
-
 router.get('/genre/:genreType', async function (req,res) {
   const genreType = req.params.genreType;
   console.log(genreType);

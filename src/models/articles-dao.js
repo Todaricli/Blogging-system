@@ -178,18 +178,6 @@ async function updateArticleToArticleTable(article_id, title, genre, content_htm
         WHERE id = ${article_id}`);
 }
 
-async function filterArticlesBySelectedDates(startDate, endDate) {
-    const db = await getDatabase();
-
-    const articles = await db.all(SQL `
-        select articles.*, user.*
-        from articles 
-        inner join user on articles.author_id = user.id
-        where date_of_publish >= ${startDate} and date_of_publish <= ${endDate}
-    `)
-    return articles;
-}
-
 async function filterArticlesByGenre(genre) {
     const db = await getDatabase();
 
@@ -219,6 +207,5 @@ module.exports = {
     getAuthorByArticle,
     insertNewArticleToArticleTable,
     updateArticleToArticleTable,
-    filterArticlesBySelectedDates,
     filterArticlesByGenre
 };
