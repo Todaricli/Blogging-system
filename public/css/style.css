@@ -63,9 +63,15 @@ nav {
 }
 
 #searchResultContainer{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    overflow-y: scroll;
+    margin-top: 30px;
+    width: 500px;
     border: transparent;
-    height: 100px;
-    max-height: 100px;
+    height: auto;
+    max-height: 500px;
     z-index: 1000;
 }
 

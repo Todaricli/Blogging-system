@@ -8,7 +8,7 @@ async function getArticlesByTitleForSearch(title){
         return undefined
     }
     const db = await getDatabase();
-    const titleSearch = `${title}%`
+    const titleSearch = `%${title}%`
 
     const articles = await db.all(SQL`
         select * from Articles_info
@@ -24,7 +24,7 @@ async function getArticlesByAuthorNameForSearch(author){
         return undefined
     }
     const db = await getDatabase();
-    const authorSearch = `${author}%`;
+    const authorSearch = `%${author}%`;
 
     const articles = await db.all(SQL`
         select * from user
@@ -33,34 +33,18 @@ async function getArticlesByAuthorNameForSearch(author){
     return articles
 }
 
-async function filterArticlesBySelectedDates(startDate, endDate) {
+async function getArticlesBySingleDate(date){
     const db = await getDatabase();
-
-    const articles = await db.all(SQL `
-        select Articles_info.*, user.*
-        from Articles_info 
-        inner join user on Articles_info.author_id = user.id
-        where date_of_publish >= ${startDate} and date_of_publish <= ${endDate}
+    const dateS = `${date}`
+    const articles = await db.all(SQL`
+        SELECT articles.title, comments_count, date(articles.date_of_publish) as date from Articles_info left join articles on Articles_info.article_id = articles.id
+        where date = ${dateS}
     `)
-    return articles;
-}
-
-async function filterArticlesByGenre(genre) {
-    const db = await getDatabase();
-
-    const articles = await db.all(SQL `
-    select articles.*, user.*
-    from articles
-    inner join user on articles.author_id = user.id
-    where genre = ${genre}
-    `)
-
-    return articles;
+    return articles
 }
 
 module.exports = {
     getArticlesByTitleForSearch,
     getArticlesByAuthorNameForSearch,
-    filterArticlesBySelectedDates,
-    filterArticlesByGenre
+    getArticlesBySingleDate
 }
