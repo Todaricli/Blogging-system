@@ -199,6 +199,18 @@ async function getArticleTitleById(articleId) {
     return title;
 }
 
+async function getAuthorIdByArticleId(articleId) {
+    const db = await getDatabase();
+
+    const authorId = await db.all(SQL `
+    SELECT articles.author_id
+    FROM articles
+    WHERE articles.id = ${articleId};
+    `)
+
+    return authorId;
+}
+
 module.exports = {
     getArticlesByUserID,
     getArticlesByID,
@@ -215,5 +227,6 @@ module.exports = {
     insertNewArticleToArticleTable,
     updateArticleToArticleTable,
     filterArticlesBySelectedDates,
-    getArticleTitleById
+    getArticleTitleById,
+    getAuthorIdByArticleId
 };

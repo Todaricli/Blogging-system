@@ -98,12 +98,13 @@ async function commentsOnArticle() {
       });
 
       const responseData = await response.json();
+      const articleId = responseData.article_id;
+      const parentId = responseData.comments_id;
 
       if (!response.ok) {
         throw new Error('Request failed with status: ' + response.status + " " + responseData);
       }
 
-      console.log(responseData);
 
       // addNewCommentElement(comments_div, responseData.username, responseData.fname, responseData.lname, responseData.content, responseData.time_of_comment, responseData.id)
 
@@ -114,6 +115,15 @@ async function commentsOnArticle() {
       textareas.forEach(textarea => {
         textarea.value = "";
       })
+
+      // send and create notification article author
+      await fetch('/api/create-new-comment-notification', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ articleId, parentId }),
+    });
 
     } catch (e) {
       alert(e);
@@ -160,6 +170,8 @@ async function commentOnComment() {
         });
 
         const responseData = await response.json();
+        console.log("i will print?");
+        console.log(responseData);
 
         if (!response.ok) {
           throw new Error('Request failed with status: ' + response.status + " " + responseData);

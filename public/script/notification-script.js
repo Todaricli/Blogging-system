@@ -81,7 +81,11 @@ window.addEventListener('load', async function () {
                             indvNotif.type === 'sub'
                         ) {
                             route = profileRoute;
-                        } else if (indvNotif.type === 'write') {
+                        } else if (
+                            indvNotif.type === 'write' ||
+                            'comment' ||
+                            'reply'
+                        ) {
                             route = articleRoute;
                         }
                         window.location.href = route;

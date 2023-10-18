@@ -9,7 +9,6 @@
 .left-panel {
   display: flex;
   align-items: center;
-  gap: 15px;
 }
 
 .notify-content {

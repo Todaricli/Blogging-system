@@ -1,8 +1,8 @@
 const SQL = require('sql-template-strings');
 const { getDatabase } = require('../db/database.js');
 
-const genericDao = require('../models/generic-dao.js') 
-const articleDao = require('../models/articles-dao.js')
+const genericDao = require('../models/generic-dao.js');
+const articleDao = require('../models/articles-dao.js');
 
 async function storeNotificationToUser(
     sender,
@@ -66,12 +66,18 @@ async function createNotification(receiverId, senderId, articleId, type) {
 }
 
 async function createContent(type, articleId) {
+    const article = await articleDao.getArticleTitleById(articleId);
     if (type === 'sub') {
         return `subscribed to you!`;
     } else if (type === 'write') {
-        const article = await articleDao.getArticleTitleById(articleId);
         return `published a new article: "${article[0].title}"!`;
-    } else console.log("not yet finished");
+    } else if (type === 'comment') {
+        return `commented on your article: "${article[0].title}"!`;
+    } else if (type === 'reply') {
+        return `published a new article: "${article[0].title}"!`;
+    } else if (type === 'like') {
+        return `published a new article: "${article[0].title}"!`;
+    }
 }
 
 module.exports = {
