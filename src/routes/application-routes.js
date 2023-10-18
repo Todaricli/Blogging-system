@@ -7,6 +7,7 @@ const subDao = require('../models/sub-dao.js');
 const commentDao = require('../models/comments-dao.js');
 const comment = require('../middleware/comments.js')
 const userDao = require('../models/user-dao.js');
+const analyticsDao = require('../models/analytics-dao.js')
 
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = require('../models/generic-dao.js');
@@ -163,6 +164,27 @@ router.get("/removeSubscription", verifyAuthenticated, async function (req, res)
       }
 })
 
+router.get("/analytics-Dashboard", async (req,res) =>{
+    const user = res.locals.user
+    const userId = user["id"]
+    const response = await analyticsDao.getNumFollowers(userId)
+    const response1 = await genericDao.getUserDataById(userId)
+    const comments = await analyticsDao.getNumberOfComments(userId)
+    const likes = await analyticsDao.getArticleLikes(userId)
+    const top3Articles = await analyticsDao.getMostPopularArticles(userId)
+
+    console.log(top3Articles)
+
+    // const yuh = await response.json()
+    const followerNumber = response[0]["counts"]
+    res.locals.followers = followerNumber
+    res.locals.user = response1
+    res.locals.comments = comments
+    res.locals.likes = likes
+    res.locals.topArticles = top3Articles
+    res.render("analyticsDashboard")
+
+});
 router.get("/addSubscription", verifyAuthenticated, async function (req, res) {
     const subscription_id = req.query.id;
     const user_id = res.locals.user.id;
@@ -198,8 +220,26 @@ router.get("/analytics-Dashboard", async (req, res) => {
     res.render("analyticsDashboard")
 })
 
-router.get('/analytics', function (req, res) {
-    res.render('analyticsDashboard');
+router.get('/analytics', async function (req, res) {
+    
+    const user = res.locals.user
+    const userId = user["id"]
+    const response = await analyticsDao.getNumFollowers(userId)
+    const response1 = await genericDao.getUserDataById(userId)
+    const comments = await analyticsDao.getNumberOfCommentsPerArticle(userId)
+    const likes = await analyticsDao.getArticleLikesPerArticle(userId)
+    const top3Articles = await analyticsDao.getMostPopularArticles(userId)
+    console.log("skeetskeet")
+    console.log(comments)
+
+    // const yuh = await response.json()
+    const followerNumber = response[0]["counts"]
+    res.locals.followers = followerNumber
+    res.locals.user = response1
+    res.locals.comments = comments
+    res.locals.likes = likes
+    res.locals.topArticles = top3Articles
+    res.render("analyticsDashboard")
 });
 
 module.exports = router;
