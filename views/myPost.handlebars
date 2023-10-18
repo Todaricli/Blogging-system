@@ -38,17 +38,6 @@
                 <img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}" id="post_img"
                     width="200px">
             </div>
-            <img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}" id="post_img" width="200px">
-            <h3 id="post_title">{{this.title}}</h3>
-            <p id="post_publish_time"><strong>Published on </strong>{{this.date_of_publish}}</p>
-            <p id="post_content">{{{this.content_html}}}</p>
-            <a href="/editArticle/{{this.article_id}}">Edit</a>
-            <a href="/article/{{this.article_id}}">Read more</a>
-            {{#if tags}}
-            {{#each tags}}
-            <p id="tag">{{this.post_tag}}</p>
-            {{/each}}
-            {{/if}}
         </div>
         {{/each}}
     </div>
