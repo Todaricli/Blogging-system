@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const articleDao = require('../models/articles-dao.js');
 const commentDao = require('../models/comments-dao.js');
+const searchDao = require('../models/search-dao.js');
 const { generateComments } = require('../middleware/comments.js');
 const comment = require('../middleware/comments.js')
 
@@ -179,7 +180,7 @@ router.get('/genre/:genreType', async function (req,res) {
   const genreType = req.params.genreType;
   console.log(genreType);
 
-  const articles = await filterArticlesByGenre(genreType)
+  const articles = await searchDao.filterArticlesByGenre(genreType)
   console.log(articles);
 
   res.locals.articles = articles
