@@ -16,6 +16,21 @@ router.get('/api/get-search', async function (req, res) {
     res.json(returnObj)
 });
 
+router.get('/api/get-search/single-date', async function (req, res) {
+    const searchDate = req.query.searchDate
+
+    const articlesByDate = await searchDao.getArticlesBySingleDate(searchDate);
+
+    console.log(articlesByDate[1])
+
+    const returnObj = {
+        articlesByDate
+    }
+
+    res.json(returnObj)
+});
+
+
 router.get(`/test`, (req,res)=>{
     res.render("test")
 })
