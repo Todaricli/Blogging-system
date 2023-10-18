@@ -62,4 +62,12 @@ button[type=submit] {
     justify-content: center;
     align-items: center;
 }
-  
+  @import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Chakra+Petch:wght@600&family=Comfortaa:wght@300&family=Delicious+Handrawn&family=Dosis:wght@300;700&family=Handjet:wght@300&family=Satisfy&display=swap');
+
+.writeArticlePage {
+    background-color: rgb(241, 248, 248);
+}
+
+#flexTitle {
+    font-family: "Satisfy", cursive;
+}

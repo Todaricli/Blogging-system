@@ -5,7 +5,7 @@ window.addEventListener(`load`, async function () {
         const response = await fetch(`/api/get-analytics`)
         information = await response.json();
     }
-    await getInformation()
+    // await getInformation()
 
     console.log(information)
     const date = new Date();

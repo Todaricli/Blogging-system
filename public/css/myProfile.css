@@ -3,7 +3,7 @@
   grid-template-rows: repeat(3, auto);
   justify-content: center;
   align-items: center;
-  background-color: lightgrey;
+  background-color: rgb(255, 255, 255);
   max-height: 100%;
 }
 
@@ -41,9 +41,10 @@
 form {
   padding: 25px;
   width: 700px;
-  background-color: #f2f2f2;
+  background-color: rgb(236, 255, 252);
   border-radius: 10px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  color: #357a84;
 }
 
 #my_profile_container{
@@ -84,7 +85,7 @@ select,
 button[type=submit] {
   width: 15%;
   max-height: 40px;
-  background-color: #4CAF50;
+  background-color: #7fc7cc;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -99,7 +100,7 @@ button[type=submit] {
 }
 
 button[type=submit]:hover {
-  background-color: #45a049;
+  background-color: #70adb0;
 }
 
 .my_profile_container {
@@ -120,7 +121,7 @@ button[type=submit]:hover {
   font-size: 30px;
   position: absolute;
   z-index: 1;
-  color: #45a049;
+  color: #7fc7cc;
   padding: 0;
   top: 77%;
   left: 57%;
@@ -128,7 +129,7 @@ button[type=submit]:hover {
 
 #update-icon-btn:hover {
   background-color: transparent;
-  color: #4CAF50
+  color: #70adb0;
 };
 
 #icon_container {

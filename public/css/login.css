@@ -1,0 +1,54 @@
+/* login page css start*/
+#login_toast {
+    color: #7fc7cc;
+}
+
+#login_container {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    border: 2px solid lightgray;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(246, 255, 254);
+    color: #0b487a;
+}
+
+#login_username {
+    padding-bottom: 20px;
+}
+
+#login_body_container button {
+    background-color: #7fc7cc;
+    color: white;
+    font-size: medium;
+    border: transparent;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#login_button {
+    display: flex;
+    justify-content: center;
+}
+
+#login_body_container a {
+    color: #7fc7cc;
+    text-decoration: none;
+}
+
+#login_body_container p {
+    color: rgb(105, 105, 105);
+    margin-bottom: 30px;
+}
+
+#login_body_container a:visited {
+    color: #7fc7cc;
+}
+/* login page css end*/
