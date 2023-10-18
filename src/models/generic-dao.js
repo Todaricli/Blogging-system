@@ -78,6 +78,16 @@ async function deleteUserById(userId) {
       where id = ${userId}`);
 }
 
+function makeArray(input) {
+    if (input === undefined) {
+        return [];
+    } else if (Array.isArray(input)) {
+        return input;
+    } else {
+        return [input];
+    }
+}
+
 module.exports = {
     getUserDataById,
     getUserDataByUsername,
@@ -87,4 +97,5 @@ module.exports = {
     getUserIdByUsername,
     getUsernameById,
     deleteUserById,
+    makeArray,
 };

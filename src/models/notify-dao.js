@@ -74,9 +74,9 @@ async function createContent(type, articleId) {
     } else if (type === 'comment') {
         return `commented on your article: "${article[0].title}"!`;
     } else if (type === 'reply') {
-        return `published a new article: "${article[0].title}"!`;
+        return `replied to your comment on article: "${article[0].title}"!`;
     } else if (type === 'like') {
-        return `published a new article: "${article[0].title}"!`;
+        return `liked your article: "${article[0].title}"!`;
     }
 }
 

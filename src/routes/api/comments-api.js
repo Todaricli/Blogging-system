@@ -4,6 +4,7 @@ const router = express.Router();
 const commentDao = require('../../models/comments-dao.js');
 const articlesDao = require('../../models/articles-dao.js');
 const notifyDao = require('../../models/notify-dao.js');
+const gDao = require('../../models/generic-dao.js');
 
 router.post('/api/addComment', async function (req, res) {
     try {
@@ -95,11 +96,14 @@ router.post('/api/create-new-comment-notification', async function (req, res) {
         console.log(parentId);
         if (!parentId) {
             type = 'comment';
-            const res = await articlesDao.getAuthorIdByArticleId(articleId);
+            const res = gDao.makeArray(await articlesDao.getAuthorIdByArticleId(articleId));
             // console.log(res);
             receiverId = res[0].author_id;
         } else {
             type = 'reply';
+            const res = gDao.makeArray(await commentDao.getAuthorIdByCommentId(parentId));
+            console.log(res);
+            receiverId = res[0].user_id;
         }
 
         const n = await notifyDao.createNotification(
@@ -108,8 +112,7 @@ router.post('/api/create-new-comment-notification', async function (req, res) {
             articleId,
             type
         );
-        console.log('here4');
-        console.log(n);
+        // console.log(n);
 
         await notifyDao.storeNotificationToUser(
             n.senderId,
@@ -120,7 +123,6 @@ router.post('/api/create-new-comment-notification', async function (req, res) {
             n.type,
             n.isRead
         );
-        console.log('here5');
 
         res.sendStatus(204);
     } catch (err) {
