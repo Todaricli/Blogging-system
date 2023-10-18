@@ -51,6 +51,7 @@ router.get('/article/:id',comment.generateComments ,async function (req, res) {
   const article_id = req.params.id;
 
   const article = await articleDao.getArticlesByID(article_id);
+  console.log(article)
   const articleId = article[0].id;
 
   try {
@@ -59,6 +60,7 @@ router.get('/article/:id',comment.generateComments ,async function (req, res) {
 
     const authorName = await articleDao.getAuthorByArticle(articleId);
     res.locals.authorName = authorName;
+    console.log(authorName)
 
     // const comments = await articleDao.getAllCommentsFromArticle(articleId);
     // res.locals.comments = comments;
@@ -167,44 +169,37 @@ function convertDeltaToHtml(content) {
   return contentArray;
 }
 
-// router.get('/article/:id', comment.generateComments,async function (req, res) {
-//     const article_id = req.params.id;
+router.get("/calendar", async function(req,res) {
 
-//     const article = await articleDao.getArticlesByID(article_id);
-//     //console.log(article)
-//     res.locals.article = article;
-//     const content = article[0].content;
+  res.render("test");
+})
 
-//     try {
-//         const content_obj = JSON.parse(content);
+router.get('/filtered-articles', async function(req, res) {
+  const {startDate, endDate}  = req.query;
+  console.log(startDate);
+  console.log(endDate);
 
-//         const delta_obj = content_obj.ops;
+  const articles = await articleDao.filterArticlesBySelectedDates(startDate, endDate);
+  console.log(articles)
 
-//         const cfg = {
-//             inlineStyles: true,
-//             multiLineBlockquote: true,
-//             multiLineHeader: true,
-//         };
+  res.locals.articles = articles;
+  res.locals.articlesByDate = articles;
+  res.locals.articlesLength = articles.length;
+  res.locals.startDate = startDate;
+  res.locals.endDate = endDate;
+  res.render("searchedArticles")
 
-//         //const converter = new QuillDeltaToHtmlConverter(delta_obj, cfg);
+})
 
-//         const html = converter.convert();
-//         res.locals.article_content = html;
-//     } catch (error) {
-//         const html = '<p>Article loading error! refresh the page.<p>';
-//         res.locals.article_content = html;
-//     }
+router.get('/genre/:genreType', async function (req,res) {
+  const genreType = req.params.genreType;
+  console.log(genreType);
 
-//     const authorName = await articleDao.getAuthorByArticle(article_id);
-//     //console.log(authorName);
-//     res.locals.authorName = authorName;
-    
-//     const likeCounts = await articleDao.getNumberOfLikesFromArticle(article_id);
-//     //console.log(likeCounts);
-//     res.locals.like_count = likeCounts;
+  const articles = await articleDao.filterArticlesByGenre(genreType);
+  console.log(articles);
 
-//     res.render('articleDemo');
-// });
-
+  res.locals.articles = articles
+  res.render("searchedArticles")
+})
 
 module.exports = router;

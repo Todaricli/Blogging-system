@@ -45,22 +45,25 @@
         <ul class="nav_list">
             {{#if user}}
             <li>
-                <a href="/logout">Logout</a>
-            </li>
-            <li>
-                <div class="dropdown">
-                    <div class="dropbtn"><img src="{{user.icon_path}}" alt="user_avatar" id="user_avatar"></div>
-                    <div class="dropdown-content">
+                <div class="dropdown skeet">
+                    <button class="dropbtn skeet">
+                        <img class="dropdown-avatar skeet" src="{{user.icon_path}}" alt="user photo">
+                        <span class="username skeet">{{user.fname}} {{user.lname}}</span>
+                        <i class="fa fa-caret-down skeet"></i>
+                    </button>
+                    <div class="dropdown-content skeet">
                         <a href="/my_profile">My Profile</a>
                         <a href="/my-page">My Page View</a>
                         <a href="/my_post">My Post</a>
                         <a href="/analytics">Analytics</a>
                         <a href="/sub">Subscription</a>
-                        <a href="/writeArticle">New Article</a>
+                        <a href="/logout" id="signout">Sign out</a>
                     </div>
                 </div>
             </li>
-            <li>
+                        <a href="/writeArticle">New Article</a>
+                    </div>
+                </div>
             </li>
             {{else}}
             <li class="login">
@@ -78,17 +81,14 @@
         {{{body}}}
     </div>
 
-    <footer>
-        <div id="footer">
-<<<<<<< HEAD
-            <img src="images/footer-logo.png">
-            <span> &copy 2023 UOA-PGCIT-S2 Group 2</span>
-=======
+
+    <footer id="footer">
         <img src="/images/footer-logo.png">
         <span> &copy 2023 UOA-PGCIT-S2 Group 2</span>
->>>>>>> 4127805408b57895e6127c2b25c1723a6b18b847
-        </div>
     </footer>
+
+
+    <script src="/script/main.js"></script>
 </body>
 
 </html>

@@ -21,10 +21,23 @@ router.get(`/test`, (req,res)=>{
 })
 
 router.get("/searched-Article", async (req,res) =>{
-    const search = req.query.search
-    res.locals.search = search
-    res.locals.articles = await searchDao.getArticlesByTitleForSearch(search);
-    res.locals.users= await searchDao.getArticlesByAuthorNameForSearch(search);
+    let search = req.query.search
+    res.locals.search = search;
+    console.log(search)
+
+    const articles = await searchDao.getArticlesByTitleForSearch(search);
+    console.log(articles)
+
+    const articlesLength = articles.length;
+
+    const users = await searchDao.getArticlesByAuthorNameForSearch(search);
+
+    const usersLength = users.length;
+
+    res.locals.articles = articles;
+    res.locals.users = users;
+    res.locals.articlesLength = articlesLength;
+    res.locals.usersLength = usersLength;
 
     res.render("searchedArticles")
 })
