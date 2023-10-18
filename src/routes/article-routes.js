@@ -3,6 +3,7 @@ const router = express.Router();
 const articleDao = require('../models/articles-dao.js');
 const commentDao = require('../models/comments-dao.js');
 const searchDao = require('../models/search-dao.js');
+const likeDao = require('../models/like-dao.js');
 
 const QuillDeltaToHtmlConverter =
   require('quill-delta-to-html').QuillDeltaToHtmlConverter;
@@ -62,16 +63,16 @@ router.get('/article/:id', async function (req, res) {
   try {
 
     const article = await articleDao.getArticlesByID(article_id);
-    console.log(article)
     const articleId = article[0].id;
 
     res.locals.article = article;
 
+
     const authorName = await articleDao.getAuthorByArticle(articleId);
     res.locals.authorName = authorName;
 
-    const likeCounts = await articleDao.getNumberOfLikesFromArticle(articleId);
-    res.locals.like_count = likeCounts
+    const likeCounts = await likeDao.getNumberOfLikesFromArticle(articleId);
+    res.locals.like_count = likeCounts;
 
 
     const comments = await commentDao.getAllFirstLevelCommentsByArticleID(articleId);
