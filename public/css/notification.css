@@ -1,23 +1,10 @@
-.register {
-  margin-right: 80px;
-}
 
-.login {
-  margin-left: auto;
-  margin-right: 50px;
-}
-
-.logout{
-  margin-left: 50px;
-  margin-right: 50px;
-}
-
-.nav-panel {
+/* .nav-panel {
   display: flex;
   justify-content: space-between;
   gap: 20px;
   width: 100%;
-}
+} */
 
 .left-panel {
   display: flex;

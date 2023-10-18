@@ -24,7 +24,10 @@ router.get('/api/check-username', async function (req, res) {
 
 router.get('/api/get-all-notifications', async function (req, res) {
     const user = res.locals.user;
-    const notifications = await notifyDao.getAllNotificationsById(user.id);
+    let notifications;
+    if (user) {
+        notifications = await notifyDao.getAllNotificationsById(user.id);
+    }
     res.status(200).json(notifications);
 });
 
@@ -39,6 +42,5 @@ router.delete('/api/delete-notification', async function (req, res) {
     await notifyDao.deleteNotification(noteId);
     res.sendStatus(204);
 });
-
 
 module.exports = router;
