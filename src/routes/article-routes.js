@@ -10,6 +10,7 @@ const QuillDeltaToHtmlConverter =
 const uploadTempFolder = require("../middleware/multer-uploader.js");
 const fs = require("fs");
 const jimp = require("jimp");
+const { filterArticlesByGenre } = require('../models/search-dao.js');
 
 
 router.get('/writeArticle', function (req, res) {
@@ -178,10 +179,15 @@ router.get('/genre/:genreType', async function (req,res) {
   const genreType = req.params.genreType;
   console.log(genreType);
 
-  const articles = await articleDao.filterArticlesByGenre(genreType);
+  const articles = await filterArticlesByGenre(genreType)
   console.log(articles);
 
   res.locals.articles = articles
+  res.render("searchedArticles")
+})
+
+router.get("/genre", async function (req, res) {
+
   res.render("searchedArticles")
 })
 

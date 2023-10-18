@@ -45,8 +45,22 @@ async function filterArticlesBySelectedDates(startDate, endDate) {
     return articles;
 }
 
+async function filterArticlesByGenre(genre) {
+    const db = await getDatabase();
+
+    const articles = await db.all(SQL `
+    select articles.*, user.*
+    from articles
+    inner join user on articles.author_id = user.id
+    where genre = ${genre}
+    `)
+
+    return articles;
+}
+
 module.exports = {
     getArticlesByTitleForSearch,
     getArticlesByAuthorNameForSearch,
-    filterArticlesBySelectedDates
+    filterArticlesBySelectedDates,
+    filterArticlesByGenre
 }
