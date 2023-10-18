@@ -51,65 +51,63 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
 });
 
 router.get('/article/:id', async function (req, res) {
-  try {
-    if(res.locals.user) {
+
+    if (res.locals.user) {
       res.locals.user_id = res.locals.user.id
     }
 
     const article_id = req.params.id;
 
     const article = await articleDao.getArticlesByID(article_id);
+    console.log(article)
     const articleId = article[0].id;
-  const article = await articleDao.getArticlesByID(article_id);
-  console.log(article)
-  const articleId = article[0].id;
 
-  try {
+    try {
 
-    res.locals.article = article;
+      res.locals.article = article;
 
-    const authorName = await articleDao.getAuthorByArticle(articleId);
-    res.locals.authorName = authorName;
+      const authorName = await articleDao.getAuthorByArticle(articleId);
+      res.locals.authorName = authorName;
 
-    const comments = await commentDao.getAllFirstLevelCommentsByArticleID(articleId);
+      const comments = await commentDao.getAllFirstLevelCommentsByArticleID(articleId);
 
-    async function getAllComments(comments) {
-      try {
-        const processedComments = await Promise.all(comments.map(async (comment) => {
-          try {
-            const secondLevelComments = await commentDao.getAllSecondOrThirdLevelCommentsByComment_id(comment.id, article_id);
-            comment["second_level_comments"] = secondLevelComments;
+      async function getAllComments(comments) {
+        try {
+          const processedComments = await Promise.all(comments.map(async (comment) => {
+            try {
+              const secondLevelComments = await commentDao.getAllSecondOrThirdLevelCommentsByComment_id(comment.id, article_id);
+              comment["second_level_comments"] = secondLevelComments;
 
-            const secondLevelComment = comment.second_level_comments;
+              const secondLevelComment = comment.second_level_comments;
 
-            await Promise.all(secondLevelComment.map(async (comment) => {
-              try {
-                const thirdLevelComments = await commentDao.getAllSecondOrThirdLevelCommentsByComment_id(comment.id, article_id);
-                comment["third_level_comments"] = thirdLevelComments;
-              } catch (e) {
-                throw new Error("Comments loading failed");
-              }
-            }));
+              await Promise.all(secondLevelComment.map(async (comment) => {
+                try {
+                  const thirdLevelComments = await commentDao.getAllSecondOrThirdLevelCommentsByComment_id(comment.id, article_id);
+                  comment["third_level_comments"] = thirdLevelComments;
+                } catch (e) {
+                  throw new Error("Comments loading failed");
+                }
+              }));
 
-            return comment;
-          } catch (e) {
-            throw new Error("Comments loading failed.")
-          }
+              return comment;
+            } catch (e) {
+              throw new Error("Comments loading failed.")
+            }
 
-        }));
-        return processedComments;
+          }));
+          return processedComments;
 
-      } catch (e) {
-        throw new Error("Comments loading failed.")
+        } catch (e) {
+          throw new Error("Comments loading failed.")
+        }
       }
-    }
 
-    const commentsForThisAriticle = await getAllComments(comments);
-    res.locals.comments = commentsForThisAriticle;
+      const commentsForThisAriticle = await getAllComments(comments);
+      res.locals.comments = commentsForThisAriticle;
 
-    res.render("articleDemo")
+      res.render("articleDemo")
 
-  } catch (error) {
+    } catch (error) {
     const html = "<p>Error occured: <p>"
     res.locals.article_content = html + error;
   }
@@ -212,13 +210,13 @@ function convertDeltaToHtml(content) {
   return contentArray;
 }
 
-router.get("/calendar", async function(req,res) {
+router.get("/calendar", async function (req, res) {
 
   res.render("test");
 })
 
-router.get('/filtered-articles', async function(req, res) {
-  const {startDate, endDate}  = req.query;
+router.get('/filtered-articles', async function (req, res) {
+  const { startDate, endDate } = req.query;
   console.log(startDate);
   console.log(endDate);
 
@@ -234,7 +232,7 @@ router.get('/filtered-articles', async function(req, res) {
 
 })
 
-router.get('/genre/:genreType', async function (req,res) {
+router.get('/genre/:genreType', async function (req, res) {
   const genreType = req.params.genreType;
   console.log(genreType);
 
