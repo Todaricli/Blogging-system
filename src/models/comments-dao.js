@@ -37,20 +37,6 @@ async function getAllSecondOrThirdLevelCommentsByComment_id(comment_id, article_
     return allFirstLevelComments;
 }
 
-async function getCommentAndReplies(articleId) {
-    const db = await getDatabase();
-
-    const replies = await db.all(SQL`
-    SELECT c.id, c.user_id, c.article_id, c.content, c.time_of_comment, c.comments_id,
-    p.content AS parent_content
-    FROM comments c
-    LEFT JOIN comments p ON c.comments_id = p.id
-    WHERE c.article_id = ${articleId};
-    `);
-
-    return replies;
-}
-
 async function deleteLikesCommnents(commentId) {
     const db = await getDatabase();
 
@@ -61,34 +47,76 @@ async function deleteLikesCommnents(commentId) {
     `);
 }
 
-async function deleteComments(commentId, articleId) {
+async function deleteComments(comment_id, article_id) {
+    const childComments = await getAllSecondOrThirdLevelCommentsByComment_id(comment_id, article_id);
+
+    console.log("outter: " + comment_id);
+    console.log("outter article: " + article_id);
+    let done1 = undefined;
+    if (childComments) {
+        done1 = childComments.forEach(async (comment) => {
+            const comment_id = comment.id;
+            const article_id = comment.article_id;
+
+            console.log("middle: " + comment_id);
+            console.log("middle article: " + article_id);
+
+            const grandChildComments = await getAllSecondOrThirdLevelCommentsByComment_id(comment_id, article_id);
+
+            if (grandChildComments) {
+                grandChildComments.forEach(async (comment) => {
+                    const comment_id = comment.id;
+                    const article_id = comment.article_id;
+
+                    console.log("inner: " + comment_id);
+                    console.log("inner article: " + article_id);
+
+                    return await deleteThisComment(comment_id, article_id);
+                })
+            }
+            return await deleteThisComment(comment_id, article_id);
+        })
+    }
+    return await deleteThisComment(comment_id, article_id);
+}
+
+async function deleteThisComment(comment_id, article_id) {
     const db = await getDatabase();
 
-    await deleteLikesCommnents(commentId);
+    console.log("inside delete: " + comment_id);
+    console.log("article delete: " + article_id);
 
-    try {
-        // Fetch the IDs of replies associated with the comment
-        const replyIds = await db.all(SQL`
-        SELECT id
-        FROM comments
-        WHERE comments_id = ${commentId}
-        AND article_id = ${articleId}
-    `);
+    return await db.run(SQL`
+        DELETE FROM comments 
+        WHERE id = ${comment_id}
+        AND article_id = ${article_id}`)
+}
 
-        // Delete the associated replies (nested comments)
-        for (const reply of replyIds) {
-            await deleteComments(reply.id, articleId);
-        }
+async function insertNewCommentOnArticle(user_id, article_id, content) {
+    const db = await getDatabase();
 
-        // Delete the parent comment
-        await db.run(SQL`
-        DELETE FROM comments
-        WHERE id = ${commentId}
-        AND article_id = ${articleId}
-    `);
-    } catch (error) {
-        console.error('Error deleting comments:', error);
-    }
+    return await db.run(SQL`
+        INSERT INTO comments (user_id, article_id, content, time_of_comment)
+        VALUES (${user_id}, ${article_id}, ${content}, datetime('now'))`);
+}
+
+async function insertNewCommentOnComment(user_id, article_id, content, comment_id) {
+
+    const db = await getDatabase();
+
+    return await db.run(SQL`
+        INSERT INTO comments (user_id, article_id, content, time_of_comment, comments_id)
+        VALUES (${user_id}, ${article_id}, ${content}, datetime('now'), ${comment_id})`);
+}
+
+async function getCommentById(comment_id) {
+    const db = await getDatabase();
+
+    return await db.get(SQL`
+        SELECT comments.*, user.username, user.fname, user.lname 
+        FROM comments, user
+        WHERE comments.id = ${comment_id}
+        AND user.id = comments.user_id`)
 }
 
 module.exports = {
@@ -96,6 +124,10 @@ module.exports = {
     getAllSecondOrThirdLevelCommentsByComment_id,
     getAllCommentsByUserId,
     deleteComments,
-    getCommentAndReplies,
     deleteLikesCommnents,
+    insertNewCommentOnArticle,
+    insertNewCommentOnComment,
+    deleteComments,
+    deleteThisComment,
+    getCommentById
 };
