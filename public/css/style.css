@@ -2,6 +2,171 @@
     --nav-user-size: 18px;
 }
 
+/* nav {
+    background-color: white;
+    position: sticky;
+    top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    z-index: 1;
+}
+
+.nav_list {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    list-style: none;
+    margin-right: 20px;
+}
+
+.login {
+    border: 1px solid rgb(184, 231, 186);
+    background-color: rgb(184, 231, 186);
+    border-radius: 30px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    width: 170px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.login > a{
+    text-decoration: none;
+    color: rgb(42, 42, 42);
+    padding-left: 10px;
+}
+
+.register {
+    border: 1px solid rgb(12, 175, 17);
+    padding: 10px 20px 10px 20px;
+    background-color: rgb(12, 175, 17);
+    border-radius: 30px;
+
+}
+
+.register a{
+    text-decoration: none;
+    color: white;
+}
+
+.logout{
+    margin-right: 15px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px 20px 10px 20px;
+    background-color: #1A77F2;
+    border-radius: 30px;
+    color: white;
+
+}
+
+.logo img {
+    width: auto;
+    height: 60px;
+}
+
+.search_bar {
+    border: 1px solid black;
+    border-radius: 20px;
+    height: 30px;
+    display: flex;
+    overflow: hidden;
+}
+
+.search_bar img {
+    align-self: center;
+    margin: 5px;
+    width: 15px;
+}
+
+.search_bar input {
+    width: 500px;
+    height: 28px;
+    border: transparent;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    width: 30px;
+}
+
+#user_avatar {
+    width: 40px;
+    border: transparent;
+    border-radius: 50%;
+    
+}
+
+.dropbtn:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100px;
+    border: 1px solid lightgray;
+    box-shadow: 1px 1px 2px 1px rgba(115, 115, 115, 0.3);
+    z-index: 2;
+    border-radius: 10px;
+    padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    background-color: white;
+}
+
+.dropdown-content a {
+    display: block;
+    height: 20px;
+    text-decoration: none;
+    color: rgb(152, 152, 152);
+}
+
+.dropdown-content a:hover {
+    background-color:white;
+    color: #1A77F2;;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#page_body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#footer {
+    margin-top: auto;
+    display: flex;
+    padding: 10px;
+    background-color: #163057;
+    color: #D87957;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+}
+
+#footer img {
+    width: auto;
+    height: 30px;
+}
+
+#footer > span {
+    display: flex;
+    align-self: center;
+    font-size: 12px;
+} */
+
 nav {
     background-color: rgb(255, 255, 255);
     position: sticky;
@@ -15,11 +180,51 @@ nav {
 
 .nav_list {
     display: flex;
-    gap: 50px;
     align-items: center;
 
     list-style: none;
     margin-right: 20px;
+}
+
+.login {
+    border: 1px solid rgb(184, 231, 186);
+    background-color: rgb(184, 231, 186);
+    border-radius: 30px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    width: 170px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.login > a{
+    text-decoration: none;
+    color: rgb(42, 42, 42);
+    padding-left: 10px;
+}
+
+.register {
+    border: 1px solid rgb(12, 175, 17);
+    padding: 10px 20px 10px 20px;
+    background-color: rgb(12, 175, 17);
+    border-radius: 30px;
+
+}
+
+.register a{
+    text-decoration: none;
+    color: white;
+}
+
+.logout{
+    margin-right: 15px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px 20px 10px 20px;
+    background-color: #1A77F2;
+    border-radius: 30px;
+    color: white;
+
 }
 
 .logo img {
@@ -109,9 +314,27 @@ nav {
     margin-right: 8px;
 }
 
+#user_avatar {
+    width: 40px;
+    border: transparent;
+    border-radius: 50%;
+    
+}
+
+#user_avatar {
+    width: 40px;
+    border: transparent;
+    border-radius: 50%;
+    
+}
+
+.dropbtn {
+    width: 30px;
+}
 .dropbtn:hover {
     transform: scale(1.2);
     cursor: pointer;
+
 }
 
 .dropdown-content {
@@ -142,7 +365,12 @@ nav {
 }
 
 .dropdown-content a:hover {
-    background-color: #f0f0f0;
+    background-color:white;
+    color: #1A77F2;;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 #page_body {
@@ -173,6 +401,166 @@ nav {
     align-self: center;
     font-size: 12px;
 }
+
+/* register page css start*/
+#register_page_body {
+    width: 700px;
+    display: flex;
+    justify-content: center;
+    border: 2px solid lightgray;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#register_title {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 30px 0px 30px;
+}
+
+#register_title a {
+    color: rgb(12, 175, 17);
+    text-decoration: none;
+}
+
+#register_title p {
+    color: rgb(105, 105, 105);
+}
+
+#register_title a:visited {
+    color: rgb(12, 175, 17);
+}
+
+#register_page_container>p {
+    padding: 0px 30px 0px 30px;
+}
+
+#register_fillinbox {
+    padding: 0px 30px 0px 30px;
+    
+}
+
+#register_fillinbox>div {
+    padding: 10px 0px 10px 0px;
+}
+
+#register_page_container button {
+    background-color: rgb(12, 175, 17);
+    color: white;
+    font-size: medium;
+    border: transparent;
+    cursor: pointer;
+    width: 200px;
+    height: 35px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+#register_button {
+    display: flex;
+    justify-content: center;
+}
+/* register page css end*/
+
+/* login page css start*/
+#login_toast {
+    color: rgb(12, 175, 17);
+}
+
+#login_container {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    border: 2px solid lightgray;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#login_username {
+    padding-bottom: 20px;
+}
+
+#login_body_container button {
+    background-color: rgb(12, 175, 17);
+    color: white;
+    font-size: medium;
+    border: transparent;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#login_button {
+    display: flex;
+    justify-content: center;
+}
+
+#login_body_container a {
+    color: rgb(12, 175, 17);
+    text-decoration: none;
+}
+
+#login_body_container p {
+    color: rgb(105, 105, 105);
+    margin-bottom: 30px;
+}
+
+#login_body_container a:visited {
+    color: rgb(12, 175, 17);
+}
+/* login page css end*/
+
+/* #home_container {
+    display: grid;
+    margin: 20px;
+    padding: 5px;
+    /* grid-template-columns: 1fr 1fr 2fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "header header header header"
+        "top5 top5 top5 top5"
+        "articles articles articles sidebar"; 
+}*/
+
+/* #category_nav {
+    grid-area: header;
+}
+
+#top5_articles {
+    grid-area: top5;
+    height: 400px;
+}
+
+#all_articles {
+    grid-area: articles;
+    height: 800px;
+    background-color: bisque;
+} */
+
+/* #sidebar {
+    grid-area: sidebar;
+    height: 50px;
+
+}
+
+#sidebar_title {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+}
+
+#specific_category_title {
+    font-size: 20px;
+} */
 
 /* sub page css start*/
 #sub_container {
@@ -419,12 +807,6 @@ nav {
 
 
 
-#user_avatar {
-    width: 40px;
-    border: 1px solid;
-    border-radius: 50%;
-    background-color: antiquewhite;
-}
 
 .each_posts {
     background-color: bisque;
@@ -467,12 +849,12 @@ nav {
 
 /* LINKS */
 /* SRC: https://codepen.io/team/css-tricks/pen/gOXMgxR */
-#newArticleLink {
+#newArticleLink, #myPostEditLink, #myPostReadMoreLink {
     color: inherit;
     text-decoration: none;
   }
   
-  #newArticleLink {
+  #newArticleLink, #myPostEditLink, #myPostReadMoreLink {
     background:
       linear-gradient(
         to right,
@@ -491,7 +873,11 @@ nav {
     transition: background-size 400ms;
   }
   
-  #newArticleLink:hover {
+  #newArticleLink:hover, #myPostEditLink:hover, #myPostReadMoreLink:hover {
     background-size: 0 3px, 100% 3px;
   }
   
+
+  hr{
+    border-top: 3px dotted lightgrey;
+  }

@@ -14,8 +14,6 @@ router.get('/', async function (req, res) {
 
     res.locals.top5Articles = await articleDao.getTopFiveArticles();
     const articleData = await articleDao.getAllArticles();
-    //console.log(articleData)
-    
     res.locals.articleData = articleData;
 
     res.render('articlesHome');
@@ -137,38 +135,9 @@ router.get("/analytics-Dashboard", async (req,res) =>{
     res.render("analyticsDashboard")
 
 });
-router.get("/addSubscription", verifyAuthenticated, async function (req, res) {
-    const subscription_id = req.query.id;
-    const user_id = res.locals.user.id;
-    if (user_id) {
-        try {
-          await subDao.addSpecificSubscriptionByID(user_id, subscription_id);
-          res.status(200).json({ message: 'Subscription removed successfully' });
-        } catch (error) {
-          res.status(500).json({ message: 'Error removing subscription' });
-        }
-      } else {
-        res.status(403).json({ message: 'Unauthorized' });
-      }
-})
 
-router.get("/removeSubscriber", verifyAuthenticated, async function (req, res) {
-    const subscriber_id = req.query.id;
-    const user_id = res.locals.user.id;
-    if (user_id) {
-        try {
-          await subDao.removeSpecificSubscriberByID(user_id, subscriber_id);
-          res.status(200).json({ message: 'Subscription removed successfully' });
-        } catch (error) {
-          res.status(500).json({ message: 'Error removing subscription' });
-        }
-      } else {
-        res.status(403).json({ message: 'Unauthorized' });
-      }
-})
 
 router.get("/analytics-Dashboard", async (req, res) => {
-    console.log("skeet")
     res.render("analyticsDashboard")
 })
 

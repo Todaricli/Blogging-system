@@ -24,7 +24,10 @@ async function getAllFirstLevelCommentsByArticleID(articleId) {
     return allFirstLevelComments;
 }
 
-async function getAllSecondOrThirdLevelCommentsByComment_id(comment_id, article_id) {
+async function getAllSecondOrThirdLevelCommentsByComment_id(
+    comment_id,
+    article_id
+) {
     const db = await getDatabase();
     const allFirstLevelComments = await db.all(SQL`
     SELECT comments.*, user.username, user.fname, user.lname
@@ -38,7 +41,10 @@ async function getAllSecondOrThirdLevelCommentsByComment_id(comment_id, article_
 }
 
 async function deleteComments(comment_id, article_id) {
-    const childComments = await getAllSecondOrThirdLevelCommentsByComment_id(comment_id, article_id);
+    const childComments = await getAllSecondOrThirdLevelCommentsByComment_id(
+        comment_id,
+        article_id
+    );
 
     let done1 = undefined;
     if (childComments) {
@@ -46,7 +52,11 @@ async function deleteComments(comment_id, article_id) {
             const comment_id = comment.id;
             const article_id = comment.article_id;
 
-            const grandChildComments = await getAllSecondOrThirdLevelCommentsByComment_id(comment_id, article_id);
+            const grandChildComments =
+                await getAllSecondOrThirdLevelCommentsByComment_id(
+                    comment_id,
+                    article_id
+                );
 
             if (grandChildComments) {
                 grandChildComments.forEach(async (comment) => {
@@ -54,10 +64,10 @@ async function deleteComments(comment_id, article_id) {
                     const article_id = comment.article_id;
 
                     return await deleteThisComment(comment_id, article_id);
-                })
+                });
             }
             return await deleteThisComment(comment_id, article_id);
-        })
+        });
     }
     return await deleteThisComment(comment_id, article_id);
 }
@@ -68,7 +78,7 @@ async function deleteThisComment(comment_id, article_id) {
     return await db.run(SQL`
         DELETE FROM comments 
         WHERE id = ${comment_id}
-        AND article_id = ${article_id}`)
+        AND article_id = ${article_id}`);
 }
 
 async function insertNewCommentOnArticle(user_id, article_id, content) {
@@ -79,8 +89,12 @@ async function insertNewCommentOnArticle(user_id, article_id, content) {
         VALUES (${user_id}, ${article_id}, ${content}, datetime('now'))`);
 }
 
-async function insertNewCommentOnComment(user_id, article_id, content, comment_id) {
-
+async function insertNewCommentOnComment(
+    user_id,
+    article_id,
+    content,
+    comment_id
+) {
     const db = await getDatabase();
 
     return await db.run(SQL`
@@ -95,7 +109,17 @@ async function getCommentById(comment_id) {
         SELECT comments.*, user.username, user.fname, user.lname 
         FROM comments, user
         WHERE comments.id = ${comment_id}
-        AND user.id = comments.user_id`)
+        AND user.id = comments.user_id`);
+}
+
+async function getAuthorIdByCommentId(comment_id) {
+    const db = await getDatabase();
+
+    return await db.get(SQL`
+        SELECT comments.user_id 
+        FROM comments
+        WHERE comments.id = ${comment_id}
+        `);
 }
 
 module.exports = {
@@ -106,5 +130,6 @@ module.exports = {
     insertNewCommentOnArticle,
     insertNewCommentOnComment,
     deleteThisComment,
-    getCommentById
+    getCommentById,
+    getAuthorIdByCommentId,
 };

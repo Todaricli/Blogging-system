@@ -149,18 +149,6 @@ async function getAllCommentsFromArticle(articleId) {
     return comments;
 }
 
-async function getNumberOfLikesFromArticle(articleId) {
-    const db = await getDatabase();
-
-    const likeCounts = await db.all(SQL `
-    select count(*) as like_count
-    from likes
-    where article_id = ${articleId}
-    `)
-
-    return likeCounts;
-}
-
 async function insertNewArticleToArticleTable(user_id, title, genre, content_html, content_delta, image) {
     const db = await getDatabase();
     
@@ -195,6 +183,42 @@ async function updateArticleToArticleTableWithoutImage(article_id, title, genre,
         WHERE id = ${article_id}`);
 }
 
+async function filterArticlesBySelectedDates(startDate, endDate) {
+    const db = await getDatabase();
+
+    const articles = await db.all(SQL `
+        select articles.*, user.*
+        from articles 
+        inner join user on articles.author_id = user.id
+        where date_of_publish >= ${startDate} and date_of_publish <= ${endDate}
+    `)
+    return articles;
+}
+
+async function getArticleTitleById(articleId) {
+    const db = await getDatabase();
+
+    const title = await db.all(SQL `
+    select title
+    from articles
+    where id = ${articleId}
+    `)
+
+    return title;
+}
+
+async function getAuthorIdByArticleId(articleId) {
+    const db = await getDatabase();
+
+    const authorId = await db.all(SQL `
+    SELECT articles.author_id
+    FROM articles
+    WHERE articles.id = ${articleId};
+    `)
+
+    return authorId;
+}
+
 module.exports = {
     getArticlesByUserID,
     getArticlesByID,
@@ -207,9 +231,12 @@ module.exports = {
     getAllArticlesByPublishDate,
     getAllArticles,
     getAllCommentsFromArticle,
-    getNumberOfLikesFromArticle,
     getAuthorByArticle,
     insertNewArticleToArticleTable,
+    updateArticleToArticleTable,
+    filterArticlesBySelectedDates,
+    getArticleTitleById,
+    getAuthorIdByArticleId
     updateArticleToArticleTable,
     updateArticleToArticleTableWithoutImage,
     insertNewArticleToArticleTableWithoutImage
