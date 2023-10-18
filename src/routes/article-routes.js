@@ -39,7 +39,7 @@ router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async fu
       processAndStoreImage(fileInfo, imagePath);
       done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string, imagePath);
     } else {
-      done = await articleDao.insertNewArticleToArticleTable(user_id, title, genre, html, delta_obj_string)
+      done = await articleDao.updateArticleToArticleTableWithoutImag(user_id, title, genre, html, delta_obj_string)
     }
 
     if (done) {

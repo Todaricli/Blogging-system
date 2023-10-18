@@ -61,6 +61,11 @@ async function deleteComment() {
 
         currentCommentDiv.remove();
 
+        const directTimer = setTimeout(() => {
+          location.reload();
+          clearTimeout(directTimer);
+        }, 300);
+
 
       } catch (e) {
         alert(e)
@@ -120,9 +125,9 @@ async function commentsOnArticle() {
     }
 
     const directTimer = setTimeout(() => {
-      window.location.assign(`/article/${article_id}`);
+      location.reload();
       clearTimeout(directTimer);
-    }, 500);
+    }, 300);
 
   })
 }
@@ -181,9 +186,9 @@ async function commentOnComment() {
       }
 
       const directTimer = setTimeout(() => {
-        window.location.assign(`/article/${article_id}`);
+        location.reload();
         clearTimeout(directTimer);
-      }, 500);
+      }, 300);
 
     })
   }

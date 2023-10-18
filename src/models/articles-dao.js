@@ -214,5 +214,6 @@ module.exports = {
     getNumberOfLikesFromArticle,
     getAuthorByArticle,
     insertNewArticleToArticleTable,
-    updateArticleToArticleTable
+    updateArticleToArticleTable,
+    updateArticleToArticleTableWithoutImage
 };
