@@ -1,6 +1,4 @@
 window.addEventListener('load', async function () {
-    const user_id = document.getElementById("user_id_temp_storage").value;
-    
 
     const iconInput = document.querySelectorAll('input[name=icon]');
     iconInput.forEach(icon => {
@@ -22,4 +20,51 @@ window.addEventListener('load', async function () {
         }
         updateIconButton.classList.toggle('active');
     })
+
+    await deleteAccount();
 });
+
+async function deleteAccount() {
+    const deleteAccountForm = document.getElementById('deleteAccount');
+
+    deleteAccountForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const user_id = document.getElementById("user_id_temp_storage").value;
+        console.log(user_id);
+
+        const data = {
+            userKey: user_id
+        }
+
+        try {
+            const response = await fetch('/api/deleteAccount', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+
+            const responseData = await response.text();
+
+            if (!response.ok) {
+                throw new Error('Request failed with status: ' + response.status + " " + responseData);
+            }
+            alert(responseData);
+
+            const directTimer = setTimeout(() => {
+                window.location.assign('/');
+                clearTimeout(directTimer);
+            }, 300);
+
+        } catch (e) {
+            alert(e);
+
+            const directTimer = setTimeout(() => {
+                location.reload();
+                clearTimeout(directTimer);
+            }, 300);
+        }
+    })
+}

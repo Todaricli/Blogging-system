@@ -64,6 +64,7 @@ async function startExpress() {
     app.use(require('./routes/article-routes.js'));
 
     // Setup api routes
+    app.use(require('./routes/api/my-profile-api.js'));
     app.use(require('./routes/api/register-api.js'));
     app.use(require('./routes/api/articles-api.js'));
     app.use(require('./routes/api/admin-api'));

@@ -17,11 +17,18 @@ async function updateUserProfileWithoutIconUpdate(user_id, email, fname, lname, 
     WHERE id = ${user_id}`);
 }
 
-async function removeAccount(user_id) {
-    const db = await getDatabase()
+async function deleteUserById(user_id) {
+    const db = await getDatabase();
+
+    const dropFromNotification = db.run(SQL`
+    DELETE FROM user
+    WHERE id = ${user_id}`)
+
+    return dropFromNotification;
 }
 
 module.exports = {
     updateUserProfile,
-    updateUserProfileWithoutIconUpdate
+    updateUserProfileWithoutIconUpdate,
+    deleteUserById
 }
