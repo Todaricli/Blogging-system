@@ -190,6 +190,17 @@ async function filterArticlesBySelectedDates(startDate, endDate) {
     return articles;
 }
 
+async function getArticleTitleById(articleId) {
+    const db = await getDatabase();
+
+    const title = await db.all(SQL `
+    select title
+    from articles
+    where id = ${articleId}
+    `)
+
+    return title;
+}
 
 module.exports = {
     getArticlesByUserID,
@@ -207,5 +218,6 @@ module.exports = {
     getAuthorByArticle,
     insertNewArticleToArticleTable,
     updateArticleToArticleTable,
-    filterArticlesBySelectedDates
+    filterArticlesBySelectedDates,
+    getArticleTitleById
 };

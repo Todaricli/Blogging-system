@@ -61,7 +61,8 @@ window.addEventListener('load', async function () {
 
             let p2Tag = document.createElement('p');
             p2Tag.classList.add('clicked');
-            p2Tag.innerHTML = `Time recieved: ${indvNotif.time}`;
+            const localTime = new Date(indvNotif.time).toLocaleString(); // parse to local time
+            p2Tag.innerHTML = `Time recieved: ${localTime}`;
 
             createTrashButton();
 
@@ -73,14 +74,14 @@ window.addEventListener('load', async function () {
                 divTag.addEventListener('click', function (event) {
                     if (event.target.tagName.toLowerCase() !== 'img') {
                         const profileRoute = `/profile?id=${indvNotif.host_id}`;
-                        const articleRoute = `/article/${indvNotif.host_id}`;
+                        const articleRoute = `/article/${indvNotif.article_id}`;
                         let route;
                         if (
                             indvNotif.type === 'like' ||
                             indvNotif.type === 'sub'
                         ) {
                             route = profileRoute;
-                        } else {
+                        } else if (indvNotif.type === 'write') {
                             route = articleRoute;
                         }
                         window.location.href = route;
@@ -120,7 +121,8 @@ window.addEventListener('load', async function () {
                             method: 'DELETE',
                         }
                     );
-                    if (res.status === 204) console.log('Notification deleted successfully');
+                    if (res.status === 204)
+                        console.log('Notification deleted successfully');
                     else console.log('Error deleting notification');
                 });
             }

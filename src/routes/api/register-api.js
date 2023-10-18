@@ -13,8 +13,8 @@ router.get('/api/check-username', async function (req, res) {
 });
 
 router.post('/api/check-passwords-match', async function (req, res) {
-  const password = req.body.password
-  const confirmPassword = req.body.confirmPassword
+  const password = req.body.password;
+  const confirmPassword = req.body.confirmPassword;
   if (password === confirmPassword || confirmPassword === '') {
     res.status(200).send('passwords match');
   } else res.status(400).send('passwords different');

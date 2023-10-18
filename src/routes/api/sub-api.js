@@ -48,15 +48,18 @@ router.get('/addSubscription', verifyAuthenticated, async function (req, res) {
         try {
             await subDao.addSpecificSubscriptionByID(user_id, subscriber_id);
             
-            const n = await createSubscriptionNotification(
+            const n = await notifyDao.createNotification(
                 subscriber_id,
-                user_id
+                user_id,
+                null, // no articleID for sub action
+                'sub'
             );
             await notifyDao.storeNotificationToUser(
                 n.senderId,
                 n.receiverId,
                 n.timestamp,
                 n.content,
+                n.articleId,
                 n.type,
                 n.isRead,
             );
@@ -88,21 +91,5 @@ router.get('/removeSubscriber', verifyAuthenticated, async function (req, res) {
         res.status(403).json({ message: 'Unauthorized' });
     }
 });
-
-async function createSubscriptionNotification(receiverId, senderId) {
-    const now = new Date();
-    const utcString = now.toISOString();
-    const sender = await genericDao.getUserDataById(senderId);
-    console.log(sender.username);
-    const notification = {
-        senderId: senderId,
-        receiverId: receiverId,
-        timestamp: utcString,
-        content: `${sender.username} just subscribed to you!`,
-        type: 'sub',
-        isRead: 0,
-    };
-    return notification;
-}
 
 module.exports = router;

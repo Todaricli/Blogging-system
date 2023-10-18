@@ -53,16 +53,23 @@ window.addEventListener("load", function () {
             if (!response.ok) {
                 throw new Error('Request failed with status: ' + response.status);
             }
-
-            const responseData = await response.text();
+            const articleId = await response.text(); // to be passed into notifications
 
             // Handle the response from the server
-            toastMessage.innerText = responseData + 'URL after response:' + window.location.href;
+            toastMessage.innerText = `Article ID: ${articleId}, URL after response: ${window.location.href}`;
             //remove user input from text editor
             quill.deleteText(0, quill.getLength());
             //remove other user input
             document.getElementById("write_article_title").value = "";
 
+            // send and create notifications to subscribers
+            await fetch('/api/create-new-article-notif-for-subs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ articleId }),
+            });
         } catch (error) {
             // Handle any errors that occur during the request
             toastMessage.innerText = error + ". Potential cause: Image uploading is not supported yet.";
