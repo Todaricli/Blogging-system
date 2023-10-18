@@ -109,6 +109,7 @@ router.get('/article/:id', async function (req, res) {
     }
 
     const commentsForThisAriticle = await getAllComments(comments);
+    console.log(commentsForThisAriticle)
     res.locals.comments = commentsForThisAriticle;
 
     res.render("articleDemo")

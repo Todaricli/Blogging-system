@@ -14,7 +14,7 @@ async function getAllCommentsByUserId(userId) {
 async function getAllFirstLevelCommentsByArticleID(articleId) {
     const db = await getDatabase();
     const allFirstLevelComments = await db.all(SQL`
-    SELECT comments.*, user.username, user.fname, user.lname
+    SELECT comments.*, user.username, user.fname, user.lname, user.icon_path
     FROM comments, user
     WHERE comments.article_id = ${articleId}
     AND user.id = comments.user_id
@@ -27,7 +27,7 @@ async function getAllFirstLevelCommentsByArticleID(articleId) {
 async function getAllSecondOrThirdLevelCommentsByComment_id(comment_id, article_id) {
     const db = await getDatabase();
     const allFirstLevelComments = await db.all(SQL`
-    SELECT comments.*, user.username, user.fname, user.lname
+    SELECT comments.*, user.username, user.fname, user.lname, user.icon_path
     FROM comments, user
     WHERE comments.article_id = ${article_id}
     AND user.id = comments.user_id
