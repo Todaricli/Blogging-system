@@ -4,11 +4,10 @@
     margin: 0;
     border: 2px solid white;
     border-radius: 10px;
-    color: #0b487a;
+    color: #357a84;
 }
 
 .analyticsDashboard {
-    /* background-color: rgb(241, 248, 248); */
     margin: 20px;
     padding: auto;
     margin-bottom: 20px;
@@ -17,45 +16,30 @@
 
 #keyMetricsTitleDiv{
     margin: 20px;
-    /* margin-left: 30px;
-    margin-right: 30px; */
-    /* background-color:rgb(130, 130, 198);
-    color: white;
-    border: 5px solid rgb(255, 255, 255);
-    border-radius: 10px; */
-    /* color: rgb(19, 27, 65); */
 }
 
 #keyMetricsTitle {
-    /* color: rgb(130, 130, 198); */
-    /* font-family: "VT323"; */
-    /* font-family: "ADLaM Display"; */
-    /* text-shadow: #dafdff 5px 0 5px; */
     margin-left: 50px;
-    font-size: 60px;
-    color: #0b487a;
+    font-size: 45px;
+    color: #357a84;
 
 }
 
 .keyMetricsDiv {
     display: flex;
     margin: 20px;
-    /* color: rgb(19, 27, 65); */
 }
 
 .keyMetricsDiv>* {
     margin: auto;
     padding: auto;
     text-align: center;
-    /* color: rgb(31, 45, 111); */
 }
 
 #keyMetricsTitle {
     margin: auto;
     padding: 20px;
     text-align: center;
-    /* color: rgb(39, 55, 138); */
-
 }
 
 .indvKeyMetrics {
@@ -66,20 +50,18 @@
 }
 
 .divTitles {
-    font-size: 30px;
+    font-size: 20px;
 }
 
 #followersDiv {
     padding-left: 50px;
     padding-right: 50px;
-    /* background: rgb(255, 133, 244);
-    background: linear-gradient(90deg, rgba(255, 133, 244, 1) 0%, rgba(252, 176, 69, 1) 98%); */
     background-color: #7fc7cc;
     color: aliceblue;
 }
 
 #followerNumber {
-    font-size: 55px;
+    font-size: 45px;
     margin-bottom: 0;
     margin-top: 15px;
 }
@@ -87,11 +69,9 @@
 #commentsDiv,
 #likesDiv {
     padding: 40px;
-    font-size: larger;
-    /* color: rgb(19, 27, 65); */
 }
 
-.articleWithComments {
+.articleWithComments, #topTitles {
     font-style: italic;
 }
 
@@ -99,15 +79,12 @@
 #commentsDiv,
 #likesDiv, .furtherData {
     background-color: rgb(255, 255, 255);
-    /* color: rgb(130, 130, 198); */
-    /* color: rgb(19, 27, 65); */
-
 }
 
 .topThreeDiv {
     padding: auto;
-    padding-bottom: 400px;
-    margin: 20px;
+    padding-bottom: 20px;
+    margin: 30px;
     border: 2px solid white;
     border-radius: 10px;
 }
@@ -121,13 +98,13 @@
 #topThreeTitle {
     margin: 20px;
     margin-top: 0;
-    font-size: 40px;
+    font-size: 30px;
+    text-decoration: underline;
 }
 
 .indvTopArticles {
-    display: flex;
+    display: flex; 
     justify-content: center;
-    /* flex-direction: row; */
 }
 
 .eachTopArticle{
@@ -143,17 +120,18 @@
     margin: 10px;
 }
 
+.topArticleSummaries{
+    text-align: left;
+    margin: auto;
+}
+
 .furtherData {
-    /* display: flex; */
     background-color: white;
-    margin: 30px;
+    margin: 35px;
 }
 
 #dataIcon {
-    margin: 20px;
-    margin-top: 20px;
-    padding-top: 20px;
-    padding-left: 5px;
+    margin: 10px;
 }
 
 .furtherData{
@@ -164,8 +142,6 @@
 #plot {
     margin: auto;
     padding: 20px;
-    /* margin-bottom: 100px;
-    padding: 20px; */
 }
 
 /* ANAYTICS DASHBOARD END*/

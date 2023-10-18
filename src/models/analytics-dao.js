@@ -31,6 +31,16 @@ async function getArticleLikes(user_id) {
     return totalLikes;
 }
 
+async function getArticleLikesPerArticle(user_id) {
+    const db = await getDatabase();
+
+    const numLikes = await db.all(SQL`
+    select title, like_count from [Articles_info]
+    where user_id = ${user_id} 
+    `)
+    return numLikes;
+}
+
 async function getNumberOfComments(user_id){
     const db = await getDatabase();
 
@@ -44,6 +54,16 @@ async function getNumberOfComments(user_id){
         totalComments += numOfComments[i]["comments_count"]
     }
     return totalComments;
+}
+
+async function getNumberOfCommentsPerArticle(user_id){
+    const db = await getDatabase();
+
+    const numOfComments = await db.all(SQL`
+    select user_id, article_id, title, comments_count from [Articles_info]
+    where user_id = ${user_id}
+    `)
+    return numOfComments;
 }
 
 async function getMostPopularArticles(user_id){
@@ -67,5 +87,7 @@ module.exports ={
     getNumFollowers,
     getNumberOfComments,
     getArticleLikes,
-    getMostPopularArticles
+    getMostPopularArticles,
+    getNumberOfCommentsPerArticle,
+    getArticleLikesPerArticle
 }
