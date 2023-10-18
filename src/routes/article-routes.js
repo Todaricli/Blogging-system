@@ -9,7 +9,6 @@ const QuillDeltaToHtmlConverter =
 const uploadTempFolder = require("../middleware/multer-uploader.js");
 const fs = require("fs");
 const jimp = require("jimp");
-const { filterArticlesByGenre } = require('../models/search-dao.js');
 
 
 router.get('/writeArticle', function (req, res) {
