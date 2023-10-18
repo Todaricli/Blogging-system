@@ -39,6 +39,7 @@ router.get('/api/update-isRead', async function (req, res) {
 
 router.delete('/api/delete-notification', async function (req, res) {
     const noteId = req.query.id;
+    console.log(noteId);
     await notifyDao.deleteNotification(noteId);
     res.sendStatus(204);
 });

@@ -109,9 +109,14 @@ window.addEventListener('load', async function () {
 
                 svgImgTag.addEventListener('click', async (event) => {
                     // visually update
+                    console.log('this is run right?');
                     const parentElement = event.target.parentElement;
                     if (parentElement) {
                         parentElement.remove();
+                        if (!parentElement.classList.contains('read')) {
+                            notifNumTag.textContent =
+                                notifNumTag.textContent - 1;
+                        }
                     }
 
                     // update database

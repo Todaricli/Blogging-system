@@ -54,7 +54,7 @@ window.addEventListener("load", function () {
                 throw new Error('Request failed with status: ' + response.status);
             }
             const articleId = await response.text(); // to be passed into notifications
-
+            console.log(articleId);
             // Handle the response from the server
             toastMessage.innerText = `Article ID: ${articleId}, URL after response: ${window.location.href}`;
             //remove user input from text editor

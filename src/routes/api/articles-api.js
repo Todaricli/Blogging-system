@@ -9,6 +9,8 @@ router.post(
     async function (req, res) {
         const userId = res.locals.user.id;
         const articleId = parseInt(req.body.articleId);
+        console.log(userId);
+        console.log(articleId);
 
         const subscribers = await subDao.getSubscribersByUserID(userId);
         try {
