@@ -180,9 +180,13 @@ router.get('/filtered-articles', async function(req, res) {
   console.log(endDate);
 
   const articles = await articleDao.filterArticlesBySelectedDates(startDate, endDate);
+  console.log(articles)
 
-  res.locals.articles = articles
-  res.render("filteredArticle")
+  res.locals.articles = articles;
+  res.locals.articlesByDate = articles;
+  res.locals.startDate = startDate;
+  res.locals.endDate = endDate;
+  res.render("searchedArticles")
 
 })
 
