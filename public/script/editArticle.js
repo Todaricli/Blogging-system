@@ -85,9 +85,9 @@ async function setUpQuillEditor() {
         }
 
         const directTimer = setTimeout(() => {
-            window.location.assign(`/editArticle/${article_id}`);
+            location.reload();
             clearTimeout(directTimer);
-        }, 500);
+        }, 300);
     });
 }
 

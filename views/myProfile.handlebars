@@ -5,8 +5,9 @@
 <div id="my_profile_container">
     {{#if userData}}
     <input id="user_id_temp_storage" name="user_id_temp_storage" value="{{userData.id}}" style="display: none;">
+    <input id="icon_id_temp_storage" name="icon_id_temp_storage" style="display: none;">
     <div id="my_profile_info">
-        <form action="/update_info" method="POST">
+        <form id="updateInfo">
             <div id="my_profile_icon">
                 <div class="my_profile_container">
                     <img id="my-profile-icon-image" src="{{userData.icon_path}}" style="width: 200px;">
@@ -142,15 +143,15 @@
                 <div id="update-container">
                     <div>
                         <label for="my_profile_fname">First Name:</label>
-                        <input id="my_profile_fname" name="my_profile_fname" value="{{userData.fname}}" required>
+                        <input id="my_profile_fname" name="my_profile_fname" type="text" value="{{userData.fname}}" required>
                     </div>
                     <div>
                         <label for="my_profile_lname">Last Name:</label>
-                        <input id="my_profile_lname" name="my_profile_lname" value="{{userData.lname}}" required>
+                        <input id="my_profile_lname" name="my_profile_lname" type="text" value="{{userData.lname}}" required>
                     </div>
                     <div>
                         <label for="my_profile_email">Email:</label>
-                        <input id="my_profile_email" name="my_profile_email" value="{{userData.email}}">
+                        <input id="my_profile_email" name="my_profile_email" type="email" value="{{userData.email}}">
                     </div>
                     <div>
                         <label for="my_profile_DOB">Date of birth:</label>
@@ -158,7 +159,7 @@
                     </div>
                     <div>
                         <label for="my_profile_desc">Description:</label>
-                        <input id="my_profile_desc" name="my_profile_desc" value="{{userData.description}}">
+                        <input id="my_profile_desc" name="my_profile_desc" type="text" value="{{userData.description}}">
                     </div>
                 </div>
             </div>
@@ -196,32 +197,16 @@
             <button id="update-password" type="submit">Update</button>
             <!-- this p is for developing purpose -->
             <p style="font-size: larger; color:red">This feature need to complete</p>
-
-
-            {{!-- <div id='register_password' class='input-container'>
-                <input type='password' name='password' id='password' required class='write'>
-                <label for='password' class='label'>Password</label>
-                <span class="enter"></span>
-                <img src='/images/svg/eye.svg' alt='eye icon' id='password-eye' class='icon'>
-            </div>
-
-            <div id='confirm_password' class='input-container'>
-                <input type='password' name='confirm_password' id='confirm-password' required class='write'>
-                <label for='confirm_password' class='label'>Confirm password</label>
-                <span class="enter"></span>
-                <img src='/images/svg/eye.svg' alt='eye icon' id='confirm-password-eye' class='icon'>
-                <p id='password-format-error' style='color: red; display: none;'></p>
-                <p id='password-match-error' style='color: red; display: none;'></p>
-            </div> --}}
+        </form action="/deleteAccount" method="POST">
+        <form id="deleteAccount">
+            <button type="submit">Delete account</button>
+        </form>
+    
     </div>
-
-    </form>
-
-</div>
-{{else}}
-<p style="color: red;">Profile loading error, please try again!</p>
-<a href="/">Home</a>
-{{/if}}
+    {{else}}
+    <p style="color: red;">Profile loading error, please try again!</p>
+    <a href="/">Home</a>
+    {{/if}}
 </div>
 
 <link href="/css/myProfile.css" rel="stylesheet">

@@ -70,12 +70,20 @@ async function deleteComment() {
 
                 alert(responseData);
 
-                currentCommentDiv.remove();
-            } catch (e) {
-                alert(e);
-            }
-        });
-    });
+        currentCommentDiv.remove();
+
+        const directTimer = setTimeout(() => {
+          location.reload();
+          clearTimeout(directTimer);
+        }, 300);
+
+
+      } catch (e) {
+        alert(e)
+      }
+
+    })
+  })
 }
 
 async function commentsOnArticle() {
@@ -140,11 +148,12 @@ async function commentsOnArticle() {
             alert(e);
         }
 
-        const directTimer = setTimeout(() => {
-            window.location.assign(`/article/${article_id}`);
-            clearTimeout(directTimer);
-        }, 500);
-    });
+    const directTimer = setTimeout(() => {
+      location.reload();
+      clearTimeout(directTimer);
+    }, 300);
+
+  })
 }
 
 async function commentOnComment() {
@@ -217,12 +226,13 @@ async function commentOnComment() {
                 alert(e);
             }
 
-            const directTimer = setTimeout(() => {
-                window.location.assign(`/article/${article_id}`);
-                clearTimeout(directTimer);
-            }, 500);
-        });
-    }
+      const directTimer = setTimeout(() => {
+        location.reload();
+        clearTimeout(directTimer);
+      }, 300);
+
+    })
+  }
 }
 
 function addNewCommentElement(
