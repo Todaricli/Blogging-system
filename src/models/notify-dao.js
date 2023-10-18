@@ -67,10 +67,10 @@ async function createNotification(receiverId, senderId, articleId, type) {
 
 async function createContent(type, articleId) {
     if (type === 'sub') {
-        return `just subscribed to you!`;
+        return `subscribed to you!`;
     } else if (type === 'write') {
         const article = await articleDao.getArticleTitleById(articleId);
-        return `just wrote a new article: "${article[0].title}"`;
+        return `published a new article: "${article[0].title}"!`;
     } else console.log("not yet finished");
 }
 
