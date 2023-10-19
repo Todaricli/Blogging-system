@@ -14,12 +14,18 @@ async function getAllCommentsByUserId(userId) {
 async function getAllFirstLevelCommentsByArticleID(articleId) {
     const db = await getDatabase();
     const allFirstLevelComments = await db.all(SQL`
-    SELECT comments.*, user.username, user.fname, user.lname
+    SELECT comments.*, user.username, user.fname, user.lname, user.icon_path
     FROM comments, user
     WHERE comments.article_id = ${articleId}
     AND user.id = comments.user_id
     AND comments.comments_id IS NULL
     `);
+
+    allFirstLevelComments.forEach(comment => {
+        const dateTimeUTC = comment.time_of_comment;
+        const localTime = new Date(dateTimeUTC).toLocaleString();
+        comment.time_of_comment = localTime;
+    })
 
     return allFirstLevelComments;
 }
@@ -29,15 +35,21 @@ async function getAllSecondOrThirdLevelCommentsByComment_id(
     article_id
 ) {
     const db = await getDatabase();
-    const allFirstLevelComments = await db.all(SQL`
-    SELECT comments.*, user.username, user.fname, user.lname
+    const allSecondOrThirdComments = await db.all(SQL`
+    SELECT comments.*, user.username, user.fname, user.lname, user.icon_path
     FROM comments, user
     WHERE comments.article_id = ${article_id}
     AND user.id = comments.user_id
     AND comments.comments_id = ${comment_id}
     `);
 
-    return allFirstLevelComments;
+    allSecondOrThirdComments.forEach(comment => {
+        const dateTimeUTC = comment.time_of_comment;
+        const localTime = new Date(dateTimeUTC).toLocaleString();
+        comment.time_of_comment = localTime;
+    })
+
+    return allSecondOrThirdComments;
 }
 
 async function deleteComments(comment_id, article_id) {
@@ -84,9 +96,12 @@ async function deleteThisComment(comment_id, article_id) {
 async function insertNewCommentOnArticle(user_id, article_id, content) {
     const db = await getDatabase();
 
+    const now = new Date();
+    const utcString = now.toISOString();
+
     return await db.run(SQL`
         INSERT INTO comments (user_id, article_id, content, time_of_comment)
-        VALUES (${user_id}, ${article_id}, ${content}, datetime('now'))`);
+        VALUES (${user_id}, ${article_id}, ${content}, ${utcString})`);
 }
 
 async function insertNewCommentOnComment(
@@ -97,19 +112,28 @@ async function insertNewCommentOnComment(
 ) {
     const db = await getDatabase();
 
+    const now = new Date();
+    const utcString = now.toISOString();
+
     return await db.run(SQL`
         INSERT INTO comments (user_id, article_id, content, time_of_comment, comments_id)
-        VALUES (${user_id}, ${article_id}, ${content}, datetime('now'), ${comment_id})`);
+        VALUES (${user_id}, ${article_id}, ${content}, ${utcString}, ${comment_id})`);
 }
 
 async function getCommentById(comment_id) {
     const db = await getDatabase();
 
-    return await db.get(SQL`
+    const comment = await db.get(SQL`
         SELECT comments.*, user.username, user.fname, user.lname 
         FROM comments, user
         WHERE comments.id = ${comment_id}
         AND user.id = comments.user_id`);
+
+    const dateTimeUTC = comment.time_of_comment;
+    const localTime = new Date(dateTimeUTC).toLocaleString();
+    comment.time_of_comment = localTime;
+
+    return comment;
 }
 
 async function getAuthorIdByCommentId(comment_id) {

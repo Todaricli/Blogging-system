@@ -68,7 +68,7 @@ window.addEventListener("load", function () {
 
     async function removeSubscription(subscription_id) {
         const subscriptionId = subscription_id;
-        fetch(`/removeSubscription?id=${subscriptionId}`)
+        await fetch(`/removeSubscription?id=${subscriptionId}`)
             .then(response => {
                 if (response.status === 200) {
                     // location.reload();
@@ -83,7 +83,7 @@ window.addEventListener("load", function () {
 
     async function addSubscription(subscription_id) {
         const subscriptionId = subscription_id;
-        fetch(`/addSubscription?id=${subscriptionId}`)
+        await fetch(`/addSubscription?id=${subscriptionId}`)
             .then(response => {
                 if (response.status === 200) {
                     // location.reload();

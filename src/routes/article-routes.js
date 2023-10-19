@@ -4,9 +4,10 @@ const articleDao = require('../models/articles-dao.js');
 const commentDao = require('../models/comments-dao.js');
 const searchDao = require('../models/search-dao.js');
 const likeDao = require('../models/like-dao.js');
+const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 
 
-router.get('/writeArticle', function (req, res) {
+router.get('/writeArticle', verifyAuthenticated, function (req, res) {
     res.render('writeArticle');
 });
 
@@ -17,11 +18,13 @@ router.get('/article/:id', async function (req, res) {
 
     const article_id = req.params.id;
 
-  try {
+    console.log(article_id);
 
-    const article = await articleDao.getArticlesByID(article_id);
+    try {
 
-    const articleId = article[0].id;
+        const article = await articleDao.getArticlesByID(article_id);
+
+        const articleId = article[0].id;
 
         res.locals.article = article;
 
@@ -83,14 +86,16 @@ router.get('/article/:id', async function (req, res) {
         const commentsForThisAriticle = await getAllComments(comments);
         res.locals.comments = commentsForThisAriticle;
 
+        console.log("got here");
         res.render('articleDemo');
+
     } catch (error) {
-        const html = '<p>Error occured: <p>';
+        const html = '<p>Error occured <p>';
         res.locals.article_content = html + error;
     }
 });
 
-router.get('/editArticle/:id', async (req, res) => {
+router.get('/editArticle/:id', verifyAuthenticated, async (req, res) => {
     const article_id = req.params.id;
 
     res.locals.article_id = article_id;
@@ -103,9 +108,9 @@ router.get('/calendar', async function (req, res) {
 });
 
 router.get('/genre/:genreType', async function (req, res) {
-  const genreType = req.params.genreType;
+    const genreType = req.params.genreType;
 
-  const articles = await searchDao.filterArticlesByGenre(genreType)
+    const articles = await searchDao.filterArticlesByGenre(genreType)
 
     res.locals.articles = articles;
     res.render('searchedArticles');
