@@ -10,7 +10,6 @@ window.addEventListener(`load`, function () {
 
 
     window.addEventListener(`click`, (e)=>{
-        console.log(e.target)
         if(e.target.className != "search"){
             searchResultContainer.style.display = "none"
             // searchNavBar.style.border="1px solid black"
