@@ -31,14 +31,6 @@
     margin: 0;
 }
 
-
-#profile_name {
-    display: flex;
-    justify-content: center;
-    font-size: 3rem;
-    font-weight: bold;
-}
-
 #container {
     margin: 20px;
     height: 100%;
@@ -81,9 +73,12 @@
 }
 
 #profile_name {
-    font-size: 28px;
-    padding: 15px;
+    font-size: 26px;
+    padding: 10px;
     border-bottom: 1px solid var(--light-text-color);
+    font-weight: bold;
+    width: 90%;
+    text-align: center;
 }
 
 #profile_subscribers,
