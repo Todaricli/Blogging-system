@@ -5,7 +5,7 @@
     {{!-- Published section --}}
     <div id="container-header">
         <div>
-            <h1>Your stories ({{this.total_posts}})</h1>
+            <h1 id="article-count-header">Your stories ({{this.total_posts}})</h1>
         </div>
         <div>
             <button>
@@ -18,10 +18,9 @@
     {{#if posts}}
     <div class="all_posts">
         {{#each posts}}
-        <div class="each_posts" article-id = "{{this.article_id}}">
-
+        <div id="article{{this.article_id}}" class="each_posts" article-id="{{this.article_id}}">
             <div class="each-posts-content">
-                <button type="button" class="delete-button" article-id = "{{this.article_id}}">delete article</button>
+
                 <h3 id="post_title">{{this.title}}</h3>
                 <p id="post_publish_time"><strong>Published on </strong>{{this.date_of_publish}}</p>
                 <div id="post_content">
@@ -35,6 +34,7 @@
                     {{/each}}
                     {{/if}}
                     <a href="/article/{{this.article_id}}" id="myPostReadMoreLink">Read more</a>
+                    <button type="button" class="delete-button" article-id="{{this.article_id}}">delete article</button>
                 </div>
             </div>
             <div class="each-posts-img">
