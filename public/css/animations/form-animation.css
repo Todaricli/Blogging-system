@@ -6,6 +6,10 @@ body {
   font-family: 'helvetica neue';
 }
 
+input[type="date"] {
+  color: #cecece;
+}
+
 #password-eye {
   opacity: 0.3;
 }

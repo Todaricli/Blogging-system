@@ -13,40 +13,52 @@
         <div id='register_fillinbox'>
             <div id='register_fname' class='input-container'>
                 <input type='name' name='fname' id='fname' required class='write'>
-                <label for='fname' class='label'>First name</label>
+                <label for='fname' class='label'>First name*</label>
                 <span class="enter"></span>
             </div>
 
             <div id='register_lname' class='input-container'>
                 <input type='name' name='lname' id='lname' required class='write'>
-                <label for='lname' class='label'>Last name</label>
+                <label for='lname' class='label'>Last name*</label>
+                <span class="enter"></span>
+            </div>
+
+            <div id='register_email' class='input-container'>
+                <input type='email' name='email' id='email' required class='write'>
+                <label for='email' class='label'>Email*</label>
+                <span class="enter"></span>
+                <p id='email-format-error' style='color: red; display: none;'></p>
+            </div>
+
+            <div id='register_DOB' class='input-container'>
+                <input type='date' name='dob' id='dob' placeholder="" class='write'>
+                <label for='date' class='label'></label>
+                <span class="enter"></span>
+            </div>
+
+             <div id='register_description' class='input-container'>
+                <input type='text' name='description' id='description' class='write'>
+                <label for='description' class='label'>Description</label>
                 <span class="enter"></span>
             </div>
 
             <div id='register_username' class='input-container'>
                 <input type='username' name='username' id='username' required class='write'>
-                <label for='username' class='label'>Username</label>
+                <label for='username' class='label'>Username*</label>
                 <span class="enter"></span>
                 <p id='username-error' style='color: red; display: none;'></p>
             </div>
 
-            <div id='register_email' class='input-container'>
-                <input type='email' name='email' id='email' required class='write'>
-                <label for='email' class='label'>Email</label>
-                <span class="enter"></span>
-                <p id='email-format-error' style='color: red; display: none;'></p>
-            </div>
-
             <div id='register_password' class='input-container'>
                 <input type='password' name='password' id='password' required class='write'>
-                <label for='password' class='label'>Password</label>
+                <label for='password' class='label'>Password*</label>
                 <span class="enter"></span>
                 <img src='/images/svg/eye.svg' alt='eye icon' id='password-eye' class='icon'>
             </div>
 
             <div id='confirm_password' class='input-container'>
                 <input type='password' name='confirm_password' id='confirm-password' required class='write'>
-                <label for='confirm_password' class='label'>Confirm password</label>
+                <label for='confirm_password' class='label'>Confirm password*</label>
                 <span class="enter"></span>
                 <img src='/images/svg/eye.svg' alt='eye icon' id='confirm-password-eye' class='icon'>
                 <p id='password-format-error' style='color: red; display: none;'></p>

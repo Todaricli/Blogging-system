@@ -23,6 +23,8 @@ async function newUser(req, res, next) {
     req.fname = req.body.fname;
     req.lname = req.body.lname;
     req.email = req.body.email;
+    req.dob = req.body.dob;
+    req.description = req.body.description;
     const icon = req.body.icon;
     const icon_path = `/images/avatars/${icon}.png`;
     bcrypt.hash(req.password, 12, async (err, passwordHash) => {
@@ -33,6 +35,8 @@ async function newUser(req, res, next) {
                 req.username, // can use usernameHash to store hash instead
                 req.email,
                 passwordHash,
+                req.dob,
+                req.description,
                 icon_path
             );
         });

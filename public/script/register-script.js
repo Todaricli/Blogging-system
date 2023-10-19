@@ -5,15 +5,19 @@ window.addEventListener('load', async function () {
     // input selectors
     const fnameInput = document.querySelector('#fname');
     const lnameInput = document.querySelector('#lname');
-    const usernameInput = document.querySelector('#username');
     const emailInput = document.querySelector('#email');
+    const dobInput = document.querySelector('#dob');
+    const descriptionInput = document.querySelector('#description');
+    const usernameInput = document.querySelector('#username');
     const passwordInput = document.querySelector('#password');
     const confirmPasswordInput = document.querySelector('#confirm-password');
     const formInputs = [
         fnameInput,
         lnameInput,
-        usernameInput,
         emailInput,
+        dobInput,
+        descriptionInput,
+        usernameInput,
         passwordInput,
         confirmPasswordInput,
     ];
@@ -158,16 +162,19 @@ window.addEventListener('load', async function () {
     function checkIfInputFocused(input) {
         const label = input.nextElementSibling;
         console.log("is this run?");
+        console.log(input.value);
 
         if (input.value && input.value.trim() !== '') {
             console.log("focused");
             label.classList.add('focused-label');
             label.classList.remove('label');
             input.style.borderBottomColor = 'black';
+            input.style.color = 'black';
         } else {
             label.classList.remove('focused-label');
             label.classList.add('label');
             input.style.borderBottomColor = '#cecece';
+            input.style.color = '#cecece';
         }
     }
 
