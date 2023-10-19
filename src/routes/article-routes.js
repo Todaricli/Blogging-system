@@ -4,9 +4,10 @@ const articleDao = require('../models/articles-dao.js');
 const commentDao = require('../models/comments-dao.js');
 const searchDao = require('../models/search-dao.js');
 const likeDao = require('../models/like-dao.js');
+const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
 
 
-router.get('/writeArticle', function (req, res) {
+router.get('/writeArticle', verifyAuthenticated, function (req, res) {
     res.render('writeArticle');
 });
 
@@ -94,7 +95,7 @@ router.get('/article/:id', async function (req, res) {
     }
 });
 
-router.get('/editArticle/:id', async (req, res) => {
+router.get('/editArticle/:id', verifyAuthenticated, async (req, res) => {
     const article_id = req.params.id;
 
     res.locals.article_id = article_id;
