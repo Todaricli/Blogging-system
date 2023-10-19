@@ -17,17 +17,17 @@ DROP TABLE IF EXISTS user;
 
 CREATE TABLE user
 (
-    id INTEGER NOT NULL PRIMARY KEY,
-    username VARCHAR(28) NOT NULL,
-    password VARCHAR(28) NOT NULL,
-    auth_token VARCHAR(100),
-    email VARCHAR(28),
-    fname VARCHAR(28),
-    lname VARCHAR(28),
-    DOB DATE,
+    id          INTEGER     NOT NULL PRIMARY KEY,
+    username    VARCHAR(28) NOT NULL,
+    password    VARCHAR(28) NOT NULL,
+    auth_token  VARCHAR(100),
+    email       VARCHAR(28),
+    fname       VARCHAR(28),
+    lname       VARCHAR(28),
+    DOB         DATE,
     description VARCHAR(120),
-    icon_path VARCHAR(20),
-    admin INTEGER NOT NULL,
+    icon_path   VARCHAR(20),
+    admin       INTEGER     NOT NULL,
     CHECK (admin >= 0 AND admin <= 1)
 );
 
@@ -58,14 +58,14 @@ VALUES (1, 'user1', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv
 
 CREATE TABLE articles
 (
-    id INTEGER NOT NULL PRIMARY KEY,
-    title VARCHAR(88) NOT NULL,
-    content_html VARCHAR(8000) NOT NULL,
-    content_delta VARCHAR(8000) NOT NULL,
-    genre VARCHAR(20),
-    image VARCHAR(8000),
-    date_of_publish TIMESTAMP NOT NULL,
-    author_id INTEGER NOT NULL,
+    id              INTEGER       NOT NULL PRIMARY KEY,
+    title           VARCHAR(88)   NOT NULL,
+    content_html    VARCHAR(8000) NOT NULL,
+    content_delta   VARCHAR(8000) NOT NULL,
+    genre           VARCHAR(20),
+    image           VARCHAR(8000),
+    date_of_publish TIMESTAMP     NOT NULL,
+    author_id       INTEGER       NOT NULL,
     FOREIGN KEY (author_id) REFERENCES user (id) ON DELETE CASCADE
 );
 
@@ -169,12 +169,12 @@ VALUES (1, 'Stunningly Beautiful - Abel Tasman Coast Track',
 
 CREATE TABLE comments
 (
-    id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
-    article_id INTEGER NOT NULL,
-    content VARCHAR(1000),
+    id              INTEGER   NOT NULL,
+    user_id         INTEGER   NOT NULL,
+    article_id      INTEGER   NOT NULL,
+    content         VARCHAR(1000),
     time_of_comment TIMESTAMP NOT NULL,
-    comments_id INTEGER,
+    comments_id     INTEGER,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE,
     FOREIGN KEY (article_id) REFERENCES articles (id) ON DELETE CASCADE,
@@ -183,32 +183,32 @@ CREATE TABLE comments
 
 -- Inserting 20 rows of sample data into the comments table with NULL comments_id
 INSERT INTO comments (id, user_id, article_id, content, time_of_comment, comments_id)
-VALUES (1, 1, 1, 'Great article!', '2023-10-10 10:15:00', NULL),
-       (2, 2, 1, 'I learned a lot from this.', '2023-10-10 11:30:00', 1),
+VALUES (1, 1, 1, 'Great article!', '2023-01-01T23:00:00.000Z', NULL),
+       (2, 2, 1, 'I learned a lot from this.', '2023-07-07T23:34:00.987Z', 1),
        (3, 3, 2, 'Silk fabric is so elegant!',
-        '2023-10-10 12:45:00', 2),
-       (4, 8, 1, 'I love wearing silk!', '2023-10-10 14:00:00', 2),
-       (5, 7, 1, 'Cotton is my favorite fabric.', '2023-10-10 15:15:00', 1),
-       (6, 9, 3, 'Polyester is versatile.', '2023-10-10 16:30:00', 5),
-       (7, 1, 1, 'Wool keeps you warm in winter.', '2023-10-10 17:45:00', 2),
-       (8, 3, 4, 'I have a wool sweater.', '2023-10-10 19:00:00', NULL),
-       (9, 4, 5, 'Linen is great for summer.', '2023-10-10 20:15:00', NULL),
-       (10, 5, 5, 'I need linen sheets.', '2023-10-10 21:30:00', NULL),
-       (11, 1, 6, 'Satin is so luxurious!', '2023-10-10 22:45:00', NULL),
-       (12, 2, 6, 'I have a satin dress.', '2023-10-10 23:59:00', NULL),
-       (13, 3, 7, 'Denim jeans are classic.', '2023-10-11 10:15:00', NULL),
-       (14, 4, 7, 'I like distressed denim.', '2023-10-11 11:30:00', NULL),
-       (15, 5, 8, 'Velvet feels so soft.', '2023-10-11 12:45:00', NULL),
-       (16, 1, 8, 'I have a velvet sofa.', '2023-10-11 14:00:00', NULL),
-       (17, 2, 9, 'Polyester is easy to care for.', '2023-10-11 15:15:00', NULL),
-       (18, 3, 9, 'I prefer natural fabrics.', '2023-10-11 16:30:00', NULL),
-       (19, 4, 10, 'Sustainability is important.', '2023-10-11 17:45:00', NULL),
-       (20, 5, 10, 'I support eco-friendly fabrics.', '2023-10-11 19:00:00', NULL);
+        '2023-09-09T23:05:45.987Z', 2),
+       (4, 8, 1, 'I love wearing silk!', '2023-04-04T23:47:15.456Z', 2),
+       (5, 7, 1, 'Cotton is my favorite fabric.', '2023-04-24T23:55:00.321Z', 1),
+       (6, 9, 3, 'Polyester is versatile.', '2023-07-03T23:41:00.654Z', 5),
+       (7, 1, 1, 'Wool keeps you warm in winter.', '2023-02-18T23:23:30.987Z', 2),
+       (8, 3, 4, 'I have a wool sweater.', '2023-11-11T23:37:30.456Z', NULL),
+       (9, 4, 5, 'Linen is great for summer.', '2023-12-18T23:57:45.789Z', NULL),
+       (10, 5, 5, 'I need linen sheets.', '2023-10-10T23:21:00.321Z', NULL),
+       (11, 1, 6, 'Satin is so luxurious!', '2023-07-07T23:34:00.987Z', NULL),
+       (12, 2, 6, 'I have a satin dress.', '2023-12-18T23:57:45.789Z', NULL),
+       (13, 3, 7, 'Denim jeans are classic.', '2023-04-24T23:55:00.321Z', NULL),
+       (14, 4, 7, 'I like distressed denim.', '2023-12-12T23:52:45.789Z', NULL),
+       (15, 5, 8, 'Velvet feels so soft.', '2023-03-21T23:39:45.123Z', NULL),
+       (16, 1, 8, 'I have a velvet sofa.', '2023-07-03T23:41:00.654Z', NULL),
+       (17, 2, 9, 'Polyester is easy to care for.', '2023-09-09T23:11:45.123Z', NULL),
+       (18, 3, 9, 'I prefer natural fabrics.', '2023-09-09T23:11:45.123Z', NULL),
+       (19, 4, 10, 'Sustainability is important.', '2023-09-09T23:11:45.123Z', NULL),
+       (20, 5, 10, 'I support eco-friendly fabrics.', '2023-09-09T23:11:45.123Z', NULL);
 
 CREATE TABLE likes
 (
     id         INTEGER AUTO_INCREMENT,
-    user_id    INTEGER NOT NULL ,
+    user_id    INTEGER NOT NULL,
     article_id INTEGER NOT NULL,
     PRIMARY KEY (id, user_id, article_id),
     FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE,
@@ -218,32 +218,31 @@ CREATE TABLE likes
 -- Inserting 20 rows of sample data into the likes table
 INSERT INTO likes
     (id, user_id, article_id)
-VALUES
-    (1, 1, 1),
-    (2, 2, 1),
-    (3, 3, 2),
-    (4, 4, 2),
-    (5, 5, 3),
-    (6, 1, 3),
-    (7, 2, 4),
-    (8, 3, 4),
-    (9, 4, 5),
-    (10, 5, 5),
-    (11, 1, 6),
-    (12, 2, 6),
-    (13, 3, 7),
-    (14, 4, 7),
-    (15, 5, 8),
-    (16, 1, 8),
-    (17, 2, 9),
-    (18, 3, 9),
-    (19, 4, 10),
-    (20, 5, 10);
+VALUES (1, 1, 1),
+       (2, 2, 1),
+       (3, 3, 2),
+       (4, 4, 2),
+       (5, 5, 3),
+       (6, 1, 3),
+       (7, 2, 4),
+       (8, 3, 4),
+       (9, 4, 5),
+       (10, 5, 5),
+       (11, 1, 6),
+       (12, 2, 6),
+       (13, 3, 7),
+       (14, 4, 7),
+       (15, 5, 8),
+       (16, 1, 8),
+       (17, 2, 9),
+       (18, 3, 9),
+       (19, 4, 10),
+       (20, 5, 10);
 
 CREATE TABLE subscription
 (
     being_subscribed_id INTEGER NOT NULL,
-    follower_id INTEGER NOT NULL,
+    follower_id         INTEGER NOT NULL,
     PRIMARY KEY (being_subscribed_id, follower_id),
     FOREIGN KEY (being_subscribed_id) REFERENCES user (id) ON DELETE CASCADE,
     FOREIGN KEY (follower_id) REFERENCES user (id) ON DELETE CASCADE
@@ -252,49 +251,48 @@ CREATE TABLE subscription
 -- Inserting 20 rows of sample data into the subscription table
 INSERT INTO subscription
     (being_subscribed_id, follower_id)
-VALUES
-    (1, 2),
-    (1, 3),
-    (1, 4),
-    (2, 3),
-    (2, 4),
-    (2, 5),
-    (3, 4),
-    (3, 5),
-    (3, 1),
-    (4, 5),
-    (4, 1),
-    (4, 2),
-    (5, 1),
-    (5, 2),
-    (5, 3),
-    (1, 5),
-    (2, 1),
-    (3, 2),
-    (4, 3),
-    (5, 4);
+VALUES (1, 2),
+       (1, 3),
+       (1, 4),
+       (2, 3),
+       (2, 4),
+       (2, 5),
+       (3, 4),
+       (3, 5),
+       (3, 1),
+       (4, 5),
+       (4, 1),
+       (4, 2),
+       (5, 1),
+       (5, 2),
+       (5, 3),
+       (1, 5),
+       (2, 1),
+       (3, 2),
+       (4, 3),
+       (5, 4);
 
 CREATE TABLE notifications
 (
-    id INTEGER NOT NULL PRIMARY KEY,
-    host_id INTEGER NOT NULL,
-    receiver_id INTEGER NOT NULL,
-    time TIMESTAMP NOT NULL,
-    content VARCHAR(88),
-    article_id INTEGER,
-    type TEXT NOT NULL,
-    isRead INTEGER NOT NULL,
+    id          INTEGER   NOT NULL PRIMARY KEY,
+    host_id     INTEGER   NOT NULL,
+    receiver_id INTEGER   NOT NULL,
+    time        TIMESTAMP NOT NULL,
+    content     VARCHAR(88),
+    article_id  INTEGER,
+    type        TEXT      NOT NULL,
+    isRead      INTEGER   NOT NULL,
     FOREIGN KEY (host_id) REFERENCES user (id) ON DELETE CASCADE
 );
 
 -- Inserting 20 rows of sample data into the notifications table
 INSERT INTO notifications
     (id, host_id, receiver_id, time, content, article_Id, type, isRead)
-VALUES
-    (1, 2, 1, '2023-10-10 10:15:00', 'user2 just subscribed to you!', null, 'sub', 0),
-    (6, 3, 1, '2023-10-10 16:30:00', 'user3 just liked your article!', null, 'like', 0),
-    (16, 4, 1, '2023-10-11 14:00:00', 'user4 just wrote a new article: "Textiles Through the Ages"!', 4, 'write', 0),
-    (11, 5, 1, '2023-10-10 22:45:00', 'user5 just wrote a new article: "Dyeing Techniques"!', 5, 'write', 0);
+VALUES (1, 2, 1, '2023-09-09T23:11:45.123Z', 'user2 just subscribed to you!', null, 'sub', 0),
+       (6, 3, 1, '2023-01-15T23:08:15.654Z', 'user3 just liked your article!', null, 'like', 0),
+       (16, 4, 1, '2023-09-09T23:05:45.987Z', 'user4 just wrote a new article: "Textiles Through the Ages"!', 4,
+        'write', 0),
+       (11, 5, 1, '2023-01-15T23:08:15.654Z', 'user5 just wrote a new article: "Dyeing Techniques"!', 5, 'write', 0);
 
 -- (2, 1, 2, '2023-10-10 11:30:00', 'New article published: "Introduction to Fabric Types"', 0),
 -- (3, 1, 3, '2023-10-10 12:45:00', 'Someone liked your comment.', 0),
@@ -332,3 +330,8 @@ from articles
                     group by article_id) on articles.id = comment_articles_id
          left join user on user.id = articles.author_id
 group by articles.id;
+
+SELECT articles.title, comments_count, articles.date_of_publish as date
+from Articles_info
+         left join articles on Articles_info.article_id = articles.id
+where date LIKE '2023-11-11%';

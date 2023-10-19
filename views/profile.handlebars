@@ -9,35 +9,47 @@
         <div id="profile_email"><strong>Email:</strong>{{user.email}} tempEmail@gmail.com</div>
         <input value="{{profile_id}}" id="profile_id" hidden>
 
-     <div id="profile_related_info">
-        {{#if profile_subscribers}}
-        <div id="profile_subscribers"><strong>{{profile_subscribers.length}}</strong> subscribers</div>
-        {{else}}
-        <div id="profile_subscribers"><strong>0</strong> subscriber</div>
+        <div id="profile_related_info">
+            {{#if profile_subscribers}}
+            <div id="profile_subscribers"><strong>{{profile_subscribers.length}}</strong> subscribers</div>
+            {{else}}
+            <div id="profile_subscribers"><strong>0</strong> subscriber</div>
+            {{/if}}
+            {{#if profile_articles}}
+            <div id="profile_articles_number"><strong>{{profile_articles.length}}</strong> articles</div>
+            {{else}}
+            <div id="profile_articles_number"><strong>0</strong> article</div>
+            {{/if}}
+
+        </div>
+
+        {{#if user}}
+        <input value="{{user.id}}" id="user_id" hidden>
         {{/if}}
-        {{#if profile_articles}}
-        <div id="profile_articles_number"><strong>{{profile_articles.length}}</strong> articles</div>
-        {{else}}
-        <div id="profile_articles_number"><strong>0</strong> article</div>
-        {{/if}}
-        
     </div>
 
-    {{#if user}}
-        <input value="{{user.id}}" id="user_id" hidden>
-    {{/if}}
-    </div>
-    
 
     <div id="profile_articles_container">
         {{#if profile_articles}}
         {{#each profile_articles}}
-        <div class="profile_article_title">{{this.title}}</div>
-        <div><img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}"></div>
-        <div class="profile_article_timestamp">{{this.date_of_publish}}</div>
-        <div class="profile_article_description">{{{this.content_html}}}</div>
-        <div class="profile_article_category">{{this.article_category}}</div>
-        
+        <div class="article">
+
+            <div class="article-left">
+                <a href="/article/{{this.id}}" class="article-link">
+                    <div class="profile_article_title">{{this.title}}</div>
+                    <div class="profile_article_timestamp">{{this.date_of_publish}}</div>
+                    <a href="/genre/{{this.genre}}" class="genre-link">
+                        <div class="profile_article_genre">{{this.genre}}</div>
+                    </a>
+                    <div class="profile_article_description">{{{this.content_html}}}</div>
+                    <div class="profile_article_category">{{this.article_category}}</div>
+                </a>
+            </div>
+
+
+            <div id="article-img"><img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}">
+            </div>
+        </div>
         {{/each}}
         {{else}}
         <div id="articles_container_title">0 article</div>

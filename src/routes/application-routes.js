@@ -4,7 +4,6 @@ const router = express.Router();
 const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 const subDao = require('../models/sub-dao.js');
-const commentDao = require('../models/comments-dao.js');
 const analyticsDao = require('../models/analytics-dao.js')
 
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
@@ -110,63 +109,41 @@ router.get("/removeSubscription", verifyAuthenticated, async function (req, res)
     const user_id = res.locals.user.id;
     if (user_id) {
         try {
-          await subDao.removeSpecificSubscriptionByID(user_id, subscription_id);
-          res.status(200).json({ message: 'Subscription removed successfully' });
+            await subDao.removeSpecificSubscriptionByID(user_id, subscription_id);
+            res.status(200).json({ message: 'Subscription removed successfully' });
         } catch (error) {
-          res.status(500).json({ message: 'Error removing subscription' });
+            res.status(500).json({ message: 'Error removing subscription' });
         }
-      } else {
+    } else {
         res.status(403).json({ message: 'Unauthorized' });
-      }
-})
-
-router.get("/analytics-Dashboard", async (req,res) =>{
-    const user = res.locals.user
-    const userId = user["id"]
-    const response = await analyticsDao.getNumFollowers(userId)
-    const response1 = await genericDao.getUserDataById(userId)
-    const comments = await analyticsDao.getNumberOfComments(userId)
-    const likes = await analyticsDao.getArticleLikes(userId)
-    const top3Articles = await analyticsDao.getMostPopularArticles(userId)
-
-    console.log(top3Articles)
-
-    // const yuh = await response.json()
-    const followerNumber = response[0]["counts"]
-    res.locals.followers = followerNumber
-    res.locals.user = response1
-    res.locals.comments = comments
-    res.locals.likes = likes
-    res.locals.topArticles = top3Articles
-    res.render("analyticsDashboard")
-
-});
-
-
-router.get("/analytics-Dashboard", async (req, res) => {
-    res.render("analyticsDashboard")
+    }
 })
 
 router.get('/analytics', async function (req, res) {
-    
-    const user = res.locals.user
-    const userId = user["id"]
-    const response = await analyticsDao.getNumFollowers(userId)
-    const response1 = await genericDao.getUserDataById(userId)
-    const comments = await analyticsDao.getNumberOfCommentsPerArticle(userId)
-    const likes = await analyticsDao.getArticleLikesPerArticle(userId)
-    const top3Articles = await analyticsDao.getMostPopularArticles(userId)
-    console.log("skeetskeet")
-    console.log(comments)
 
-    // const yuh = await response.json()
-    const followerNumber = response[0]["counts"]
-    res.locals.followers = followerNumber
-    res.locals.user = response1
-    res.locals.comments = comments
-    res.locals.likes = likes
-    res.locals.topArticles = top3Articles
-    res.render("analyticsDashboard")
+    try {
+        const user = res.locals.user
+        const userId = user["id"]
+        const response = await analyticsDao.getNumFollowers(userId)
+        const response1 = await genericDao.getUserDataById(userId)
+        const comments = await analyticsDao.getNumberOfCommentsPerArticle(userId)
+        const likes = await analyticsDao.getArticleLikesPerArticle(userId)
+        const top3Articles = await analyticsDao.getMostPopularArticles(userId)
+        console.log("skeetskeet")
+        console.log(comments)
+
+        // const yuh = await response.json()
+        const followerNumber = response[0]["counts"]
+        res.locals.followers = followerNumber
+        res.locals.user = response1
+        res.locals.comments = comments
+        res.locals.likes = likes
+        res.locals.topArticles = top3Articles
+        res.render("analyticsDashboard")
+    } catch (e) {
+        res.locals.errorMessage = 'Page loading incomplete. ' + e;
+        res.render('analyticsDashboard');
+    }
 });
 
 module.exports = router;

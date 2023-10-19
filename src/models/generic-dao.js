@@ -32,6 +32,14 @@ async function getUserArticles(userId) {
     INNER JOIN user ON articles.author_id = user.id
     WHERE user.id = ${userId}
     `);
+
+    allArticles.forEach(article => {
+        const dateTimeUTC = article.date_of_publish;
+        const localTime = new Date(dateTimeUTC).toLocaleString();
+        article.date_of_publish = localTime;
+    })
+
+
     return allArticles;
 }
 
