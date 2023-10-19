@@ -4,7 +4,7 @@ const { getDatabase } = require('../db/database.js');
 
 
 //working
-async function getArticlesByUserID(userid){
+async function getArticlesByUserID(userid) {
     const db = await getDatabase();
 
     const article = await db.all(SQL`
@@ -12,10 +12,14 @@ async function getArticlesByUserID(userid){
     where author_id = ${userid}
     `)
 
+    const dateTimeUTC = article.date_of_publish;
+    const localTime = new Date(dateTimeUTC).toLocaleString();
+    article.date_of_publish = localTime;
+
     return article;
 }
 
-async function getAllArticles(){
+async function getAllArticles() {
     const db = await getDatabase();
 
     const articles = await db.all(SQL`
@@ -23,11 +27,17 @@ async function getAllArticles(){
     from articles left join user on articles.author_id = user.id
     `);
 
+    articles.forEach(article => {
+        const dateTimeUTC = article.date_of_publish;
+        const localTime = new Date(dateTimeUTC).toLocaleString();
+        article.date_of_publish = localTime;
+    })
+
     return articles;
 }
 
 //working
-async function getArticlesByID(id){
+async function getArticlesByID(id) {
     const db = await getDatabase();
 
     const article = await db.all(SQL`
@@ -35,13 +45,18 @@ async function getArticlesByID(id){
     where id = ${id};
     `)
 
+    const dateTimeUTC = article[0].date_of_publish;
+    const localTime = new Date(dateTimeUTC).toLocaleString();
+    article[0].date_of_publish = localTime;
+
+
     return article;
 }
 
 async function getAuthorByArticle(articleId) {
     const db = await getDatabase();
 
-    const author = await db.all(SQL `
+    const author = await db.all(SQL`
     SELECT user.fname AS author_fname, user.lname AS author_lname, user.*
     FROM articles
     INNER JOIN user ON articles.author_id = user.id
@@ -52,10 +67,10 @@ async function getAuthorByArticle(articleId) {
 }
 
 //working
-async function getTopFiveArticles(){
+async function getTopFiveArticles() {
     const db = await getDatabase();
 
-    const article = await db.all(SQL`
+    const articles = await db.all(SQL`
     select articles.*, COUNT(user_id) as like_count
     from articles left join likes on articles.id = likes.article_id
     GROUP by article_id
@@ -63,35 +78,56 @@ async function getTopFiveArticles(){
     limit 5
     `)
 
-    return article;
+    articles.forEach(article => {
+        const dateTimeUTC = article.date_of_publish;
+        const localTime = new Date(dateTimeUTC).toLocaleString();
+        article.date_of_publish = localTime;
+    })
+
+    return articles;
 }
 
 //this one not working yet, not sure how you wanna do the date input, cos need to convert the date column matching format.
-async function getAllArticlesByPublishDate(date){
+async function getAllArticlesByPublishDate(date) {
     const db = await getDatabase();
+
+    const dateTimeUTC = new Date(date).toISOString();
 
     const articles = await db.all(SQL`
     select * from articles
-    where date_of_publish =${date};
+    where date_of_publish =${dateTimeUTC};
     `)
+
+    articles.forEach(article => {
+        const dateTimeUTC = article.date_of_publish;
+        const localTime = new Date(dateTimeUTC).toLocaleString();
+        article.date_of_publish = localTime;
+    })
 
     return articles
 }
 
 //working
-async function getAllArticlesByUsername(username){
+async function getAllArticlesByUsername(username) {
     const db = await getDatabase();
 
-    const article = await db.all(SQL`
+    const articles = await db.all(SQL`
     select articles.* from articles left join user on articles.author_id =user.id
     where user.username like ${username};
     `)
-    return article
+
+    articles.forEach(article => {
+        const dateTimeUTC = article.date_of_publish;
+        const localTime = new Date(dateTimeUTC).toLocaleString();
+        article.date_of_publish = localTime;
+    })
+
+    return articles
 }
 
 
 //working
-async function getAllArticlesByTitle(title){
+async function getAllArticlesByTitle(title) {
     const db = await getDatabase();
 
     const articles = await db.all(SQL`
@@ -99,11 +135,17 @@ async function getAllArticlesByTitle(title){
     where date_of_publish like ${title};
     `)
 
+    articles.forEach(article => {
+        const dateTimeUTC = article.date_of_publish;
+        const localTime = new Date(dateTimeUTC).toLocaleString();
+        article.date_of_publish = localTime;
+    })
+
     return articles
 }
 
 //working
-async function getAllArticlesSortedByPublishDate(){
+async function getAllArticlesSortedByPublishDate() {
     const db = await getDatabase();
 
     const articles = await db.all(SQL`
@@ -111,11 +153,17 @@ async function getAllArticlesSortedByPublishDate(){
     order by date_of_publish
     `)
 
+    articles.forEach(article => {
+        const dateTimeUTC = article.date_of_publish;
+        const localTime = new Date(dateTimeUTC).toLocaleString();
+        article.date_of_publish = localTime;
+    })
+
     return articles
 }
 
 //working
-async function getAllArticlesSortedByUsername(){
+async function getAllArticlesSortedByUsername() {
     const db = await getDatabase();
 
     const articles = await db.all(SQL`
@@ -123,11 +171,17 @@ async function getAllArticlesSortedByUsername(){
     order by username
     `)
 
+    articles.forEach(article => {
+        const dateTimeUTC = article.date_of_publish;
+        const localTime = new Date(dateTimeUTC).toLocaleString();
+        article.date_of_publish = localTime;
+    })
+
     return articles
 }
 
 //working
-async function getAllArticlesSortedByTitle(){
+async function getAllArticlesSortedByTitle() {
     const db = await getDatabase();
 
     const articles = await db.all(SQL`
@@ -135,34 +189,52 @@ async function getAllArticlesSortedByTitle(){
     order by title
     `)
 
+    articles.forEach(article => {
+        const dateTimeUTC = article.date_of_publish;
+        const localTime = new Date(dateTimeUTC).toLocaleString();
+        article.date_of_publish = localTime;
+    })
+
     return articles
 }
 
 async function getAllCommentsFromArticle(articleId) {
     const db = await getDatabase();
 
-    const comments = await db.all(SQL `
+    const comments = await db.all(SQL`
     select * from comments 
     where article_id = ${articleId}
     `)
+
+    comments.forEach(comment => {
+        const dateTimeUTC = comment.time_of_comment;
+        const localTime = new Date(dateTimeUTC).toLocaleString();
+        comment.time_of_comment = localTime;
+    })
 
     return comments;
 }
 
 async function insertNewArticleToArticleTable(user_id, title, genre, content_html, content_delta, image) {
     const db = await getDatabase();
-    
+
+    const now = new Date();
+    const utcString = now.toISOString();
+
     return await db.run(SQL`
         INSERT INTO articles (title, content_html, content_delta, genre, image, date_of_publish, author_id) VALUES 
-        (${title}, ${content_html}, ${content_delta}, ${genre}, ${image}, datetime('now'), ${user_id})`);
+        (${title}, ${content_html}, ${content_delta}, ${genre}, ${image}, ${utcString}, ${user_id})`);
 }
 
 async function insertNewArticleToArticleTableWithoutImage(user_id, title, genre, content_html, content_delta) {
     const db = await getDatabase();
-    
+
+    const now = new Date();
+    const utcString = now.toISOString();
+
     return await db.run(SQL`
         INSERT INTO articles (title, content_html, content_delta, genre, date_of_publish, author_id) VALUES 
-        (${title}, ${content_html}, ${content_delta}, ${genre}, datetime('now'), ${user_id})`);
+        (${title}, ${content_html}, ${content_delta}, ${genre}, ${utcString}, ${user_id})`);
 }
 
 async function updateArticleToArticleTable(article_id, title, genre, content_html, content_delta, image) {
@@ -186,19 +258,23 @@ async function updateArticleToArticleTableWithoutImage(article_id, title, genre,
 async function filterArticlesBySelectedDates(startDate, endDate) {
     const db = await getDatabase();
 
-    const articles = await db.all(SQL `
+    const startDateTimeUTC = new Date(startDate).toISOString();
+    const endDateTimeUTC = new Date(endDate).toISOString();
+
+    const articles = await db.all(SQL`
         select articles.*, user.*
         from articles 
         inner join user on articles.author_id = user.id
-        where date_of_publish >= ${startDate} and date_of_publish <= ${endDate}
+        where date_of_publish >= ${startDateTimeUTC} and date_of_publish <= ${endDateTimeUTC}
     `)
+
     return articles;
 }
 
 async function getArticleTitleById(articleId) {
     const db = await getDatabase();
 
-    const title = await db.all(SQL `
+    const title = await db.all(SQL`
     select title
     from articles
     where id = ${articleId}
@@ -219,7 +295,28 @@ async function getAuthorIdByArticleId(articleId) {
 
     return authorId;
 }
+async function deleteArticle(article_id){
+    const db = await getDatabase();
 
+    const article = await db.run(SQL`
+    DELETE from articles
+    where id = ${article_id}
+    `)
+}
+
+async function filterArticlesByGenre(genre) {
+    const db = await getDatabase();
+    const genre1 = `${genre}`
+
+    const articles = await db.all(SQL `
+    select articles.*, user.*
+    from articles
+    inner join user on articles.author_id = user.id
+    where genre like ${genre1}
+    `)
+
+    return articles;
+}
 module.exports = {
     getArticlesByUserID,
     getArticlesByID,
@@ -240,5 +337,7 @@ module.exports = {
     getAuthorIdByArticleId,
     updateArticleToArticleTable,
     updateArticleToArticleTableWithoutImage,
-    insertNewArticleToArticleTableWithoutImage
+    insertNewArticleToArticleTableWithoutImage,
+    filterArticlesByGenre,
+    deleteArticle
 };

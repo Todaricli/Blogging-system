@@ -1,3 +1,5 @@
+<span style="color: brown;">{{errorMessage}}</span>
+
 <div id="keyMetricsTitleDiv">
     {{#if user}}
     <h2 id="keyMetricsTitle"> <img src="{{user.user_icon}}"> {{user.fname}}'s Analytics Dashboard</h2>
@@ -158,82 +160,5 @@
         <div id="plot" style="width:600px;height:250px;"></div>
         <script src="https://cdn.plot.ly/plotly-2.26.0.min.js" charset="utf-8"></script>
         <script src="/script/analytics-script.js"></script>
-        {{!-- <div class="furtherData">
-            <div id="dataIcon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#7fc7cc"
-                    class="bi bi-clipboard-data" viewBox="0 0 16 16">
-                    <path
-                        d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z" />
-                    <path
-                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                    <path
-                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                </svg>
-            </div>
-            <div id="plot" style="width:600px;height:250px;">
-
-            </div>
-        </div>
-        <script>
-            const date = new Date();
-            console.log("" + (date.getDate()) + "-" + date.getMonth() + "-" + date.getFullYear())
-            PLOT = document.getElementById("plot");
-            var x1 = [1, 100, 10000];
-            var y1 = [1, 5, 10];
-
-            // Create a new array that contains only unique values
-            var uniqueY1 = Array.from(new Set(y1));
-
-            // Sort the x-axis values
-            x1.sort();
-
-            var trace = {
-                x: x1,
-                y: uniqueY1,
-                autobinx: false,
-                histnorm: "count",
-                marker: {
-                    color: "#7fc7cc",
-                    line: {
-                        color: "rgba(255, 100, 102, 1)",
-                        width: 0.5
-                    }
-                },
-                opacity: 0.5,
-                type: "histogram",
-                xbins: null
-            };
-
-            var data = [trace];
-
-            var layout = {
-                bargap: 0.05,
-                bargroupgap: 0.2,
-                barmode: "group",
-
-                xaxis: {
-                    title: {
-                        text: "Days",
-                        font: {
-                            family: "Times New Roman",
-                            size: 20,
-                            color: "rgb(19, 27, 65)"
-                        }
-                    },
-                },
-
-                yaxis: {
-                    title: {
-                        text: "Total Likes",
-                        font: {
-                            family: "Times New Roman",
-                            size: 20,
-                            color: "rgb(19, 27, 65)"
-                        }
-                    }
-                }
-            };
-            Plotly.newPlot("plot", data, layout);
-        </script> --}}
     </div>
 </div>

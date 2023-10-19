@@ -33,12 +33,13 @@ async function getArticlesByAuthorNameForSearch(author){
     return articles
 }
 
-async function getArticlesBySingleDate(date){
+async function getArticlesBySingleDate(date, userId){
     const db = await getDatabase();
-    const dateS = `${date}`
+    const dateS = `${date}%`
     const articles = await db.all(SQL`
-        SELECT articles.title, comments_count, date(articles.date_of_publish) as date from Articles_info left join articles on Articles_info.article_id = articles.id
-        where date = ${dateS}
+    select count(comments.id) as comment_count from comments 
+	left join articles on comments.article_id = articles.id
+	where author_id = ${userId} AND time_of_comment like ${dateS}
     `)
     return articles
 }

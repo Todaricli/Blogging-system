@@ -28,13 +28,3 @@
     color: blue;
 }
 
-#article-div {
-    background-color:bisque;
-}
-
-.each-top5Articles, #each-articleData{
-    background-color: bisque;
-    margin: 20px;
-    padding: 15px;
-}
-

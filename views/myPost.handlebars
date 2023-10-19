@@ -1,10 +1,12 @@
 <link rel="stylesheet" href="/css/myPost.css">
 
+<span style="color: brown;">{{errorMessage}}</span>
+
 <div class="container">
     {{!-- Published section --}}
     <div id="container-header">
         <div>
-            <h1>Your stories ({{this.total_posts}})</h1>
+            <h1 id="article-count-header">Your stories ({{this.total_posts}})</h1>
         </div>
         <div>
             <button>
@@ -17,14 +19,16 @@
     {{#if posts}}
     <div class="all_posts">
         {{#each posts}}
-        <div class="each_posts">
+        <div id="article{{this.article_id}}" class="each_posts" article-id="{{this.article_id}}">
             <div class="each-posts-content">
-                <h2 id="post_title">"{{this.title}}"</h2>
+
+                <h3 id="post_title">{{this.title}}</h3>
                 <p id="post_publish_time"><strong>Published on </strong>{{this.date_of_publish}}</p>
                 <div id="post_content">
                     <span>{{{this.content_html}}}</span><span>...</span>
                 </div>
-                <div class="each-posts-links">
+                <i class="fa-solid fa-angle-down drop-down-arrow"></i>
+                <div id="links{{this.article_id}}" class="each-posts-links" >
                     <a href="/editArticle/{{this.article_id}}" id="myPostEditLink">Edit</a>
                     {{#if tags}}
                     {{#each tags}}
@@ -32,6 +36,7 @@
                     {{/each}}
                     {{/if}}
                     <a href="/article/{{this.article_id}}" id="myPostReadMoreLink">Read more</a>
+                    <button type="button" class="delete-button" article-id="{{this.article_id}}">delete article</button>
                 </div>
             </div>
             <div class="each-posts-img">
@@ -45,3 +50,4 @@
     <p>You have no posts</p>
     {{/if}}
 </div>
+<script type="application/javascript" src="/script/myPost.js"></script>

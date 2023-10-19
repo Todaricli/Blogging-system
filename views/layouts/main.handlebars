@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/css/subscription&subscriber.css">
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/css/articlesHome.css">
-    <link rel="stylesheet" href="/css/notification-menu.css">
+    <link rel="stylesheet" href="/css/search-bar.css">
 
 
 
@@ -32,25 +32,45 @@
         {{!-- Page logo --}}
         <div class="logo">
             <a href="/">
-                <img src="/images/logo1.png" alt="page logo">
+                <img src="/images/logo.png" alt="page logo">
             </a>
         </div>
 
 
 
-        {{!-- Navigation search bar--}}
-        <div class="search_bar search">
-            {{!-- <img src="/images/search-icon.png"> --}}
-            <input type="text" id="searchInput" placeholder="Search..." class="search">
-            <div id="searchResultContainer">
-                <div class="dropdownsearch search" id="searchByTitle">
-                </div>
-                <div class="dropdownsearch search" id="searchByAuthor">
-                </div>
-                <div id="viewAllDiv search">
-                    <a id="viewAllSearchResults">view all search results</a>
-                </div>
 
+        {{!-- Navigation search bar--}}
+        <div id="search_bar_container">
+            <img id="search-icon" src="/images/search-icon.png">
+            <div id="search_bar_content">
+                <div class="search_bar search">
+                    <input type="text" id="searchInput" placeholder="Search..." class="search">
+                </div>
+                <div id="searchResultContainer">
+                    <div class="dropdownsearch search" id="searchByTitle">
+                    </div>
+                    <div class="dropdownsearch search" id="searchByAuthor">
+                    </div>
+                    <div id="viewAllDiv search">
+                        <a id="viewAllSearchResults">view all search results</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="calender-div">
+            <div>
+                <button type="button" id="search-calender">Search By Date</button>
+            </div>
+            <div class="filterDiv">
+                <form action="/filtered-articles" method="GET">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" name="startDate" id="startDate">
+
+                    <label for="endDate">End Date:</label>
+                    <input type="date" name="endDate" id="endDate">
+
+                    <button type="submit" id="dateInput">Filter Articles</button>
+                </form>
             </div>
         </div>
 
@@ -58,6 +78,14 @@
         <span class="left-panel">
             {{#if user}}
 
+
+
+            <div id="write-icon-div">
+            <a href="/writeArticle" id="write-icon">
+            <i class="fa-regular fa-pen-to-square"> </i>
+            </a>
+            </div>
+            {{!-- notify bell icon --}}
             <div class="bell-icon notify-drop clicked" tabindex="0">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                     y="0px" width="50px" height="30px" viewBox="0 0 50 30" enable-background="new 0 0 50 30"
