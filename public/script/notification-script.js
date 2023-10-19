@@ -1,19 +1,20 @@
 window.addEventListener('load', async function () {
-    // manage notifications
+    // bell attributes
     const notificationBell = document.querySelector('.bell-icon');
-
-    const userNotifications = await getAllNotifications();
-    console.log(userNotifications);
-    setNotificationDropDownMenu();
-
-    // manage bell icon
-    const notifUnreadTag = document.querySelector(
+    const notifUnreadTag = document.querySelector('.notify-content .unread');
+    const notifUnviewedTag = document.querySelector(
         '.notification-amount > span'
     );
-    const notifUnviewedTag = document.querySelector(
-        '.notify-content p'
-    );
-    console.log(notifUnviewedTag.textContent)
+
+    const userNotifications = await getAllNotifications();
+    let totalNumberOfNotif = userNotifications.length;
+    let numberOfUnreadNotif = 0;
+    for (notif of userNotifications) {
+        if (notif.isRead === 0) numberOfUnreadNotif++;
+    }
+
+    setNotificationDropDownMenu();
+
     notificationBell.addEventListener('click', () => {
         deactivateBell();
         if (checkIfMoreThanZeroNotif()) setTimeout(activateBell, 100);
@@ -29,8 +30,16 @@ window.addEventListener('load', async function () {
             if (notif.isRead === 0) readNotifNum++;
             if (notif.isViewed === 0) viewNotifNum++;
         }
-        notifUnreadTag.textContent = readNotifNum;
+        //set viewed count
         notifUnviewedTag.textContent = viewNotifNum;
+
+        //set unread count
+        if (totalNumberOfNotif === 0) {
+            notifUnreadTag.textContent = 'No notifications';
+        } else {
+            notifUnreadTag.textContent = `Unread: ${readNotifNum}`;
+        }
+        return readNotifNum;
     }
 
     function checkIfMoreThanZeroNotif() {
@@ -64,6 +73,7 @@ window.addEventListener('load', async function () {
             let divTag = document.createElement('div');
             divTag.classList.add('clicked');
             addLinkToNotificationDiv();
+            checkAndUpdateIsViewed();
             checkAndUpdateIsRead();
 
             let p1Tag = document.createElement('p');
@@ -105,20 +115,22 @@ window.addEventListener('load', async function () {
             }
 
             function checkAndUpdateIsViewed() {
-                if (indvNotif.isViewed === 1) {
-                    divTag.classList.add('read');
-                }
-                divTag.addEventListener('click', async function () {
-                    if (indvNotif.isRead === 0) {
-                        await fetch(`/api/update-isRead?id=${indvNotif.id}`);
+                notificationBell.addEventListener('click', async function () {
+                    notifUnviewedTag.textContent = 0;
+                    deactivateBell();
+                    if (indvNotif.isViewed === 0) {
+                        await fetch(`/api/update-isViewed?id=${indvNotif.id}`);
                     }
                 });
             }
 
             function checkAndUpdateIsRead() {
-                notificationBell.addEventListener('click', async function () {
-                    if (indvNotif.isViewed === 0) {
-                        await fetch(`/api/update-isViewed?id=${indvNotif.id}`);
+                if (indvNotif.isRead === 1) {
+                    divTag.classList.add('read');
+                }
+                divTag.addEventListener('click', async function () {
+                    if (indvNotif.isRead === 0) {
+                        await fetch(`/api/update-isRead?id=${indvNotif.id}`);
                     }
                 });
             }
@@ -132,26 +144,31 @@ window.addEventListener('load', async function () {
 
                 svgImgTag.addEventListener('click', async (event) => {
                     // visually update
-                    console.log('this is run right?');
                     const parentElement = event.target.parentElement;
                     if (parentElement) {
                         parentElement.remove();
+                        totalNumberOfNotif--;
+                        if (totalNumberOfNotif === 0) {
+                            notifUnreadTag.textContent = 'No Notifications';
+                        }
                         if (!parentElement.classList.contains('read')) {
-                            notifUnreadTag.textContent =
-                                notifUnreadTag.textContent - 1;
+                            numberOfUnreadNotif--;
+                            if (totalNumberOfNotif != 0) {
+                                notifUnreadTag.textContent = `Unread: ${numberOfUnreadNotif}`;
+                            }
                         }
-                    }
 
-                    // update database
-                    const res = await fetch(
-                        `/api/delete-notification?id=${indvNotif.id}`,
-                        {
-                            method: 'DELETE',
-                        }
-                    );
-                    if (res.status === 204)
-                        console.log('Notification deleted successfully');
-                    else console.log('Error deleting notification');
+                        // update database
+                        const res = await fetch(
+                            `/api/delete-notification?id=${indvNotif.id}`,
+                            {
+                                method: 'DELETE',
+                            }
+                        );
+                        if (res.status === 204)
+                            console.log('Notification deleted successfully');
+                        else console.log('Error deleting notification');
+                    }
                 });
             }
         }

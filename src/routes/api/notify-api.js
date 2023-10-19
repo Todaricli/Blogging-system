@@ -37,6 +37,12 @@ router.get('/api/update-isRead', async function (req, res) {
     res.sendStatus(204);
 });
 
+router.get('/api/update-isViewed', async function (req, res) {
+    const noteId = req.query.id;
+    await notifyDao.updateIsViewed(noteId);
+    res.sendStatus(204);
+});
+
 router.delete('/api/delete-notification', async function (req, res) {
     const noteId = req.query.id;
     console.log(noteId);

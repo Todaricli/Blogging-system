@@ -54,6 +54,7 @@ router.get('/addSubscription', verifyAuthenticated, async function (req, res) {
                 n.articleId,
                 n.type,
                 n.isRead,
+                n.isViewed,
             );
             res.status(200).json({
                 message: 'Subscription add successfully',

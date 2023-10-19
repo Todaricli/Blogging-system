@@ -47,7 +47,7 @@ async function updateIsViewed(id) {
     const db = await getDatabase();
     await db.all(SQL`
     update notifications
-    set isRead = 1
+    set isViewed = 1
     where id = ${id};
 `);
 }

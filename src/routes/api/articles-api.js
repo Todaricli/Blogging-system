@@ -160,7 +160,8 @@ router.post(
                     n.content,
                     n.articleId,
                     n.type,
-                    n.isRead
+                    n.isRead,
+                    n.isViewed,
                 );
 
             }

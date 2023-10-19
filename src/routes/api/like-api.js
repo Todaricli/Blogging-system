@@ -50,6 +50,7 @@ router.get("/addLike", verifyAuthenticated, async function (req, res) {
                 n.articleId,
                 n.type,
                 n.isRead,
+                n.isViewed,
             );
 
             res.status(200).json({ message: 'Add Like successfully' });
