@@ -9,9 +9,10 @@ window.addEventListener('load', async function () {
         });
     });
 
+    const updateFormBtn = document.getElementById('my_profile_submit_btn');
     const updateIconButton = document.getElementById('update-icon-btn');
     const icon_container = document.getElementById('icon_container');
-
+    
     updateIconButton.addEventListener('click', function (e) {
         console.log('click');
         if (icon_container.style.display === 'block') {
@@ -149,14 +150,21 @@ window.addEventListener('load', async function () {
         if (
             usernameError.style.display === 'none' &&
             passwordFormatError.style.display === 'none' &&
-            passwordMatchError.style.display === 'none' &&
-            emailFormatError.style.display === 'none'
+            passwordMatchError.style.display === 'none'
         ) {
             updateSecurityBtn.disabled = false;
             updateSecurityBtn.style.opacity = '1.0';
         } else {
             updateSecurityBtn.disabled = true;
             updateSecurityBtn.style.opacity = '0.3';
+        }
+
+        if (emailFormatError.style.display === 'none') {
+            updateFormBtn.disabled = false;
+            updateFormBtn.style.opacity = '1.0';
+        } else {
+            updateFormBtn.disabled = true;
+            updateFormBtn.style.opacity = '0.3';
         }
     }
 
