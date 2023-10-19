@@ -31,7 +31,7 @@ window.addEventListener(`load`, async function () {
     }
 
     const update = {
-        width:800,
+        width:600,
         height:300
     }
 

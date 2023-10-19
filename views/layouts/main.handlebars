@@ -55,21 +55,20 @@
             </div>
         </div>
         <div id="calender-div">
-            <div>
-                <button type="button" id="search-calender">Search By Date</button>
-            </div>
+            <button type="button" id="search-calender">Search By Date</button>
             <div class="filterDiv">
-                <form action="/filtered-articles" method="GET">
-                    <label for="startDate">Start Date:</label>
-                    <input type="date" name="startDate" id="startDate">
+            <form action="/filtered-articles" method="GET">
+                <label for="startDate">Start Date:</label>
+                <input type="date" name="startDate" id="startDate">
 
-                    <label for="endDate">End Date:</label>
-                    <input type="date" name="endDate" id="endDate">
+                <label for="endDate">End Date:</label>
+                <input type="date" name="endDate" id="endDate">
 
-                    <button type="submit" id="dateInput">Filter Articles</button>
-                </form>
-            </div>
+                <button type="submit" id="dateInput">Filter Articles</button>
+            </form>
         </div>
+        </div>
+        
 
         {{!-- Nav login and dropdown button --}}
         <span class="left-panel">
