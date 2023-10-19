@@ -5,7 +5,6 @@ const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 const subDao = require('../models/sub-dao.js');
 const commentDao = require('../models/comments-dao.js');
-const userDao = require('../models/user-dao.js');
 const analyticsDao = require('../models/analytics-dao.js')
 
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
@@ -60,37 +59,6 @@ router.get('/my_profile', verifyAuthenticated, async function (req, res) {
     res.render('myProfile');
 })
 
-router.post('/update_info', async function (req, res) {
-    const user_id = res.locals.user.id;
-    const info = req.body;
-    const fname = info.my_profile_fname;
-    const lname = info.my_profile_lname;
-    const email = info.my_profile_email;
-    const DOB = info.my_profile_DOB;
-    const desc = info.my_profile_desc;
-    try {
-        if (!info.icon) {
-            const sqlReponse = await userDao.updateUserProfileWithoutIconUpdate(user_id, email, fname, lname, DOB, desc);
-            if (sqlReponse) { 
-                res.setToastMessage("Information updated!")
-            }
-            console.log(sqlReponse);
-            res.redirect('/my_profile');
-        } else {
-            const iconPath = `/images/avatars/${info.icon}.png`;
-            const sqlReponse = await userDao.updateUserProfile(user_id, email, fname, lname, DOB, desc, iconPath);
-            if (sqlReponse) { 
-                res.setToastMessage("Information updated!")
-            }
-            console.log(sqlReponse);
-            res.redirect('/my_profile');
-        }
-    } catch (e) {
-        res.setToastMessage('Updating error: ' + e);
-        res.redirect('/my_profile');
-    }
-})
-
 router.get('/my-page', async function (req, res) {
     const user_id = res.locals.user.id
     if (user_id) {
@@ -129,23 +97,6 @@ router.get('/my_post', verifyAuthenticated, async function (_, res) {
     // res.locals.total_responses = totalResponses;
 
     res.render('myPost');
-})
-
-router.get('/deleteComment/:id', async function(req,res) {
-    const user = res.locals.user;
-    const comment_id = req.params.id;
-
-    const data = await getUserArticles(user.id);
-    const article_id = data[0].article_id;
-
-    if (comment_id) {
-        await commentDao.deleteComments(comment_id, article_id);
-        const responses = await commentDao.getAllCommentsByArticles(article_id);
-        console.log("Responses:");
-        console.log(responses);
-        res.redirect("/my_post")
-    }
-
 })
 
 router.get("/removeSubscription", verifyAuthenticated, async function (req, res) {

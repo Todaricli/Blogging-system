@@ -67,6 +67,7 @@ async function createNotification(receiverId, senderId, articleId, type) {
 
 async function createContent(type, articleId) {
     const article = await articleDao.getArticleTitleById(articleId);
+    console.log("articleOBJ: " + article);
     if (type === 'sub') {
         return `subscribed to you!`;
     } else if (type === 'write') {

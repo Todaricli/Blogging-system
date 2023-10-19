@@ -157,6 +157,14 @@ async function insertNewArticleToArticleTable(user_id, title, genre, content_htm
         (${title}, ${content_html}, ${content_delta}, ${genre}, ${image}, datetime('now'), ${user_id})`);
 }
 
+async function insertNewArticleToArticleTableWithoutImage(user_id, title, genre, content_html, content_delta) {
+    const db = await getDatabase();
+    
+    return await db.run(SQL`
+        INSERT INTO articles (title, content_html, content_delta, genre, date_of_publish, author_id) VALUES 
+        (${title}, ${content_html}, ${content_delta}, ${genre}, datetime('now'), ${user_id})`);
+}
+
 async function updateArticleToArticleTable(article_id, title, genre, content_html, content_delta, image) {
     const db = await getDatabase();
 
@@ -196,6 +204,7 @@ async function getArticleTitleById(articleId) {
     where id = ${articleId}
     `)
 
+    console.log(title);
     return title;
 }
 
@@ -228,5 +237,8 @@ module.exports = {
     updateArticleToArticleTable,
     filterArticlesBySelectedDates,
     getArticleTitleById,
-    getAuthorIdByArticleId
+    getAuthorIdByArticleId,
+    updateArticleToArticleTable,
+    updateArticleToArticleTableWithoutImage,
+    insertNewArticleToArticleTableWithoutImage
 };

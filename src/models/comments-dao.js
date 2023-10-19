@@ -40,32 +40,17 @@ async function getAllSecondOrThirdLevelCommentsByComment_id(
     return allFirstLevelComments;
 }
 
-async function deleteLikesCommnents(commentId) {
-    const db = await getDatabase();
-
-    await db.all(SQL`
-        DELETE 
-        FROM likes_comments
-        WHERE comments_id = ${commentId}
-    `);
-}
-
 async function deleteComments(comment_id, article_id) {
     const childComments = await getAllSecondOrThirdLevelCommentsByComment_id(
         comment_id,
         article_id
     );
 
-    console.log('outter: ' + comment_id);
-    console.log('outter article: ' + article_id);
     let done1 = undefined;
     if (childComments) {
         done1 = childComments.forEach(async (comment) => {
             const comment_id = comment.id;
             const article_id = comment.article_id;
-
-            console.log('middle: ' + comment_id);
-            console.log('middle article: ' + article_id);
 
             const grandChildComments =
                 await getAllSecondOrThirdLevelCommentsByComment_id(
@@ -78,9 +63,6 @@ async function deleteComments(comment_id, article_id) {
                     const comment_id = comment.id;
                     const article_id = comment.article_id;
 
-                    console.log('inner: ' + comment_id);
-                    console.log('inner article: ' + article_id);
-
                     return await deleteThisComment(comment_id, article_id);
                 });
             }
@@ -92,9 +74,6 @@ async function deleteComments(comment_id, article_id) {
 
 async function deleteThisComment(comment_id, article_id) {
     const db = await getDatabase();
-
-    console.log('inside delete: ' + comment_id);
-    console.log('article delete: ' + article_id);
 
     return await db.run(SQL`
         DELETE FROM comments 
@@ -148,10 +127,8 @@ module.exports = {
     getAllSecondOrThirdLevelCommentsByComment_id,
     getAllCommentsByUserId,
     deleteComments,
-    deleteLikesCommnents,
     insertNewCommentOnArticle,
     insertNewCommentOnComment,
-    deleteComments,
     deleteThisComment,
     getCommentById,
     getAuthorIdByCommentId,
