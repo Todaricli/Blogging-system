@@ -2,12 +2,14 @@
 
 <div id="home_container">
 
+    <div>
     {{#if user}}
     <input value="{{user.id}}" name="user_id" id="current_user_id" hidden>
     <div id="greetingDiv">
         <div>Welcome to your homepage, {{user.fname}}!</div>
     </div>
     {{/if}}
+    </div>
 
     {{!-- <a href="/writeArticle">Write a new article</a> --}}
     <br>
@@ -23,6 +25,48 @@
             <button type="submit" id="dateInput">Filter Articles</button>
         </form>
     </div> --}}
+
+    <div>
+    <h2 id="category_nav">
+        {{#if current_category}}
+        <div id="specific_category_title">
+            <span id="all_articles_category"><a href="/">All Articles</a></span> / <span
+                id="current_category">{{current_category}}</span>
+        </div>
+        {{else}}
+        <div id="home_title">
+            {{!-- <h3>Explore All Articles</h3> --}}
+        </div>
+        {{/if}}
+    </h2>
+    </div>
+
+        <div id="top5_articles">
+            <h1 id="top5_block_title">Top 5 Popular Articles</h1>
+            <div id="top5_articles_container">
+                {{#each top5Articles}}
+                <div class="each-top5Articles" style="background-image: url('/images/article-images/thumbnails/{{this.image}}'); background-size: cover; background-position: center center; background-repeat: no-repeat;">
+                    {{!-- <div id="top5_background_image">
+                        
+                    </div> --}}
+                    {{!-- <div><img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}">
+                    </div> --}}
+                    <div class="each-top5content">
+                        <div id="top5_article_title">
+                            <h2>{{this.title}}</h2>
+                        </div>
+                        {{!-- <div id="article_description">{{{this.content_html}}}</div> --}}
+                        {{!-- No category data? --}}
+                        {{!-- <div id="article_category">{{this.article_category}}</div> --}}
+                        <button type="button" class="btn_readmore">
+                            <a href="/article/{{this.id}}" id="readMoreLink">Read more</a>
+                        </button>
+                    </div>
+                </div>
+                
+                {{/each}}
+            </div>
+        </div>
 
     <div id="genre-container">
         <ul id="genre-list">
@@ -59,90 +103,54 @@
         </ul>
     </div>
 
-
-    <h2 id="category_nav">
-        {{#if current_category}}
-        <div id="specific_category_title">
-            <span id="all_articles_category"><a href="/">All Articles</a></span> / <span
-                id="current_category">{{current_category}}</span>
-        </div>
-        {{else}}
-        <div id="home_title">
-            {{!-- <h3>Explore All Articles</h3> --}}
-        </div>
-        {{/if}}
-    </h2>
-
-    <div id="articles">
-        <div id="top5_articles">
-            <h1 id="top5_block_title">Top 5 Popular Articles</h1>
-            {{#each top5Articles}}
-            <div class="each-top5Articles">
-                {{!-- <div id="background_image"></div> --}}
-                <div><img src="/images/article-images/thumbnails/{{this.image}}" alt="{{this.image}}" width="150px">
-                </div>
-                <div id="article_title">
-                    <h2>{{this.title}}</h2>
-                </div>
-                {{!-- <div id="article_description">{{{this.content_html}}}</div> --}}
-                {{!-- No category data? --}}
-                {{!-- <div id="article_category">{{this.article_category}}</div> --}}
-                <button type="submit">
-                    <a href="/article/{{this.id}}" id="readMoreLink">Read more</a>
-                </button>
-            </div>
-            {{/each}}
-        </div>
-        <hr>
-
-        <div id="all_articles">
-            <h1 id="main_block_title">Explore More Articles</h1>
-            {{#each articleData}}
-            <div id="each-articleData">
-                <div class="btn_sub_option">
-                    {{!-- {{#isEqual user.id this.author_id}} --}}
-                    <a href="/profile?id={{this.author_id}}" id="authorData">
-                        <div id="author_icon"><img src="{{this.icon_path}}"></div>
-                        <div id="author_name">{{this.fname}} {{this.lname}}</div>
-                    </a>
-                    <div id="article_timestamp">{{this.date_of_publish}}</div>
-                    {{!-- {{else}}
-                    <a href="/my_profile" id="authorData">
-                        <div id="author_icon"><img src="{{this.icon_path}}"></div>
-                        <div id="author_name">{{this.fname}} {{this.lname}}</div>
-                    </a>
-                    {{/isEqual}} --}}
-                    <div class="btn_subscribe">
-                        <input value="{{this.author_id}}" name="author_id" class="article_author_id" hidden>
-                    </div>
-                </div>
-                <div id="article_title">
-                    <h2>"{{this.title}}"</h2>
-                </div>
-                <div id="article_description">{{{this.content_html}}}</div>
-                {{!-- No category information yet --}}
-                {{!-- <div id="article_category">{{this.article_category}}</div> --}}
-                <button type="submit">
-                    <a href="/article/{{this.id}}" id="readMoreLink">Read more</a>
-                </button>
-            </div>
-            {{/each}}
-
-
-            <div id="sidebar">
-                <div id="sidebar_title">More to explore</div>
-                <div id="sidebar_category_container">
-                    {{#each categoryData}}
-                    <div class="categoryData">
-                        {{this.category}}
-                    </div>
-                    {{/each}}
+    <div id="all_articles">
+        <h1 id="main_block_title">Explore More Articles</h1>
+        {{#each articleData}}
+        <div id="each-articleData">
+            <div class="btn_sub_option">
+                {{!-- {{#isEqual user.id this.author_id}} --}}
+                <a href="/profile?id={{this.author_id}}" id="authorData">
+                    <div id="author_icon"><img src="{{this.icon_path}}"></div>
+                    <div id="author_name">{{this.fname}} {{this.lname}}</div>
+                </a>
+                <div id="article_timestamp">{{this.date_of_publish}}</div>
+                {{!-- {{else}}
+                <a href="/my_profile" id="authorData">
+                    <div id="author_icon"><img src="{{this.icon_path}}"></div>
+                    <div id="author_name">{{this.fname}} {{this.lname}}</div>
+                </a>
+                {{/isEqual}} --}}
+                <div class="btn_subscribe">
+                    <input value="{{this.author_id}}" name="author_id" class="article_author_id" hidden>
                 </div>
             </div>
-
-
+            <div id="article_title">
+                <h2>"{{this.title}}"</h2>
+            </div>
+            <div id="article_description">{{{this.content_html}}}</div>
+            {{!-- No category information yet --}}
+            {{!-- <div id="article_category">{{this.article_category}}</div> --}}
+            <button type="submit">
+                <a href="/article/{{this.id}}" id="readMoreLink">Read more</a>
+            </button>
         </div>
+        {{/each}}
+
+
+        <div id="sidebar">
+            <div id="sidebar_title">More to explore</div>
+            <div id="sidebar_category_container">
+                {{#each categoryData}}
+                <div class="categoryData">
+                    {{this.category}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+
+
     </div>
 </div>
-
+</div>
 <script src="/script/articlesHome.js"></script>
