@@ -73,3 +73,11 @@ button[type=submit] {
 #flexTitle {
     font-family: "Satisfy", cursive;
 }
+
+#write_article_content {
+  color: black;
+}
+
+#update_article_content {
+  color: black;
+}

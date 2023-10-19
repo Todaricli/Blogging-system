@@ -32,6 +32,16 @@ window.addEventListener("load", function () {
         }
     });
 
+    const calenderButton = document.querySelector("#search-calender")
+    const calenderDiv = document.querySelector(".filterDiv")
+    calenderButton.addEventListener(`click`, (e)=>{
+        if(calenderDiv.style.display == "flex"){
+            calenderDiv.style.display = "none"
+        }else{
+            calenderDiv.style.display = "flex"
+        }
+    })
+
     // notifyDrop.addEventListener('mouseenter', (e) => {
     //     notifyContent.style.display = 'block';
     // });
