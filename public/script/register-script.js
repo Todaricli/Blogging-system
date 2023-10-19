@@ -3,13 +3,15 @@ window.addEventListener('load', async function () {
     const passwordEye = document.querySelector('#password-eye');
     const confirmPasswordEye = document.querySelector('#confirm-password-eye');
     // input selectors
-    const nameInput = document.querySelector('#name');
+    const fnameInput = document.querySelector('#fname');
+    const lnameInput = document.querySelector('#lname');
     const usernameInput = document.querySelector('#username');
     const emailInput = document.querySelector('#email');
     const passwordInput = document.querySelector('#password');
     const confirmPasswordInput = document.querySelector('#confirm-password');
     const formInputs = [
-        nameInput,
+        fnameInput,
+        lnameInput,
         usernameInput,
         emailInput,
         passwordInput,
@@ -155,7 +157,10 @@ window.addEventListener('load', async function () {
 
     function checkIfInputFocused(input) {
         const label = input.nextElementSibling;
+        console.log("is this run?");
+
         if (input.value && input.value.trim() !== '') {
+            console.log("focused");
             label.classList.add('focused-label');
             label.classList.remove('label');
             input.style.borderBottomColor = 'black';

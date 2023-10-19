@@ -77,7 +77,7 @@ textarea, input {
 .icon {
   position: absolute;
   right: 25%;
-  top: 5px;
+  top: -12.5px;
   cursor: pointer;
   width: 20px;
   transform: translateY(80%);
