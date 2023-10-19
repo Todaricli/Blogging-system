@@ -75,28 +75,17 @@ router.get('/my-page', async function (req, res) {
 })
 
 router.get('/my_post', verifyAuthenticated, async function (_, res) {
-    const user = res.locals.user;
-
-    const data = await getUserArticles(user.id)
-    console.log(data)
-    const totalPosts = data.length;
-    res.locals.posts = data;
-    res.locals.total_posts = totalPosts;
-
-    const article_id = data[0].article_id;
-    console.log(article_id)
-
-    // const comments = await commentDao.getAllCommentsByArticles(article_id);
-    // console.log(comments)
-
-    // const filteredComments = comments.filter(comment => comment.comment_id !== null);
-
-
-    // const totalResponses = filteredComments.length;
-    // res.locals.responses = filteredComments;
-    // res.locals.total_responses = totalResponses;
-
-    res.render('myPost');
+    try {
+        const user = res.locals.user;
+        const data = await getUserArticles(user.id)
+        const totalPosts = data.length;
+        res.locals.posts = data;
+        res.locals.total_posts = totalPosts;
+        res.render('myPost');
+    } catch (e) {
+        res.locals.errorMessage = 'Page loading incomplete. ' + e;
+        res.render('myPost');
+    }
 })
 
 router.get("/removeSubscription", verifyAuthenticated, async function (req, res) {
