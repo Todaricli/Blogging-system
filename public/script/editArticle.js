@@ -1,4 +1,7 @@
-window.addEventListener("load", async function () { await setUpQuillEditor(); });
+window.addEventListener("load", async function () { 
+    await setUpQuillEditor(); 
+    await deleteCurrentImage();
+});
 
 async function setUpQuillEditor() {
     const toolBox = [
@@ -72,7 +75,7 @@ async function setUpQuillEditor() {
             document.getElementById("update_article_title").value = "";
 
             // Handle the response from the server
-            alert(responseData + ' URL after response:' + window.location.href);
+            alert(responseData);
 
 
         } catch (error) {
@@ -95,12 +98,19 @@ async function fetchArticleDelta() {
     const article_id = document.getElementById("article_id_temp_storage").value;
     const title_input = document.getElementById("update_article_title");
     const genere_select = document.getElementById("update_article_genre");
+    const currentImage = document.getElementById("current_article_image");
 
 
     const response = await fetch(`/api/currentEditArticleDelta?article_id=${article_id}`);
     const article = await response.json();
 
     title_input.value = article[0].title;
+
+    if (article[0].image) {
+        const imagePath = `/images/article-images/thumbnails/${article[0].image}`;
+        currentImage.src = imagePath;
+    }
+
 
     //setting article current genre
     for (let i, j = 0; i = genere_select.options[j]; j++) {
@@ -115,3 +125,37 @@ async function fetchArticleDelta() {
     const content_delta_json = JSON.parse(content_delta);
     return content_delta_json;
 };
+
+
+async function deleteCurrentImage() {
+    const deleteButton = document.getElementById('delete-current-image');
+    const article_id = document.getElementById("article_id_temp_storage").value;
+
+    const data = {
+        article_idKey: article_id
+    }
+    deleteButton.addEventListener('click', async function () {
+        try {
+            const response = await fetch('/api/deleteArticleImage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const responseData = await response.text();
+
+            if (!response.ok) {
+                throw new Error('Request failed with status: ' + response.status + " " + responseData);
+            }
+
+            alert(responseData);
+
+            location.reload();
+
+        } catch (e) {
+            alert(e)
+        }
+    })
+}
