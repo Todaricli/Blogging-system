@@ -35,3 +35,7 @@ div {
 .user-label img {
     width: 150px;
 }
+
+#calender-div {
+    position: absolute;
+}

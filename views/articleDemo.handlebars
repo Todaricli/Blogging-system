@@ -5,7 +5,7 @@
         <i class="fa-solid fa-arrow-left"></i>
         <a href="/">Back to Home</a>
     </span>
-    /
+        /
     <span id="current_category">
         <a href="/genre/{{article.[0].genre}}">
             {{article.[0].genre}}
@@ -70,6 +70,7 @@
         <input value="{{user.id}}" id="user_id" hidden>
         <input value="{{article.[0].id}}" id="article_id" hidden>
 
+
         <button class="like-btn">
             <i class="fa-thumbs-up" id="like-icon"></i>
             {{like_count}}
@@ -81,6 +82,30 @@
     </div>
 
     <div class="comment-container" style="display: none;">
+<div id="article_content">
+    {{{article.[0].content_html}}}
+</div>
+<hr>
+<div>
+    <form id="comment_on_article_form">
+        <textarea name="comment_content" placeholder="comment on this article!" required></textarea>
+        <button id="commentOnArticleButton" type="submit">Submit</button>
+    </form>
+</div>
+
+{{#if comments}}
+<input id="user_id_temp_storage" name="user_id_temp_storage" value="{{user_id}}">
+<input id="article_id_temp_storage" name="article_id_temp_storage" value="{{article.[0].author_id}}">
+
+<div id="comments-div">
+    {{#each comments}}
+    <div>
+        <span>{{this.username}}</span>
+        <span>{{this.fname}}</span>
+        <span>{{this.lname}}</span>
+        <span>{{this.content}}</span>
+        <span>{{this.time_of_comment}}</span>
+        <button class="textareaOpener">Comment</button>
         <div>
             <form id="comment_on_article_form">
                 <textarea name="comment_content" placeholder="comment on this article!" required></textarea>

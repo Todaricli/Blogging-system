@@ -7,7 +7,6 @@ window.addEventListener(`load`, async function () {
     }
     // await getInformation()
 
-    console.log(information)
     const date = new Date();
     const yesterday = new Date(date - 86400000)
     let day = 0
@@ -21,22 +20,14 @@ window.addEventListener(`load`, async function () {
     let y1 = []
     for (let i = 0; i < 10; i++) {
         let newDate = new Date(date - day)
-        x1.unshift(`${newDate.getFullYear()}-${newDate.getMonth() + 1}-${newDate.getDate()}`)
+        x1.push(`${newDate.getFullYear()}-${newDate.getMonth() + 1}-${newDate.getDate()}`)
         day += 86400000;
     }
-    console.log(x1)
     for (let i = 0; i < x1.length; i++) {
         let yEle = await fetch(`/api/get-search/single-date?searchDate=${x1[i]}`)
         let yJson = await yEle.json()
-        let totatCommentCount = 0
-        for (let i = 0; i < yJson["articlesByDate"].length; i++) {
-            if (yJson["articlesByDate"][i]["comments_count"] != undefined) {
-                totatCommentCount += yJson["articlesByDate"][i]["comments_count"]
-            }
-            // console.log(yJson["articlesByDate"][i]["comments_count"])
-        }
-        y1.unshift(totatCommentCount)
-        // console.log(yJson)
+        let totatCommentCount = yJson["articlesByDate"][0]["comment_count"]
+        y1.push(totatCommentCount)
     }
 
     const update = {

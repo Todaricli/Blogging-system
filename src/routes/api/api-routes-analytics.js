@@ -15,9 +15,6 @@ router.get('/api/get-analytics', async function (req, res) {
         res.locals.followers = numberOfFollowers;
         // res.locals.comments = 
         
-
-
-
         const sendObj = {
             numberOfFollowers,
             numberOfComments,
