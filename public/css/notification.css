@@ -1,0 +1,72 @@
+
+/* .nav-panel {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+} */
+
+.left-panel {
+  display: flex;
+  align-items: center;
+}
+
+.notify-content {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: -150px;
+  max-height: 400px;
+  overflow: scroll;
+  width: 200px;
+  background-color: bisque;
+  z-index: 2;
+}
+
+.notify-content div {
+  margin: 5px;
+  padding: 10px;
+  background-color: #f5f5f5; 
+  border: 1px solid #ddd; 
+  border-radius: 5px; 
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+.notify-content div:hover {
+  background-color: #e0e0e0; 
+  cursor: pointer; 
+  display: block;
+  box-shadow: inset 1.5px 1.5px 3px rgba(0, 0, 0, 0.2); 
+}
+
+.notify-content div.read {
+  background-color: #e0e0e0;
+  cursor: pointer;
+  box-shadow: inset 1.5px 1.5px 3px rgba(0, 0, 0, 0.2); 
+}
+
+.notify-content a {
+  display: block;
+  height: 20px;
+}
+
+.svg-trash {
+  height: 16px;
+  width: 16px;
+  background-image: url("/images/svg/trash.svg");
+}
+
+.svg-trash:hover {
+  background-image: url("/images/svg/trash-fill.svg");
+}
+
+/* 
+.notify-drop:hover .notify-content {
+  display: block;
+} */
+
+
+
+
+
+

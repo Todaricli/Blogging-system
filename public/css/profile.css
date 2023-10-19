@@ -1,0 +1,103 @@
+/* profile page css start
+#profile_container {
+    margin: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+
+}
+
+#profile_info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-size: cover;
+    border: 1px solid green;
+}
+
+#profile_icon img {
+    width: 100px;
+    background-color: white;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
+
+    border-radius: 50%;
+    padding: 5px;
+}
+
+#profile_name {
+    font-weight: bold;
+}
+
+#profile_info>* {
+    padding: 10px;
+}
+
+#profile_related_info {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 50px;
+    padding: 10px;
+}
+
+#profile_related_info img{
+    width: 15px;
+}
+
+#profile_articles_container>* {
+    padding: 10px;
+} */
+/* profile page css end*/
+
+
+.article {
+    margin: 10px 0;
+    border: 1px solid red;
+}
+
+#profile_container {    
+    display: grid;
+    grid-template-columns: 0.5fr 2fr;
+    max-width: 100%;
+    border: 1px solid black;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+#profile_icon img {
+    width: 100px;
+}
+
+
+#profile_articles_container img{
+    width: 300px;
+}
+
+#container {
+    margin: 20px;
+    height: 100%;
+    border: 1px solid red;
+    
+}
+
+#container div {
+    border: 1px solid green;
+    padding: 20px;
+}
+
+#profile_articles_container {
+    padding: 20px;
+    border: 1px solid blue;
+}
+
+.subscribe-button {
+    border: 1px solid green;
+    padding: 10px;
+}
+

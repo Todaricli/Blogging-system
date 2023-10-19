@@ -5,7 +5,6 @@ const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 const subDao = require('../models/sub-dao.js');
 const commentDao = require('../models/comments-dao.js');
-const userDao = require('../models/user-dao.js');
 const analyticsDao = require('../models/analytics-dao.js')
 
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
@@ -15,8 +14,6 @@ router.get('/', async function (req, res) {
 
     res.locals.top5Articles = await articleDao.getTopFiveArticles();
     const articleData = await articleDao.getAllArticles();
-    //console.log(articleData)
-    
     res.locals.articleData = articleData;
 
     res.render('articlesHome');
@@ -62,46 +59,32 @@ router.get('/my_profile', verifyAuthenticated, async function (req, res) {
     res.render('myProfile');
 })
 
-router.post('/update_info', async function (req, res) {
-    const user_id = res.locals.user.id;
-    const info = req.body;
-    const fname = info.my_profile_fname;
-    const lname = info.my_profile_lname;
-    const email = info.my_profile_email;
-    const DOB = info.my_profile_DOB;
-    const desc = info.my_profile_desc;
-    try {
-        if (!info.icon) {
-            const sqlReponse = await userDao.updateUserProfileWithoutIconUpdate(user_id, email, fname, lname, DOB, desc);
-            if (sqlReponse) { 
-                res.setToastMessage("Information updated!")
-            }
-            console.log(sqlReponse);
-            res.redirect('/my_profile');
-        } else {
-            const iconPath = `/images/avatars/${info.icon}.png`;
-            const sqlReponse = await userDao.updateUserProfile(user_id, email, fname, lname, DOB, desc, iconPath);
-            if (sqlReponse) { 
-                res.setToastMessage("Information updated!")
-            }
-            console.log(sqlReponse);
-            res.redirect('/my_profile');
-        }
-    } catch (e) {
-        res.setToastMessage('Updating error: ' + e);
-        res.redirect('/my_profile');
-    }
-})
-
 router.get('/my-page', async function (req, res) {
     const user_id = res.locals.user.id
+    console.log(user_id)
+
     if (user_id) {
         const profileData = await genericDao.getUserDataById(user_id);
-        res.locals.profile_icon = profileData.icon_path;
-        res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
-        res.locals.profile_DOB = profileData.DOB;
-        res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);
-        res.locals.profile_articles = await articleDao.getArticlesByID(profileData.id);
+
+        console.log(profileData)
+
+        res.locals.user = profileData;
+
+        // res.locals.profile_icon = profileData.icon_path;
+        // res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
+        // res.locals.profile_DOB = profileData.DOB;
+
+        const subscriberList = await subDao.getSubscribersByUserID(profileData.id);
+        //console.log(subscriberList)
+
+        res.locals.profile_subscribers = subscriberList;
+
+
+        const articles = await articleDao.getArticlesByUserID(user_id);
+        //console.log(articles)
+
+        res.locals.profile_articles = articles;
+
         res.render('profile');
     } else {
         res.status(404).send("Page not found 404!");
@@ -131,23 +114,6 @@ router.get('/my_post', verifyAuthenticated, async function (_, res) {
     // res.locals.total_responses = totalResponses;
 
     res.render('myPost');
-})
-
-router.get('/deleteComment/:id', async function(req,res) {
-    const user = res.locals.user;
-    const comment_id = req.params.id;
-
-    const data = await getUserArticles(user.id);
-    const article_id = data[0].article_id;
-
-    if (comment_id) {
-        await commentDao.deleteComments(comment_id, article_id);
-        const responses = await commentDao.getAllCommentsByArticles(article_id);
-        console.log("Responses:");
-        console.log(responses);
-        res.redirect("/my_post")
-    }
-
 })
 
 router.get("/removeSubscription", verifyAuthenticated, async function (req, res) {
@@ -186,38 +152,9 @@ router.get("/analytics-Dashboard", async (req,res) =>{
     res.render("analyticsDashboard")
 
 });
-router.get("/addSubscription", verifyAuthenticated, async function (req, res) {
-    const subscription_id = req.query.id;
-    const user_id = res.locals.user.id;
-    if (user_id) {
-        try {
-          await subDao.addSpecificSubscriptionByID(user_id, subscription_id);
-          res.status(200).json({ message: 'Subscription removed successfully' });
-        } catch (error) {
-          res.status(500).json({ message: 'Error removing subscription' });
-        }
-      } else {
-        res.status(403).json({ message: 'Unauthorized' });
-      }
-})
 
-router.get("/removeSubscriber", verifyAuthenticated, async function (req, res) {
-    const subscriber_id = req.query.id;
-    const user_id = res.locals.user.id;
-    if (user_id) {
-        try {
-          await subDao.removeSpecificSubscriberByID(user_id, subscriber_id);
-          res.status(200).json({ message: 'Subscription removed successfully' });
-        } catch (error) {
-          res.status(500).json({ message: 'Error removing subscription' });
-        }
-      } else {
-        res.status(403).json({ message: 'Unauthorized' });
-      }
-})
 
 router.get("/analytics-Dashboard", async (req, res) => {
-    console.log("skeet")
     res.render("analyticsDashboard")
 })
 

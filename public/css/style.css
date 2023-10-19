@@ -696,7 +696,7 @@ nav {
 
 
 /* profile page css start*/
-#profile_container {
+/* #profile_container {
     margin: 20px;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -748,7 +748,7 @@ nav {
 
 #profile_articles_container>* {
     padding: 10px;
-}
+} */
 /* profile page css end*/
 
 /* register page css start*/
@@ -880,4 +880,15 @@ nav {
 
   hr{
     border-top: 3px dotted lightgrey;
+  }
+
+  /* Write icon */
+  #write-icon i {
+    font-size: 24px;
+    color: black;
+    margin-right: 5px;
+  }
+
+  #write-icon i:hover {
+    color: blue;
   }
