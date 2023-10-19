@@ -201,5 +201,5 @@ module.exports = {
     getAllCommentsFromArticle,
     getAuthorByArticle,
     insertNewArticleToArticleTable,
-    updateArticleToArticleTable
+    updateArticleToArticleTable,filterArticlesBySelectedDates
 };

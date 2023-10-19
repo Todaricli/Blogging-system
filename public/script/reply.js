@@ -1,47 +1,42 @@
-window.addEventListener('click', function() {
-    const textareaOpener1 = document.querySelector('.textareaOpener-1');
-    const textareaOpener2 = document.querySelector('.textareaOpener-2');
-    const textareaOpener3 = document.querySelector('.textareaOpener-3');
-
+window.addEventListener('load', function() {
+    const textareaOpener1 = document.querySelectorAll('.textareaOpener-1');
+    const textareaOpener2 = document.querySelectorAll('.textareaOpener-2');
     
-    const replyContainer = document.getElementById('reply-container');
-    const secondLevel = document.getElementById('second-level-form');
-    const thirdLevel = document.getElementById('second-level-form');
+    const replyContainer = document.querySelectorAll('.reply-container');
+    const secondLevel = document.querySelectorAll('.second-level-form');
 
+    const commentBtn = document.getElementById("comment-btn");
+    const commentContainer = document.querySelector('.comment-container');
 
-    // textareaOpeners.forEach((textareaOpener) => {
-    //     textareaOpener.addEventListener('click', function() {
-    //         const replyContainer = document.getElementById('reply-container');
-    //         if (replyContainer.style.display === 'block') {
-    //             replyContainer.style.display = 'none';
-    //         } else {
-    //             replyContainer.style.display = 'block';
-    //         }
-    //     })
-    // })
-
-    textareaOpener1.addEventListener('click', function() {
-        if (replyContainer.style.display === 'block') {
-            replyContainer.style.display = 'none';
+    commentBtn.addEventListener("click", function() {
+        if (commentContainer.style.display === 'block') {
+            commentContainer.style.display = 'none';
         } else {
-            replyContainer.style.display = 'block';
+            commentContainer.style.display = 'block';
         }
     })
 
-    textareaOpener2.addEventListener('click', function() {
-        if (secondLevel.style.display === 'block') {
-            secondLevel.style.display = 'none';
-        } else {
-            secondLevel.style.display = 'block';
-        }
+
+    textareaOpener1.forEach((e,index)=>{
+        e.addEventListener('click', function(e) {
+
+            if (replyContainer[index].style.display === 'block') {
+                replyContainer[index].style.display = 'none';
+            } else {
+                replyContainer[index].style.display = 'block';
+            }
+        })
     })
 
-    textareaOpener3.addEventListener('click', function() {
-        if (thirdLevel.style.display === 'block') {
-            thirdLevel.style.display = 'none';
-        } else {
-            thirdLevel.style.display = 'block';
-        }
+    textareaOpener2.forEach((e,index)=>{
+        e.addEventListener('click', function(e) {
+
+            if (secondLevel[index].style.display === 'block') {
+                secondLevel[index].style.display = 'none';
+            } else {
+                secondLevel[index].style.display = 'block';
+            }
+        })
     })
 
 

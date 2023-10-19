@@ -46,17 +46,18 @@
     /* border: 1px solid red; */
 }
 
-/* #article_container {
+#article_container {
     width: 900px;
     display: flex;
-    justify-content: center;
+ 
     align-items: center;
     flex-direction: column;
     margin-top: 25px;
-} */
+}
 
 #article_title {
-    max-width: 100%;
+    width: 100%;
+   
 }
 
 #article_title h1 {
@@ -136,7 +137,15 @@
 }
 
 #like_section {
-    float: right;
+    width: 100%;
+    margin: 5px;
+    font-size: 20px;
+}
+
+#comment-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
 }
 
 #like {
@@ -170,12 +179,12 @@
 }
 
 /* Comment section ----------------------------------------------------------- */
-#comment-container {
+.comment-container {
     margin: 15px;
     width: 90%;
 }
 
-#comments-div div{
+.comments-div div{
     margin-bottom: 20px;
 }
 
@@ -187,6 +196,7 @@ form {
 
 #comment_on_article_form {
     border-bottom: 1px solid lightgrey;
+    padding-bottom: 10px;
 }
 
 textarea {
@@ -204,16 +214,17 @@ textarea {
     width: 100%;
 }
 
-#users-comment {
+.users-comment {
     /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
+    width: 100%;
     max-height: 100%;
-    border-bottom: 1px solid lightgrey;
     gap: 0;
+    margin-top: 15px;
 }
 
-#users-comment div {
+.users-comment div {
     margin-bottom: 10px;
 }
 
@@ -229,7 +240,7 @@ textarea {
     align-items: center;
 }
 
-#comment-info {
+.comment-info {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -237,7 +248,7 @@ textarea {
     gap: 0;
 }
 
-#comment-info div {
+.comment-info div {
     height: 50px;
     padding: 5px;
     margin-bottom: 0;
@@ -278,9 +289,25 @@ textarea {
     display: block;
     float: right;
     cursor: pointer;
-    /* border: none;
-    background-color: transparent; */
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
 }
+
+.textareaOpener-1:hover,
+.textareaOpener-2:hover,
+.deleteCommentButton:hover {
+    color: blue;
+} 
+
+.deleteCommentButton {
+    background-color: transparent;
+    text-decoration: underline;
+    float: right;
+    cursor: pointer;
+    border: none;
+}
+
 
 .commentSubmitButton {
     background-color: transparent;
@@ -303,7 +330,7 @@ textarea {
     margin-top: 10px;
 }
 
-#reply-container {
+.reply-container {
     display: none;
     padding-left: 50px;
 }
@@ -319,6 +346,7 @@ textarea {
 
 .reply-btn {
     margin: 10px 0;
+
 }
  
 .commentSubmitButton {
@@ -330,12 +358,12 @@ textarea {
     box-shadow:4px 4px 10px rgba(0,0,0,0.06);
 }
 /* second level */
-#second-level {
+.second-level {
     padding-left: 50px;
     /* border-bottom: 1px solid lightgrey; */
 }
 
-#users-comment-2 {
+.users-comment-2 {
     /* background-color: aqua; */
     display: flex;
     flex-direction: column;
@@ -345,23 +373,13 @@ textarea {
     border-left: 5px solid lightgrey;
 }
 
-/* #second-level-btn {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-#second-level-btn div {
-    margin: 5px;
-} */
-
 #delete-btn {
     display: block;
     float: right;
     
 }
 
-#third-level {
+.third-level {
     padding-left: 100px;
     /* border-bottom: 1px solid lightgrey; */
 }
@@ -372,7 +390,7 @@ textarea {
 }
 
 
-#second-level-form {
+.second-level-form {
     padding-left: 50px;
     display: none;
 }

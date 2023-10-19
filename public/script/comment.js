@@ -66,6 +66,11 @@ async function deleteComment() {
         alert(e)
       }
 
+      const directTimer = setTimeout(()=>{
+        location.reload();
+        clearTimeout(directTimer);
+      },300);
+
     })
   })
 }
@@ -119,10 +124,10 @@ async function commentsOnArticle() {
       alert(e);
     }
 
-    const directTimer = setTimeout(() => {
-      window.location.assign(`/article/${article_id}`);
+    const directTimer = setTimeout(()=>{
+      location.reload();
       clearTimeout(directTimer);
-    }, 500);
+    },300);
 
   })
 }
@@ -180,10 +185,10 @@ async function commentOnComment() {
         alert(e);
       }
 
-      const directTimer = setTimeout(() => {
-        window.location.assign(`/article/${article_id}`);
+      const directTimer = setTimeout(()=>{
+        location.reload();
         clearTimeout(directTimer);
-      }, 500);
+      },300);
 
     })
   }

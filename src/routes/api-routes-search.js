@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const searchDao = require(`../models/search-dao`)
+const searchDao = require(`../models/search-dao`);
+const articleDao = require(`../models/articles-dao.js`)
 
 router.get('/api/get-search', async function (req, res) {
     const searchTerm = req.query.searchTerm
@@ -73,7 +74,7 @@ router.get('/filtered-articles', async function(req, res) {
     console.log(startDate);
     console.log(endDate);
   
-    const articles = await searchDao.filterArticlesBySelectedDates(startDate, endDate)
+    const articles = await articleDao.filterArticlesBySelectedDates(startDate, endDate)
     console.log(articles)
   
     res.locals.articles = articles;
