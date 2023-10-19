@@ -42,8 +42,6 @@ window.addEventListener("load", function () {
         formData.append("contentKey", actualContent);
         formData.append("imageKey", image);
 
-        const toastMessage = document.getElementById("write-article-toast-message");
-
         try {
             const response = await fetch('/api/postNewArticle', {
                 method: 'POST',
@@ -56,7 +54,6 @@ window.addEventListener("load", function () {
             const articleId = await response.text(); // to be passed into notifications
             console.log(articleId);
             // Handle the response from the server
-            toastMessage.innerText = `Article ID: ${articleId}, URL after response: ${window.location.href}`;
             //remove user input from text editor
             quill.deleteText(0, quill.getLength());
             //remove other user input
@@ -75,7 +72,7 @@ window.addEventListener("load", function () {
             
         } catch (error) {
             // Handle any errors that occur during the request
-            alert(error + ". Potential cause: Image uploading is not supported yet.");
+            alert(error + ". Potential cause: Inline Image uploading is not supported yet.");
             //remove user input from text editor
             quill.deleteText(0, quill.getLength());
             //remove other user input

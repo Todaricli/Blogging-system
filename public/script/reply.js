@@ -30,7 +30,6 @@ window.addEventListener('load', function() {
 
     textareaOpener2.forEach((e,index)=>{
         e.addEventListener('click', function(e) {
-
             if (secondLevel[index].style.display === 'block') {
                 secondLevel[index].style.display = 'none';
             } else {
