@@ -11,13 +11,14 @@ async function storeNotificationToUser(
     content,
     articleId,
     type,
-    isRead
+    isRead,
+    isViewed
 ) {
     if (sender != receiver) {
         const db = await getDatabase();
         await db.all(SQL`
-  insert into notifications (host_id, receiver_id, time, content, article_id, type, isRead)
-  values (${sender}, ${receiver}, ${timestamp}, ${content}, ${articleId}, ${type}, ${isRead})
+  insert into notifications (host_id, receiver_id, time, content, article_id, type, isRead, isViewed)
+  values (${sender}, ${receiver}, ${timestamp}, ${content}, ${articleId}, ${type}, ${isRead}, ${isViewed})
 `);
     }
 }
@@ -34,6 +35,15 @@ async function getAllNotificationsById(userId) {
 }
 
 async function updateIsRead(id) {
+    const db = await getDatabase();
+    await db.all(SQL`
+    update notifications
+    set isRead = 1
+    where id = ${id};
+`);
+}
+
+async function updateIsViewed(id) {
     const db = await getDatabase();
     await db.all(SQL`
     update notifications
@@ -63,6 +73,7 @@ async function createNotification(receiverId, senderId, articleId, type) {
         articleId: articleId,
         type: type,
         isRead: 0,
+        isViewed: 0,
     };
     return notification;
 }
@@ -87,6 +98,7 @@ module.exports = {
     storeNotificationToUser,
     getAllNotificationsById,
     updateIsRead,
+    updateIsViewed,
     deleteNotification,
     createNotification,
 };

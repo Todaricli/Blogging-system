@@ -1,12 +1,19 @@
 window.addEventListener('load', async function () {
     // manage notifications
+    const notificationBell = document.querySelector('.bell-icon');
+
     const userNotifications = await getAllNotifications();
     console.log(userNotifications);
     setNotificationDropDownMenu();
 
     // manage bell icon
-    const notificationBell = document.querySelector('.bell-icon');
-    const notifNumTag = document.querySelector('.notification-amount > span');
+    const notifUnreadTag = document.querySelector(
+        '.notification-amount > span'
+    );
+    const notifUnviewedTag = document.querySelector(
+        '.notify-content p'
+    );
+    console.log(notifUnviewedTag.textContent)
     notificationBell.addEventListener('click', () => {
         deactivateBell();
         if (checkIfMoreThanZeroNotif()) setTimeout(activateBell, 100);
@@ -16,15 +23,18 @@ window.addEventListener('load', async function () {
 
     // Bell Icon Functions
     function setNumberOfNotifications() {
-        let notifNum = 0;
+        let readNotifNum = 0;
+        let viewNotifNum = 0;
         for (notif of userNotifications) {
-            if (notif.isRead === 0) notifNum++;
+            if (notif.isRead === 0) readNotifNum++;
+            if (notif.isViewed === 0) viewNotifNum++;
         }
-        notifNumTag.textContent = notifNum;
+        notifUnreadTag.textContent = readNotifNum;
+        notifUnviewedTag.textContent = viewNotifNum;
     }
 
     function checkIfMoreThanZeroNotif() {
-        if (parseInt(notifNumTag.textContent) > 0) return true;
+        if (parseInt(notifUnviewedTag.textContent) > 0) return true;
         else return false;
     }
 
@@ -40,6 +50,7 @@ window.addEventListener('load', async function () {
     async function getAllNotifications() {
         const response = await fetch(`/api/get-all-notifications`);
         let data = makeArray(await response.json());
+        if (data.length === 0) notifUnreadTag.textContent = 'No notifications';
         return data;
     }
 
@@ -93,13 +104,21 @@ window.addEventListener('load', async function () {
                 });
             }
 
-            function checkAndUpdateIsRead() {
-                if (indvNotif.isRead === 1) {
+            function checkAndUpdateIsViewed() {
+                if (indvNotif.isViewed === 1) {
                     divTag.classList.add('read');
                 }
                 divTag.addEventListener('click', async function () {
                     if (indvNotif.isRead === 0) {
                         await fetch(`/api/update-isRead?id=${indvNotif.id}`);
+                    }
+                });
+            }
+
+            function checkAndUpdateIsRead() {
+                notificationBell.addEventListener('click', async function () {
+                    if (indvNotif.isViewed === 0) {
+                        await fetch(`/api/update-isViewed?id=${indvNotif.id}`);
                     }
                 });
             }
@@ -118,8 +137,8 @@ window.addEventListener('load', async function () {
                     if (parentElement) {
                         parentElement.remove();
                         if (!parentElement.classList.contains('read')) {
-                            notifNumTag.textContent =
-                                notifNumTag.textContent - 1;
+                            notifUnreadTag.textContent =
+                                notifUnreadTag.textContent - 1;
                         }
                     }
 

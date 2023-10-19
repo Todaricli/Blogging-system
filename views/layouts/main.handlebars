@@ -36,9 +36,6 @@
             </a>
         </div>
 
-
-
-
         {{!-- Navigation search bar--}}
         <div id="search_bar_container">
             <img id="search-icon" src="/images/search-icon.png">
@@ -78,12 +75,10 @@
         <span class="left-panel">
             {{#if user}}
 
-
-
             <div id="write-icon-div">
-            <a href="/writeArticle" id="write-icon">
-            <i class="fa-regular fa-pen-to-square"> </i>
-            </a>
+                <a href="/writeArticle" id="write-icon">
+                    <i class="fa-regular fa-pen-to-square"> </i>
+                </a>
             </div>
             {{!-- notify bell icon --}}
             <div class="bell-icon notify-drop clicked" tabindex="0">
@@ -105,14 +100,11 @@
 
                 <div class="notify-content clicked">
                     <h2>Notifications</h2>
-                    <p>Unread: 4</p>
+                    <p class="unread">Unread: 0</p>
                 </div>
             </div>
 
-
             {{!-- notify bell icon --}}
-
-
             <div class="dropdown clicked">
                 <button class="dropbtn clicked">
                     <img class="dropdown-avatar clicked" src="{{user.icon_path}}" alt="user photo">

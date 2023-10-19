@@ -281,17 +281,18 @@ CREATE TABLE notifications
     article_id INTEGER,
     type TEXT NOT NULL,
     isRead INTEGER NOT NULL,
+    isViewed INTEGER NOT NULL,
     FOREIGN KEY (host_id) REFERENCES user (id) ON DELETE CASCADE
 );
 
 -- Inserting 20 rows of sample data into the notifications table
 INSERT INTO notifications
-    (id, host_id, receiver_id, time, content, article_Id, type, isRead)
-VALUES (1, 2, 1, '2023-09-09T23:11:45.123Z', 'user2 just subscribed to you!', null, 'sub', 0),
-       (6, 3, 1, '2023-01-15T23:08:15.654Z', 'user3 just liked your article!', null, 'like', 0),
+    (id, host_id, receiver_id, time, content, article_Id, type, isRead, isViewed)
+VALUES (1, 2, 1, '2023-09-09T23:11:45.123Z', 'user2 just subscribed to you!', null, 'sub', 0, 0),
+       (6, 3, 1, '2023-01-15T23:08:15.654Z', 'user3 just liked your article!', null, 'like', 0, 0),
        (16, 4, 1, '2023-09-09T23:05:45.987Z', 'user4 just wrote a new article: "Textiles Through the Ages"!', 4,
-        'write', 0),
-       (11, 5, 1, '2023-01-15T23:08:15.654Z', 'user5 just wrote a new article: "Dyeing Techniques"!', 5, 'write', 0);
+        'write',  0, 0),
+       (11, 5, 1, '2023-01-15T23:08:15.654Z', 'user5 just wrote a new article: "Dyeing Techniques"!', 5, 'write',  0, 0);
 
 -- (2, 1, 2, '2023-10-10 11:30:00', 'New article published: "Introduction to Fabric Types"', 0),
 -- (3, 1, 3, '2023-10-10 12:45:00', 'Someone liked your comment.', 0),
