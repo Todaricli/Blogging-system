@@ -39,7 +39,7 @@ router.get('/profile', async function (req, res) {
         res.locals.profile_DOB = profileData.DOB;
         res.locals.profile_id = id;
         res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);
-        res.locals.profile_articles = await articleDao.getArticlesByID(profileData.id);
+        res.locals.profile_articles = await articleDao.getArticlesByUserID(profileData.id);
         res.render('profile');
     } else {
         res.redirect('/');
