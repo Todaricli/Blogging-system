@@ -60,13 +60,30 @@ router.get('/my_profile', verifyAuthenticated, async function (req, res) {
 
 router.get('/my-page', async function (req, res) {
     const user_id = res.locals.user.id
+    console.log(user_id)
+
     if (user_id) {
         const profileData = await genericDao.getUserDataById(user_id);
-        res.locals.profile_icon = profileData.icon_path;
-        res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
-        res.locals.profile_DOB = profileData.DOB;
-        res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);
-        res.locals.profile_articles = await articleDao.getArticlesByID(profileData.id);
+
+        console.log(profileData)
+
+        res.locals.user = profileData;
+
+        // res.locals.profile_icon = profileData.icon_path;
+        // res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
+        // res.locals.profile_DOB = profileData.DOB;
+
+        const subscriberList = await subDao.getSubscribersByUserID(profileData.id);
+        //console.log(subscriberList)
+
+        res.locals.profile_subscribers = subscriberList;
+
+
+        const articles = await articleDao.getArticlesByUserID(user_id);
+        //console.log(articles)
+
+        res.locals.profile_articles = articles;
+
         res.render('profile');
     } else {
         res.status(404).send("Page not found 404!");
