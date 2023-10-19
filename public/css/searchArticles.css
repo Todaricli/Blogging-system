@@ -49,14 +49,14 @@ h1 {
     grid-template-columns: 2fr 1fr;
     height: 100%;
     margin: 15px 0;
-    padding: 5px;
+    padding: 5px 0;
     border-bottom: 1px solid lightgrey;
  
 }
 
 .eachArticleDiv-container {
     height: 100%;
-    padding: 10px;
+    padding: 10px 0;
 }
 
 img {
