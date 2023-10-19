@@ -25,6 +25,7 @@ window.addEventListener(`load`, async function(){
                 const elementToRemove =document.querySelector(`#article${articleId}`)
                 articleCounter--
                 elementToRemove.innerHTML = "<h2>article has been deleted</h2>"
+                elementToRemove.remove();
                 articleCount.innerHTML = `your stories(${articleCounter})`
             }else{
                 txt = "cancelled"
