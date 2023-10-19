@@ -5,7 +5,7 @@ const authDao = require('../../models/auth-dao');
 async function addUserToLocals(req, res, next) {
     const authToken = req.cookies['authToken'];
     res.locals.user = await authDao.getUserWithAuthToken(authToken);
-    //if (!res.locals.user) res.locals.user = await userDb.getUserDataById(1); // THIS IS FOR DEVELOPING PURPOSES ONLY
+    if (!res.locals.user) res.locals.user = await userDb.getUserDataById(1); // THIS IS FOR DEVELOPING PURPOSES ONLY
     next();
 }
 
@@ -13,7 +13,7 @@ function verifyAuthenticated(req, res, next) {
     if (res.locals.user) {
         next();
     } else {
-        res.redirect("/");
+        res.redirect('/');
     }
 }
 

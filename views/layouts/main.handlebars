@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/popup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/animations/notification-animation.css">
+    <link rel="stylesheet" href="/css/notification.css">
+    <script src="/script/notification-script.js"></script>
     <script src="/script/search-script.js"></script>
     <link rel="stylesheet" href="/css/analyticsDashboard.css">
     <link rel="stylesheet" href="/css/register.css">
@@ -23,8 +26,9 @@
 
 </head>
 
+
 <body>
-    <nav>
+    <nav class="nav-panel">
         {{!-- Page logo --}}
         <div class="logo">
             <a href="/">
@@ -56,29 +60,48 @@
         </div>
 
         {{!-- Nav login and dropdown button --}}
-        <ul class="nav_list">
+        <span class="left-panel">
             {{#if user}}
-            <li>
-                <div class="dropdown skeet">
-                    <button class="dropbtn skeet">
-                        <img class="dropdown-avatar skeet" src="{{user.icon_path}}" alt="user photo">
-                        <span class="username skeet">{{user.fname}} {{user.lname}}</span>
-                        <i class="fa fa-caret-down skeet"></i>
-                    </button>
-                    <div class="dropdown-content skeet">
-                        <a href="/my_profile">My Profile</a>
-                        <a href="/my-page">My Page View</a>
-                        <a href="/my_post">My Post</a>
-                        <a href="/analytics">Analytics</a>
-                        <a href="/sub">Subscription</a>
-                        <a href="/logout" id="signout">Sign out</a>
-                    </div>
+            
+
+            <a href="/writeArticle">New Article</a>
+            {{!-- notify bell icon --}}
+            <div class="bell-icon notify-drop clicked" tabindex="0">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                    y="0px" width="50px" height="30px" viewBox="0 0 50 30" enable-background="new 0 0 50 30"
+                    xml:space="preserve" class="clicked">
+                    <g class="bell-icon__group clicked">
+                        <path class="bell-icon__ball clicked" id="ball" fill-rule="evenodd" stroke-width="1.5"
+                            clip-rule="evenodd" fill="none" stroke="#currentColor" stroke-miterlimit="10"
+                            d="M28.7,25 c0,1.9-1.7,3.5-3.7,3.5s-3.7-1.6-3.7-3.5s1.7-3.5,3.7-3.5S28.7,23,28.7,25z" />
+                        <path class="bell-icon__shell clicked" id="shell" fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF"
+                            stroke="#currentColor" stroke-width="2" stroke-miterlimit="10"
+                            d="M35.9,21.8c-1.2-0.7-4.1-3-3.4-8.7c0.1-1,0.1-2.1,0-3.1h0c-0.3-4.1-3.9-7.2-8.1-6.9c-3.7,0.3-6.6,3.2-6.9,6.9h0 c-0.1,1-0.1,2.1,0,3.1c0.6,5.7-2.2,8-3.4,8.7c-0.4,0.2-0.6,0.6-0.6,1v1.8c0,0.2,0.2,0.4,0.4,0.4h22.2c0.2,0,0.4-0.2,0.4-0.4v-1.8 C36.5,22.4,36.3,22,35.9,21.8L35.9,21.8z" />
+                    </g>
+                </svg>
+                <div class="notification-amount clicked">
+                    <span>0</span>
                 </div>
-            </li>
-            <a href="/writeArticle" id="newArticleLink">New Article</a>
+                <div class="notify-content clicked">
+                </div>
             </div>
+
+            <div class="dropdown clicked">
+                <button class="dropbtn clicked">
+                    <img class="dropdown-avatar clicked" src="{{user.icon_path}}" alt="user photo">
+                    <span class="username clicked">{{user.fname}} {{user.lname}}</span>
+                    <i class="fa fa-caret-down clicked"></i>
+                </button>
+                <div class="dropdown-content clicked">
+                    <a href="/my_profile">My Profile</a>
+                    <a href="/my-page">My Page View</a>
+                    <a href="/my_post">My Post</a>
+                    <a href="/analytics">Analytics</a>
+                    <a href="/sub">Subscription</a>
+                    <a href="/logout" id="signout">Sign out</a>
+                </div>
             </div>
-            </li>
+
             {{else}}
             <div class="login">
                 <div class="register">
@@ -87,7 +110,7 @@
                 <a href="/login">Login</a>
             </div>
             {{/if}}
-        </ul>
+        </span>
     </nav>
 
 

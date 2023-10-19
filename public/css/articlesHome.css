@@ -15,6 +15,7 @@
     padding-right: 0;
     margin: 20px;
     margin-top: 0;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .each-top5Articles, #each-articleData{
@@ -31,6 +32,7 @@
     border: 2px solid white;
     border-radius: 10px;
     padding: 30px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 #article_description {
@@ -108,7 +110,7 @@
     background-color: #7fc7cc;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 30px;
     padding: 7px 10px;
     font-size: smaller;
 }
@@ -117,9 +119,9 @@
     background-color: #70adb0;
 }
 
-hr {
-    color: rgb(60, 188, 188);
-}
+/* hr {
+    border: rgb(60, 188, 188);
+} */
 
 button[type=submit] {
     width: 15%;
@@ -130,7 +132,7 @@ button[type=submit] {
     margin: auto;
     margin-top: 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 30px;
     cursor: pointer;
     font-size: 1rem;
     display: flex;
@@ -150,7 +152,6 @@ button[type=submit]:hover {
 
 img {
     margin: 20px;
-    margin-top: 0px;
 }
 
 /* Genre section */

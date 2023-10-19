@@ -7,14 +7,16 @@
     width: 400px;
     display: flex;
     justify-content: center;
-    border: 2px solid lightgray;
+    border: 2px solid rgb(255, 255, 255);
     border-radius: 15px;
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(246, 255, 254);
-    color: #0b487a;
+    background-color: rgb(247, 255, 254);
+    color: #357a84;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+
 }
 
 #login_username {
@@ -29,7 +31,7 @@
     cursor: pointer;
     width: 100px;
     height: 30px;
-    border-radius: 10px;
+    border-radius: 30px;
     margin-top: 20px;
 }
 
