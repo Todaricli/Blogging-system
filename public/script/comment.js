@@ -82,6 +82,11 @@ async function deleteComment() {
         alert(e)
       }
 
+      const directTimer = setTimeout(()=>{
+        location.reload();
+        clearTimeout(directTimer);
+      },300);
+
     })
   })
 }
