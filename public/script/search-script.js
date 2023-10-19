@@ -6,19 +6,20 @@ window.addEventListener(`load`, function () {
     const searchNavBar = document.querySelector(".search_bar")
     const searchAllButton = document.querySelector("#viewAllSearchResults")
     const searchResultContainer = document.querySelector("#searchResultContainer")
+    
 
 
     window.addEventListener(`click`, (e)=>{
         if(e.target.className != "search"){
             searchResultContainer.style.display = "none"
-            searchNavBar.style.border="1px solid black"
+            // searchNavBar.style.border="1px solid black"
         }
      
     })
 
     searchNavBar.addEventListener(`click`,()=>{
         searchResultContainer.style.display = "flex"
-        searchNavBar.style.border = "7px solid purple"
+        // searchNavBar.style.border = "7px solid purple"
         searchBarForm.style.border = "transparent"
 
     })

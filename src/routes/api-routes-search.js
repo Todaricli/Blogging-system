@@ -19,7 +19,7 @@ router.get('/api/get-search', async function (req, res) {
 router.get('/api/get-search/single-date', async function (req, res) {
     const searchDate = req.query.searchDate
 
-    const articlesByDate = await searchDao.getArticlesBySingleDate(searchDate);
+    const articlesByDate = await searchDao.getArticlesBySingleDate(searchDate, res.locals.user.id);
 
     console.log(articlesByDate[1])
 
