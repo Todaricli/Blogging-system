@@ -54,7 +54,6 @@ async function setUpQuillEditor() {
         formData.append("contentKey", actualContent);
         formData.append("imageKey", image);
 
-
         try {
             const response = await fetch('/api/updateArticle', {
                 method: 'POST',
@@ -86,9 +85,9 @@ async function setUpQuillEditor() {
         }
 
         const directTimer = setTimeout(() => {
-            window.location.assign(`/editArticle/${article_id}`);
+            location.reload();
             clearTimeout(directTimer);
-        }, 500);
+        }, 300);
     });
 }
 

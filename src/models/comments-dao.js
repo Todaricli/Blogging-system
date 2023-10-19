@@ -11,75 +11,125 @@ async function getAllCommentsByUserId(userId) {
     return allComments;
 }
 
-async function getAllCommentsByArticles(articleId) {
+async function getAllFirstLevelCommentsByArticleID(articleId) {
     const db = await getDatabase();
-    const allComments = await db.all(SQL`
-    SELECT comments.*, articles.title AS article_title
-    FROM comments
-    JOIN articles ON comments.article_id = articles.id
-    WHERE comments.article_id = ${articleId};
+    const allFirstLevelComments = await db.all(SQL`
+    SELECT comments.*, user.username, user.fname, user.lname
+    FROM comments, user
+    WHERE comments.article_id = ${articleId}
+    AND user.id = comments.user_id
+    AND comments.comments_id IS NULL
     `);
-    return allComments;
+
+    return allFirstLevelComments;
 }
 
-async function getCommentAndReplies(articleId) {
+async function getAllSecondOrThirdLevelCommentsByComment_id(
+    comment_id,
+    article_id
+) {
     const db = await getDatabase();
-
-    const replies = await db.all(SQL`
-    SELECT c.id, c.user_id, c.article_id, c.content, c.time_of_comment, c.comments_id,
-    p.content AS parent_content
-    FROM comments c
-    LEFT JOIN comments p ON c.comments_id = p.id
-    WHERE c.article_id = ${articleId};
+    const allFirstLevelComments = await db.all(SQL`
+    SELECT comments.*, user.username, user.fname, user.lname
+    FROM comments, user
+    WHERE comments.article_id = ${article_id}
+    AND user.id = comments.user_id
+    AND comments.comments_id = ${comment_id}
     `);
 
-    return replies;
+    return allFirstLevelComments;
 }
 
-async function deleteLikesCommnents(commentId) {
-    const db = await getDatabase();
+async function deleteComments(comment_id, article_id) {
+    const childComments = await getAllSecondOrThirdLevelCommentsByComment_id(
+        comment_id,
+        article_id
+    );
 
-    await db.all(SQL`
-        DELETE 
-        FROM likes_comments
-        WHERE comments_id = ${commentId}
-    `);
-}
+    let done1 = undefined;
+    if (childComments) {
+        done1 = childComments.forEach(async (comment) => {
+            const comment_id = comment.id;
+            const article_id = comment.article_id;
 
-async function deleteComments(commentId, articleId) {
-    const db = await getDatabase();
+            const grandChildComments =
+                await getAllSecondOrThirdLevelCommentsByComment_id(
+                    comment_id,
+                    article_id
+                );
 
-    await deleteLikesCommnents(commentId);
+            if (grandChildComments) {
+                grandChildComments.forEach(async (comment) => {
+                    const comment_id = comment.id;
+                    const article_id = comment.article_id;
 
-    try {
-        // Fetch the IDs of replies associated with the comment
-        const replyIds = await db.all(SQL`
-        SELECT id
-        FROM comments
-        WHERE comments_id = ${commentId}
-        AND article_id = ${articleId}
-    `);
-
-        // Delete the associated replies (nested comments)
-        for (const reply of replyIds) {
-            await deleteComments(reply.id, articleId);
-        }
-
-        // Delete the parent comment
-        await db.run(SQL`
-        DELETE FROM comments
-        WHERE id = ${commentId}
-        AND article_id = ${articleId}
-    `);
-    } catch (error) {
-        console.error('Error deleting comments:', error);
+                    return await deleteThisComment(comment_id, article_id);
+                });
+            }
+            return await deleteThisComment(comment_id, article_id);
+        });
     }
+    return await deleteThisComment(comment_id, article_id);
+}
+
+async function deleteThisComment(comment_id, article_id) {
+    const db = await getDatabase();
+
+    return await db.run(SQL`
+        DELETE FROM comments 
+        WHERE id = ${comment_id}
+        AND article_id = ${article_id}`);
+}
+
+async function insertNewCommentOnArticle(user_id, article_id, content) {
+    const db = await getDatabase();
+
+    return await db.run(SQL`
+        INSERT INTO comments (user_id, article_id, content, time_of_comment)
+        VALUES (${user_id}, ${article_id}, ${content}, datetime('now'))`);
+}
+
+async function insertNewCommentOnComment(
+    user_id,
+    article_id,
+    content,
+    comment_id
+) {
+    const db = await getDatabase();
+
+    return await db.run(SQL`
+        INSERT INTO comments (user_id, article_id, content, time_of_comment, comments_id)
+        VALUES (${user_id}, ${article_id}, ${content}, datetime('now'), ${comment_id})`);
+}
+
+async function getCommentById(comment_id) {
+    const db = await getDatabase();
+
+    return await db.get(SQL`
+        SELECT comments.*, user.username, user.fname, user.lname 
+        FROM comments, user
+        WHERE comments.id = ${comment_id}
+        AND user.id = comments.user_id`);
+}
+
+async function getAuthorIdByCommentId(comment_id) {
+    const db = await getDatabase();
+
+    return await db.get(SQL`
+        SELECT comments.user_id 
+        FROM comments
+        WHERE comments.id = ${comment_id}
+        `);
 }
 
 module.exports = {
-    getAllCommentsByArticles,
+    getAllFirstLevelCommentsByArticleID,
+    getAllSecondOrThirdLevelCommentsByComment_id,
     getAllCommentsByUserId,
     deleteComments,
-    getCommentAndReplies,
-    deleteLikesCommnents,
+    insertNewCommentOnArticle,
+    insertNewCommentOnComment,
+    deleteThisComment,
+    getCommentById,
+    getAuthorIdByCommentId,
 };

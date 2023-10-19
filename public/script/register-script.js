@@ -21,6 +21,9 @@ window.addEventListener('load', async function () {
         '#password-format-error'
     );
     const passwordMatchError = document.querySelector('#password-match-error');
+    const emailFormatError = document.querySelector(
+        '#email-format-error'
+    );
 
     await windowsOnLoadChecks();
     await addFormVerificationListeners();
@@ -39,6 +42,10 @@ window.addEventListener('load', async function () {
         });
         confirmPasswordInput.addEventListener('input', async () => {
             await checkPasswordsMatch();
+            registerButtonEnabler();
+        });
+        emailInput.addEventListener('input', async () => {
+            await checkValidEmailFormat();
             registerButtonEnabler();
         });
     }
@@ -76,7 +83,29 @@ window.addEventListener('load', async function () {
         } else {
             passwordFormatError.style.display = '';
             passwordFormatError.innerHTML =
-                'Password must be at least 5 characters long and include at least 1 special character.';
+                'Password must be at least 5 characters long and include at least 1 special character';
+            return false;
+        }
+    }
+
+    async function checkValidEmailFormat() {
+        const email = emailInput.value;
+        const response = await fetch(`/api/validate-email-format`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+        let data = await response.text();
+        if (data === 'valid') {
+            emailFormatError.style.display = 'none';
+            emailFormatError.innerHTML = '';
+            return true;
+        } else {
+            emailFormatError.style.display = '';
+            emailFormatError.innerHTML =
+                'Please input a valid email format';
             return false;
         }
     }
@@ -105,7 +134,8 @@ window.addEventListener('load', async function () {
         if (
             usernameError.style.display === 'none' &&
             passwordFormatError.style.display === 'none' &&
-            passwordMatchError.style.display === 'none'
+            passwordMatchError.style.display === 'none' &&
+            emailFormatError.style.display === 'none'
         ) {
             registerButton.disabled = false;
             registerButton.style.opacity = '1.0';
@@ -168,6 +198,7 @@ window.addEventListener('load', async function () {
         await checkUsernameInDb();
         await checkValidPasswordFormat();
         await checkPasswordsMatch();
+        await checkValidEmailFormat();
         registerButtonEnabler();
     }
 });

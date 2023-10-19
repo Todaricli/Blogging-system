@@ -149,18 +149,6 @@ async function getAllCommentsFromArticle(articleId) {
     return comments;
 }
 
-async function getNumberOfLikesFromArticle(articleId) {
-    const db = await getDatabase();
-
-    const likeCounts = await db.all(SQL `
-    select count(*) as like_count
-    from likes
-    where article_id = ${articleId}
-    `)
-
-    return likeCounts;
-}
-
 async function insertNewArticleToArticleTable(user_id, title, genre, content_html, content_delta, image) {
     const db = await getDatabase();
     
@@ -169,12 +157,29 @@ async function insertNewArticleToArticleTable(user_id, title, genre, content_htm
         (${title}, ${content_html}, ${content_delta}, ${genre}, ${image}, datetime('now'), ${user_id})`);
 }
 
+async function insertNewArticleToArticleTableWithoutImage(user_id, title, genre, content_html, content_delta) {
+    const db = await getDatabase();
+    
+    return await db.run(SQL`
+        INSERT INTO articles (title, content_html, content_delta, genre, date_of_publish, author_id) VALUES 
+        (${title}, ${content_html}, ${content_delta}, ${genre}, datetime('now'), ${user_id})`);
+}
+
 async function updateArticleToArticleTable(article_id, title, genre, content_html, content_delta, image) {
     const db = await getDatabase();
 
     return await db.run(SQL`
         UPDATE articles 
         SET title = ${title}, genre = ${genre}, content_html = ${content_html}, content_delta = ${content_delta}, image = ${image}, date_of_publish = datetime('now')
+        WHERE id = ${article_id}`);
+}
+
+async function updateArticleToArticleTableWithoutImage(article_id, title, genre, content_html, content_delta) {
+    const db = await getDatabase();
+
+    return await db.run(SQL`
+        UPDATE articles 
+        SET title = ${title}, genre = ${genre}, content_html = ${content_html}, content_delta = ${content_delta}, date_of_publish = datetime('now')
         WHERE id = ${article_id}`);
 }
 
@@ -190,6 +195,39 @@ async function filterArticlesBySelectedDates(startDate, endDate) {
     return articles;
 }
 
+async function getArticleTitleById(articleId) {
+    const db = await getDatabase();
+
+    const title = await db.all(SQL `
+    select title
+    from articles
+    where id = ${articleId}
+    `)
+
+    console.log(title);
+    return title;
+}
+
+async function getAuthorIdByArticleId(articleId) {
+    const db = await getDatabase();
+
+    const authorId = await db.all(SQL `
+    SELECT articles.author_id
+    FROM articles
+    WHERE articles.id = ${articleId};
+    `)
+
+    return authorId;
+}
+async function deleteArticle(article_id){
+    const db = await getDatabase();
+
+    const article = await db.run(SQL`
+    DELETE from articles
+    where id = ${article_id}
+    `)
+}
+
 async function filterArticlesByGenre(genre) {
     const db = await getDatabase();
     const genre1 = `${genre}`
@@ -203,15 +241,6 @@ async function filterArticlesByGenre(genre) {
 
     return articles;
 }
-async function deleteArticle(article_id){
-    const db = await getDatabase();
-
-    const article = await db.run(SQL`
-    DELETE from articles
-    where id = ${article_id}
-    `)
-}
-
 module.exports = {
     getArticlesByUserID,
     getArticlesByID,
@@ -224,11 +253,15 @@ module.exports = {
     getAllArticlesByPublishDate,
     getAllArticles,
     getAllCommentsFromArticle,
-    getNumberOfLikesFromArticle,
     getAuthorByArticle,
     insertNewArticleToArticleTable,
     updateArticleToArticleTable,
     filterArticlesBySelectedDates,
+    getArticleTitleById,
+    getAuthorIdByArticleId,
+    updateArticleToArticleTable,
+    updateArticleToArticleTableWithoutImage,
+    insertNewArticleToArticleTableWithoutImage,
     filterArticlesByGenre,
     deleteArticle
 };
