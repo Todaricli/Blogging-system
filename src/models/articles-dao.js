@@ -317,6 +317,17 @@ async function filterArticlesByGenre(genre) {
 
     return articles;
 }
+
+async function deleteArticleImageByArticleId(article_id) {
+    const db = await getDatabase();
+    
+    const done = await db.run(SQL`
+        UPDATE articles 
+        SET image = NULL
+        WHERE id = ${article_id}`);
+
+    return done;
+}
 module.exports = {
     getArticlesByUserID,
     getArticlesByID,
@@ -339,5 +350,6 @@ module.exports = {
     updateArticleToArticleTableWithoutImage,
     insertNewArticleToArticleTableWithoutImage,
     filterArticlesByGenre,
-    deleteArticle
+    deleteArticle,
+    deleteArticleImageByArticleId
 };

@@ -11,11 +11,16 @@ const { getUserArticles, getAllCommentsByArticles, getUserNameByComment } = requ
 
 router.get('/', async function (req, res) {
 
+    try {
+
     res.locals.top5Articles = await articleDao.getTopFiveArticles();
     const articleData = await articleDao.getAllArticles();
     res.locals.articleData = articleData;
 
     res.render('articlesHome');
+    } catch (e) {
+        res.locals.errorMessage = 'Page loading incomplete. ' + e
+    }
 });
 
 router.get('/sub', verifyAuthenticated, async function (req, res) {
