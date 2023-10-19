@@ -14,24 +14,24 @@ window.addEventListener("load", function () {
                 if ((user_id.value != author_id.value) && user_id.value != null) {
                     const option = document.createElement("button");
 
-                    const subBtnAlden = document.createElement("button")
-                    subBtnAlden.innerHTML = `<img class="unsubBtn" src="/images/subscribe.png">Subscribe`;
-                    subBtnAlden.addEventListener(`click`, (e)=>{
+                    const subOption = document.createElement("button")
+                    subOption.innerHTML = `<img class="unsubBtn" src="/images/subscribe.png">Subscribe`;
+                    subOption.addEventListener(`click`, (e)=>{
                         addSubscription(subscription_id);
-                        subBtnAlden.style.display = "none"
-                        unsubBtnAlden.style.display = "block"
+                        subOption.style.display = "none"
+                        unsubOption.style.display = "block"
                     })
 
-                    const unsubBtnAlden = document.createElement("button")
-                    unsubBtnAlden.innerHTML = `<img class="unsubBtn" src="/images/unsubscribe.png">Unsubscribe`
-                    unsubBtnAlden.addEventListener(`click`, (e)=>{
+                    const unsubOption = document.createElement("button")
+                    unsubOption.innerHTML = `<img class="unsubBtn" src="/images/unsubscribe.png">Unsubscribe`
+                    unsubOption.addEventListener(`click`, (e)=>{
                         removeSubscription(subscription_id);
-                        subBtnAlden.style.display = "block"
-                        unsubBtnAlden.style.display = "none"
+                        subOption.style.display = "block"
+                        unsubOption.style.display = "none"
                     })
 
-                    unsubBtnAlden.setAttribute("class", "subscribe-button")
-                    subBtnAlden.setAttribute("class", "subscribe-button")
+                    unsubOption.setAttribute("class", "subscribe-button")
+                    subOption.setAttribute("class", "subscribe-button")
 
                     option.setAttribute("class", "subscribe-button")
                     const isSubscribe = await checkIfSubscribe(user_id.value, author_id.value);
@@ -43,20 +43,20 @@ window.addEventListener("load", function () {
                         //     removeSubscription(subscription_id);
                         //     option.innerHTML = `<img src="/images/subscribe.png">Subscribe`;
                         // });
-                        unsubBtnAlden.style.display ="block"
-                        subBtnAlden.style.display="none"
+                        unsubOption.style.display ="block"
+                        subOption.style.display="none"
                     } else if (isSubscribe == 0) {
                         // option.innerHTML = `<img src="/images/subscribe.png">Subscribe`;
                         // option.addEventListener("click", function () {
                         //     addSubscription(subscription_id);
                         //     option.innerHTML = `<img src="/images/unsubscribe.png">Unsubscribe`;
                         // });
-                        unsubBtnAlden.style.display ="none"
-                        subBtnAlden.style.display="block"
+                        unsubOption.style.display ="none"
+                        subOption.style.display="block"
                     }
                     // btn_subscribe.appendChild(option);
-                    btn_subscribe.append(unsubBtnAlden);
-                    btn_subscribe.append(subBtnAlden);
+                    btn_subscribe.append(unsubOption);
+                    btn_subscribe.append(subOption);
                 }
             }
             catch (error) {
