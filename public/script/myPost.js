@@ -2,9 +2,20 @@ window.addEventListener(`load`, async function(){
 
     const deleteButton = document.querySelectorAll(".delete-button")
     const articleCount = document.querySelector("#article-count-header")
-    const dropDownDiv = document.querySelector(".each-posts-links")
+    const dropDownDiv = document.querySelectorAll(".each-posts-links")
+    const dropDownArrow = document.querySelectorAll(".drop-down-arrow")
 
     let articleCounter = deleteButton.length
+
+    dropDownDiv.forEach((e,i)=>{
+        dropDownArrow[i].addEventListener(`click`, (e)=>{
+            if (dropDownDiv[i].style.display === "block") {
+                dropDownDiv[i].style.display = "none";
+              } else {
+                dropDownDiv[i].style.display = "block";
+              }
+        })
+    })
 
     deleteButton.forEach((e,i)=>{
         deleteButton[i].addEventListener(`click`, async(e)=>{
@@ -21,7 +32,6 @@ window.addEventListener(`load`, async function(){
         })
     })
     
-
     async function deleteArticle(id){
         await fetch(`/api/delete-article?articleId=${id}`)
         alert("Article deleted")

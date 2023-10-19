@@ -26,7 +26,8 @@
                 <div id="post_content">
                     <span>{{{this.content_html}}}</span><span>...</span>
                 </div>
-                <div class="each-posts-links">
+                <i class="fa-solid fa-angle-down drop-down-arrow"></i>
+                <div id="links{{this.article_id}}" class="each-posts-links" >
                     <a href="/editArticle/{{this.article_id}}" id="myPostEditLink">Edit</a>
                     {{#if tags}}
                     {{#each tags}}
