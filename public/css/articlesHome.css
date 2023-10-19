@@ -97,6 +97,19 @@
     color: rgb(0, 205, 205);
 }
 
+/* .subscribe-button {
+    background-color: #7fc7cc;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 7px 10px;
+    font-size: smaller;
+} */
+
+.subscribe-button:hover {
+    background-color: #70adb0;
+}
+
 /* hr {
     border: rgb(60, 188, 188);
 } */

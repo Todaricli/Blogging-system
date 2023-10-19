@@ -54,6 +54,10 @@
 } */
 /* profile page css end*/
 
+#page_body {
+    align-items: center;
+
+}
 
 .article {
     margin: 10px 0;
@@ -63,17 +67,31 @@
 #profile_container {    
     display: grid;
     grid-template-columns: 0.5fr 2fr;
-    max-width: 100%;
+    width: 1100px;
     border: 1px solid black;
     padding: 20px;
     justify-content: center;
     align-items: center;
 }
 
-#profile_icon img {
-    width: 100px;
+#profile_icon {
+    display: flex;
+    justify-content: center;
+    
 }
 
+#profile_icon img {
+    width: 200px;
+    margin: 0;
+}
+
+
+#profile_name {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+}
 
 #profile_articles_container img{
     width: 300px;
@@ -83,12 +101,12 @@
     margin: 20px;
     height: 100%;
     border: 1px solid red;
+    max-width: 1000px;
     
 }
 
 #container div {
     border: 1px solid green;
-    padding: 20px;
 }
 
 #profile_articles_container {
@@ -99,5 +117,16 @@
 .subscribe-button {
     border: 1px solid green;
     padding: 10px;
+    width: 100%;
+}
+
+#profile_related_info {
+    width: 100%;
+    padding: 0;
+}
+
+#profile_DOB, #profile_email, #profile_name, #profile_subscribers, #profile_articles_number {
+    padding: 10px;
+    font-size: 18px;
 }
 
