@@ -811,7 +811,7 @@ nav {
     text-decoration: none;
   }
   
-  #newArticleLink, #myPostEditLink, #myPostReadMoreLink {
+  #newArticleLink, #myPostEditLink{
     background:
       linear-gradient(
         to right,
