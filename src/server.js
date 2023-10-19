@@ -72,6 +72,7 @@ async function startExpress() {
     app.use(require('./routes/api/articles-api.js'));
     app.use(require('./routes/api/admin-api'));
     app.use(require('./routes/api/sub-api.js'));
+    app.use(require('./routes/api/api-routes-delete.js'))
     app.use(require('./routes/api/like-api.js'));
     app.use(require('./routes/api/comments-api.js'));
 
