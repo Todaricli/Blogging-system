@@ -4,7 +4,6 @@ const router = express.Router();
 const articleDao = require('../models/articles-dao.js');
 const genericDao = require('../models/generic-dao.js');
 const subDao = require('../models/sub-dao.js');
-const commentDao = require('../models/comments-dao.js');
 const analyticsDao = require('../models/analytics-dao.js')
 
 const { verifyAuthenticated } = require('../middleware/auth-middleware/login-auth.js');
@@ -75,28 +74,17 @@ router.get('/my-page', async function (req, res) {
 })
 
 router.get('/my_post', verifyAuthenticated, async function (_, res) {
-    const user = res.locals.user;
-
-    const data = await getUserArticles(user.id)
-    console.log(data)
-    const totalPosts = data.length;
-    res.locals.posts = data;
-    res.locals.total_posts = totalPosts;
-
-    const article_id = data[0].article_id;
-    console.log(article_id)
-
-    // const comments = await commentDao.getAllCommentsByArticles(article_id);
-    // console.log(comments)
-
-    // const filteredComments = comments.filter(comment => comment.comment_id !== null);
-
-
-    // const totalResponses = filteredComments.length;
-    // res.locals.responses = filteredComments;
-    // res.locals.total_responses = totalResponses;
-
-    res.render('myPost');
+    try {
+        const user = res.locals.user;
+        const data = await getUserArticles(user.id)
+        const totalPosts = data.length;
+        res.locals.posts = data;
+        res.locals.total_posts = totalPosts;
+        res.render('myPost');
+    } catch (e) {
+        res.locals.errorMessage = 'Page loading incomplete. ' + e;
+        res.render('myPost');
+    }
 })
 
 router.get("/removeSubscription", verifyAuthenticated, async function (req, res) {
@@ -104,17 +92,17 @@ router.get("/removeSubscription", verifyAuthenticated, async function (req, res)
     const user_id = res.locals.user.id;
     if (user_id) {
         try {
-          await subDao.removeSpecificSubscriptionByID(user_id, subscription_id);
-          res.status(200).json({ message: 'Subscription removed successfully' });
+            await subDao.removeSpecificSubscriptionByID(user_id, subscription_id);
+            res.status(200).json({ message: 'Subscription removed successfully' });
         } catch (error) {
-          res.status(500).json({ message: 'Error removing subscription' });
+            res.status(500).json({ message: 'Error removing subscription' });
         }
-      } else {
+    } else {
         res.status(403).json({ message: 'Unauthorized' });
-      }
+    }
 })
 
-router.get("/analytics-Dashboard", async (req,res) =>{
+router.get("/analytics-Dashboard", async (req, res) => {
     const user = res.locals.user
     const userId = user["id"]
     const response = await analyticsDao.getNumFollowers(userId)
@@ -142,7 +130,7 @@ router.get("/analytics-Dashboard", async (req, res) => {
 })
 
 router.get('/analytics', async function (req, res) {
-    
+
     const user = res.locals.user
     const userId = user["id"]
     const response = await analyticsDao.getNumFollowers(userId)
