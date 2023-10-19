@@ -72,23 +72,17 @@ async function deleteComment() {
 
                 currentCommentDiv.remove();
 
-                const directTimer = setTimeout(() => {
-                    location.reload();
-                    clearTimeout(directTimer);
-                }, 300);
-
-
             } catch (e) {
                 alert(e)
             }
 
-      const directTimer = setTimeout(()=>{
-        location.reload();
-        clearTimeout(directTimer);
-      },300);
+            const directTimer = setTimeout(() => {
+                location.reload();
+                clearTimeout(directTimer);
+            }, 300);
 
+        })
     })
-  })
 }
 
 async function commentsOnArticle() {
