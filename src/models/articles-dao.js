@@ -49,7 +49,6 @@ async function getArticlesByID(id) {
     const localTime = new Date(dateTimeUTC).toLocaleString();
     article[0].date_of_publish = localTime;
 
-    console.log(article.date_of_publish)
 
     return article;
 }

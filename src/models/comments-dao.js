@@ -35,7 +35,7 @@ async function getAllSecondOrThirdLevelCommentsByComment_id(
     article_id
 ) {
     const db = await getDatabase();
-    const allFirstLevelComments = await db.all(SQL`
+    const allSecondOrThirdComments = await db.all(SQL`
     SELECT comments.*, user.username, user.fname, user.lname, user.icon_path
     FROM comments, user
     WHERE comments.article_id = ${article_id}

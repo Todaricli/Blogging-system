@@ -17,6 +17,8 @@ router.get('/article/:id', async function (req, res) {
 
     const article_id = req.params.id;
 
+    console.log(article_id);
+
     try {
 
         const article = await articleDao.getArticlesByID(article_id);
@@ -83,9 +85,11 @@ router.get('/article/:id', async function (req, res) {
         const commentsForThisAriticle = await getAllComments(comments);
         res.locals.comments = commentsForThisAriticle;
 
+        console.log("got here");
         res.render('articleDemo');
+
     } catch (error) {
-        const html = '<p>Error occured: <p>';
+        const html = '<p>Error occured <p>';
         res.locals.article_content = html + error;
     }
 });
