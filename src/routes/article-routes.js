@@ -17,11 +17,11 @@ router.get('/article/:id', async function (req, res) {
 
     const article_id = req.params.id;
 
-  try {
+    try {
 
-    const article = await articleDao.getArticlesByID(article_id);
+        const article = await articleDao.getArticlesByID(article_id);
 
-    const articleId = article[0].id;
+        const articleId = article[0].id;
 
         res.locals.article = article;
 
@@ -103,9 +103,9 @@ router.get('/calendar', async function (req, res) {
 });
 
 router.get('/genre/:genreType', async function (req, res) {
-  const genreType = req.params.genreType;
+    const genreType = req.params.genreType;
 
-  const articles = await searchDao.filterArticlesByGenre(genreType)
+    const articles = await searchDao.filterArticlesByGenre(genreType)
 
     res.locals.articles = articles;
     res.render('searchedArticles');
