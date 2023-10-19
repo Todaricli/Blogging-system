@@ -40,6 +40,7 @@ async function newUser(req, res, next) {
     next();
 }
 
+
 module.exports = {
     authenticate,
     newUser,

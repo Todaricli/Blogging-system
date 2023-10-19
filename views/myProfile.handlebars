@@ -143,15 +143,18 @@
                 <div id="update-container">
                     <div>
                         <label for="my_profile_fname">First Name:</label>
-                        <input id="my_profile_fname" name="my_profile_fname" type="text" value="{{userData.fname}}" required>
+                        <input id="my_profile_fname" name="my_profile_fname" type="text" value="{{userData.fname}}"
+                            required>
                     </div>
                     <div>
                         <label for="my_profile_lname">Last Name:</label>
-                        <input id="my_profile_lname" name="my_profile_lname" type="text" value="{{userData.lname}}" required>
+                        <input id="my_profile_lname" name="my_profile_lname" type="text" value="{{userData.lname}}"
+                            required>
                     </div>
                     <div>
                         <label for="my_profile_email">Email:</label>
                         <input id="my_profile_email" name="my_profile_email" type="email" value="{{userData.email}}">
+                        <p id='email-format-error' style='color: red; display: none;'></p>
                     </div>
                     <div>
                         <label for="my_profile_DOB">Date of birth:</label>
@@ -170,9 +173,9 @@
     <hr>
 
     <div>
-        <form action="/update-user-security-details" method="POST">
-            <div id='current_password' class='input-container'>
-                <label for='current_password' class='label'>Confirm current password</label>
+        <form id="update-security-info">
+            <div>
+                <label for='current_password'>Confirm current password to update security details:</label>
                 <input type='password' name='current_password' id='current_password' required class='write'>
                 <span class="enter"></span>
             </div>
@@ -183,13 +186,9 @@
                 <p id='username-error' style='color: red; display: none;'></p>
             </div>
 
-            {{!-- <p id="usernamePromptMessage"></p>
-            <!-- this p is for developing purpose -->
-            <p style="font-size: larger; color:red">This feature need to complete</p> --}}
-
             <div>
                 <label for="my_profile_password">Password:</label>
-                <input id="my_profile_passoword" name="my_profile_password" type="password">
+                <input id="my_profile_password" name="my_profile_password" type="password">
             </div>
             <div>
                 <label for="my_profile_comfirm_password">Confirm password:</label>
@@ -198,14 +197,12 @@
                 <p id='password-match-error' style='color: red; display: none;'></p>
             </div>
             <p id="passwordPromptMessage"></p>
-            <button id="update-password" type="submit">Update</button>
-            <!-- this p is for developing purpose -->
-            <p style="font-size: larger; color:red">This feature need to complete</p>
-        </form action="/deleteAccount" method="POST">
+            <button id="update-security-button" type="submit">Update</button>
+        </form>
         <form id="deleteAccount">
             <button type="submit">Delete account</button>
         </form>
-    
+
     </div>
     {{else}}
     <p style="color: red;">Profile loading error, please try again!</p>

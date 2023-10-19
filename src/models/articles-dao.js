@@ -211,7 +211,7 @@ async function getArticleTitleById(articleId) {
 async function getAuthorIdByArticleId(articleId) {
     const db = await getDatabase();
 
-    const authorId = await db.all(SQL `
+    const authorId = await db.get(SQL `
     SELECT articles.author_id
     FROM articles
     WHERE articles.id = ${articleId};

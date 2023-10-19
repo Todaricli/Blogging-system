@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const subDao = require('../../models/sub-dao');
-const genericDao = require('../../models/generic-dao');
 const notifyDao = require('../../models/notify-dao');
 const {
     verifyAuthenticated,
