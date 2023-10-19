@@ -13,11 +13,13 @@ async function storeNotificationToUser(
     type,
     isRead
 ) {
-    const db = await getDatabase();
-    await db.all(SQL`
+    if (sender != receiver) {
+        const db = await getDatabase();
+        await db.all(SQL`
   insert into notifications (host_id, receiver_id, time, content, article_id, type, isRead)
   values (${sender}, ${receiver}, ${timestamp}, ${content}, ${articleId}, ${type}, ${isRead})
 `);
+    }
 }
 
 async function getAllNotificationsById(userId) {
@@ -67,7 +69,7 @@ async function createNotification(receiverId, senderId, articleId, type) {
 
 async function createContent(type, articleId) {
     const article = await articleDao.getArticleTitleById(articleId);
-    console.log("articleOBJ: " + article);
+    console.log('articleOBJ: ' + article);
     if (type === 'sub') {
         return `subscribed to you!`;
     } else if (type === 'write') {
