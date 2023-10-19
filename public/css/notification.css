@@ -11,19 +11,20 @@
   border: 1px rgb(243, 143, 22);
   position: absolute;
   top: 45px;
-  left: -190px;
+  left: -180px;
   max-height: 400px;
   overflow: scroll;
   width: 400px;
-  background-color: bisque;
+  background-color: rgb(255, 237, 219);
   z-index: 2;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
 }
 
-.notify-content div {
+.notify-content .notification {
   text-align: center;
   align-items: center;
   display: flex;
+  justify-content: space-between;
   border-radius: 5px;
   margin: 3px;
   padding: 6px;
@@ -35,42 +36,50 @@
 }
 
 
-.notify-content h2{
+.notify-content h2 {
   text-align: center;
   padding-top: 10px;
   margin: 0px;
 }
 
-.notify-content p{
+.notify-content p {
   text-align: center;
   padding-bottom: 5px;
   margin: 0px;
 }
 
 
-.notify-content div:hover {
+.notify-content .notification:hover {
   display: flex;
   background-color: #e0e0e0; 
   cursor: pointer; 
   box-shadow: inset 1.5px 1.5px 3px rgba(0, 0, 0, 0.2); 
 }
 
-.notify-content div.read {
+.notify-content .read {
   background-color: #e0e0e0;
   cursor: pointer;
   box-shadow: inset 1.5px 1.5px 3px rgba(0, 0, 0, 0.2); 
 }
 
-.notify-content a {
-  display: block;
-  height: 20px;
+.notify-content .notification .avatar {
+  width: 50px;
+  margin: 10px;
 }
 
+.notify-content .notification .timestamp {
+  font-size: 0.8em;
+  color: grey;
+}
+
+
 .svg-trash {
-  margin: 10px;
+  margin: 15px;
   height: 16px;
   width: 16px;
   background-image: url("/images/svg/trash.svg");
+  background-repeat: no-repeat;
+  transform: scale(1.25);
   order: 3;
 }
 

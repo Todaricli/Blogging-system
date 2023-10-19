@@ -13,7 +13,7 @@ window.addEventListener('load', async function () {
         if (notif.isRead === 0) numberOfUnreadNotif++;
     }
 
-    setNotificationDropDownMenu();
+    await setNotificationDropDownMenu();
 
     notificationBell.addEventListener('click', () => {
         deactivateBell();
@@ -63,32 +63,43 @@ window.addEventListener('load', async function () {
         return data;
     }
 
-    function setNotificationDropDownMenu() {
+    async function setNotificationDropDownMenu() {
         const notifyDropMenu = document.querySelector('.notify-content');
         for (notification of userNotifications) {
-            createNotification(notification);
+            await createNotification(notification);
         }
 
-        function createNotification(indvNotif) {
+        async function createNotification(indvNotif) {
             let divTag = document.createElement('div');
-            divTag.classList.add('clicked');
+            divTag.classList.add('clicked', 'notification');
             addLinkToNotificationDiv();
             checkAndUpdateIsViewed();
             checkAndUpdateIsRead();
+
+            const res = await fetch(`/api/get-user-by-id?id=${indvNotif.host_id}`);
+            const user = await res.json();
+            const icon_path = user.icon_path;
+            let imgTag = document.createElement('img');
+            imgTag.classList.add('clicked', 'avatar');
+            imgTag.setAttribute('src', icon_path);
+
+            let contentDivTag = document.createElement('div');
+            
 
             let p1Tag = document.createElement('p');
             p1Tag.classList.add('clicked');
             p1Tag.innerHTML = indvNotif.content;
 
             let p2Tag = document.createElement('p');
-            p2Tag.classList.add('clicked');
+            p2Tag.classList.add('clicked', 'timestamp');
             const localTime = new Date(indvNotif.time).toLocaleString(); // parse to local time
-            p2Tag.innerHTML = `Time recieved: ${localTime}`;
+            p2Tag.innerHTML = localTime;
 
             createTrashButton();
 
-            divTag.appendChild(p1Tag);
-            divTag.appendChild(p2Tag);
+            divTag.appendChild(imgTag);
+            divTag.appendChild(contentDivTag).appendChild(p1Tag);
+            divTag.appendChild(contentDivTag).appendChild(p2Tag);
             notifyDropMenu.appendChild(divTag);
 
             function addLinkToNotificationDiv() {
