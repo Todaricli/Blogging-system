@@ -62,28 +62,28 @@ async function deleteComment() {
                 if (!response.ok) {
                     throw new Error(
                         'Request failed with status: ' +
-                            response.status +
-                            ' ' +
-                            responseData
+                        response.status +
+                        ' ' +
+                        responseData
                     );
                 }
 
                 alert(responseData);
 
-        currentCommentDiv.remove();
+                currentCommentDiv.remove();
 
-        const directTimer = setTimeout(() => {
-          location.reload();
-          clearTimeout(directTimer);
-        }, 300);
+                const directTimer = setTimeout(() => {
+                    location.reload();
+                    clearTimeout(directTimer);
+                }, 300);
 
 
-      } catch (e) {
-        alert(e)
-      }
+            } catch (e) {
+                alert(e)
+            }
 
+        })
     })
-  })
 }
 
 async function commentsOnArticle() {
@@ -120,9 +120,9 @@ async function commentsOnArticle() {
             if (!response.ok) {
                 throw new Error(
                     'Request failed with status: ' +
-                        response.status +
-                        ' ' +
-                        responseData
+                    response.status +
+                    ' ' +
+                    responseData
                 );
             }
 
@@ -148,12 +148,12 @@ async function commentsOnArticle() {
             alert(e);
         }
 
-    const directTimer = setTimeout(() => {
-      location.reload();
-      clearTimeout(directTimer);
-    }, 300);
+        const directTimer = setTimeout(() => {
+            location.reload();
+            clearTimeout(directTimer);
+        }, 300);
 
-  })
+    })
 }
 
 async function commentOnComment() {
@@ -199,9 +199,9 @@ async function commentOnComment() {
                 if (!response.ok) {
                     throw new Error(
                         'Request failed with status: ' +
-                            response.status +
-                            ' ' +
-                            responseData
+                        response.status +
+                        ' ' +
+                        responseData
                     );
                 }
 
@@ -216,23 +216,23 @@ async function commentOnComment() {
                 });
 
                 await fetch('/api/create-new-comment-notification', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({ articleId, parentId }),
-              });
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ articleId, parentId }),
+                });
             } catch (e) {
                 alert(e);
             }
 
-      const directTimer = setTimeout(() => {
-        location.reload();
-        clearTimeout(directTimer);
-      }, 300);
+            const directTimer = setTimeout(() => {
+                location.reload();
+                clearTimeout(directTimer);
+            }, 300);
 
-    })
-  }
+        })
+    }
 }
 
 function addNewCommentElement(
