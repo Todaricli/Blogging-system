@@ -115,10 +115,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(255, 255, 255, 0);
 }
 
 #top5readMoreLink:hover {
-    background-color: #1A77F2;
+    background-color: #0B66C2;
 }
 
 #top5_article_title {
@@ -182,9 +183,11 @@
 
 .each-article-content{
     display: grid;
-    grid-template-rows: 45% 25% 30%;
+    grid-template-rows: 40% 30% 30%;
     max-height: 200px;
     margin-right: 10px;
+
+    
 }
 
 #article_description {
@@ -192,6 +195,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
     justify-content: flex-start;
+    border-bottom: 2px solid rgb(96, 96, 96, 0.1);
+    background:
+    linear-gradient(
+      to bottom,
+      rgb(0, 0, 0,0),
+      rgb(0, 0, 0, 0.1)
+    );
+    
 
 }
 #article_title {
@@ -263,7 +274,7 @@
     border: none;
     background-color: rgb(255, 255, 255, 0);
     text-decoration: none;
-    color: #1A77F2;
+    color: #0B66C2
 }
 
 #article-readMoreLink:hover{
