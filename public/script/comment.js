@@ -1,7 +1,6 @@
 window.addEventListener('load', async function () {
-    verifyLogInStatus();
     displayDeleteButton();
-    commentsOnArticle();
+    await commentsOnArticle();
     await commentOnComment();
     await deleteComment();
 });
@@ -10,8 +9,13 @@ function verifyLogInStatus() {
     const user_id = document.getElementById('user_id_temp_storage').value;
 
     if (!user_id) {
-        console.log(user_id);
-        document.getElementById('comments-div').hidden = true;
+        window.location.assign('/login');
+        const replyBtns = document.querySelectorAll('.reply-btn');
+
+        replyBtns.forEach(btn => {
+            btn.hidden = true;
+        })
+
     }
 }
 
@@ -68,8 +72,6 @@ async function deleteComment() {
                     );
                 }
 
-                alert(responseData);
-
                 currentCommentDiv.remove();
 
             } catch (e) {
@@ -89,6 +91,9 @@ async function commentsOnArticle() {
     const form = document.getElementById('comment_on_article_form');
 
     form.addEventListener('submit', async function (e) {
+
+        verifyLogInStatus();
+
         e.preventDefault();
         const content = form.querySelector('textarea').value;
         const article_id = document.getElementById(
@@ -125,10 +130,6 @@ async function commentsOnArticle() {
                 );
             }
 
-            // addNewCommentElement(comments_div, responseData.username, responseData.fname, responseData.lname, responseData.content, responseData.time_of_comment, responseData.id)
-
-            alert('Comment added!');
-
             const textareas = document.querySelectorAll('textarea');
 
             textareas.forEach((textarea) => {
@@ -157,7 +158,6 @@ async function commentsOnArticle() {
 
 async function commentOnComment() {
     const forms = document.querySelectorAll('.comment_on_comment_form');
-    console.log(forms);
 
     forms.forEach(await attachListenerToForm);
 
@@ -204,10 +204,6 @@ async function commentOnComment() {
                     );
                 }
 
-                // addNewCommentElement(comments_div, responseData.username, responseData.fname, responseData.lname, responseData.content, responseData.time_of_comment, responseData.id)
-
-                alert('Comment added!');
-
                 const textareas = document.querySelectorAll('textarea');
 
                 textareas.forEach((textarea) => {
@@ -232,59 +228,4 @@ async function commentOnComment() {
 
         })
     }
-}
-
-function addNewCommentElement(
-    parentDiv,
-    username,
-    fname,
-    lname,
-    content,
-    time_of_comment,
-    id
-) {
-    const newCommentDiv = document.createElement('div');
-
-    const username_span = document.createElement('span');
-    const fname_span = document.createElement('span');
-    const lname_span = document.createElement('span');
-    const content_span = document.createElement('span');
-    const time_span = document.createElement('span');
-    const newTextareaOpener = document.createElement('button');
-    const newThisCommentFormDiv = document.createElement('div');
-    const newThisCommentForm = document.createElement('form');
-    const newThisCommentIdStorage = document.createElement('input');
-    const newThisCommentTextarea = document.createElement('textarea');
-    const newThisCommentFormSubmitButton = document.createElement('button');
-
-    username_span.innerText = username;
-    fname_span.innerText = fname;
-    lname_span.innerText = lname;
-    content_span.innerText = content;
-    time_span.innerText = time_of_comment;
-    newTextareaOpener.innerText = 'Comment';
-    newTextareaOpener.classList.add('textareaOpener');
-    newThisCommentForm.classList.add('comment_on_comment_form');
-    newThisCommentIdStorage.name = 'comment_id_storage';
-    newThisCommentIdStorage.value = id;
-    newThisCommentIdStorage.hidden = true;
-    newThisCommentTextarea.name = 'comment_content';
-    newThisCommentTextarea.placeholder = 'leave your comments here';
-    newThisCommentFormSubmitButton.classList.add('commentSubmitButton');
-    newThisCommentFormSubmitButton.innerText = 'Submit';
-
-    newThisCommentForm.appendChild(newThisCommentIdStorage);
-    newThisCommentForm.appendChild(newThisCommentTextarea);
-    newThisCommentForm.appendChild(newThisCommentFormSubmitButton);
-    newThisCommentFormDiv.appendChild(newThisCommentForm);
-
-    newCommentDiv.appendChild(username_span);
-    newCommentDiv.appendChild(fname_span);
-    newCommentDiv.appendChild(lname_span);
-    newCommentDiv.appendChild(content_span);
-    newCommentDiv.appendChild(time_span);
-    newCommentDiv.appendChild(newTextareaOpener);
-    newCommentDiv.appendChild(newThisCommentFormDiv);
-
-    parentDiv.appendChild(newCommentDiv);
 }
