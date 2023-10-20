@@ -38,6 +38,7 @@
 
 .nav-panel {
     width: 100%;
+    border-bottom: 1.5px solid lightgray;
     font-family: Arial, Helvetica, sans-serif;
     display: grid;
     grid-template-rows: 100%;
