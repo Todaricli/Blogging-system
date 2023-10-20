@@ -59,6 +59,7 @@
 
 #search_bar_container{
     grid-area: search-bar;
+    z-index: 3;
 }
 
 #calender-div{
