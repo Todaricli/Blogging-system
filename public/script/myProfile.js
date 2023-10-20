@@ -1,4 +1,30 @@
 window.addEventListener('load', async function () {
+
+
+    const updateProfileBtn = document.querySelector("#my_profile_submit_btn")
+    const profileLoadTick = document.querySelector("#load-tick-profile")
+    const profileDoneTick = document.querySelector("#done-tick-profile")
+
+    function profileEventListener(){
+        profileDoneTick.style.display = "none"
+        profileLoadTick.style.display = "inline-block"
+        updateProfileBtn.disabled = true
+        let running = false;
+        if (!running) {
+            running = true
+            const myTimeout = setTimeout(function () {
+                profileLoadTick.style.display = "none"
+                profileDoneTick.style.display = "block"
+                running = false
+                updateProfileBtn.disabled = false
+            }, 3000);
+        }
+    }
+
+    
+
+    updateProfileBtn.addEventListener(`click`, profileEventListener)
+
     const iconInput = document.querySelectorAll('input[name=icon]');
     iconInput.forEach((icon) => {
         icon.addEventListener('click', () => {
@@ -156,6 +182,7 @@ window.addEventListener('load', async function () {
             updateSecurityBtn.style.opacity = '1.0';
         } else {
             updateSecurityBtn.disabled = true;
+
             updateSecurityBtn.style.opacity = '0.3';
         }
 
