@@ -1,5 +1,12 @@
 # Personal Blogging System 
 
+Username: user1 or user with integer 1 to 10 inclusive is already in the database
+Password: 123 for all users
+
+Dont have time to add any more instructions at this stage: 23.57PM 
+
+**GOD BLESS YOU**
+
 **Final project - Starter Template - PGCert Information Technology**
 
 This repository contains a starting point for your team's final project.
