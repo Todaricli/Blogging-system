@@ -11,8 +11,6 @@ window.addEventListener("load", function () {
     const user_id = document.querySelector("#user_id")
     const article_id = document.querySelector("#article_id")
 
-    console.log(article_id.value)
-
     let isLiked = await checkIfLiked(user_id.value, article_id.value);
 
     if (isLiked == 1) {

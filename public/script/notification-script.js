@@ -1,7 +1,6 @@
 window.addEventListener('load', async function () {
     // manage notifications
     const userNotifications = await getAllNotifications();
-    console.log(userNotifications);
     setNotificationDropDownMenu();
 
     // manage bell icon
@@ -113,7 +112,6 @@ window.addEventListener('load', async function () {
 
                 svgImgTag.addEventListener('click', async (event) => {
                     // visually update
-                    console.log('this is run right?');
                     const parentElement = event.target.parentElement;
                     if (parentElement) {
                         parentElement.remove();
