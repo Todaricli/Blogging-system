@@ -181,3 +181,27 @@
 }
 
 /* ANAYTICS DASHBOARD END*/
+
+@media screen and (max-width: 900px) {
+    .analyticsContainer {
+        width: 600px;
+    }
+}
+
+@media  screen and (max-width: 400px) {
+    .analyticsContainer {
+        width: 400px;
+    }
+
+    .keyMetricsDiv {
+        flex-direction: column;
+       
+    }
+
+    .indvTopArticles {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+}
