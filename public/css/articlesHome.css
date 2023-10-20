@@ -183,13 +183,16 @@
     width: 30px;
 }
 
-#author_name {
-    color: black
-}
+/* #author_name {
+    color: #357a84
+} */
 
 .btn_sub_option {
     cursor: pointer;
-    display: flex;
+    background-color: rgb(255, 255, 204, 0);
+    border: 0px;
+    display: inline-block;
+
 }
 
 .btn_sub_option a {
