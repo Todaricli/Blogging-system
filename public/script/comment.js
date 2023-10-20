@@ -3,19 +3,30 @@ window.addEventListener('load', async function () {
     await commentsOnArticle();
     await commentOnComment();
     await deleteComment();
+
+    const user_id = document.getElementById('user_id_temp_storage').value;
+
+    if (!user_id) {
+        const replyBtns = document.querySelectorAll('.reply-btn');
+
+        replyBtns.forEach(btn => {
+            btn.hidden = true;
+        })
+    }
 });
 
 function verifyLogInStatus() {
     const user_id = document.getElementById('user_id_temp_storage').value;
 
     if (!user_id) {
-        window.location.assign('/login');
         const replyBtns = document.querySelectorAll('.reply-btn');
 
         replyBtns.forEach(btn => {
             btn.hidden = true;
         })
 
+        window.location.assign('/login');
+        return true;
     }
 }
 
@@ -91,10 +102,14 @@ async function commentsOnArticle() {
     const form = document.getElementById('comment_on_article_form');
 
     form.addEventListener('submit', async function (e) {
-
-        verifyLogInStatus();
-
         e.preventDefault();
+
+        const loginOrNot = verifyLogInStatus();
+
+        if (loginOrNot) {
+            return;
+        }
+
         const content = form.querySelector('textarea').value;
         const article_id = document.getElementById(
             'article_id_temp_storage'
@@ -163,6 +178,13 @@ async function commentOnComment() {
 
     async function attachListenerToForm(form) {
         form.addEventListener('submit', async function (e) {
+
+            const loginOrNot = verifyLogInStatus();
+
+            if (loginOrNot) {
+                return;
+            }
+
             e.preventDefault();
             const content = form.querySelector('textarea').value;
             const comment_id = form.querySelector(

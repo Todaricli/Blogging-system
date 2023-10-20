@@ -657,4 +657,5 @@ nav {
 
 #calender-div button:hover {
     color: #414a4c;
+    cursor: pointer;
 }
