@@ -84,7 +84,6 @@
 } */
 
 
-
 @media only screen and (max-width:1200px) {
     .nav-panel {
         display: flex;
@@ -103,13 +102,11 @@
         margin: 8px 0px 8px 0px;
     }
 
+    #calender-div {
+        position: inherit;
+    }
     /* #user-releted-function{
         grid-area: user-related;
-    }
-
-    #search_bar_container{
-        grid-area: search-bar;
-    } */
-
-
+    }*/
 }
+
