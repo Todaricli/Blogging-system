@@ -1,17 +1,9 @@
 
-/** this div effect for developing purpose only **/
-/* div {
-    border: 2px greenyellow solid;
-    margin: 0px 0px 20px 30px;
-} */
-
 #page_body {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-/* Category title  --------------------------------------------------------*/
 
 #specific_category_title{
     width: 100%;
@@ -211,7 +203,16 @@ textarea {
 }
 
 #commentOnArticleButton {
-    width: 100%;
+    width: 20%;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: gainsboro;
+    cursor: pointer;
+}
+
+#commentOnArticleButton:hover {
+    background-color: #f2f2f2;
 }
 
 .users-comment {
