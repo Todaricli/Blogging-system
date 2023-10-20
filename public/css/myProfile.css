@@ -10,20 +10,21 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.collapse {
+/* .collapse {
   background-color: #777;
   color: white;
   cursor: pointer;
-  /* padding: 18px; */
   border: none;
   text-align: left;
   outline: none;
   font-size: 15px;
-}
+} */
 
-#update-icon-btn:hover {
-  background-color: #555;
-}
+/* .collapse:hover {
+  color: #f2f2f2;
+  border: none;
+  border: none;
+} */
 
 .active {
   background-color: #555;
@@ -46,7 +47,7 @@ form {
   width: 700px;
   border-radius: 10px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
+  background-color: #f2f2f2;
 }
 
 #my_profile_container{
@@ -114,12 +115,6 @@ button[type=submit]:hover {
   border: 1.5px solid rgb(12, 175, 17);
 }
 
-#deleteAccount button:hover {
-  color: #404040;
-  background-color: rgb(253, 196, 196);
-  border: 1.5px solid rgb(253, 196, 196);
-}
-
 .my_profile_container {
   /* margin: 15px; */
   font-size: 1.1rem;
@@ -139,18 +134,15 @@ button[type=submit]:hover {
   position: absolute;
   z-index: 1;
   color: #404040;
-  background-color: white;
-  border: 1.5px solid #E0E0E0;
   padding: 0;
   top: 77%;
   left: 57%;
 }
 
 #update-icon-btn:hover {
-  background-color: transparent;
+  color:  rgb(12, 175, 17);
 
 }
-
 
 #icon_container {
   display: none;
@@ -170,13 +162,13 @@ button[type=submit]:hover {
   margin: 10px;
 }
 
-#my-profile-sub-btn-div{
+.my-profile-sub-btn-div, .my-profile-password-btn-div{
   display: flex;
   align-items: center;
   width: 100%;
 }
 
-#my-profile-sub-btn-div button {
+.my-profile-sub-btn-div button {
   width: 100%;
   margin-right: 10px;
 }
@@ -193,3 +185,15 @@ button[type=submit]:hover {
   display: none;
 }
 
+#delete {
+  margin-top: 15px;
+}
+
+#delete button {
+  width: 100%;
+}
+
+#deleteAccount button:hover {
+  color: #404040;
+  background-color: rgb(12, 175, 17);
+}

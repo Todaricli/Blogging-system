@@ -73,3 +73,12 @@
     background-color:#1A77F2;
     color: white;
 }
+
+@media only screen and (max-width:550px) {
+    #search_bar_container{
+        width: 90%;
+    } 
+    #searchInput{
+        width: auto;
+    }
+}

@@ -14,9 +14,12 @@ window.addEventListener('load', async function () {
             running = true
             const myTimeout = setTimeout(function () {
                 profileLoadTick.style.display = "none"
-                profileDoneTick.style.display = "block"
+                profileDoneTick.style.display = "block"   
                 running = false
                 updateProfileBtn.disabled = false
+                const myTimeout1 = setTimeout(function () {
+                    profileDoneTick.style.display = "none"
+                }, 5000);
             }, 800);
         }
     }
@@ -38,6 +41,9 @@ window.addEventListener('load', async function () {
                 securityDoneTick.style.display = "block"
                 running = false
                 updateSecurityBtn1.disabled = false
+                const myTimeout1 = setTimeout(function () {
+                    securityDoneTick.style.display = "none"
+                }, 5000);
             }, 800);
         }
     }
