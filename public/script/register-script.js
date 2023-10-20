@@ -3,15 +3,21 @@ window.addEventListener('load', async function () {
     const passwordEye = document.querySelector('#password-eye');
     const confirmPasswordEye = document.querySelector('#confirm-password-eye');
     // input selectors
-    const nameInput = document.querySelector('#name');
-    const usernameInput = document.querySelector('#username');
+    const fnameInput = document.querySelector('#fname');
+    const lnameInput = document.querySelector('#lname');
     const emailInput = document.querySelector('#email');
+    const dobInput = document.querySelector('#dob');
+    const descriptionInput = document.querySelector('#description');
+    const usernameInput = document.querySelector('#username');
     const passwordInput = document.querySelector('#password');
     const confirmPasswordInput = document.querySelector('#confirm-password');
     const formInputs = [
-        nameInput,
-        usernameInput,
+        fnameInput,
+        lnameInput,
         emailInput,
+        dobInput,
+        descriptionInput,
+        usernameInput,
         passwordInput,
         confirmPasswordInput,
     ];
@@ -155,14 +161,20 @@ window.addEventListener('load', async function () {
 
     function checkIfInputFocused(input) {
         const label = input.nextElementSibling;
+        console.log("is this run?");
+        console.log(input.value);
+
         if (input.value && input.value.trim() !== '') {
+            console.log("focused");
             label.classList.add('focused-label');
             label.classList.remove('label');
             input.style.borderBottomColor = 'black';
+            input.style.color = 'black';
         } else {
             label.classList.remove('focused-label');
             label.classList.add('label');
             input.style.borderBottomColor = '#cecece';
+            input.style.color = '#cecece';
         }
     }
 

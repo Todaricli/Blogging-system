@@ -43,9 +43,22 @@ function authorizeAdmin(req, res, next) {
     }
 }
 
+async function confirmCurrentPassowrd(req, res, next) {
+    const username = res.locals.user.username;
+    const currentPassword = req.body.my_profile_currentPassword;
+    const user = await authDao.getUserWithCredentials(username, currentPassword);
+
+    if (user) {
+        next();
+    } else {
+        res.status(404).send("Invalid current password");
+    }
+}
+
 module.exports = {
     verifyAuthenticated,
     addUserToLocals,
     authenticate,
     authorizeAdmin,
+    confirmCurrentPassowrd,
 };

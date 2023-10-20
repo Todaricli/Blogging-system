@@ -7,10 +7,14 @@ window.addEventListener("load", function () {
             //let isClick = 0;
             const author_id = btn.querySelector('.article_author_id');
             const btn_subscribe = btn.querySelector('.btn_subscribe');
+
+            
+
             try {
                 if ((user_id.value != author_id.value) && user_id.value) {
                     const option = document.createElement("button");
                     const isSubscribe = await checkIfSubscribe(user_id.value, author_id.value);
+                    console.log(isSubscribe)
                     const subscription_id = author_id.value;
                     if (isSubscribe == 1) {
                         option.setAttribute("class", "unsubscribe-button")
@@ -63,7 +67,7 @@ window.addEventListener("load", function () {
         fetch(`/removeSubscription?id=${subscriptionId}`)
             .then(response => {
                 if (response.status === 200) {
-                    location.reload();
+                    // location.reload();
                 } else {
                     console.error('Error removing subscription');
                 }
@@ -78,7 +82,7 @@ window.addEventListener("load", function () {
         fetch(`/addSubscription?id=${subscriptionId}`)
             .then(response => {
                 if (response.status === 200) {
-                    location.reload();
+                    // location.reload();
                 } else {
                     console.error('Error removing subscription');
                 }

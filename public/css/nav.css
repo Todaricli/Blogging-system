@@ -63,50 +63,6 @@
     grid-area: search-bar;
 }
 
-#calender-div {
+/* #calender-div {
     position: absolute;
-    width: 100px;
-    overflow: hidden;
-    height: 60px;
-}
-
-
-
-@media only screen and (max-width:1150px) {
-    .nav-panel {
-        grid-template-columns: 5% 5% 55% 10% 25%;
-    }
-
-    .logo{
-        background: url("../images/logo.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
-}
-
-
-
-@media only screen and (max-width:800px) {
-    .nav-panel {
-        height: 100px;
-        grid-template-rows: 50% 50%;
-        grid-template-columns: 10% 45% 45%;
-        grid-template-areas:
-        "logo . user-related"
-        "search-bar search-bar search-bar"
-    }
-
-    .logo{
-        grid-area: logo;
-    }
-
-    #user-releted-function{
-        grid-area: user-related;
-    }
-
-    #search_bar_container{
-        grid-area: search-bar;
-    }
-
-
-}
+} */

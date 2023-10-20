@@ -121,7 +121,8 @@ router.post('/api/create-new-comment-notification', async function (req, res) {
             n.content,
             n.articleId,
             n.type,
-            n.isRead
+            n.isRead,
+            n.isViewed,
         );
 
         res.sendStatus(204);
