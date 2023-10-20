@@ -128,4 +128,18 @@
     background-color: lightgray;
     cursor: pointer;
 }
+
+
+@media only screen and (max-width:1000px) {
+    #sub_container {
+        display: grid;
+        grid-template-rows: auto 40px auto;
+        grid-template-columns: auto;
+        grid-template-areas:
+            "subscription"
+            "." 
+            "subscriber";
+        padding: 20px;
+    }
+}
 /* sub page css end*/

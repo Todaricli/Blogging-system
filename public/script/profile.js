@@ -3,7 +3,7 @@ addEventListener("load", function () {
         const user_id = document.querySelector("#user_id");
         console.log(user_id);
         const profile_id = document.querySelector('#profile_id');
-        const profile_related_info = document.querySelector('#profile_related_info');
+        const sub_status = document.querySelector('#sub-status');
         if ((user_id.value != profile_id.value) && user_id.value && profile_id.value) {
             const option = document.createElement("button");
             const isSubscribe = await checkIfSubscribe(user_id.value, profile_id.value);
@@ -21,7 +21,7 @@ addEventListener("load", function () {
                     addSubscription(subscription_id);
                 });
             }
-            profile_related_info.appendChild(option);
+            sub_status.appendChild(option);
         }
         
     }
@@ -49,6 +49,7 @@ addEventListener("load", function () {
                 }
             })
             .catch(error => {
+                location.reload()
                 console.error('Network error:', error);
             });
     }
@@ -60,10 +61,12 @@ addEventListener("load", function () {
                 if (response.status === 200) {
                     location.reload();
                 } else {
+                    location.reload()
                     console.error('Error removing subscription');
                 }
             })
             .catch(error => {
+                location.reload()
                 console.error('Network error:', error);
             });
     }

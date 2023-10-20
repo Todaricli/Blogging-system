@@ -98,7 +98,7 @@ window.addEventListener("load", function () {
                 console.error('Network error:', error);
             });
     }
-    displaySubOption();
+    // displaySubOption();
 
 
     // articlesHome.registerHelper('isEqual', function(user_id, author_id, options) {
