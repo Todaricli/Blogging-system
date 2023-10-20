@@ -8,11 +8,11 @@
         <div>
             <h1 id="article-count-header">Your stories ({{this.total_posts}})</h1>
         </div>
-        <div>
-            <div id="write_article_btn">
-                <a href="/writeArticle">Write a story</a>
-            </div>
+
+        <div id="write-btn">
+            <a href="/writeArticle">Write a story</a>
         </div>
+
     </div>
 
 
@@ -27,8 +27,8 @@
                 <div id="post_content">
                     <span>{{{this.content_html}}}</span>
                 </div>
-                 <div>
-            </div>
+                <div>
+                </div>
 
             </div>
             <div class="each-posts-img">
@@ -37,7 +37,7 @@
             </div>
             <div class="link-container">
                 <i class="fa-solid fa-angle-down drop-down-arrow"></i>
-                <div id="links{{this.article_id}}" class="each-posts-links" style="display: none;" >
+                <div id="links{{this.article_id}}" class="each-posts-links" style="display: none;">
                     <div>
                         <a href="/editArticle/{{this.article_id}}" id="myPostEditLink">Edit</a>
                     </div>
@@ -47,7 +47,7 @@
                     <div>
                         <a type="button" class="delete-button" article-id="{{this.article_id}}">Delete article</a>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
