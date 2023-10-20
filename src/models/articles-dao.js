@@ -257,6 +257,7 @@ async function updateArticleToArticleTableWithoutImage(article_id, title, genre,
 
 async function filterArticlesBySelectedDates(startDate, endDate) {
     const db = await getDatabase();
+    
 
     try {
         const startDateTimeUTC = new Date(startDate).toISOString();
