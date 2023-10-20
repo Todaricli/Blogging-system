@@ -49,6 +49,7 @@ addEventListener("load", function () {
                 }
             })
             .catch(error => {
+                location.reload()
                 console.error('Network error:', error);
             });
     }
@@ -60,10 +61,12 @@ addEventListener("load", function () {
                 if (response.status === 200) {
                     location.reload();
                 } else {
+                    location.reload()
                     console.error('Error removing subscription');
                 }
             })
             .catch(error => {
+                location.reload()
                 console.error('Network error:', error);
             });
     }
