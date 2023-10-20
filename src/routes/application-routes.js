@@ -17,6 +17,11 @@ router.get('/', async function (req, res) {
     const articleData = await articleDao.getAllArticles();
     res.locals.articleData = articleData;
 
+    const currentTime = new Date();
+    const format = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+    res.locals.currentTime = currentTime.toLocaleDateString("en-us", format);
+
     res.render('articlesHome');
     } catch (e) {
         res.locals.errorMessage = 'Page loading incomplete. ' + e

@@ -21,6 +21,7 @@ window.addEventListener('load', async function () {
         passwordInput,
         confirmPasswordInput,
     ];
+    
     // error selectors
     const usernameError = document.querySelector('#username-error');
     const passwordFormatError = document.querySelector(

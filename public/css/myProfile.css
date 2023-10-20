@@ -151,3 +151,18 @@ button[type=submit]:hover {
   width: 100px;
   margin: 10px;
 }
+
+/* #my-profile-sub-btn-div{
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 100%;
+
+} */
+
+#load-tick-profile{
+  display: none;
+}
+
+#done-tick-profile{
+  display: none;
+}
