@@ -42,14 +42,13 @@ window.addEventListener("load", function () {
         }
     })
 
-    // notifyDrop.addEventListener('mouseenter', (e) => {
-    //     notifyContent.style.display = 'block';
-    // });
-    // notifyDrop.addEventListener('mouseleave', (e) => {
-    //     if (!notifyClicked) {
-    //         notifyContent.style.display = 'none';
-    //         console.log("wtf");
-    //     }
-    // });
+    window.addEventListener('click', (e) => {
+        console.log(e.target.id)
+        if (e.target.id !== 'search-calender') {
+            calenderDiv.style.display = "none";
+        }
+    })
+
+
 
 });
