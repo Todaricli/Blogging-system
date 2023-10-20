@@ -103,10 +103,6 @@ router.get('/editArticle/:id', verifyAuthenticated, async (req, res) => {
     res.render('editArticle');
 });
 
-router.get('/calendar', async function (req, res) {
-    res.render('test');
-});
-
 router.get('/genre/:genreType', async function (req, res) {
     const genreType = req.params.genreType;
 

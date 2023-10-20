@@ -153,7 +153,10 @@ button[type=submit]:hover {
 }
 
 /* #my-profile-sub-btn-div{
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 100%;
+
 } */
 
 #load-tick-profile{

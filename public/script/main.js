@@ -1,43 +1,51 @@
 window.addEventListener("load", function () {
-    const dropdown = document.querySelector('.dropdown');
-    const dropDownContent = document.querySelector('.dropdown-content');
 
-    window.addEventListener('click', (e) => {
-        if (!e.target.classList.contains('clicked')) {
-            dropDownContent.style.display = 'none';
-        }
-    });
+    const login = document.querySelector("#user_status")
+    login.style.display = "none"
 
-    dropdown.addEventListener('click', (e) => {
-        if (e.target.classList.contains('clicked')) {
-            dropDownContent.style.display = 'block';
-        }
-    });
+    if (login.innerText != "none") {
 
-    const notifyDrop = document.querySelector('.notify-drop');
-    const notifyContent = document.querySelector('.notify-content');
-    let notifyClicked = false;
+        const dropdown = document.querySelector('.dropdown');
+        const dropDownContent = document.querySelector('.dropdown-content');
 
-    window.addEventListener('click', (e) => {
-        if (!e.target.classList.contains('clicked')) {
-            notifyContent.style.display = 'none';
-            notifyClicked = false;
-        }
-    });
+        window.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('clicked')) {
+                dropDownContent.style.display = 'none';
+            }
+        });
 
-    notifyDrop.addEventListener('click', (e) => {
-        if (e.target.classList.contains('clicked')) {
-            notifyContent.style.display = 'block';
-            notifyClicked = true;
-        }
-    });
+        dropdown.addEventListener('click', (e) => {
+            if (e.target.classList.contains('clicked')) {
+                dropDownContent.style.display = 'block';
+            }
+        });
+
+        const notifyDrop = document.querySelector('.notify-drop');
+        const notifyContent = document.querySelector('.notify-content');
+        let notifyClicked = false;
+
+        window.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('clicked')) {
+                notifyContent.style.display = 'none';
+                notifyClicked = false;
+            }
+        });
+
+        notifyDrop.addEventListener('click', (e) => {
+            if (e.target.classList.contains('clicked')) {
+                notifyContent.style.display = 'block';
+                notifyClicked = true;
+            }
+        });
+    }
+
 
     const calenderButton = document.querySelector("#search-calender")
     const calenderDiv = document.querySelector(".filterDiv")
-    calenderButton.addEventListener(`click`, (e)=>{
-        if(calenderDiv.style.display == "flex"){
+    calenderButton.addEventListener(`click`, (e) => {
+        if (calenderDiv.style.display == "flex") {
             calenderDiv.style.display = "none"
-        }else{
+        } else {
             calenderDiv.style.display = "flex"
         }
     })

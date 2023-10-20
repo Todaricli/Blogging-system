@@ -73,7 +73,7 @@
         {{!-- Nav login and dropdown button --}}
         <span class="left-panel">
             {{#if user}}
-
+            <div id ="user_status">{{user.id}}</div>
             <div id="write-icon-div">
                 <a href="/writeArticle" id="write-icon">
                     <i class="fa-regular fa-pen-to-square"> </i>
@@ -121,6 +121,7 @@
             </div>
 
             {{else}}
+            <div id="user_status">none</div>
             <div class="login">
                 <div class="register">
                     <a href="/register">Register</a>
