@@ -167,12 +167,12 @@
                     </div>
                 </div>
             </div>
-            <div id="my-profile-sub-btn-div">
+            <div class="my-profile-sub-btn-div">
                 <div>
                     <button id="my_profile_submit_btn" type="submit">Update</button>
                 </div>
                 <div class="tick-btn">
-                <i id="load-tick-profile" class="fa-solid fa-check fa-refresh fa-xl" style="color: red;"></i>
+                <i id="load-tick-profile" class="fa-solid fa-spinner fa-refresh fa-xl" style="color: grey;"></i>
                 <i id="done-tick-profile" class="fa-solid fa-check fa-xl" style="color: #0ff013;"></i>
                 </div>
             </div>
@@ -204,9 +204,13 @@
                 <p id='password-match-error' style='color: red; display: none;'></p>
             </div>
             <p id="passwordPromptMessage"></p>
+            <div class="my-profile-password-btn-div">
             <button id="update-security-button" type="submit">Update</button>
-            <i id="load-tick-security" class="fa-solid fa-spinner fa-refresh fa-xl" style="color: grey;"></i>
-            <i id="done-tick-security" class="fa-solid fa-check fa-xl" style="color: #0ff013;"></i>
+            <div class="tick-btn">
+            <i id="load-tick-security" class="fa-solid fa-spinner fa-refresh fa-xl" style="color: grey; display: none"></i>
+            <i id="done-tick-security" class="fa-solid fa-check fa-xl" style="color: #0ff013; display: none;"></i>
+            </div>
+            </div>
         </form>
         <div id="delete">
         <form id="deleteAccount">

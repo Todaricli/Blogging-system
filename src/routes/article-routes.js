@@ -112,8 +112,4 @@ router.get('/genre/:genreType', async function (req, res) {
     res.render('searchedArticles');
 });
 
-router.get('/genre', async function (req, res) {
-    res.render('searchedArticles');
-});
-
 module.exports = router;
