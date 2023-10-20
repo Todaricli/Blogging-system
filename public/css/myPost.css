@@ -12,6 +12,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
@@ -35,7 +36,20 @@ h1 {
     font-size: 3rem;
 }
 
-#write_article_btn a{
+/* #write_article_btn a {
+    background-color: rgb(12, 175, 17);
+    color: white;
+    cursor: pointer;
+    width: 50px;
+    height: 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    padding: 10px 15px 10px 15px;
+    border: 2px solid lightgray;
+} */
+
+#write-btn a {
+    font-size: 0.9rem;
     background-color: rgb(12, 175, 17);
     color: white;
     cursor: pointer;
@@ -47,27 +61,11 @@ h1 {
     border: 2px solid lightgray;
 }
 
-button {
-    height: 40px;
-    border-radius: 30px;
-    width: 120px;
-    color: #404040;
-    background-color: white;
-    border: 1.5px solid #E0E0E0;
-}
-
-#write-btn a {
-    font-size: 0.9rem;
-    text-decoration: none;
-    color: white;
-}
-
-button:hover {
+/* #write-btn a:hover {
     color: #404040;
     background-color: rgb(253, 196, 196);
     border: 1.5px solid rgb(253, 196, 196);
-    
-}
+} */
 
 .all_posts {
     margin-top: 20px;
@@ -103,7 +101,8 @@ button:hover {
     overflow: hidden; */
     max-height: 60%;
     margin: 10px;
-    margin-left: 0;-webkit-box-orient: vertical;
+    margin-left: 0;
+    -webkit-box-orient: vertical;
     -webkit-line-clamp: 7;
     display: -webkit-box;
     overflow: hidden;
@@ -121,7 +120,8 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer;;
+    cursor: pointer;
+    ;
 }
 
 .each-posts-links div {

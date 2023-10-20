@@ -3,8 +3,8 @@
 }
 
 #calender-div {
-    position: relative;
-
+    position: absolute;
+    /* top: ; */
 }
 .filterDiv {
     display: none;

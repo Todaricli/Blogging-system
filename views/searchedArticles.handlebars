@@ -1,17 +1,15 @@
 <link rel="stylesheet" href="/css/searchArticles.css">
-
+ 
 <div class="allArticles {{#if articlesByDate}}search-by-date{{/if}}">
 
     <div id="search-left">
         <div id="search-header">
-            {{#if current_genre}}
-            <div id="genre-header">
-                <span id="articles_home">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <a href="/">Back to Home</a> / {{current_genre}}
-                </span>
+            {{#if articlesByGenre}}
+            <div class="search-word-genre">
+                <h1>Search Results for articles from {{articlesByGenre}}
+                </h1>
             </div>
-            {{else}}
+            {{/if}}
             {{#if articlesByDate}}
             <div class="search-word-date">
                 <h1>Search Results for articles from <div id="search-word-date"> "{{startDate}}"</div> to <div
@@ -19,10 +17,9 @@
                 </h1>
             </div>
             {{else}}
-            <h1>Search Results of
+            <h1 id = "skeetskeet">Search Results of 
                 <div id="search-word"> "{{search}}"</div>
             </h1>
-            {{/if}}
             {{/if}}
         </div>
 
@@ -115,3 +112,4 @@
     {{/if}}
     {{/if}}
 </div>
+<script type="application/javascript" src="/script/genre-script.js"></script>

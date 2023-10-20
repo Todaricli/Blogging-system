@@ -46,13 +46,13 @@ async function getArticlesBySingleDate(date, userId){
 
 async function filterArticlesByGenre(genre) {
     const db = await getDatabase();
-    const genre1 = `${genre}`
+    console.log(genre)
 
     const articles = await db.all(SQL `
-    select articles.*, user.*
+    select articles.*, user.username, user.fname, user.lname, user.DOB, user.description, user.icon_path, user.admin
     from articles
     inner join user on articles.author_id = user.id
-    where genre like ${genre1}
+    where genre = ${genre}
     `)
 
     return articles;
