@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const subDao = require('../../models/sub-dao');
-const genericDao = require('../../models/generic-dao');
 const notifyDao = require('../../models/notify-dao');
 const {
     verifyAuthenticated,
@@ -55,6 +54,7 @@ router.get('/addSubscription', verifyAuthenticated, async function (req, res) {
                 n.articleId,
                 n.type,
                 n.isRead,
+                n.isViewed,
             );
             res.status(200).json({
                 message: 'Subscription add successfully',

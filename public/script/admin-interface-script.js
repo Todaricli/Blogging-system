@@ -15,9 +15,8 @@ window.addEventListener('load', async function () {
             },
             body: JSON.stringify({ username, password }),
         });
-        if (response.status) {
-            const data = await response.json();
-            result.textContent = JSON.stringify({ data });
+        if (response.status === 204) {
+            result.textContent = 'Logged in successfully'
         } else {
             result.textContent = `Login failed with status ${response.status}`;
         }

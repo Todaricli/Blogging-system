@@ -144,24 +144,25 @@ router.post(
     console.log(userId);
     console.log(articleId);
 
-    const subscribers = await subDao.getSubscribersByUserID(userId);
-    try {
-      for (subscriber of subscribers) {
-        const n = await notifyDao.createNotification(
-          subscriber.id,
-          userId,
-          articleId,
-          'write'
-        );
-        await notifyDao.storeNotificationToUser(
-          n.senderId,
-          n.receiverId,
-          n.timestamp,
-          n.content,
-          n.articleId,
-          n.type,
-          n.isRead
-        );
+        const subscribers = await subDao.getSubscribersByUserID(userId);
+        try {
+            for (subscriber of subscribers) {
+                const n = await notifyDao.createNotification(
+                    subscriber.id,
+                    userId,
+                    articleId,
+                    'write'
+                );
+                await notifyDao.storeNotificationToUser(
+                    n.senderId,
+                    n.receiverId,
+                    n.timestamp,
+                    n.content,
+                    n.articleId,
+                    n.type,
+                    n.isRead,
+                    n.isViewed,
+                );
 
       }
       res.sendStatus(204);
