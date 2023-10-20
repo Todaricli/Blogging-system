@@ -3,11 +3,11 @@
     --infor-label-size: 20px;
 }
 
-div {
+/* div {
     margin: 20px;
-}
+} */
 
-#page_body {
+/* #page_body {
     display: grid;
     grid-template-columns: 2fr 1fr;
 }
@@ -34,6 +34,81 @@ div {
 
 .user-label img {
     width: 150px;
+} */
+
+.nav-panel {
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 150px auto auto auto 20% auto;
+    grid-template-areas:
+    "logo . search-bar . calender . user-related"
 }
 
+.logo{
+    grid-area: logo;
+    height: 50px;
+}
 
+#user-releted-function{
+    grid-area: user-related;
+    display: flex;
+    justify-content: end;
+}
+
+#search_bar_container{
+    grid-area: search-bar;
+    z-index: 3;
+}
+
+#calender-div{
+    grid-area: calender;
+}
+
+#search-calender{
+    cursor: pointer;
+}
+
+/* @media only screen and (max-width:1150px) {
+    .nav-panel {
+        grid-template-columns: 80px auto 55% auto 25% auto 30%;
+    }
+
+    .logo{
+        background: url("../images/logo.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+} */
+
+
+
+@media only screen and (max-width:1200px) {
+    .nav-panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        /* margin: 10px 0px 10px 0px; */
+        /* grid-template-rows: 50% 50%;
+        grid-template-columns: 150px auto auto auto;
+        grid-template-areas:
+        "logo . user-related user-related"
+        "search-bar search-bar . calender" */
+    }
+    .nav-panel > * {
+        margin: 8px 0px 8px 0px;
+    }
+
+    /* #user-releted-function{
+        grid-area: user-related;
+    }
+
+    #search_bar_container{
+        grid-area: search-bar;
+    } */
+
+
+}

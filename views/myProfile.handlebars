@@ -4,6 +4,7 @@
 
 <div id="my_profile_container">
     {{#if userData}}
+    <input value="{{userData.username}}" id="loggedInUser" hidden>
     <input id="user_id_temp_storage" name="user_id_temp_storage" value="{{userData.id}}" style="display: none;">
     <input id="icon_id_temp_storage" name="icon_id_temp_storage" style="display: none;">
     <div id="my_profile_info">
@@ -204,6 +205,8 @@
             </div>
             <p id="passwordPromptMessage"></p>
             <button id="update-security-button" type="submit">Update</button>
+            <i id="load-tick-security" class="fa-solid fa-spinner fa-refresh fa-xl" style="color: grey;"></i>
+            <i id="done-tick-security" class="fa-solid fa-check fa-xl" style="color: #0ff013;"></i>
         </form>
         <div id="delete">
         <form id="deleteAccount">
