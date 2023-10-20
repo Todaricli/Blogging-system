@@ -119,12 +119,20 @@ form {
   margin-top: 10px;
 }
 
-#update-container button {
-  width: 10%;
+#delete-current-image:hover{
+  background-color: rgb(253, 196, 196);
+  border: 1.5px solid rgb(253, 196, 196);
+}
+
+#update-container button{
+  cursor: pointer;
+  background-color: rgb(12, 175, 17);
+  color: white;
+  border-radius: 20px;
+  height: 35px;
+  width: 150px;
   margin: 8px 0;
   font-size: 14px;
-  color: #404040;
-  background-color: white;
   border: 1.5px solid #E0E0E0;
 }
 
