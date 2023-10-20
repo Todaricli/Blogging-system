@@ -1,7 +1,7 @@
 /* original source https://codepen.io/ben_sterling/pen/ZNzBOQ */
 
 .background {
-  background: #f6f6f6;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,23 +10,23 @@
 
 .bell-icon {
   position: relative;
-  width: 40px;
-  height: 40px;
-  background: #fff;
+  width: 45px;
+  height: 45px;
+  background: white;
   border-radius: 50%;
   display: flex;
-  min-width: 40px;
-  min-height: 40px;
+  min-width: 45px;
+  min-height: 45px;
   margin-left: 20px;
-  margin-right: -5px;
+  margin-right: 15px;
   cursor: pointer;
 }
 .bell-icon svg {
   position: relative;
-  right: 2%;
+  right: 0%;
   width: 100%;
   height: 100%;
-  stroke: rgba(0, 0, 0, 0.75);
+  stroke: rgb(0, 0, 0);
 }
 .bell-icon .bell-icon__group {
   transform-origin: 50% 2px;
@@ -48,15 +48,15 @@
   -webkit-animation-timing-function: ease-in-out;
           animation-timing-function: ease-in-out;
 }
-.activate {
+.activate, .bell-icon:focus, .bell-icon:hover {
   outline: none;
   box-shadow: 0 0 12px -8px rgba(0, 0, 0, 0.6);
 }
-.activate .bell-icon__group  {
+.activate .bell-icon__group, .bell-icon:focus .bell-icon__group, .bell-icon:hover .bell-icon__group  {
   -webkit-animation: animateGroup 2.3s;
           animation: animateGroup 2.3s;
 }
-.activate .bell-icon__ball {
+.activate .bell-icon__ball, .bell-icon:focus .bell-icon__ball, .bell-icon:hover .bell-icon__ball {
   -webkit-animation: animateBall 2.3s;
           animation: animateBall 2.3s;
 }
@@ -64,7 +64,7 @@
   opacity: 1;
   visibility: visible;
 }
-.activate .notification-amount::before {
+.activate .notification-amount::before, .bell-icon:focus .notification-amount::before, .bell-icon:hover .notification-amount::before {
   -webkit-animation-name: bounce;
           animation-name: bounce;
   -webkit-animation-delay: 450ms;
@@ -85,7 +85,7 @@
   align-items: center;
   justify-content: center;
   font-family: "Copse", serif;
-  font-size: 10px;
+  font-size: 10.5px;
   
   transition: transform 0.3s;
 }

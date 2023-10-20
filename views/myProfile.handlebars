@@ -154,6 +154,7 @@
                     <div>
                         <label for="my_profile_email">Email:</label>
                         <input id="my_profile_email" name="my_profile_email" type="email" value="{{userData.email}}">
+                        <p id='email-format-error' style='color: red; display: none;'></p>
                     </div>
                     <div>
                         <label for="my_profile_DOB">Date of birth:</label>
@@ -176,34 +177,32 @@
     <hr>
 
     <div>
-        <form action="/update-user-security-details" method="POST">
+        <form id="update-security-info">
             <div>
-                <label for="confirm_current_password">Confirm current password:</label>
-                <input id="current_password" name="current_password" type="password">
+                <label for='current_password'>Confirm current password to update security details:</label>
+                <input type='password' name='current_password' id='current_password' required class='write'>
+                <span class="enter"></span>
             </div>
 
             <div>
                 <label for="my_profile_username">Username:</label>
                 <input id="my_profile_username" name="my_profile_username" type="text" value="{{userData.username}}">
+                <p id='username-error' style='color: red; display: none;'></p>
             </div>
-            <p id="usernamePromptMessage"></p>
-            <!-- this p is for developing purpose -->
-            <p style="font-size: larger; color:red">This feature need to complete</p>
 
             <div>
                 <label for="my_profile_password">Password:</label>
-                <input id="my_profile_passoword" name="my_profile_password" type="password">
+                <input id="my_profile_password" name="my_profile_password" type="password">
             </div>
-            <p id="passwordPromptMessage"></p>
             <div>
                 <label for="my_profile_comfirm_password">Confirm password:</label>
                 <input id="my_profile_comfirm_password" name="my_profile_comfirm_password" type="password">
+                <p id='password-format-error' style='color: red; display: none;'></p>
+                <p id='password-match-error' style='color: red; display: none;'></p>
             </div>
             <p id="passwordPromptMessage"></p>
-            <button id="update-password" type="submit">Update</button>
-            <!-- this p is for developing purpose -->
-            <p style="font-size: larger; color:red">This feature need to complete</p>
-        </form action="/deleteAccount" method="POST">
+            <button id="update-security-button" type="submit">Update</button>
+        </form>
         <form id="deleteAccount">
             <button type="submit">Delete account</button>
         </form>
