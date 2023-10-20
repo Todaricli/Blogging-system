@@ -105,10 +105,6 @@ async function processAndStoreImage(fileInfo, imagePath) {
   //Create and save thumbnail
   const image = await jimp.read(newFileName);
   image.resize(320, jimp.AUTO);
-  const font = await jimp.loadFont(jimp.FONT_SANS_32_WHITE);
-  let name = fileInfo.originalname.substring(0, fileInfo.originalname.lastIndexOf("."));
-  name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
-  image.print(font, 10, 10, name);
 
   await image.write(`./public/images/article-images/thumbnails/${imagePath}`);
 }
