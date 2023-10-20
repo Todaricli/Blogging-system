@@ -162,3 +162,9 @@ select {
   margin-left: 10px;
   padding: 8px 5px;
 }
+
+@media screen and (max-width: 800px) {
+  #write_article_form {
+    width: auto;
+  }
+}

@@ -168,3 +168,12 @@ h1 {
 #post_publish_time {
     color: var(--light-text-color);
 }
+
+@media only screen and (max-width:900px) {
+    #container-header{
+        flex-direction: column;
+        max-height: fit-content;
+        justify-content: center;
+        border: 0px;
+    }
+}
