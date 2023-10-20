@@ -4,6 +4,12 @@
 
     <div id="search-left">
         <div id="search-header">
+            {{#if articlesByGenre}}
+            <div class="search-word-genre">
+                <h1>Search Results for articles from {{articlesByGenre}}
+                </h1>
+            </div>
+            {{/if}}
             {{#if articlesByDate}}
             <div class="search-word-date">
                 <h1>Search Results for articles from <div id="search-word-date"> "{{startDate}}"</div> to <div
@@ -11,7 +17,7 @@
                 </h1>
             </div>
             {{else}}
-            <h1>Search Results of
+            <h1 id = "skeetskeet">Search Results of
                 <div id="search-word"> "{{search}}"</div>
             </h1>
             {{/if}}
@@ -101,4 +107,6 @@
         {{/if}}
     </div>
     {{/if}}
+    <script src="/script/genre-script.js"></script>
 </div>
+

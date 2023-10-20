@@ -258,7 +258,8 @@ async function updateArticleToArticleTableWithoutImage(article_id, title, genre,
 async function filterArticlesBySelectedDates(startDate, endDate) {
     const db = await getDatabase();
 
-    const startDateTimeUTC = new Date(startDate).toISOString();
+    try{
+        const startDateTimeUTC = new Date(startDate).toISOString();
     const endDateTimeUTC = new Date(endDate).toISOString();
 
     const articles = await db.all(SQL`
@@ -269,6 +270,11 @@ async function filterArticlesBySelectedDates(startDate, endDate) {
     `)
 
     return articles;
+    }catch(e){
+        console.log(e)
+    }
+
+    
 }
 
 async function getArticleTitleById(articleId) {
