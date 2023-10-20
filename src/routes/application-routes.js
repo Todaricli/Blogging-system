@@ -36,11 +36,13 @@ router.get('/sub', verifyAuthenticated, async function (req, res) {
 
 router.get('/profile', async function (req, res) {
     const id = req.query.id;
+    // console.log(res.locals.user.id)
 
     if (id) {
         const profileData = await genericDao.getUserDataById(id);
+        console.log(profileData);
 
-        res.locals.user = profileData;
+        res.locals.profile_user = profileData;
 
         res.locals.profile_id = id;
         res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);

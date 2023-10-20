@@ -27,9 +27,7 @@ window.addEventListener('load', async function () {
         '#password-format-error'
     );
     const passwordMatchError = document.querySelector('#password-match-error');
-    const emailFormatError = document.querySelector(
-        '#email-format-error'
-    );
+    const emailFormatError = document.querySelector('#email-format-error');
 
     await windowsOnLoadChecks();
     await addFormVerificationListeners();
@@ -52,6 +50,14 @@ window.addEventListener('load', async function () {
         });
         emailInput.addEventListener('input', async () => {
             await checkValidEmailFormat();
+            registerButtonEnabler();
+        });
+
+        fnameInput.addEventListener('input', async () => {
+            registerButtonEnabler();
+        });
+
+        lnameInput.addEventListener('input', async () => {
             registerButtonEnabler();
         });
     }
@@ -110,8 +116,7 @@ window.addEventListener('load', async function () {
             return true;
         } else {
             emailFormatError.style.display = '';
-            emailFormatError.innerHTML =
-                'Please input a valid email format';
+            emailFormatError.innerHTML = 'Please input a valid email format';
             return false;
         }
     }
@@ -137,17 +142,45 @@ window.addEventListener('load', async function () {
     }
 
     function registerButtonEnabler() {
+        console.log(usernameError.style.display === 'none')
         if (
             usernameError.style.display === 'none' &&
             passwordFormatError.style.display === 'none' &&
             passwordMatchError.style.display === 'none' &&
             emailFormatError.style.display === 'none'
         ) {
+            console.log("im here")
+            
+
+
             registerButton.disabled = false;
-            registerButton.style.opacity = '1.0';
+            console.log(fnameInput.value);
+            console.log(fnameInput.value == '' &&
+            lnameInput.value == '' &&
+            emailInput.value == '' &&
+            usernameInput.value == '' &&
+            passwordInput.value == '' &&
+            confirmPasswordInput.value == '');
+
+
+            if (
+                fnameInput.value == '' ||
+                lnameInput.value == '' ||
+                emailInput.value == '' ||
+                usernameInput.value == '' ||
+                passwordInput.value == '' ||
+                confirmPasswordInput.value == ''
+            ) {
+                console.log("skeet");
+                console.log(fnameInput.value);
+                registerButton.style.opacity = '0.3';
+            } else {
+                console.log("reached");
+                registerButton.style.opacity = '1.0';
+            }
         } else {
-            registerButton.disabled = true;
             registerButton.style.opacity = '0.3';
+            registerButton.disabled = true;
         }
     }
 
@@ -161,11 +194,8 @@ window.addEventListener('load', async function () {
 
     function checkIfInputFocused(input) {
         const label = input.nextElementSibling;
-        console.log("is this run?");
-        console.log(input.value);
 
         if (input.value && input.value.trim() !== '') {
-            console.log("focused");
             label.classList.add('focused-label');
             label.classList.remove('label');
             input.style.borderBottomColor = 'black';
