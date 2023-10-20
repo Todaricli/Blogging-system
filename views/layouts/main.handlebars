@@ -55,7 +55,7 @@
             </div>
         </div>
         <div id="calender-div">
-            <button type="button" id="search-calender">Search By Date</button>
+            <button type="button" id="search-calender">{{this.currentTime}}</button>
             <div class="filterDiv">
             <form action="/filtered-articles" method="GET">
                 <label for="startDate">Start Date:</label>
@@ -64,7 +64,9 @@
                 <label for="endDate">End Date:</label>
                 <input type="date" name="endDate" id="endDate">
 
-                <button type="submit" id="dateInput">Filter Articles</button>
+                <div id="calendar-btn">
+                <button type="submit" id="dateInput"><p>Filter Articles</p></button>
+                </div>
             </form>
         </div>
         </div>
