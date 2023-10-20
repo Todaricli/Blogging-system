@@ -4,6 +4,7 @@
 
 <div id="my_profile_container">
     {{#if userData}}
+    <input value="{{userData.username}}" id="loggedInUser" hidden>
     <input id="user_id_temp_storage" name="user_id_temp_storage" value="{{userData.id}}" style="display: none;">
     <input id="icon_id_temp_storage" name="icon_id_temp_storage" style="display: none;">
     <div id="my_profile_info">

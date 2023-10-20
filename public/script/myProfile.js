@@ -116,11 +116,13 @@ window.addEventListener('load', async function () {
 
     async function checkUsernameInDb() {
         const username = usernameInput.value;
+        const loggedInUsername = document.querySelector('#loggedInUser').value;
+        
         const response = await fetch(
             `/api/check-username?username=${username}`
         );
         let data = await response.text();
-        if (data === 'username exists') {
+        if (data === 'username exists' && username != loggedInUsername) {
             usernameError.style.display = '';
             usernameError.innerHTML = 'Username exists, please choose another';
             return false;
