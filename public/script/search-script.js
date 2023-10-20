@@ -1,5 +1,5 @@
 window.addEventListener(`load`, function () {
-    console.log("shelom")
+
     const searchBarForm = document.querySelector("#searchInput")
     const searchByTitleContainer = document.querySelector("#searchByTitle")
     const searchByAuthorContainer = document.querySelector("#searchByAuthor")

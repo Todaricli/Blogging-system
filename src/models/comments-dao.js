@@ -19,6 +19,7 @@ async function getAllFirstLevelCommentsByArticleID(articleId) {
     WHERE comments.article_id = ${articleId}
     AND user.id = comments.user_id
     AND comments.comments_id IS NULL
+    ORDER BY comments.time_of_comment DESC
     `);
 
     allFirstLevelComments.forEach(comment => {
@@ -41,6 +42,7 @@ async function getAllSecondOrThirdLevelCommentsByComment_id(
     WHERE comments.article_id = ${article_id}
     AND user.id = comments.user_id
     AND comments.comments_id = ${comment_id}
+    ORDER BY comments.time_of_comment DESC
     `);
 
     allSecondOrThirdComments.forEach(comment => {
