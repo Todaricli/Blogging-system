@@ -1,4 +1,11 @@
 /* ANAYTICS DASHBOARD START*/
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .analyticsContainer{
     /* background-color: rgb(236, 255, 252); */
     margin: 0;
@@ -7,9 +14,11 @@
     padding: 20px;
     background-color: #f2f2f2;
     width: 1200px;
-   
 }
 
+.data {
+    margin-bottom: 15px;
+}
 /* .analyticsContainer div {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;;
 } */
@@ -34,6 +43,7 @@
 .keyMetricsDiv {
     display: flex;
     border: none;
+    align-items: center;
     /* margin: 20px; */
 }
 
@@ -54,6 +64,7 @@
     margin: 20px;
     border: 3px solid white;
     border-radius: 10px;
+    height: 100%;
 }
 
 .divTitles {
@@ -64,7 +75,7 @@
     padding-left: 50px;
     padding-right: 50px;
     background-color: black;
-    color: aliceblue;
+    color: white;
 }
 
 #followerNumber {
