@@ -258,23 +258,20 @@ async function updateArticleToArticleTableWithoutImage(article_id, title, genre,
 async function filterArticlesBySelectedDates(startDate, endDate) {
     const db = await getDatabase();
 
-    try{
+    try {
         const startDateTimeUTC = new Date(startDate).toISOString();
-    const endDateTimeUTC = new Date(endDate).toISOString();
+        const endDateTimeUTC = new Date(endDate).toISOString();
 
-    const articles = await db.all(SQL`
+        const articles = await db.all(SQL`
         select articles.*, user.*
         from articles 
         inner join user on articles.author_id = user.id
         where date_of_publish >= ${startDateTimeUTC} and date_of_publish <= ${endDateTimeUTC}
     `)
-
-    return articles;
-    }catch(e){
-        console.log(e)
+        return articles;
+    } catch (e) {
+        return null;
     }
-
-    
 }
 
 async function getArticleTitleById(articleId) {
@@ -293,7 +290,7 @@ async function getArticleTitleById(articleId) {
 async function getAuthorIdByArticleId(articleId) {
     const db = await getDatabase();
 
-    const authorId = await db.get(SQL `
+    const authorId = await db.get(SQL`
     SELECT articles.author_id
     FROM articles
     WHERE articles.id = ${articleId};
@@ -301,7 +298,7 @@ async function getAuthorIdByArticleId(articleId) {
 
     return authorId;
 }
-async function deleteArticle(article_id){
+async function deleteArticle(article_id) {
     const db = await getDatabase();
 
     const article = await db.run(SQL`
@@ -314,7 +311,7 @@ async function filterArticlesByGenre(genre) {
     const db = await getDatabase();
     const genre1 = `${genre}`
 
-    const articles = await db.all(SQL `
+    const articles = await db.all(SQL`
     select articles.*, user.*
     from articles
     inner join user on articles.author_id = user.id
@@ -326,7 +323,7 @@ async function filterArticlesByGenre(genre) {
 
 async function deleteArticleImageByArticleId(article_id) {
     const db = await getDatabase();
-    
+
     const done = await db.run(SQL`
         UPDATE articles 
         SET image = NULL

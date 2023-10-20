@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/css/searchArticles.css">
-
+ 
 <div class="allArticles {{#if articlesByDate}}search-by-date{{/if}}">
 
     <div id="search-left">
@@ -17,7 +17,7 @@
                 </h1>
             </div>
             {{else}}
-            <h1 id = "skeetskeet">Search Results of
+            <h1 id = "skeetskeet">Search Results of 
                 <div id="search-word"> "{{search}}"</div>
             </h1>
             {{/if}}
@@ -25,54 +25,56 @@
 
         <div id="search-articles">
             {{#if articles}}
+            {{#if current_genre}}
+            {{else}}
             <div id="articles-length">
                 <h2>Matching Articles ({{this.articlesLength}})</h2>
             </div>
-
+            {{/if}}
             {{#each articles}}
             <div class="eachArticleDiv">
                 <div class="eachArticleDiv-container">
-                        <div class="eachArticleDiv-title">
-                            <h2>{{this.title}}</h2>
-                        </div>
-                        <div class="eachArticleDiv-time">
-                            {{this.date_of_publish}}
-                        </div>
+                    <div class="eachArticleDiv-title">
+                        <h2>{{this.title}}</h2>
+                    </div>
+                    <div class="eachArticleDiv-time">
+                        {{this.date_of_publish}}
+                    </div>
 
-                        <div class="authorDiv">
-                            <div id="author-icon">
-                                <img src="{{this.icon_path}}" alt="author avatar">
-                            </div>
-                            <div id="author-name">
-                                <strong>
-                                    <a href="/profile?id={{this.author_id}}">{{this.fname}} {{this.lname}}</a>
-                                </strong>
-                            </div>
+                    <div class="authorDiv">
+                        <div id="author-icon">
+                            <img src="{{this.icon_path}}" alt="author avatar">
                         </div>
+                        <div id="author-name">
+                            <strong>
+                                <a href="/profile?id={{this.author_id}}">{{this.fname}} {{this.lname}}</a>
+                            </strong>
+                        </div>
+                    </div>
 
-                        <div id="eachArticleDiv-content">
-                            {{{this.content_html}}}
-                        </div>
+                    <div id="eachArticleDiv-content">
+                        {{{this.content_html}}}
+                    </div>
 
-                        <div class="eachArticleDiv-last">
-                            <div id="readMoreDiv">
-                                <a href="/article/{{this.id}}">Read more</a>
+                    <div class="eachArticleDiv-last">
+                        <div id="readMoreDiv">
+                            <a href="/article/{{this.id}}">Read more</a>
+                        </div>
+                        <div id="likesAndComments">
+                            <div>
+                                <i class="fa-regular fa-thumbs-up" id="like-icon"></i>
+                                {{this.like_count}}
                             </div>
-                            <div id="likesAndComments">
-                                <div>
-                                    <i class="fa-regular fa-thumbs-up" id="like-icon"></i>
-                                    {{this.like_count}}
-                                </div>
-                                <div>
-                                    <i class="fa-regular fa-comment-dots"></i>
-                                    {{#if this.comments_count}}
-                                    {{this.comments_count}}
-                                    {{else}}
-                                    0
-                                    {{/if}}
-                                </div>
+                            <div>
+                                <i class="fa-regular fa-comment-dots"></i>
+                                {{#if this.comments_count}}
+                                {{this.comments_count}}
+                                {{else}}
+                                0
+                                {{/if}}
                             </div>
                         </div>
+                    </div>
                 </div>
                 <div id="eachArticleDiv-img">
                     <img src="/images/article-images/{{this.image}}" alt="article image">
@@ -84,7 +86,8 @@
             {{/if}}
         </div>
     </div>
-
+    {{#if current_genre}}
+    {{else}}
     {{#if articlesByDate}}
     {{else}}
     <div id="search-users">
@@ -107,6 +110,6 @@
         {{/if}}
     </div>
     {{/if}}
-    <script src="/script/genre-script.js"></script>
+    {{/if}}
 </div>
-
+<script type="application/javascript" src="/script/genre-script.js"></script>

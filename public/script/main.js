@@ -14,15 +14,11 @@ window.addEventListener("load", function () {
             }
         });
 
-
-    if (dropdown) {
         dropdown.addEventListener('click', (e) => {
             if (e.target.classList.contains('clicked')) {
                 dropDownContent.style.display = 'block';
             }
         });
-    }
-    
 
         const notifyDrop = document.querySelector('.notify-drop');
         const notifyContent = document.querySelector('.notify-content');
@@ -53,19 +49,19 @@ window.addEventListener("load", function () {
             calenderDiv.style.display = "flex"
         }
     })
-
-    window.addEventListener('click', (e) => {
-        console.log(e.target.getAttribute("cal"))
-        if (!e.target.getAttribute("cal")) {
-            calenderDiv.style.display = "none";
-        }
-    })
-
+    
     const calButton = document.querySelector("#search-calender")
 
     calButton.innerText = `${new Date().toDateString()}`
 
-
-
+    // notifyDrop.addEventListener('mouseenter', (e) => {
+    //     notifyContent.style.display = 'block';
+    // });
+    // notifyDrop.addEventListener('mouseleave', (e) => {
+    //     if (!notifyClicked) {
+    //         notifyContent.style.display = 'none';
+    //         console.log("wtf");
+    //     }
+    // });
 
 });

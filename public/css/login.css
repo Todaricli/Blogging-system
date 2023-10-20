@@ -1,22 +1,20 @@
 /* login page css start*/
 #login_toast {
-    color: #7fc7cc;
+    color: rgb(12, 175, 17);
 }
 
 #login_container {
     width: 400px;
     display: flex;
     justify-content: center;
-    border: 2px solid rgb(255, 255, 255);
+    border: 2px solid lightgray;
     border-radius: 15px;
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(247, 255, 254);
-    color: #357a84;
+    background-color: white;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
 }
 
 #login_username {
@@ -24,14 +22,14 @@
 }
 
 #login_body_container button {
-    background-color: #7fc7cc;
+    background-color: rgb(12, 175, 17);
     color: white;
     font-size: medium;
     border: transparent;
     cursor: pointer;
     width: 100px;
     height: 30px;
-    border-radius: 30px;
+    border-radius: 10px;
     margin-top: 20px;
 }
 
@@ -41,7 +39,7 @@
 }
 
 #login_body_container a {
-    color: #7fc7cc;
+    color: rgb(12, 175, 17);
     text-decoration: none;
 }
 
@@ -51,6 +49,7 @@
 }
 
 #login_body_container a:visited {
-    color: #7fc7cc;
+    color: rgb(12, 175, 17);
 }
+
 /* login page css end*/
