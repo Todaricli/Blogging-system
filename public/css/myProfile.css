@@ -166,3 +166,11 @@ button[type=submit]:hover {
 #done-tick-profile{
   display: none;
 }
+
+#load-tick-security{
+  display: none;
+}
+
+#done-tick-security{
+  display: none;
+}
