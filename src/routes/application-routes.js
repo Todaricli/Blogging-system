@@ -81,7 +81,7 @@ router.get('/my-page', async function (req, res) {
 
         console.log(profileData)
 
-        res.locals.user = profileData;
+        res.locals.profile_user = profileData;
 
         // res.locals.profile_icon = profileData.icon_path;
         // res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
