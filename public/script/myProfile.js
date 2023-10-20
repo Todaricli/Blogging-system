@@ -1,5 +1,27 @@
 window.addEventListener('load', async function () {
 
+    const updateProfileBtn = document.querySelector("#my_profile_submit_btn")
+    const profileLoadTick = document.querySelector("#load-tick-profile")
+    const profileDoneTick = document.querySelector("#done-tick-profile")
+
+    
+
+    updateProfileBtn.addEventListener(`click`, (e) => {
+        profileDoneTick.style.display = "none"
+        profileLoadTick.style.display = "inline-block"
+        updateProfileBtn.disabled = true
+        let running = false;
+        if (!running) {
+            running = true
+            const myTimeout = setTimeout(function () {
+                profileLoadTick.style.display = "none"
+                profileDoneTick.style.display = "block"
+                running = false
+                updateProfileBtn.disabled = false
+            }, 3000);
+        }
+    })
+
     const iconInput = document.querySelectorAll('input[name=icon]');
     iconInput.forEach(icon => {
         icon.addEventListener('click', () => {
@@ -54,7 +76,7 @@ async function deleteAccount() {
             if (!response.ok) {
                 throw new Error('Request failed with status: ' + response.status + " " + responseData);
             }
-            alert(responseData);
+            // alert(responseData);
 
             const directTimer = setTimeout(() => {
                 window.location.assign('/');
@@ -62,12 +84,12 @@ async function deleteAccount() {
             }, 300);
 
         } catch (e) {
-            alert(e);
+            // alert(e);
 
-            const directTimer = setTimeout(() => {
-                location.reload();
-                clearTimeout(directTimer);
-            }, 300);
+            // const directTimer = setTimeout(() => {
+            //     location.reload();
+            //     clearTimeout(directTimer);
+            // }, 300);
         }
     })
 }
@@ -109,20 +131,20 @@ async function updateInfo() {
                 throw new Error('Request failed with status: ' + response.status + " " + responseData);
             }
 
-            alert(responseData);
+            // alert(responseData);
 
-            const directTimer = setTimeout(() => {
-                location.reload();
-                clearTimeout(directTimer);
-            }, 300);
+            // const directTimer = setTimeout(() => {
+            //     location.reload();
+            //     clearTimeout(directTimer);
+            // }, 300);
 
         } catch (e) {
-            alert(e);
+            // alert(e);
 
-            const directTimer = setTimeout(() => {
-                location.reload();
-                clearTimeout(directTimer);
-            }, 300);
+            // const directTimer = setTimeout(() => {
+            //     location.reload();
+            //     clearTimeout(directTimer);
+            // }, 300);
         }
     })
 }

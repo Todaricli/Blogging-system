@@ -143,11 +143,13 @@
                 <div id="update-container">
                     <div>
                         <label for="my_profile_fname">First Name:</label>
-                        <input id="my_profile_fname" name="my_profile_fname" type="text" value="{{userData.fname}}" required>
+                        <input id="my_profile_fname" name="my_profile_fname" type="text" value="{{userData.fname}}"
+                            required>
                     </div>
                     <div>
                         <label for="my_profile_lname">Last Name:</label>
-                        <input id="my_profile_lname" name="my_profile_lname" type="text" value="{{userData.lname}}" required>
+                        <input id="my_profile_lname" name="my_profile_lname" type="text" value="{{userData.lname}}"
+                            required>
                     </div>
                     <div>
                         <label for="my_profile_email">Email:</label>
@@ -163,7 +165,11 @@
                     </div>
                 </div>
             </div>
-            <button id="my_profile_submit_btn" type="submit">Update</button>
+            <div id="my-profile-sub-btn-div">
+                <button id="my_profile_submit_btn" type="submit">Update</button>
+                <i id="load-tick-profile" class="fa-solid fa-check fa-spin fa-refresh fa-xl" style="color: red;"></i>
+                <i id="done-tick-profile" class="fa-solid fa-check fa-xl" style="color: #0ff013;"></i>
+            </div>
         </form>
     </div>
 
@@ -201,7 +207,7 @@
         <form id="deleteAccount">
             <button type="submit">Delete account</button>
         </form>
-    
+
     </div>
     {{else}}
     <p style="color: red;">Profile loading error, please try again!</p>
