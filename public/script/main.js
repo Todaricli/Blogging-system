@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
         }
     });
 
-    console.log("testing");
+
     if (dropdown) {
         dropdown.addEventListener('click', (e) => {
             if (e.target.classList.contains('clicked')) {
@@ -19,7 +19,6 @@ window.addEventListener("load", function () {
         });
     }
     
-    console.log("i am here");
 
 
     const notifyDrop = document.querySelector('.notify-drop');
@@ -56,11 +55,16 @@ window.addEventListener("load", function () {
     })
 
     window.addEventListener('click', (e) => {
-        console.log(e.target.id)
-        if (e.target.id !== 'search-calender') {
+        console.log(e.target.getAttribute("cal"))
+        if (!e.target.getAttribute("cal")) {
             calenderDiv.style.display = "none";
         }
     })
+
+    const calButton = document.querySelector("#search-calender")
+
+    calButton.innerText = `${new Date().toDateString()}`
+
 
 
 
