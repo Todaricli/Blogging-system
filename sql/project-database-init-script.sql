@@ -292,24 +292,10 @@ VALUES (1, 2, 1, '2023-09-09T23:11:45.123Z', 'user2 just subscribed to you!', nu
        (6, 3, 1, '2023-01-15T23:08:15.654Z', 'user3 just liked your article!', null, 'like', 0, 0),
        (16, 4, 1, '2023-09-09T23:05:45.987Z', 'user4 just wrote a new article: "Textiles Through the Ages"!', 4,
         'write',  0, 0),
-       (11, 5, 1, '2023-01-15T23:08:15.654Z', 'user5 just wrote a new article: "Dyeing Techniques"!', 5, 'write',  0, 0);
+       (11, 5, 1, '2023-01-15T23:08:15.654Z', 'user5 just wrote a new article: "Dyeing Techniques"!', 5, 'write',  0, 0),
+       
 
--- (2, 1, 2, '2023-10-10 11:30:00', 'New article published: "Introduction to Fabric Types"', 0),
--- (3, 1, 3, '2023-10-10 12:45:00', 'Someone liked your comment.', 0),
--- (4, 1, 4, '2023-10-10 14:00:00', 'New article published: "Silk Fabric Production"', 0),
--- (5, 1, 5, '2023-10-10 15:15:00', 'You have a new follower.', 0),
--- (7, 1, 2, '2023-10-10 17:45:00', 'New article published: "Cotton vs. Polyester"', 0),
--- (8, 1, 3, '2023-10-10 19:00:00', 'Someone liked your article.', 0),
--- (9, 1, 4, '2023-10-10 20:15:00', 'You have a new follower.', 0),
--- (10, 1, 5, '2023-10-10 21:30:00', 'New article published: "Wool Fabric Properties"', 0),
--- (12, 1, 2, '2023-10-10 23:59:00', 'You have a new follower.', 0),
--- (13, 1, 3, '2023-10-11 10:15:00', 'New article published: "Linen Fabric Uses"', 0),
--- (14, 1, 4, '2023-10-11 11:30:00', 'Your article received a comment.', 0),
--- (15, 1, 5, '2023-10-11 12:45:00', 'Someone liked your article.', 0),
--- (17, 1, 2, '2023-10-11 15:15:00', 'New article published: "Satin Fabric Elegance"', 0),
--- (18, 1, 3, '2023-10-11 16:30:00', 'Your comment was mentioned in an article.', 0),
--- (19, 1, 4, '2023-10-11 17:45:00', 'New article published: "Denim Fabric History"', 0),
--- (20, 1, 5, '2023-10-11 19:00:00', 'Your article was shared by a follower.', 0);
+
 
 -- creating a view that shows articles likes, comments and popularity
 
