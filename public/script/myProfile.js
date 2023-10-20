@@ -17,12 +17,33 @@ window.addEventListener('load', async function () {
                 profileDoneTick.style.display = "block"
                 running = false
                 updateProfileBtn.disabled = false
-            }, 3000);
+            }, 800);
+        }
+    }
+
+    const updateSecurityBtn1 = document.querySelector("#update-security-button")
+    const securityLoadTick = document.querySelector("#load-tick-security")
+    const securityDoneTick = document.querySelector("#done-tick-security")
+
+    function securityEventListener(){
+        console.log("sddssdsd")
+        securityDoneTick.style.display = "none"
+        securityLoadTick.style.display = "inline-block"
+        updateSecurityBtn1.disabled = true
+        let running = false;
+        if (!running) {
+            running = true
+            const myTimeout = setTimeout(function () {
+                securityLoadTick.style.display = "none"
+                securityDoneTick.style.display = "block"
+                running = false
+                updateSecurityBtn1.disabled = false
+            }, 800);
         }
     }
 
     
-
+    updateSecurityBtn1.addEventListener(`click`, securityEventListener)
     updateProfileBtn.addEventListener(`click`, profileEventListener)
 
     const iconInput = document.querySelectorAll('input[name=icon]');
