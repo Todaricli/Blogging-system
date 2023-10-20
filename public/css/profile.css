@@ -1,12 +1,12 @@
 :root {
-    --genre-background-color: #f2f2f2;
+    --genre-background-color: white;
     --light-text-color: #6b6b66;
     --heading-text-color: #242424;
 }
 
 #page_body {
     align-items: center;
-    
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #profile_container {
@@ -48,15 +48,6 @@
     padding: 10px;
     margin: 10px 40px;
     border-radius: 20px;
-    background-color: transparent;
-    border: 1px solid black;
-    font-weight: bold;
-    font-size: 14px;
-    width: 150px;
-}
-
-.subscribe-button:hover {
-    background-color: greenyellow;
 }
 
 #profile_related_info {
@@ -146,10 +137,18 @@
 .profile_article_genre {
     background-color: var(--genre-background-color);
     padding: 8px;
+    color: #404040;;
     border-radius: 20px;
     margin-top: 5px;
     margin-bottom: 12px;
     display: inline-block;
     font-size: 14px;
+    border: 2px solid #E0E0E0;
+}
+
+.profile_article_genre:hover{
+    color: #181818;
+    background-color: #F5F5F5;
+    border: 2px solid #878787;
 }
 

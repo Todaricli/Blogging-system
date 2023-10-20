@@ -10,6 +10,15 @@
     margin-top: 40px;
 }
 
+#articles_home a{
+    text-decoration: none;
+    color: #1A77F2;;
+}
+
+#articles_home a:hover{
+    text-decoration: underline;
+}
+
 #search-left {
     border-right: 1px solid lightgrey;
     padding: 10px 20px;
@@ -65,7 +74,7 @@ img {
 
 #eachArticleDiv-content {
     overflow: hidden;
-    height: 150px;
+    height: 130px;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 5;
     display: -webkit-box;

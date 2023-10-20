@@ -4,7 +4,9 @@ window.addEventListener(`load`, function () {
     const searchByTitleContainer = document.querySelector("#searchByTitle")
     const searchByAuthorContainer = document.querySelector("#searchByAuthor")
     const searchNavBar = document.querySelector(".search_bar")
-    const searchAllButton = document.querySelector("#viewAllSearchResults")
+    const searchAllButton = document.createElement("a")
+    searchAllButton.id = "viewAllSearchResults"
+    searchAllButton.innerText = "View all search results"
     const searchResultContainer = document.querySelector("#searchResultContainer")
     
 
@@ -18,7 +20,7 @@ window.addEventListener(`load`, function () {
     })
 
     searchNavBar.addEventListener(`click`,()=>{
-        searchResultContainer.style.display = "flex"
+        // searchResultContainer.style.display = "flex"
         // searchNavBar.style.border = "7px solid purple"
         searchBarForm.style.border = "transparent"
 
@@ -31,6 +33,11 @@ window.addEventListener(`load`, function () {
     })
 
     searchBarForm.addEventListener(`input`, async (e) => {
+        if(searchBarForm.value){
+            searchResultContainer.style.display = "flex"
+        } else{
+            searchResultContainer.style.display = "none"
+        }
         searchNavBar.style.overflow = "visible"
         searchByTitleContainer.innerHTML = ""
         searchByAuthorContainer.innerHTML = ""
@@ -39,13 +46,16 @@ window.addEventListener(`load`, function () {
 
         const resultByTitle = results["articlesByTitle"]
         const resultsByUser = results["articlesByUser"]
-
+        
 
         if (resultByTitle != undefined) {
             const byTitleHeader = document.createElement("div")
             byTitleHeader.innerHTML = "<h2>Matching Title</h2>"
             byTitleHeader.classList.add("individualResult")
             searchByTitleContainer.append(byTitleHeader)
+            const titleSearchResultContainer = document.createElement("div")
+            titleSearchResultContainer.id = "titleSearchResultContainer"
+            searchByTitleContainer.appendChild(titleSearchResultContainer)
             for (let i = 0; i < resultByTitle.length; i++) {
                 const searchResultDiv = document.createElement("div")
                 searchResultDiv.setAttribute("id", `${resultByTitle[i]["article_id"]}`)
@@ -56,7 +66,7 @@ window.addEventListener(`load`, function () {
                 searchResultDiv.addEventListener(`click`, (e)=>{
                     window.location.href = `/article/${e.target.id}`
                 })
-                searchByTitleContainer.append(searchResultDiv)
+                titleSearchResultContainer.append(searchResultDiv)
             }
         }
 
@@ -78,6 +88,11 @@ window.addEventListener(`load`, function () {
             }
         }
 
+        if(resultByTitle.length > 0 || resultsByUser.length > 0){
+            searchResultContainer.appendChild(searchAllButton);
+        } else {
+            searchResultContainer.removeChild(searchAllButton)
+        }
     })
 
     async function getSearchResults(search) {
