@@ -111,7 +111,7 @@ router.get('/genre/:genreType', async function (req, res) {
     res.locals.articles = articles;
     res.locals.articlesByGenre = genreType;
 
-    // console.log(articles)
+    console.log(articles)
     res.render('searchedArticles');
 });
 
