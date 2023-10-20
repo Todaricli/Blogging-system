@@ -170,15 +170,13 @@
                 <div>
                     <button id="my_profile_submit_btn" type="submit">Update</button>
                 </div>
-                <div>
+                <div class="tick-btn">
                 <i id="load-tick-profile" class="fa-solid fa-check fa-refresh fa-xl" style="color: red;"></i>
                 <i id="done-tick-profile" class="fa-solid fa-check fa-xl" style="color: #0ff013;"></i>
                 </div>
             </div>
         </form>
     </div>
-
-    <hr>
 
     <div>
         <form id="update-security-info">
@@ -207,9 +205,11 @@
             <p id="passwordPromptMessage"></p>
             <button id="update-security-button" type="submit">Update</button>
         </form>
+        <div id="delete">
         <form id="deleteAccount">
             <button type="submit">Delete account</button>
         </form>
+        </div>
 
     </div>
     {{else}}

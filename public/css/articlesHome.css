@@ -97,16 +97,16 @@
     margin: auto
 }
 
-#author_name {
+/* #author_name {
     color: #357a84
-}
+} */
 
 .btn_sub_option {
     cursor: pointer;
     background-color: rgb(255, 255, 204, 0);
     border: 0px;
     display: inline-block;
-    background-color: #70adb0;
+
 }
 
 .btn_sub_option a {
