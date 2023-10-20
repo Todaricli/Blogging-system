@@ -21,6 +21,7 @@ window.addEventListener('load', async function () {
         passwordInput,
         confirmPasswordInput,
     ];
+    
     // error selectors
     const usernameError = document.querySelector('#username-error');
     const passwordFormatError = document.querySelector(
@@ -144,6 +145,7 @@ window.addEventListener('load', async function () {
             emailFormatError.style.display === 'none'
         ) {
             registerButton.disabled = false;
+
             registerButton.style.opacity = '1.0';
         } else {
             registerButton.disabled = true;

@@ -1,14 +1,18 @@
 window.addEventListener("load", function () {
-    const dropdown = document.querySelector('.dropdown');
-    const dropDownContent = document.querySelector('.dropdown-content');
 
-    window.addEventListener('click', (e) => {
-        if (!e.target.classList.contains('clicked')) {
-            if (dropDownContent) {
+    const login = document.querySelector("#user_status")
+    login.style.display = "none"
+
+    if (login.innerText != "none") {
+
+        const dropdown = document.querySelector('.dropdown');
+        const dropDownContent = document.querySelector('.dropdown-content');
+
+        window.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('clicked')) {
                 dropDownContent.style.display = 'none';
             }
-        }
-    });
+        });
 
 
     if (dropdown) {
@@ -20,21 +24,17 @@ window.addEventListener("load", function () {
     }
     
 
+        const notifyDrop = document.querySelector('.notify-drop');
+        const notifyContent = document.querySelector('.notify-content');
+        let notifyClicked = false;
 
-    const notifyDrop = document.querySelector('.notify-drop');
-    const notifyContent = document.querySelector('.notify-content');
-    let notifyClicked = false;
-
-    window.addEventListener('click', (e) => {
-        if (!e.target.classList.contains('clicked')) {
-            if (notifyContent) {
+        window.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('clicked')) {
                 notifyContent.style.display = 'none';
                 notifyClicked = false;
             }
-        }
-    });
+        });
 
-    if (notifyDrop) {
         notifyDrop.addEventListener('click', (e) => {
             if (e.target.classList.contains('clicked')) {
                 notifyContent.style.display = 'block';
@@ -42,14 +42,14 @@ window.addEventListener("load", function () {
             }
         });
     }
-    
+
 
     const calenderButton = document.querySelector("#search-calender")
     const calenderDiv = document.querySelector(".filterDiv")
-    calenderButton.addEventListener(`click`, (e)=>{
-        if(calenderDiv.style.display == "flex"){
+    calenderButton.addEventListener(`click`, (e) => {
+        if (calenderDiv.style.display == "flex") {
             calenderDiv.style.display = "none"
-        }else{
+        } else {
             calenderDiv.style.display = "flex"
         }
     })
