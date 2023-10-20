@@ -10,16 +10,17 @@ window.addEventListener("load", function () {
             try {
                 if ((user_id.value != author_id.value) && user_id.value) {
                     const option = document.createElement("button");
-                    option.setAttribute("class", "subscribe-button")
                     const isSubscribe = await checkIfSubscribe(user_id.value, author_id.value);
                     const subscription_id = author_id.value;
                     if (isSubscribe == 1) {
+                        option.setAttribute("class", "unsubscribe-button")
                         option.innerHTML = `<img src="/images/unsubscribe.png">Unsubscribe`;
                         option.addEventListener("click", function () {
                             removeSubscription(subscription_id);
                         });
                     } else if (isSubscribe == 0) {
-                        option.innerHTML = `<img src="/images/subscribe.png">Subscribe`;
+                        option.setAttribute("class", "subscribe-button")
+                        option.innerHTML = `<img class="subscribe-btn" src="/images/subscribe.png">Subscribe`;
                         option.addEventListener("click", function () {
                             addSubscription(subscription_id);
                         });
