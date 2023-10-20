@@ -604,7 +604,7 @@ nav {
 
 /* LINKS */
 /* SRC: https://codepen.io/team/css-tricks/pen/gOXMgxR */
-#newArticleLink, #myPostEditLink, #myPostReadMoreLink {
+/* #newArticleLink, #myPostEditLink, #myPostReadMoreLink {
     color: inherit;
     text-decoration: none;
   }
@@ -631,7 +631,7 @@ nav {
   #newArticleLink:hover, #myPostEditLink:hover, #myPostReadMoreLink:hover {
     background-size: 0 3px, 100% 3px;
   }
-  
+   */
 
   hr{
     border-top: 3px dotted lightgrey;
