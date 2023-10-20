@@ -27,8 +27,17 @@ async function deleteUserById(user_id) {
     return dropFromNotification;
 }
 
+async function updateUserSecurityDetails(user_id, username, password) {
+    const db = await getDatabase();
+    return await db.run(SQL`
+    UPDATE user 
+    SET username = ${username}, password = ${password}
+    WHERE id = ${user_id}`);
+}
+
 module.exports = {
     updateUserProfile,
     updateUserProfileWithoutIconUpdate,
-    deleteUserById
+    deleteUserById,
+    updateUserSecurityDetails,
 }
