@@ -1,5 +1,5 @@
 :root {
-    --nav-user-size: 18px;
+    --nav-user-size: 16px;
 }
 
 #calender-div {
@@ -172,6 +172,7 @@ nav {
     font-size: var(--nav-user-size);
     color: black;
     margin-right: 8px;
+    font-weight: bold;
 }
 
 #user_avatar {
@@ -192,7 +193,6 @@ nav {
     width: 30px;
 }
 .dropbtn:hover {
-    transform: scale(1.2);
     cursor: pointer;
 
 }
@@ -208,6 +208,7 @@ nav {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 18px;
 }
 
 .dropdown-content a {
@@ -227,10 +228,6 @@ nav {
 .dropdown-content a:hover {
     background-color:white;
     color: #1A77F2;;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
 }
 
 #page_body {

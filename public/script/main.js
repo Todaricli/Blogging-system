@@ -4,15 +4,23 @@ window.addEventListener("load", function () {
 
     window.addEventListener('click', (e) => {
         if (!e.target.classList.contains('clicked')) {
-            dropDownContent.style.display = 'none';
+            if (dropDownContent) {
+                dropDownContent.style.display = 'none';
+            }
         }
     });
 
-    dropdown.addEventListener('click', (e) => {
-        if (e.target.classList.contains('clicked')) {
-            dropDownContent.style.display = 'block';
-        }
-    });
+    console.log("testing");
+    if (dropdown) {
+        dropdown.addEventListener('click', (e) => {
+            if (e.target.classList.contains('clicked')) {
+                dropDownContent.style.display = 'block';
+            }
+        });
+    }
+    
+    console.log("i am here");
+
 
     const notifyDrop = document.querySelector('.notify-drop');
     const notifyContent = document.querySelector('.notify-content');
@@ -20,17 +28,22 @@ window.addEventListener("load", function () {
 
     window.addEventListener('click', (e) => {
         if (!e.target.classList.contains('clicked')) {
-            notifyContent.style.display = 'none';
-            notifyClicked = false;
+            if (notifyContent) {
+                notifyContent.style.display = 'none';
+                notifyClicked = false;
+            }
         }
     });
 
-    notifyDrop.addEventListener('click', (e) => {
-        if (e.target.classList.contains('clicked')) {
-            notifyContent.style.display = 'block';
-            notifyClicked = true;
-        }
-    });
+    if (notifyDrop) {
+        notifyDrop.addEventListener('click', (e) => {
+            if (e.target.classList.contains('clicked')) {
+                notifyContent.style.display = 'block';
+                notifyClicked = true;
+            }
+        });
+    }
+    
 
     const calenderButton = document.querySelector("#search-calender")
     const calenderDiv = document.querySelector(".filterDiv")
