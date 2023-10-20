@@ -349,7 +349,7 @@ textarea {
 .commentSubmitButton {
     margin-top: 10px;
     border: none;
-    background-color: aquamarine;
+    background-color: rgb(12,175,17);
     padding: 8px;
     border-radius: 20px;
     box-shadow:4px 4px 10px rgba(0,0,0,0.06);
@@ -385,4 +385,25 @@ textarea {
 .second-level-form {
     padding-left: 50px;
     display: none;
+}
+
+@media only screen and (max-width:950px) {
+    #container{
+        width: 100%;
+    }
+
+    #article_container{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:800px) {
+    #article-img img {
+        width: 80%;
+    }
+
+    #article-img{
+        display: flex;
+        justify-content: center;
+    }
 }

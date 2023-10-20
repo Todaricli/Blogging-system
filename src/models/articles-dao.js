@@ -264,7 +264,7 @@ async function filterArticlesBySelectedDates(startDate, endDate) {
         const endDateTimeUTC = new Date(endDate).toISOString();
 
         const articles = await db.all(SQL`
-        select articles.*, user.*
+        select articles.*, user.username, user.fname, user.lname, user.DOB, user.description, user.icon_path, user.admin
         from articles 
         inner join user on articles.author_id = user.id
         where date_of_publish >= ${startDateTimeUTC} and date_of_publish <= ${endDateTimeUTC}

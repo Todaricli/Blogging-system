@@ -44,7 +44,8 @@
     grid-template-rows: 100%;
     grid-template-columns: 150px auto auto auto 20% auto;
     grid-template-areas:
-    "logo . search-bar . calender . user-related"
+    "logo . search-bar . calender . user-related";
+    align-items: center;
 }
 
 .logo{
@@ -65,23 +66,13 @@
 
 #calender-div{
     grid-area: calender;
+
 }
 
 #search-calender{
     cursor: pointer;
 }
 
-/* @media only screen and (max-width:1150px) {
-    .nav-panel {
-        grid-template-columns: 80px auto 55% auto 25% auto 30%;
-    }
-
-    .logo{
-        background: url("../images/logo.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
-} */
 
 
 @media only screen and (max-width:1200px) {
