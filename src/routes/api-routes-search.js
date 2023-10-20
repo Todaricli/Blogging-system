@@ -32,11 +32,11 @@ router.get('/api/get-search/single-date', async function (req, res) {
 });
 
 
-router.get(`/test`, (req,res)=>{
+router.get(`/test`, (req, res) => {
     res.render("test")
 })
 
-router.get("/searched-Article", async (req,res) =>{
+router.get("/searched-Article", async (req, res) => {
     let search = req.query.search
     res.locals.search = search;
     console.log(search)
@@ -45,18 +45,18 @@ router.get("/searched-Article", async (req,res) =>{
 
     const articles = await searchDao.getArticlesByTitleForSearch(search);
     console.log(articles)
-    if(articles != undefined){
+    if (articles != undefined) {
         articlesLength = articles.length;
-    }else{
+    } else {
         articlesLength = 0
     }
-    
+
 
     const users = await searchDao.getArticlesByAuthorNameForSearch(search);
 
-    if(articles != undefined){
+    if (articles != undefined) {
         usersLength = users.length;
-    }else{
+    } else {
         usersLength = 0
     }
 
@@ -69,25 +69,26 @@ router.get("/searched-Article", async (req,res) =>{
     res.render("searchedArticles")
 })
 
-router.get('/filtered-articles', async function(req, res) {
-    const {startDate, endDate}  = req.query;
+router.get('/filtered-articles', async function (req, res) {
+    const { startDate, endDate } = req.query;
+    console.log("hi")
     console.log(startDate);
     console.log(endDate);
-  
+
     const articles = await articleDao.filterArticlesBySelectedDates(startDate, endDate)
     console.log(articles)
-    if(articles != null){
+    if (articles != null) {
         res.locals.articles = articles;
-    res.locals.articlesByDate = articles;
-    res.locals.articlesLength = articles.length;
-    res.locals.startDate = startDate;
-    res.locals.endDate = endDate;
-    res.render("searchedArticles")
-    }else{
+        res.locals.articlesByDate = articles;
+        res.locals.articlesLength = articles.length;
+        res.locals.startDate = startDate;
+        res.locals.endDate = endDate;
+        res.render("searchedArticles")
+    } else {
         res.render("searchedArticles")
     }
-    
-  
+
+
 })
 
 module.exports = router
