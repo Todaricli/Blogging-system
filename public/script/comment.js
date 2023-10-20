@@ -36,8 +36,9 @@ function displayDeleteButton() {
     );
     deleteCommentButtons.forEach((button) => {
         const commenter_id = button.nextElementSibling.value;
+        const author_id = document.getElementById('author_id_temp_storage').value;
         const user_id = document.getElementById('user_id_temp_storage').value;
-        if (commenter_id !== user_id) {
+        if (commenter_id !== user_id && author_id !== user_id) {
             button.hidden = true;
         }
     });
