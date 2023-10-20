@@ -134,7 +134,7 @@
     font-size: 20px;
 }
 
-#comment-btn {
+.comment-btn {
     background-color: transparent;
     border: none;
     font-size: 18px;
@@ -145,12 +145,6 @@
 }
 
 .like-btn {
-    background-color: transparent;
-    border: none;
-    font-size: 16px;
-}
-
-#open-comment {
     background-color: transparent;
     border: none;
     font-size: 16px;
@@ -229,13 +223,13 @@ textarea {
     margin-bottom: 10px;
 }
 
-#avatar {
+.avatar {
     width: 40px;
     height: 40px;
     margin:0;
 }
 
-#avatar-div {
+.avatar-div {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -255,7 +249,7 @@ textarea {
     margin-bottom: 0;
 }
 
-#comment-content {
+.comment-content {
     max-height: 100%;
     background-color: gainsboro;
     border-radius: 5px;
@@ -266,20 +260,20 @@ textarea {
     box-shadow:4px 4px 10px rgba(0,0,0,0.06);
 }
 
-#avatar-right {
+.avatar-right {
     height: 100%;
 }
 
-#avatar-right p {
+.avatar-right p {
     margin: 5px 0;
 }
 
-#comment-time {
+.comment-time {
     color: grey;
     font-size: 12px;
 }
 
-#comment-name {
+.comment-name {
     font-size: 18px;
 }
 
@@ -385,18 +379,8 @@ textarea {
     /* border-bottom: 1px solid lightgrey; */
 }
 
-#level-btn {
-    display: flex;
-    justify-content: flex-end;
-}
-
 
 .second-level-form {
-    padding-left: 50px;
-    display: none;
-}
-
-#third-level-form {
     padding-left: 50px;
     display: none;
 }

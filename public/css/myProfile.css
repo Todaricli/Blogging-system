@@ -49,8 +49,8 @@ form {
 
 }
 
-#my_profile_container {
-  /* margin: 15px; */
+#my_profile_container{
+  margin: 15px;
 }
 
 #my_profile_toast {
@@ -63,6 +63,8 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 15px;
+  margin-top: 40px;
 }
 
 label {
@@ -168,12 +170,20 @@ button[type=submit]:hover {
   margin: 10px;
 }
 
-/* #my-profile-sub-btn-div{
-  display: grid;
-  grid-template-columns: auto auto;
+#my-profile-sub-btn-div{
+  display: flex;
+  align-items: center;
   width: 100%;
+}
 
-} */
+#my-profile-sub-btn-div button {
+  width: 100%;
+  margin-right: 10px;
+}
+
+.tick-btn {
+  margin-left: 10px
+}
 
 #load-tick-profile{
   display: none;
@@ -183,10 +193,3 @@ button[type=submit]:hover {
   display: none;
 }
 
-#load-tick-security{
-  display: none;
-}
-
-#done-tick-security{
-  display: none;
-}
