@@ -58,7 +58,8 @@ window.addEventListener('load', async function () {
     // Notification Functions
     async function getAllNotifications() {
         const response = await fetch(`/api/get-all-notifications`);
-        let data = makeArray(await response.json());
+        const responseData = await response.json();
+        let data = makeArray(responseData);
         if (data.length === 0) notifUnreadTag.textContent = 'No notifications';
         return data;
     }
