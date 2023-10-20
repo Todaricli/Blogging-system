@@ -6,7 +6,10 @@
         <div id="search-header">
             {{#if current_genre}}
             <div id="genre-header">
-                <h1><a href="/">All</a> / {{current_genre}}</h1>
+                <span id="articles_home">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <a href="/">Back to Home</a> / {{current_genre}}
+                </span>
             </div>
             {{else}}
             {{#if articlesByDate}}
@@ -25,10 +28,12 @@
 
         <div id="search-articles">
             {{#if articles}}
+            {{#if current_genre}}
+            {{else}}
             <div id="articles-length">
                 <h2>Matching Articles ({{this.articlesLength}})</h2>
             </div>
-
+            {{/if}}
             {{#each articles}}
             <div class="eachArticleDiv">
                 <div class="eachArticleDiv-container">
@@ -84,7 +89,8 @@
             {{/if}}
         </div>
     </div>
-
+    {{#if current_genre}}
+    {{else}}
     {{#if articlesByDate}}
     {{else}}
     <div id="search-users">
@@ -106,5 +112,6 @@
         <p><i>There are no users matching "{{search}}"</i></p>
         {{/if}}
     </div>
+    {{/if}}
     {{/if}}
 </div>

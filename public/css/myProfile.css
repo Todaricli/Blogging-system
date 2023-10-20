@@ -97,7 +97,6 @@ button[type=submit] {
   border: 1.5px solid #E0E0E0;
   padding: 14px 20px;
   margin: 8px 0;
-
   border-radius: 30px;
   cursor: pointer;
   font-size: 1rem;
@@ -108,9 +107,9 @@ button[type=submit] {
 }
 
 button[type=submit]:hover {
-  color: #404040;
-  background-color: rgb(184, 231, 186);
-  border: 1.5px solid rgb(184, 231, 186);
+  color: white;
+  background-color: rgb(12, 175, 17);
+  border: 1.5px solid rgb(12, 175, 17);
 }
 
 #deleteAccount button:hover {

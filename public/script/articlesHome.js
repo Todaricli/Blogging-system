@@ -1,5 +1,12 @@
 window.addEventListener("load", function () {
 
+    // const scrollButton = document.getElementById("scrollButton");
+    // const top5_articles_container = document.getElementById("top5_articles_container");
+    // scrollButton.addEventListener("click", () => {
+    //     top5_articles_container.scrollBy(0, 100); 
+    // });
+
+
     function displaySubOption() {
         const btn_option = document.querySelectorAll(".btn_sub_option");
         const user_id = document.querySelector("#current_user_id");
