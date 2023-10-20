@@ -88,7 +88,7 @@ textarea, input {
 }
 
 input:focus::before{
-  content: 'content';
+  content: 'DOB:  ';
 }
 
 .hidden-label {

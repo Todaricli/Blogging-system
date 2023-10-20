@@ -238,7 +238,8 @@ VALUES (1, 1, 1),
        (17, 2, 9),
        (18, 3, 9),
        (19, 4, 10),
-       (20, 5, 10);
+       (20, 5, 10),
+       (21, 1, 2);
 
 CREATE TABLE subscription
 (
@@ -295,7 +296,7 @@ VALUES (1, 2, 1, '2023-09-09T23:11:45.123Z', 'user2 just subscribed to you!', nu
        (16, 4, 1, '2022-07-10T18:15:00.000Z', 'user4 just wrote a new article: "Govt announces $35b mega-plan for new Auckland harbour crossing', 4,
         'write', 0, 0),
        (11, 5, 1, '2023-08-04T14:25:00.000Z', 'user5 just wrote a new article: "Sarah Burton dedicates final Alexander McQueen show to memory of designer"!', 5, 'write', 0, 0),
-       (17, 2, 10, '2023-10-20T08:24:11.189Z', 'user2 commented on your article: "Fantastic 4 days in an unqiue and imressive nature"!', 10, 'comment', 0, 0);
+       (17, 1, 2, '2023-10-20T09:40:29.040Z', 'user1 liked your article: "The Wandering Earth: Specialty tech suits"!', 2, 'like', 0, 0);
 
 -- creating a view that shows articles likes, comments and popularity
 
