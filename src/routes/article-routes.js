@@ -111,7 +111,7 @@ router.get('/genre/:genreType', async function (req, res) {
     const genreType = req.params.genreType;
 
     const articles = await searchDao.filterArticlesByGenre(genreType)
-
+    res.locals.current_genre = genreType;
     res.locals.articles = articles;
     res.render('searchedArticles');
 });

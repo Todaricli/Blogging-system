@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="/css/profile.css">
 
 <div id="profile_container">
-    {{#if user}}
+    {{#if profile_user}}
     <div id="container">
-        <div id="profile_icon"><img src="{{user.icon_path}}"></div>
-        <div id="profile_name">{{user.fname}} {{user.lname}}</div>
-        <div id="profile_DOB"><strong>DOB:</strong> {{user.DOB}}</div>
-        <div id="profile_email"><strong>Email:</strong>{{user.email}} tempEmail@gmail.com</div>
+        <div id="profile_icon"><img src="{{profile_user.icon_path}}"></div>
+        <div id="profile_name">{{profile_user.fname}} {{profile_user.lname}}</div>
+        <div id="profile_DOB"><strong>DOB:</strong> {{profile_user.DOB}}</div>
+        <div id="profile_email"><strong>Email:</strong>{{profile_user.email}} tempEmail@gmail.com</div>
         <input value="{{profile_id}}" id="profile_id" hidden>
 
         <div id="profile_related_info">
@@ -33,7 +33,6 @@
         {{#if profile_articles}}
         {{#each profile_articles}}
         <div class="article">
-
             <div class="article-left">
                 <a href="/article/{{this.id}}" class="article-link">
                     <div class="profile_article_title">{{this.title}}</div>

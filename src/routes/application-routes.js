@@ -45,8 +45,7 @@ router.get('/profile', async function (req, res) {
     if (id) {
         const profileData = await genericDao.getUserDataById(id);
 
-        res.locals.user = profileData;
-
+        res.locals.profile_user = profileData;
         res.locals.profile_id = id;
         res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);
         res.locals.profile_articles = await articleDao.getArticlesByUserID(profileData.id);
@@ -79,7 +78,7 @@ router.get('/my-page', async function (req, res) {
 
         console.log(profileData)
 
-        res.locals.user = profileData;
+        res.locals.profile_user = profileData;
 
         // res.locals.profile_icon = profileData.icon_path;
         // res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
