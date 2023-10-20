@@ -41,9 +41,9 @@
     font-family: Arial, Helvetica, sans-serif;
     display: grid;
     grid-template-rows: 100%;
-    grid-template-columns: 15% 10% 30% 20% 40%;
+    grid-template-columns: 150px auto auto auto 20% auto;
     grid-template-areas:
-    "logo . search-bar . user-related"
+    "logo . search-bar . calender . user-related"
 }
 
 .logo{
@@ -57,12 +57,49 @@
 #user-releted-function{
     grid-area: user-related;
     display: flex;
+    justify-content: end;
 }
 
 #search_bar_container{
     grid-area: search-bar;
 }
 
-/* #calender-div {
-    position: absolute;
+#calender-div{
+    grid-area: calender;
+}
+
+
+/* @media only screen and (max-width:1150px) {
+    .nav-panel {
+        grid-template-columns: 80px auto 55% auto 25% auto 30%;
+    }
+
+    .logo{
+        background: url("../images/logo.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
 } */
+
+
+
+@media only screen and (max-width:1200px) {
+    .nav-panel {
+        height: 100px;
+        grid-template-rows: 50% 50%;
+        grid-template-columns: 150px auto auto auto;
+        grid-template-areas:
+        "logo . user-related user-related"
+        "search-bar search-bar . calender"
+    }
+
+    #user-releted-function{
+        grid-area: user-related;
+    }
+
+    #search_bar_container{
+        grid-area: search-bar;
+    }
+
+
+}

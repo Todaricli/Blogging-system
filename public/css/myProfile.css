@@ -43,13 +43,12 @@
 form {
   padding: 25px;
   width: 700px;
-  background-color: rgb(247, 255, 254);
   border-radius: 10px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  color: #357a84;
+
 }
 
-#my_profile_container{
+#my_profile_container {
   /* margin: 15px; */
 }
 
@@ -84,14 +83,20 @@ select,
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+#searchInput{
+  box-shadow: 0px 0px 0px;
+  padding: 0px;
+}
+
 button[type=submit] {
   width: 15%;
   max-height: 40px;
-  background-color: #7fc7cc;
-  color: white;
+  color: #404040;
+  background-color: white;
+  border: 1.5px solid #E0E0E0;
   padding: 14px 20px;
   margin: 8px 0;
-  border: none;
+
   border-radius: 30px;
   cursor: pointer;
   font-size: 1rem;
@@ -102,7 +107,15 @@ button[type=submit] {
 }
 
 button[type=submit]:hover {
-  background-color: #70adb0;
+  color: #404040;
+  background-color: rgb(184, 231, 186);
+  border: 1.5px solid rgb(184, 231, 186);
+}
+
+#deleteAccount button:hover {
+  color: #404040;
+  background-color: rgb(253, 196, 196);
+  border: 1.5px solid rgb(253, 196, 196);
 }
 
 .my_profile_container {
@@ -123,7 +136,9 @@ button[type=submit]:hover {
   font-size: 30px;
   position: absolute;
   z-index: 1;
-  color: #7fc7cc;
+  color: #404040;
+  background-color: white;
+  border: 1.5px solid #E0E0E0;
   padding: 0;
   top: 77%;
   left: 57%;
@@ -131,14 +146,15 @@ button[type=submit]:hover {
 
 #update-icon-btn:hover {
   background-color: transparent;
-  color: #70adb0;
-};
+
+}
+
 
 #icon_container {
   display: none;
 }
 
-#icon_container label{
+#icon_container label {
   text-align: center;
 }
 

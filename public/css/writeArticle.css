@@ -16,10 +16,9 @@
 form {
   padding: 25px;
   width: 1000px;
-  background-color: rgb(247, 255, 254);
   border-radius: 10px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  color: #357a84;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #img-form-div {
@@ -38,9 +37,7 @@ form {
 
 @import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Chakra+Petch:wght@600&family=Comfortaa:wght@300&family=Delicious+Handrawn&family=Dosis:wght@300;700&family=Handjet:wght@300&family=Satisfy&display=swap');
 
-.writeArticlePage {
-  background-color: rgb(241, 248, 248);
-}
+.writeArticlePage {}
 
 #flexTitle {
   font-family: "Satisfy", cursive;
@@ -58,8 +55,9 @@ form {
   margin: 10px;
 }
 
-#change-img, #content {
- margin: 20px 0 20px 0;
+#change-img,
+#content {
+  margin: 20px 0 20px 0;
 }
 
 #img-container {
@@ -76,23 +74,37 @@ form {
   width: 300px;
 }
 
- #delete-current-image {
+#delete-current-image {
   max-height: 35px;
   margin: 8px 0;
 }
 
-#delete-current-image, button[type=submit] {
+#delete-current-image {
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  background-color: #7fc7cc;
-  color: white;
+  color: #404040;
   padding: 14px 20px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
   max-height: 35px;
+}
+
+#publish_article_btn{
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#publish_article_btn button {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background-color: rgb(12, 175, 17);
+  color: white;
 }
 
 #update-container {
@@ -106,9 +118,13 @@ form {
   width: 10%;
   margin: 8px 0;
   font-size: 14px;
+  color: #404040;
+  background-color: white;
+  border: 1.5px solid #E0E0E0;
 }
 
-#title-box, #genre-box {
+#title-box,
+#genre-box {
   display: flex;
   align-items: center;
   justify-content: flex-start;
