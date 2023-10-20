@@ -11,13 +11,16 @@ async function storeNotificationToUser(
     content,
     articleId,
     type,
-    isRead
+    isRead,
+    isViewed
 ) {
-    const db = await getDatabase();
-    await db.all(SQL`
-  insert into notifications (host_id, receiver_id, time, content, article_id, type, isRead)
-  values (${sender}, ${receiver}, ${timestamp}, ${content}, ${articleId}, ${type}, ${isRead})
+    if (sender != receiver) {
+        const db = await getDatabase();
+        await db.all(SQL`
+  insert into notifications (host_id, receiver_id, time, content, article_id, type, isRead, isViewed)
+  values (${sender}, ${receiver}, ${timestamp}, ${content}, ${articleId}, ${type}, ${isRead}, ${isViewed})
 `);
+    }
 }
 
 async function getAllNotificationsById(userId) {
@@ -40,6 +43,15 @@ async function updateIsRead(id) {
 `);
 }
 
+async function updateIsViewed(id) {
+    const db = await getDatabase();
+    await db.all(SQL`
+    update notifications
+    set isViewed = 1
+    where id = ${id};
+`);
+}
+
 async function deleteNotification(id) {
     const db = await getDatabase();
     await db.all(SQL`
@@ -51,23 +63,52 @@ async function deleteNotification(id) {
 async function createNotification(receiverId, senderId, articleId, type) {
     const now = new Date();
     const utcString = now.toISOString();
-    const sender = await genericDao.getUserDataById(senderId);
-    const contentAction = await createContent(type, articleId);
-    const notification = {
-        senderId: senderId,
-        receiverId: receiverId,
-        timestamp: utcString,
-        content: `${sender.username} ${contentAction}`,
-        articleId: articleId,
-        type: type,
-        isRead: 0,
-    };
-    return notification;
+    const existingNotif = await returnNotificationIfExists(
+        senderId,
+        receiverId,
+        type
+    );
+    if (existingNotif) {
+        updateNotifTimeAndStatus(existingNotif.id, utcString);
+    } else {
+        const sender = await genericDao.getUserDataById(senderId);
+        const contentAction = await createContent(type, articleId);
+        const notification = {
+            senderId: senderId,
+            receiverId: receiverId,
+            timestamp: utcString,
+            content: `${sender.username} ${contentAction}`,
+            articleId: articleId,
+            type: type,
+            isRead: 0,
+            isViewed: 0,
+        };
+        return notification;
+    }
+
+    async function returnNotificationIfExists(sender_id, receiver_id, type) {
+        const db = await getDatabase();
+        const notif_id = await db.get(SQL`
+        select id
+        from notifications
+        where host_id = ${sender_id} and receiver_id = ${receiver_id} and type = ${type}
+    `);
+        return notif_id;
+    }
+
+    async function updateNotifTimeAndStatus(id, time) {
+        const db = await getDatabase();
+        await db.get(SQL`
+        update notifications
+        set time = ${time}, isRead = 0, isViewed = 0
+        where id = ${id}
+    `);
+    }
 }
 
 async function createContent(type, articleId) {
     const article = await articleDao.getArticleTitleById(articleId);
-    console.log("articleOBJ: " + article);
+    console.log('articleOBJ: ' + article);
     if (type === 'sub') {
         return `subscribed to you!`;
     } else if (type === 'write') {
@@ -85,6 +126,7 @@ module.exports = {
     storeNotificationToUser,
     getAllNotificationsById,
     updateIsRead,
+    updateIsViewed,
     deleteNotification,
     createNotification,
 };

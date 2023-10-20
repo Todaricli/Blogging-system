@@ -1,11 +1,20 @@
 window.addEventListener('load', async function () {
-    // manage notifications
-    const userNotifications = await getAllNotifications();
-    setNotificationDropDownMenu();
-
-    // manage bell icon
+    // bell attributes
     const notificationBell = document.querySelector('.bell-icon');
-    const notifNumTag = document.querySelector('.notification-amount > span');
+    const notifUnreadTag = document.querySelector('.notify-content .unread');
+    const notifUnviewedTag = document.querySelector(
+        '.notification-amount > span'
+    );
+
+    const userNotifications = await getAllNotifications();
+    let totalNumberOfNotif = userNotifications.length;
+    let numberOfUnreadNotif = 0;
+    for (notif of userNotifications) {
+        if (notif.isRead === 0) numberOfUnreadNotif++;
+    }
+
+    await setNotificationDropDownMenu();
+
     notificationBell.addEventListener('click', () => {
         deactivateBell();
         if (checkIfMoreThanZeroNotif()) setTimeout(activateBell, 100);
@@ -15,15 +24,26 @@ window.addEventListener('load', async function () {
 
     // Bell Icon Functions
     function setNumberOfNotifications() {
-        let notifNum = 0;
+        let readNotifNum = 0;
+        let viewNotifNum = 0;
         for (notif of userNotifications) {
-            if (notif.isRead === 0) notifNum++;
+            if (notif.isRead === 0) readNotifNum++;
+            if (notif.isViewed === 0) viewNotifNum++;
         }
-        notifNumTag.textContent = notifNum;
+        //set viewed count
+        notifUnviewedTag.textContent = viewNotifNum;
+
+        //set unread count
+        if (totalNumberOfNotif === 0) {
+            notifUnreadTag.textContent = 'No notifications';
+        } else {
+            notifUnreadTag.textContent = `Unread: ${readNotifNum}`;
+        }
+        return readNotifNum;
     }
 
     function checkIfMoreThanZeroNotif() {
-        if (parseInt(notifNumTag.textContent) > 0) return true;
+        if (parseInt(notifUnviewedTag.textContent) > 0) return true;
         else return false;
     }
 
@@ -39,34 +59,47 @@ window.addEventListener('load', async function () {
     async function getAllNotifications() {
         const response = await fetch(`/api/get-all-notifications`);
         let data = makeArray(await response.json());
+        if (data.length === 0) notifUnreadTag.textContent = 'No notifications';
         return data;
     }
 
-    function setNotificationDropDownMenu() {
+    async function setNotificationDropDownMenu() {
         const notifyDropMenu = document.querySelector('.notify-content');
         for (notification of userNotifications) {
-            createNotification(notification);
+            await createNotification(notification);
         }
 
-        function createNotification(indvNotif) {
+        async function createNotification(indvNotif) {
             let divTag = document.createElement('div');
-            divTag.classList.add('clicked');
+            divTag.classList.add('clicked', 'notification');
             addLinkToNotificationDiv();
+            checkAndUpdateIsViewed();
             checkAndUpdateIsRead();
+
+            const res = await fetch(`/api/get-user-by-id?id=${indvNotif.host_id}`);
+            const user = await res.json();
+            const icon_path = user.icon_path;
+            let imgTag = document.createElement('img');
+            imgTag.classList.add('clicked', 'avatar');
+            imgTag.setAttribute('src', icon_path);
+
+            let contentDivTag = document.createElement('div');
+            
 
             let p1Tag = document.createElement('p');
             p1Tag.classList.add('clicked');
             p1Tag.innerHTML = indvNotif.content;
 
             let p2Tag = document.createElement('p');
-            p2Tag.classList.add('clicked');
+            p2Tag.classList.add('clicked', 'timestamp');
             const localTime = new Date(indvNotif.time).toLocaleString(); // parse to local time
-            p2Tag.innerHTML = `Time recieved: ${localTime}`;
+            p2Tag.innerHTML = localTime;
 
             createTrashButton();
 
-            divTag.appendChild(p1Tag);
-            divTag.appendChild(p2Tag);
+            divTag.appendChild(imgTag);
+            divTag.appendChild(contentDivTag).appendChild(p1Tag);
+            divTag.appendChild(contentDivTag).appendChild(p2Tag);
             notifyDropMenu.appendChild(divTag);
 
             function addLinkToNotificationDiv() {
@@ -88,6 +121,16 @@ window.addEventListener('load', async function () {
                             route = articleRoute;
                         }
                         window.location.href = route;
+                    }
+                });
+            }
+
+            function checkAndUpdateIsViewed() {
+                notificationBell.addEventListener('click', async function () {
+                    notifUnviewedTag.textContent = 0;
+                    deactivateBell();
+                    if (indvNotif.isViewed === 0) {
+                        await fetch(`/api/update-isViewed?id=${indvNotif.id}`);
                     }
                 });
             }
@@ -115,22 +158,28 @@ window.addEventListener('load', async function () {
                     const parentElement = event.target.parentElement;
                     if (parentElement) {
                         parentElement.remove();
+                        totalNumberOfNotif--;
+                        if (totalNumberOfNotif === 0) {
+                            notifUnreadTag.textContent = 'No Notifications';
+                        }
                         if (!parentElement.classList.contains('read')) {
-                            notifNumTag.textContent =
-                                notifNumTag.textContent - 1;
+                            numberOfUnreadNotif--;
+                            if (totalNumberOfNotif != 0) {
+                                notifUnreadTag.textContent = `Unread: ${numberOfUnreadNotif}`;
+                            }
                         }
-                    }
 
-                    // update database
-                    const res = await fetch(
-                        `/api/delete-notification?id=${indvNotif.id}`,
-                        {
-                            method: 'DELETE',
-                        }
-                    );
-                    if (res.status === 204)
-                        console.log('Notification deleted successfully');
-                    else console.log('Error deleting notification');
+                        // update database
+                        const res = await fetch(
+                            `/api/delete-notification?id=${indvNotif.id}`,
+                            {
+                                method: 'DELETE',
+                            }
+                        );
+                        if (res.status === 204)
+                            console.log('Notification deleted successfully');
+                        else console.log('Error deleting notification');
+                    }
                 });
             }
         }

@@ -36,14 +36,18 @@ router.get('/sub', verifyAuthenticated, async function (req, res) {
 
 router.get('/profile', async function (req, res) {
     const id = req.query.id;
+    // console.log(res.locals.user.id)
+
     if (id) {
         const profileData = await genericDao.getUserDataById(id);
-        res.locals.profile_icon = profileData.icon_path;
-        res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
-        res.locals.profile_DOB = profileData.DOB;
+        console.log(profileData);
+
+        res.locals.profile_user = profileData;
+
         res.locals.profile_id = id;
         res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);
         res.locals.profile_articles = await articleDao.getArticlesByUserID(profileData.id);
+        
         res.render('profile');
     } else {
         res.redirect('/');
@@ -72,7 +76,7 @@ router.get('/my-page', async function (req, res) {
 
         console.log(profileData)
 
-        res.locals.user = profileData;
+        res.locals.profile_user = profileData;
 
         // res.locals.profile_icon = profileData.icon_path;
         // res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;

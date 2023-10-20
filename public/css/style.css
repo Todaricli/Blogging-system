@@ -1,171 +1,57 @@
 :root {
-    --nav-user-size: 18px;
+    --nav-user-size: 16px;
 }
 
-/* nav {
-    background-color: white;
-    position: sticky;
-    top: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-    z-index: 1;
-}
-
-.nav_list {
-    display: flex;
-    align-items: center;
-    width: 200px;
-    list-style: none;
-    margin-right: 20px;
-}
-
-.login {
-    border: 1px solid rgb(184, 231, 186);
-    background-color: rgb(184, 231, 186);
-    border-radius: 30px;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    width: 170px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.login > a{
-    text-decoration: none;
-    color: rgb(42, 42, 42);
-    padding-left: 10px;
-}
-
-.register {
-    border: 1px solid rgb(12, 175, 17);
-    padding: 10px 20px 10px 20px;
-    background-color: rgb(12, 175, 17);
-    border-radius: 30px;
-
-}
-
-.register a{
-    text-decoration: none;
-    color: white;
-}
-
-.logout{
-    margin-right: 15px;
-    text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 10px 20px 10px 20px;
-    background-color: #1A77F2;
-    border-radius: 30px;
-    color: white;
-
-}
-
-.logo img {
-    width: auto;
-    height: 60px;
-}
-
-.search_bar {
-    border: 1px solid black;
-    border-radius: 20px;
-    height: 30px;
-    display: flex;
-    overflow: hidden;
-}
-
-.search_bar img {
-    align-self: center;
-    margin: 5px;
-    width: 15px;
-}
-
-.search_bar input {
-    width: 500px;
-    height: 28px;
-    border: transparent;
-}
-
-.dropdown {
+#calender-div {
     position: relative;
-    display: inline-block;
+
+}
+.filterDiv {
+    display: none;
+    position: absolute;
+    width: 200px;
+    box-shadow: 5px 5px 10px darkgray;
+    border: 1px solid lightgrey;
+    margin-top: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+
 }
 
-.dropbtn {
-    width: 30px;
-}
-
-#user_avatar {
-    width: 40px;
-    border: transparent;
-    border-radius: 50%;
+.filterDiv form {
+    display: flex;
+    padding: 5px;
+    flex-direction: column;
+    justify-items: center;
+    width: 100%;
     
 }
 
-.dropbtn:hover {
-    transform: scale(1.2);
-    cursor: pointer;
-
+.filterDiv form input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    width: 100px;
-    border: 1px solid lightgray;
-    box-shadow: 1px 1px 2px 1px rgba(115, 115, 115, 0.3);
-    z-index: 2;
-    border-radius: 10px;
-    padding: 5px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    background-color: white;
-}
-
-.dropdown-content a {
-    display: block;
-    height: 20px;
-    text-decoration: none;
-    color: rgb(152, 152, 152);
-}
-
-.dropdown-content a:hover {
-    background-color:white;
-    color: #1A77F2;;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-#page_body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-#footer {
-    margin-top: auto;
-    display: flex;
-    padding: 10px;
-    background-color: #163057;
-    color: #D87957;
-    font-family: Arial, Helvetica, sans-serif;
-    width: 100%;
-}
-
-#footer img {
-    width: auto;
+#calendar-btn button {
+    padding: 0;
     height: 30px;
+    transition: background-color 0.3s;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
-#footer > span {
-    display: flex;
-    align-self: center;
-    font-size: 12px;
-} */
+#calendar-btn button:hover {
+    background-color: lightgrey;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.filterDiv form > * {
+    padding: 5px;
+}
 
 nav {
     background-color: rgb(255, 255, 255);
@@ -254,33 +140,6 @@ nav {
     border-radius: 15px;
 }
 
-/* .search_bar img {
-    align-self: center;
-    margin: 5px;
-    width: 15px;
-} */
-
-/* .search_bar input {
-    width: 500px;
-    height: 40px;
-    border: transparent;
-    margin-bottom: 20px;
-} */
-
-/* #searchResultContainer{
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    overflow-y: scroll;
-    margin-top: 30px;
-    width: 500px;
-    border: transparent;
-    height: auto;
-    max-height: 500px;
-    z-index: 1000;
-} */
-
-
 .dropdown {
     position: relative;
     display: inline-block;
@@ -312,6 +171,7 @@ nav {
     font-size: var(--nav-user-size);
     color: black;
     margin-right: 8px;
+    font-weight: bold;
 }
 
 #user_avatar {
@@ -332,7 +192,6 @@ nav {
     width: 30px;
 }
 .dropbtn:hover {
-    transform: scale(1.2);
     cursor: pointer;
 
 }
@@ -348,6 +207,7 @@ nav {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 18px;
 }
 
 .dropdown-content a {
@@ -367,10 +227,6 @@ nav {
 .dropdown-content a:hover {
     background-color:white;
     color: #1A77F2;;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
 }
 
 #page_body {
@@ -649,66 +505,7 @@ nav {
     background-color: lightgray;
     cursor: pointer;
 }
-/* sub page css end*/
 
-
-/* profile page css start*/
-/* #profile_container {
-    margin: 20px;
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-#profile_info {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    border-bottom: 1px solid lightgray;
-    padding: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    background: url("../images/profile-background.png");
-    background-size: cover;
-}
-
-#profile_icon img {
-    width: 100px;
-    background-color: white;
-    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
-
-    border-radius: 50%;
-    padding: 5px;
-}
-
-#profile_name {
-    font-weight: bold;
-}
-
-#profile_info>* {
-    padding: 10px;
-}
-
-#profile_related_info {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    gap: 50px;
-    padding: 10px;
-}
-
-#profile_related_info img{
-    width: 15px;
-}
-
-#profile_articles_container>* {
-    padding: 10px;
-} */
-/* profile page css end*/
-
-/* register page css start*/
 #icon_container {
     padding: 10px 30px 10px 30px;
 }
@@ -806,12 +603,12 @@ nav {
 
 /* LINKS */
 /* SRC: https://codepen.io/team/css-tricks/pen/gOXMgxR */
-#newArticleLink, #myPostEditLink, #myPostReadMoreLink {
+/* #newArticleLink, #myPostEditLink, #myPostReadMoreLink {
     color: inherit;
     text-decoration: none;
   }
   
-  #newArticleLink, #myPostEditLink, #myPostReadMoreLink {
+  #newArticleLink, #myPostEditLink{
     background:
       linear-gradient(
         to right,
@@ -833,7 +630,7 @@ nav {
   #newArticleLink:hover, #myPostEditLink:hover, #myPostReadMoreLink:hover {
     background-size: 0 3px, 100% 3px;
   }
-  
+   */
 
   hr{
     border-top: 3px dotted lightgrey;
@@ -849,3 +646,15 @@ nav {
   #write-icon i:hover {
     color: blue;
   }
+
+/* Calendar button */
+#calender-div button {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#calender-div button:hover {
+    color: #414a4c;
+}

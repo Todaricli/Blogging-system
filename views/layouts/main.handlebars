@@ -36,9 +36,6 @@
             </a>
         </div>
 
-
-
-
         {{!-- Navigation search bar--}}
         <div id="search_bar_container">
             <img id="search-icon" src="/images/search-icon.png">
@@ -57,33 +54,34 @@
                 </div>
             </div>
         </div>
-        <div id="calender-div">
-            <div>
-                <button type="button" id="search-calender">Search By Date</button>
-            </div>
-            <div class="filterDiv">
-                <form action="/filtered-articles" method="GET">
-                    <label for="startDate">Start Date:</label>
-                    <input type="date" name="startDate" id="startDate">
+        <div cal = "yes"id="calender-div">
+            <button cal = "yes" type="button" id="search-calender"></button>
+            <div cal = "yes" class="filterDiv">
+                <form cal = "yes" action="/filtered-articles" method="GET">
+                    <label cal = "yes" for="startDate">Start Date:</label>
+                    <input cal = "yes" type="date" name="startDate" id="startDate">
 
-                    <label for="endDate">End Date:</label>
-                    <input type="date" name="endDate" id="endDate">
+                    <label cal = "yes" for="endDate">End Date:</label>
+                    <input cal = "yes" type="date" name="endDate" id="endDate">
 
-                    <button type="submit" id="dateInput">Filter Articles</button>
+                    <div cal = "yes" id="calendar-btn">
+                        <button cal = "yes" type="submit" id="dateInput">
+                            <p>Filter Articles</p>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
 
+
         {{!-- Nav login and dropdown button --}}
         <span class="left-panel">
             {{#if user}}
-
-
-
+            <div id ="user_status">{{user.id}}</div>
             <div id="write-icon-div">
-            <a href="/writeArticle" id="write-icon">
-            <i class="fa-regular fa-pen-to-square"> </i>
-            </a>
+                <a href="/writeArticle" id="write-icon">
+                    <i class="fa-regular fa-pen-to-square"> </i>
+                </a>
             </div>
             {{!-- notify bell icon --}}
             <div class="bell-icon notify-drop clicked" tabindex="0">
@@ -95,8 +93,6 @@
                             clip-rule="evenodd" fill="none" stroke="#currentColor" stroke-miterlimit="10"
                             d="M28.7,25 c0,1.9-1.7,3.5-3.7,3.5s-3.7-1.6-3.7-3.5s1.7-3.5,3.7-3.5S28.7,23,28.7,25z" />
                         <path class="bell-icon__shell clicked" id="shell" fill-rule="evenodd" clip-rule="evenodd"
-                            fill="#FFFFFF" stroke="#currentColor" stroke-width="2" stroke-miterlimit="10" <path
-                            class="bell-icon__shell clicked" id="shell" fill-rule="evenodd" clip-rule="evenodd"
                             fill="#FFFFFF" stroke="#currentColor" stroke-width="2" stroke-miterlimit="10"
                             d="M35.9,21.8c-1.2-0.7-4.1-3-3.4-8.7c0.1-1,0.1-2.1,0-3.1h0c-0.3-4.1-3.9-7.2-8.1-6.9c-3.7,0.3-6.6,3.2-6.9,6.9h0 c-0.1,1-0.1,2.1,0,3.1c0.6,5.7-2.2,8-3.4,8.7c-0.4,0.2-0.6,0.6-0.6,1v1.8c0,0.2,0.2,0.4,0.4,0.4h22.2c0.2,0,0.4-0.2,0.4-0.4v-1.8 C36.5,22.4,36.3,22,35.9,21.8L35.9,21.8z" />
                     </g>
@@ -104,10 +100,14 @@
                 <div class="notification-amount clicked">
                     <span>0</span>
                 </div>
+
                 <div class="notify-content clicked">
+                    <h2>Notifications</h2>
+                    <p class="unread">Unread: 0</p>
                 </div>
             </div>
 
+            {{!-- notify bell icon --}}
             <div class="dropdown clicked">
                 <button class="dropbtn clicked">
                     <img class="dropdown-avatar clicked" src="{{user.icon_path}}" alt="user photo">
@@ -125,6 +125,7 @@
             </div>
 
             {{else}}
+            <div id="user_status">none</div>
             <div class="login">
                 <div class="register">
                     <a href="/register">Register</a>

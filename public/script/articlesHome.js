@@ -7,24 +7,56 @@ window.addEventListener("load", function () {
             //let isClick = 0;
             const author_id = btn.querySelector('.article_author_id');
             const btn_subscribe = btn.querySelector('.btn_subscribe');
+
+            
+
             try {
                 if ((user_id.value != author_id.value) && user_id.value != null) {
                     const option = document.createElement("button");
+
+                    const subOption = document.createElement("button")
+                    subOption.innerHTML = `<img class="unsubBtn" src="/images/subscribe.png">Subscribe`;
+                    subOption.addEventListener(`click`, (e)=>{
+                        addSubscription(subscription_id);
+                        subOption.style.display = "none"
+                        unsubOption.style.display = "block"
+                    })
+
+                    const unsubOption = document.createElement("button")
+                    unsubOption.innerHTML = `<img class="unsubBtn" src="/images/unsubscribe.png">Unsubscribe`
+                    unsubOption.addEventListener(`click`, (e)=>{
+                        removeSubscription(subscription_id);
+                        subOption.style.display = "block"
+                        unsubOption.style.display = "none"
+                    })
+
+                    unsubOption.setAttribute("class", "subscribe-button")
+                    subOption.setAttribute("class", "subscribe-button")
+
                     option.setAttribute("class", "subscribe-button")
                     const isSubscribe = await checkIfSubscribe(user_id.value, author_id.value);
+                    console.log(isSubscribe)
                     const subscription_id = author_id.value;
                     if (isSubscribe == 1) {
-                        option.innerHTML = `<img src="/images/unsubscribe.png">Unsubscribe`;
-                        option.addEventListener("click", function () {
-                            removeSubscription(subscription_id);
-                        });
+                        // option.innerHTML = `<img src="/images/unsubscribe.png">Unsubscribe`;
+                        // option.addEventListener("click", function () {
+                        //     removeSubscription(subscription_id);
+                        //     option.innerHTML = `<img src="/images/subscribe.png">Subscribe`;
+                        // });
+                        unsubOption.style.display ="block"
+                        subOption.style.display="none"
                     } else if (isSubscribe == 0) {
-                        option.innerHTML = `<img src="/images/subscribe.png">Subscribe`;
-                        option.addEventListener("click", function () {
-                            addSubscription(subscription_id);
-                        });
+                        // option.innerHTML = `<img src="/images/subscribe.png">Subscribe`;
+                        // option.addEventListener("click", function () {
+                        //     addSubscription(subscription_id);
+                        //     option.innerHTML = `<img src="/images/unsubscribe.png">Unsubscribe`;
+                        // });
+                        unsubOption.style.display ="none"
+                        subOption.style.display="block"
                     }
-                    btn_subscribe.appendChild(option);
+                    // btn_subscribe.appendChild(option);
+                    btn_subscribe.append(unsubOption);
+                    btn_subscribe.append(subOption);
                 }
             }
             catch (error) {
@@ -62,7 +94,7 @@ window.addEventListener("load", function () {
         fetch(`/removeSubscription?id=${subscriptionId}`)
             .then(response => {
                 if (response.status === 200) {
-                    location.reload();
+                    // location.reload();
                 } else {
                     console.error('Error removing subscription');
                 }
@@ -77,7 +109,7 @@ window.addEventListener("load", function () {
         fetch(`/addSubscription?id=${subscriptionId}`)
             .then(response => {
                 if (response.status === 200) {
-                    location.reload();
+                    // location.reload();
                 } else {
                     console.error('Error removing subscription');
                 }

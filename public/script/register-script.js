@@ -3,27 +3,32 @@ window.addEventListener('load', async function () {
     const passwordEye = document.querySelector('#password-eye');
     const confirmPasswordEye = document.querySelector('#confirm-password-eye');
     // input selectors
-    const nameInput = document.querySelector('#name');
-    const usernameInput = document.querySelector('#username');
+    const fnameInput = document.querySelector('#fname');
+    const lnameInput = document.querySelector('#lname');
     const emailInput = document.querySelector('#email');
+    const dobInput = document.querySelector('#dob');
+    const descriptionInput = document.querySelector('#description');
+    const usernameInput = document.querySelector('#username');
     const passwordInput = document.querySelector('#password');
     const confirmPasswordInput = document.querySelector('#confirm-password');
     const formInputs = [
-        nameInput,
-        usernameInput,
+        fnameInput,
+        lnameInput,
         emailInput,
+        dobInput,
+        descriptionInput,
+        usernameInput,
         passwordInput,
         confirmPasswordInput,
     ];
+    
     // error selectors
     const usernameError = document.querySelector('#username-error');
     const passwordFormatError = document.querySelector(
         '#password-format-error'
     );
     const passwordMatchError = document.querySelector('#password-match-error');
-    const emailFormatError = document.querySelector(
-        '#email-format-error'
-    );
+    const emailFormatError = document.querySelector('#email-format-error');
 
     await windowsOnLoadChecks();
     await addFormVerificationListeners();
@@ -46,6 +51,14 @@ window.addEventListener('load', async function () {
         });
         emailInput.addEventListener('input', async () => {
             await checkValidEmailFormat();
+            registerButtonEnabler();
+        });
+
+        fnameInput.addEventListener('input', async () => {
+            registerButtonEnabler();
+        });
+
+        lnameInput.addEventListener('input', async () => {
             registerButtonEnabler();
         });
     }
@@ -104,8 +117,7 @@ window.addEventListener('load', async function () {
             return true;
         } else {
             emailFormatError.style.display = '';
-            emailFormatError.innerHTML =
-                'Please input a valid email format';
+            emailFormatError.innerHTML = 'Please input a valid email format';
             return false;
         }
     }
@@ -131,17 +143,45 @@ window.addEventListener('load', async function () {
     }
 
     function registerButtonEnabler() {
+        console.log(usernameError.style.display === 'none')
         if (
             usernameError.style.display === 'none' &&
             passwordFormatError.style.display === 'none' &&
             passwordMatchError.style.display === 'none' &&
             emailFormatError.style.display === 'none'
         ) {
+            console.log("im here")
+            
+
+
             registerButton.disabled = false;
-            registerButton.style.opacity = '1.0';
+            console.log(fnameInput.value);
+            console.log(fnameInput.value == '' &&
+            lnameInput.value == '' &&
+            emailInput.value == '' &&
+            usernameInput.value == '' &&
+            passwordInput.value == '' &&
+            confirmPasswordInput.value == '');
+
+
+            if (
+                fnameInput.value == '' ||
+                lnameInput.value == '' ||
+                emailInput.value == '' ||
+                usernameInput.value == '' ||
+                passwordInput.value == '' ||
+                confirmPasswordInput.value == ''
+            ) {
+                console.log("skeet");
+                console.log(fnameInput.value);
+                registerButton.style.opacity = '0.3';
+            } else {
+                console.log("reached");
+                registerButton.style.opacity = '1.0';
+            }
         } else {
-            registerButton.disabled = true;
             registerButton.style.opacity = '0.3';
+            registerButton.disabled = true;
         }
     }
 
@@ -155,14 +195,17 @@ window.addEventListener('load', async function () {
 
     function checkIfInputFocused(input) {
         const label = input.nextElementSibling;
+
         if (input.value && input.value.trim() !== '') {
             label.classList.add('focused-label');
             label.classList.remove('label');
             input.style.borderBottomColor = 'black';
+            input.style.color = 'black';
         } else {
             label.classList.remove('focused-label');
             label.classList.add('label');
             input.style.borderBottomColor = '#cecece';
+            input.style.color = '#cecece';
         }
     }
 
