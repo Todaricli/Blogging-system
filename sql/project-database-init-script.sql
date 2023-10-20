@@ -32,29 +32,29 @@ CREATE TABLE user
 );
 
 INSERT INTO user
-(id, username, password, fname, lname, DOB, description, icon_path, admin)
+(id, username, password, fname, lname, DOB, description, icon_path, admin, email)
 VALUES (1, 'user1', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'John', 'Doe', '1990-01-01',
-        'User 1', '/images/avatars/guy1.png', 0),
+        'User 1', '/images/avatars/guy1.png', 0, 'user1@gmail.com'),
        (2, 'user2', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Jane', 'Smith', '1995-03-15',
-        'User 2', '/images/avatars/girl2.png', 0),
+        'User 2', '/images/avatars/girl2.png', 0, 'user2@gmail.com'),
        (3, 'user3', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Bob', 'Johnson', '1988-07-20',
-        'User 3', '/images/avatars/guy2.png', 0),
+        'User 3', '/images/avatars/guy2.png', 0, 'user3@gmail.com'),
        (4, 'user4', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Alice', 'Williams', '1992-09-10',
-        'User 4', '/images/avatars/girl1.png', 0),
+        'User 4', '/images/avatars/girl1.png', 0, 'user4@gmail.com'),
        (5, 'user5', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Charlie', 'Brown', '1998-12-05',
-        'User 5', '/images/avatars/guy3.png', 0),
+        'User 5', '/images/avatars/guy3.png', 0, 'user5@gmail.com'),
        (6, 'user6', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Eve', 'Anderson', '1993-04-30',
-        'User 6', '/images/avatars/girl3.png', 0),
+        'User 6', '/images/avatars/girl3.png', 0, 'user6@gmail.com'),
        (7, 'user7', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'David', 'Wilson', '1996-06-25',
-        'User 7', '/images/avatars/guy4.png', 0),
+        'User 7', '/images/avatars/guy4.png', 0, 'user7@gmail.com'),
        (8, 'user8', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Grace', 'Miller', '1991-11-15',
-        'User 8', '/images/avatars/girl4.png', 0),
+        'User 8', '/images/avatars/girl4.png', 0, 'user8@gmail.com'),
        (9, 'user9', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Frank', 'Martinez', '1987-02-08',
-        'User 9', '/images/avatars/guy5.png', 0),
+        'User 9', '/images/avatars/guy5.png', 0, 'user9@gmail.com'),
        (10, 'user10', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'Olivia', 'Jones', '1994-08-12',
-        'User 10', '/images/avatars/girl6.png', 0),
+        'User 10', '/images/avatars/girl6.png', 0, 'user10@gmail.com'),
        (11, 'ADMIN', '$2b$10$E3bLcihN46HGIzd9ue1SH.XWbw41Ba0Eohx2vokivFFwuBkzqVGv2', 'ADMIN', 'ADMIN', '1994-08-12',
-        'ADMIN', '/images/avatars/girl6.png', 1);
+        'ADMIN', '/images/avatars/girl6.png', 1, 'admin@gmail.com');
 
 CREATE TABLE articles
 (

@@ -48,9 +48,6 @@
 
 .logo{
     grid-area: logo;
-    background: url("../images/footer-logo.png");
-    background-size: contain;
-    background-repeat: no-repeat;
     height: 50px;
 }
 
@@ -68,6 +65,9 @@
     grid-area: calender;
 }
 
+#search-calender{
+    cursor: pointer;
+}
 
 /* @media only screen and (max-width:1150px) {
     .nav-panel {
@@ -85,21 +85,29 @@
 
 @media only screen and (max-width:1200px) {
     .nav-panel {
-        height: 100px;
-        grid-template-rows: 50% 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        /* margin: 10px 0px 10px 0px; */
+        /* grid-template-rows: 50% 50%;
         grid-template-columns: 150px auto auto auto;
         grid-template-areas:
         "logo . user-related user-related"
-        "search-bar search-bar . calender"
+        "search-bar search-bar . calender" */
+    }
+    .nav-panel > * {
+        margin: 8px 0px 8px 0px;
     }
 
-    #user-releted-function{
+    /* #user-releted-function{
         grid-area: user-related;
     }
 
     #search_bar_container{
         grid-area: search-bar;
-    }
+    } */
 
 
 }

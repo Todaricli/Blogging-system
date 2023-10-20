@@ -17,11 +17,6 @@ router.get('/', async function (req, res) {
     const articleData = await articleDao.getAllArticles();
     res.locals.articleData = articleData;
 
-    const currentTime = new Date();
-    const format = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-
-    res.locals.currentTime = currentTime.toLocaleDateString("en-us", format);
-
     res.render('articlesHome');
     } catch (e) {
         res.locals.errorMessage = 'Page loading incomplete. ' + e
@@ -41,11 +36,14 @@ router.get('/sub', verifyAuthenticated, async function (req, res) {
 
 router.get('/profile', async function (req, res) {
     const id = req.query.id;
+    // console.log(res.locals.user.id)
 
     if (id) {
         const profileData = await genericDao.getUserDataById(id);
+        console.log(profileData);
 
         res.locals.profile_user = profileData;
+
         res.locals.profile_id = id;
         res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);
         res.locals.profile_articles = await articleDao.getArticlesByUserID(profileData.id);

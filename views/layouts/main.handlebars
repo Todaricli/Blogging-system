@@ -32,7 +32,7 @@
     <nav class="nav-panel">
         {{!-- Page logo --}}
         <a href="/" class="logo">
-
+            <img src="/images/footer-logo.png" alt="logo">
         </a>
 
 
@@ -54,20 +54,18 @@
                 </div>
             </div>
         </div>
+        <div cal = "yes"id="calender-div">
+            <button cal = "yes" type="button" id="search-calender"></button>
+            <div cal = "yes" class="filterDiv">
+                <form cal = "yes" action="/filtered-articles" method="GET">
+                    <label cal = "yes" for="startDate">Start Date:</label>
+                    <input cal = "yes" type="date" name="startDate" id="startDate">
 
+                    <label cal = "yes" for="endDate">End Date:</label>
+                    <input cal = "yes" type="date" name="endDate" id="endDate">
 
-        <div id="calender-div">
-            <button type="button" id="search-calender">{{this.currentTime}}</button>
-            <div class="filterDiv">
-                <form action="/filtered-articles" method="GET">
-                    <label for="startDate">Start Date:</label>
-                    <input type="date" name="startDate" id="startDate">
-
-                    <label for="endDate">End Date:</label>
-                    <input type="date" name="endDate" id="endDate">
-
-                    <div id="calendar-btn">
-                        <button type="submit" id="dateInput">
+                    <div cal = "yes" id="calendar-btn">
+                        <button cal = "yes" type="submit" id="dateInput">
                             <p>Filter Articles</p>
                         </button>
                     </div>

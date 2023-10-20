@@ -1,6 +1,7 @@
 addEventListener("load", function () {
     async function displaySubOption() {
         const user_id = document.querySelector("#user_id");
+        console.log(user_id);
         const profile_id = document.querySelector('#profile_id');
         const profile_related_info = document.querySelector('#profile_related_info');
         if ((user_id.value != profile_id.value) && user_id.value && profile_id.value) {
