@@ -1,5 +1,9 @@
 <h1>Blogging Website Project</h1>
 
+
+<img width="800" alt="image" src="https://github.com/UOA-PGCIT-FULLTIME/group-2-s2-23-v1/assets/130806678/0ee70232-e7a5-4296-a3f3-f2f32320eca3">
+
+
 <h3>Project Description:</h3>
 
 This project aims to develop a blogging website with the following features:
