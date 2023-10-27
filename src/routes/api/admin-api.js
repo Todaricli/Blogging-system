@@ -42,7 +42,7 @@ router.delete('/api/users/:id', authorizeAdmin, async function (req, res) {
     const user = res.locals.user;
     if (user && user.admin === 1) {
         await userDb.deleteUserById(userId);
-        res.status(204);
+        res.sendStatus(204);
     } else {
         res.status(401).send('Access Denied');
     }
