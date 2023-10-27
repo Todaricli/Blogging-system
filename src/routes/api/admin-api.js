@@ -11,7 +11,7 @@ router.post('/api/login', async function (req, res) {
     const password = req.body.password;
 
     const user = await authDao.getUserWithCredentials(username, password);
-    if (users.admin==1) {
+    if (user.admin==1) {
         const authToken = uuid();
         await authDao.setUserDbAuthToken(username, authToken); // Save token in the database
         res.cookie('authToken', authToken);
