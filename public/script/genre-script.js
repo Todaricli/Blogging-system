@@ -1,9 +1,9 @@
 window.addEventListener(`load`,()=>{
     const genreDiv = document.querySelector("#search-word")
-    const skeet =document.querySelector("#skeetskeet")
+    const genre =document.querySelector("#search-results")
 
-    if (skeet != null){
-        skeet.remove()
+    if (genre != null){
+        genre.remove()
     }
 
 })

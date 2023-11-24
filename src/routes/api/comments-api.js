@@ -9,9 +9,7 @@ const gDao = require('../../models/generic-dao.js');
 router.post('/api/addComment', async function (req, res) {
     try {
         const user_id = res.locals.user.id;
-        console.log(user_id);
         const comment = req.body;
-        console.log(comment);
         const content = comment.contentKey;
         const comment_id = comment.comment_idKey;
         const article_id = comment.article_idKey;
@@ -30,12 +28,9 @@ router.post('/api/addComment', async function (req, res) {
             const comment_id = done.lastID;
 
             const newComment = await commentDao.getCommentById(comment_id);
-            console.log(newComment);
-            console.log('hello');
 
             res.status(200).json(newComment);
         } else {
-            console.log('inside');
             done = await commentDao.insertNewCommentOnComment(
                 user_id,
                 article_id,
@@ -47,13 +42,8 @@ router.post('/api/addComment', async function (req, res) {
                 throw new Error('Comment submitting failed, please try again.');
             }
 
-            console.log(done);
-
             const new_comment_id = done.lastID;
-            console.log(new_comment_id);
-
             const newComment = await commentDao.getCommentById(new_comment_id);
-            console.log(newComment);
 
             res.status(200).json(newComment);
         }
@@ -66,12 +56,10 @@ router.post('/api/deleteComment', async function (req, res) {
     const comment = req.body;
     const comment_id = comment.comment_idKey;
     const article_id = comment.article_idKey;
-    console.log(comment);
     try {
         let done = undefined;
 
         done = await commentDao.deleteThisComment(comment_id, article_id);
-        console.log(done);
 
         if (!done) {
             throw new Error('Comment deleting failed, please try again');
@@ -86,23 +74,19 @@ router.post('/api/deleteComment', async function (req, res) {
 });
 
 router.post('/api/create-new-comment-notification', async function (req, res) {
-    console.log('running');
     const userId = res.locals.user.id;
     let receiverId;
     const articleId = parseInt(req.body.articleId);
     const parentId = req.body.parentId;
     let type;
     try {
-        console.log(parentId);
         if (!parentId) {
             type = 'comment';
             const res = gDao.makeArray(await articlesDao.getAuthorIdByArticleId(articleId));
-            // console.log(res);
             receiverId = res[0].author_id;
         } else {
             type = 'reply';
             const res = gDao.makeArray(await commentDao.getAuthorIdByCommentId(parentId));
-            console.log(res);
             receiverId = res[0].user_id;
         }
 
@@ -112,7 +96,6 @@ router.post('/api/create-new-comment-notification', async function (req, res) {
             articleId,
             type
         );
-        // console.log(n);
 
         await notifyDao.storeNotificationToUser(
             n.senderId,

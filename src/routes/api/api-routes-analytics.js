@@ -21,7 +21,6 @@ router.get('/api/get-analytics', async function (req, res) {
             numberOfLikes,
             top3Articles
         }
-        console.log(sendObj)
 
         res.json(sendObj)
     }else{

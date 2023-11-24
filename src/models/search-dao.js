@@ -3,7 +3,6 @@ const SQL = require('sql-template-strings');
 const { getDatabase } = require('../db/database.js');
 
 async function getArticlesByTitleForSearch(title){
-    console.log(title) 
     if(title == ""){
         return undefined
     }
@@ -19,7 +18,6 @@ async function getArticlesByTitleForSearch(title){
 
 async function getArticlesByAuthorNameForSearch(author){
 
-    console.log(author)
     if(author == ""){
         return undefined
     }
@@ -46,7 +44,6 @@ async function getArticlesBySingleDate(date, userId){
 
 async function filterArticlesByGenre(genre) {
     const db = await getDatabase();
-    console.log(genre)
 
     const articles = await db.all(SQL `
     select articles.*, user.username, user.fname, user.lname, user.DOB, user.description, user.icon_path, user.admin

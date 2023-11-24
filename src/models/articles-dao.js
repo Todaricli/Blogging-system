@@ -283,8 +283,6 @@ async function getArticleTitleById(articleId) {
     from articles
     where id = ${articleId}
     `)
-
-    console.log(title);
     return title;
 }
 

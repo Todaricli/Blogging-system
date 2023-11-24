@@ -4,17 +4,13 @@ const { getDatabase } = require('../db/database.js');
 const { getAllUserData } = require('./generic-dao.js');
 
 async function getNumFollowers(user_id) {
-    console.log("skeetskeet")
     const db = await getDatabase()
 
     const numFollowers = await db.all(SQL`
     select count(being_subscribed_id) as counts from subscription 
     where being_subscribed_id = ${user_id}
     `)
-    console.log("skatskat")
-
     return numFollowers
-
 }
 
 async function getArticleLikes(user_id) {

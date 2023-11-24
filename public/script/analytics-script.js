@@ -11,11 +11,6 @@ window.addEventListener(`load`, async function () {
     const yesterday = new Date(date - 86400000)
     let day = 0
 
-
-    console.log(date)
-
-    console.log(new Date(yesterday - 86400000));
-
     let x1 = []
     let y1 = []
     for (let i = 0; i < 10; i++) {

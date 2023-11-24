@@ -19,11 +19,7 @@ router.get('/api/get-search', async function (req, res) {
 
 router.get('/api/get-search/single-date', async function (req, res) {
     const searchDate = req.query.searchDate
-
     const articlesByDate = await searchDao.getArticlesBySingleDate(searchDate, res.locals.user.id);
-
-    console.log(articlesByDate[1])
-
     const returnObj = {
         articlesByDate
     }
@@ -39,12 +35,10 @@ router.get(`/test`, (req, res) => {
 router.get("/searched-Article", async (req, res) => {
     let search = req.query.search
     res.locals.search = search;
-    console.log(search)
     let articlesLength = ""
     let usersLength = ""
 
     const articles = await searchDao.getArticlesByTitleForSearch(search);
-    console.log(articles)
     if (articles != undefined) {
         articlesLength = articles.length;
     } else {
@@ -71,12 +65,7 @@ router.get("/searched-Article", async (req, res) => {
 
 router.get('/filtered-articles', async function (req, res) {
     const { startDate, endDate } = req.query;
-    console.log("hi")
-    console.log(startDate);
-    console.log(endDate);
-
     const articles = await articleDao.filterArticlesBySelectedDates(startDate, endDate)
-    console.log(articles)
     if (articles != null) {
         res.locals.articles = articles;
         res.locals.articlesByDate = articles;

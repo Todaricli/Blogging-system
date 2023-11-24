@@ -55,7 +55,6 @@ window.addEventListener("load", function () {
                     throw new Error('Request failed with status: ' + response.status + JSON.stringify(response.text()));
                 }
                 const articleId = await response.text(); // to be passed into notifications
-                console.log(articleId);
                 // Handle the response from the server
                 //remove user input from text editor
                 quill.deleteText(0, quill.getLength());

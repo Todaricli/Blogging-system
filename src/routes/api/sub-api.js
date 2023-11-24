@@ -30,13 +30,10 @@ router.get("/removeSubscription", verifyAuthenticated, async function (req, res)
 })
 
 router.get('/addSubscription', verifyAuthenticated, async function (req, res) {
-    console.log("this route is reached?");
     
     const subscriber_id = req.query.id;
     const user_id = res.locals.user.id;
-    console.log(user_id);
     if (user_id) {
-        console.log("testing");
         try {
             await subDao.addSpecificSubscriptionByID(user_id, subscriber_id);
             

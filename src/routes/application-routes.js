@@ -36,14 +36,10 @@ router.get('/sub', verifyAuthenticated, async function (req, res) {
 
 router.get('/profile', async function (req, res) {
     const id = req.query.id;
-    // console.log(res.locals.user.id)
-
     if (id) {
         const profileData = await genericDao.getUserDataById(id);
-        console.log(profileData);
 
         res.locals.profile_user = profileData;
-
         res.locals.profile_id = id;
         res.locals.profile_subscribers = await subDao.getSubscribersByUserID(profileData.id);
         res.locals.profile_articles = await articleDao.getArticlesByUserID(profileData.id);
@@ -69,28 +65,15 @@ router.get('/my_profile', verifyAuthenticated, async function (req, res) {
 
 router.get('/my-page', async function (req, res) {
     const user_id = res.locals.user.id
-    console.log(user_id)
 
     if (user_id) {
         const profileData = await genericDao.getUserDataById(user_id);
-
-        console.log(profileData)
-
         res.locals.profile_user = profileData;
 
-        // res.locals.profile_icon = profileData.icon_path;
-        // res.locals.profile_name = `${profileData.fname} ${profileData.lname}`;
-        // res.locals.profile_DOB = profileData.DOB;
-
         const subscriberList = await subDao.getSubscribersByUserID(profileData.id);
-        //console.log(subscriberList)
-
         res.locals.profile_subscribers = subscriberList;
 
-
         const articles = await articleDao.getArticlesByUserID(user_id);
-        //console.log(articles)
-
         res.locals.profile_articles = articles;
 
         res.render('profile');
@@ -138,8 +121,6 @@ router.get('/analytics', async function (req, res) {
         const comments = await analyticsDao.getNumberOfCommentsPerArticle(userId)
         const likes = await analyticsDao.getArticleLikesPerArticle(userId)
         const top3Articles = await analyticsDao.getMostPopularArticles(userId)
-        console.log("skeetskeet")
-        console.log(comments)
 
         // const yuh = await response.json()
         const followerNumber = response[0]["counts"]

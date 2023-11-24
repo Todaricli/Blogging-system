@@ -13,7 +13,6 @@ const jimp = require("jimp");
 
 router.post("/api/postNewArticle", uploadTempFolder.single("imageKey"), async function (req, res) {
   const newArticle = req.body;
-  console.log(newArticle);
 
   const user_id = res.locals.user.id;
   const title = newArticle.titleKey;
@@ -137,9 +136,6 @@ router.post(
   async function (req, res) {
     const userId = res.locals.user.id;
     const articleId = parseInt(req.body.articleId);
-    console.log(userId);
-    console.log(articleId);
-
         const subscribers = await subDao.getSubscribersByUserID(userId);
         try {
             for (subscriber of subscribers) {
@@ -171,10 +167,8 @@ router.post(
 
 router.post('/api/deleteArticleImage', async function (req, res) {
   const article_id = req.body.article_idKey;
-  console.log(article_id);
 
   if (!article_id) {
-    console.log('inside')
     res.status(500).send('Image deletion error');
   }
 

@@ -121,7 +121,6 @@ async function fetchArticleDelta() {
     }
 
     const content_delta = article[0].content_delta;
-    console.log(content_delta);
     const content_delta_json = JSON.parse(content_delta);
     return content_delta_json;
 };

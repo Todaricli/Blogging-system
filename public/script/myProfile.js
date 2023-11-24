@@ -1,57 +1,5 @@
 window.addEventListener('load', async function () {
 
-
-    // const updateProfileBtn = document.querySelector("#my_profile_submit_btn")
-    // const profileLoadTick = document.querySelector("#load-tick-profile")
-    // const profileDoneTick = document.querySelector("#done-tick-profile")
-
-    // function profileEventListener(){
-    //     profileDoneTick.style.display = "none"
-    //     profileLoadTick.style.display = "inline-block"
-    //     updateProfileBtn.disabled = true
-    //     let running = false;
-    //     if (!running) {
-    //         running = true
-    //         const myTimeout = setTimeout(function () {
-    //             profileLoadTick.style.display = "none"
-    //             profileDoneTick.style.display = "block"   
-    //             running = false
-    //             updateProfileBtn.disabled = false
-    //             const myTimeout1 = setTimeout(function () {
-    //                 profileDoneTick.style.display = "none"
-    //             }, 5000);
-    //         }, 800);
-    //     }
-    // }
-
-    // const updateSecurityBtn1 = document.querySelector("#update-security-button")
-    // const securityLoadTick = document.querySelector("#load-tick-security")
-    // const securityDoneTick = document.querySelector("#done-tick-security")
-
-    // function securityEventListener(){
-    //     console.log("sddssdsd")
-    //     securityDoneTick.style.display = "none"
-    //     securityLoadTick.style.display = "inline-block"
-    //     updateSecurityBtn1.disabled = true
-    //     let running = false;
-    //     if (!running) {
-    //         running = true
-    //         const myTimeout = setTimeout(function () {
-    //             securityLoadTick.style.display = "none"
-    //             securityDoneTick.style.display = "block"
-    //             running = false
-    //             updateSecurityBtn1.disabled = false
-    //             const myTimeout1 = setTimeout(function () {
-    //                 securityDoneTick.style.display = "none"
-    //             }, 5000);
-    //         }, 800);
-    //     }
-    // }
-
-    
-    // updateSecurityBtn1.addEventListener(`click`, securityEventListener)
-    // updateProfileBtn.addEventListener(`click`, profileEventListener)
-
     const iconInput = document.querySelectorAll('input[name=icon]');
     iconInput.forEach((icon) => {
         icon.addEventListener('click', () => {
@@ -67,7 +15,6 @@ window.addEventListener('load', async function () {
     const icon_container = document.getElementById('icon_container');
     
     updateIconButton.addEventListener('click', function (e) {
-        console.log('click');
         if (icon_container.style.display === 'block') {
             icon_container.style.display = 'none';
         } else {
@@ -240,8 +187,6 @@ async function deleteAccount() {
         e.preventDefault();
 
         const user_id = document.getElementById('user_id_temp_storage').value;
-        console.log(user_id);
-
         const data = {
             userKey: user_id,
         };

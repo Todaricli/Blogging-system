@@ -18,8 +18,6 @@ router.get('/article/:id', async function (req, res) {
 
     const article_id = req.params.id;
 
-    console.log(article_id);
-
     try {
 
         const article = await articleDao.getArticlesByID(article_id);
@@ -86,7 +84,6 @@ router.get('/article/:id', async function (req, res) {
         const commentsForThisAriticle = await getAllComments(comments);
         res.locals.comments = commentsForThisAriticle;
 
-        console.log("got here");
         res.render('articleDemo');
 
     } catch (error) {
@@ -111,7 +108,6 @@ router.get('/genre/:genreType', async function (req, res) {
     res.locals.articles = articles;
     res.locals.articlesByGenre = genreType;
 
-    console.log(articles)
     res.render('searchedArticles');
 });
 

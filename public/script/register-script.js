@@ -143,27 +143,13 @@ window.addEventListener('load', async function () {
     }
 
     function registerButtonEnabler() {
-        console.log(usernameError.style.display === 'none')
         if (
             usernameError.style.display === 'none' &&
             passwordFormatError.style.display === 'none' &&
             passwordMatchError.style.display === 'none' &&
             emailFormatError.style.display === 'none'
-        ) {
-            console.log("im here")
-            
-
-
+        ) {            
             registerButton.disabled = false;
-            console.log(fnameInput.value);
-            console.log(fnameInput.value == '' &&
-            lnameInput.value == '' &&
-            emailInput.value == '' &&
-            usernameInput.value == '' &&
-            passwordInput.value == '' &&
-            confirmPasswordInput.value == '');
-
-
             if (
                 fnameInput.value == '' ||
                 lnameInput.value == '' ||
@@ -172,11 +158,8 @@ window.addEventListener('load', async function () {
                 passwordInput.value == '' ||
                 confirmPasswordInput.value == ''
             ) {
-                console.log("skeet");
-                console.log(fnameInput.value);
                 registerButton.style.opacity = '0.3';
             } else {
-                console.log("reached");
                 registerButton.style.opacity = '1.0';
             }
         } else {

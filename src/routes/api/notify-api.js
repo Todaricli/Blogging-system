@@ -8,7 +8,6 @@ const userDb = require('../../models/generic-dao');
 router.get('/api/getSubscribersByUserId', async function (req, res) {
     const userId = req.query.userId;
     const subscribers = await subDao.getSubscribersByUserID(userId);
-    console.log(subscribers);
     if (subscribers) {
         res.status(200).json({ subscribers });
     } else res.status(401).send('no subscribers');

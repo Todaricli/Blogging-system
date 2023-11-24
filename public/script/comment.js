@@ -203,7 +203,6 @@ async function commentOnComment() {
 
             const formParentDiv = e.target.parentElement;
             const comments_div = formParentDiv.parentElement;
-            console.log(comments_div);
 
             try {
                 const response = await fetch('/api/addComment', {

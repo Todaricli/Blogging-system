@@ -14,7 +14,6 @@ router.post('/api/deleteAccount', async (req, res) => {
             if (!done) {
                 throw new Error('Deleting failed');
             }
-            console.log(done);
             res.status(200).send('Account Deleted');
         } else {
             throw new Error('User not found');
