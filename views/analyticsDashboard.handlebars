@@ -11,7 +11,6 @@
     </div>
 
     <div class="analyticsContainer">
-        {{!-- <div class="analyticsDashboard"> --}}
             <div class="keyMetricsDiv">
                 <div class="indvKeyMetrics" id="followersDiv">
                     {{#if followers}}
@@ -26,7 +25,6 @@
                         <p id="followerNumber">{{followers}}</p>
                     </div>
                     {{else}}
-                    {{!-- <div class="followerUpperDiv"> --}}
                         <div id="followersIcon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white"
                                 class="bi bi-people" viewBox="0 0 16 16">
@@ -35,8 +33,6 @@
                             </svg>
                         </div>
                         <p id="followerNumber">0</p>
-                        {{!--
-                    </div> --}}
                     {{/if}}
                     <h3 id="followerTitle">Total Followers</h3>
                 </div>
@@ -102,21 +98,16 @@
 
 
             <div class="topThreeDiv">
-                {{!-- {{#if user}}
-                <h2 id="topThreeTitle"> {{this.fname}}'s TOP 3 ARTICLES</h2>
-                {{else}} --}}
+                
                 <div id="top3Container">
                     <i class="fa-solid fa-trophy"></i>
                     <h2 id="topThreeTitle">TOP 3 ARTICLES</h2>
-                    {{!-- {{/if}} --}}
                 </div>
 
                 {{#if topArticles}}
                 <div class="indvTopArticles">
                     {{#each topArticles}}
-                    {{!-- <img src="{{this.article_thumbnail}}" alt="{{this.article_name}}"
-                        style="width:500px;height:600px;"> --}}
-
+                   
                     <div class="topArticleSummaries">
                         <h1>{{this.index}}</h1>
                         <h3 id="topTitles">"{{this.title}}"</h3>
@@ -135,7 +126,6 @@
                         {{else}}
                         <li>Popularity Metric: 0</li>
                         {{/if}}
-                        {{!-- <li>Creation Time: {{this.creation_period}}</li> --}}
                     </div>
                     {{/each}}
                     {{else}}
