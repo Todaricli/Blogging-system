@@ -12,7 +12,7 @@ const path = require('path');
 const fs = require('fs');
 const { cookieToaster } = require('./middleware/toaster-middleware');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 async function startExpress() {
     const app = express();
