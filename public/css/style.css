@@ -2,6 +2,10 @@
     --nav-user-size: 16px;
 }
 
+#user_status {
+    display: none;
+}
+
 #calender-div {
     position: absolute;
     /* top: ; */
