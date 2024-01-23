@@ -3,8 +3,15 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     margin: 0px;
     padding: 2rem;
+    height: 100%;
+}
+
+footer {
+    justify-self: flex-end;
 }
 
 #user_status {
@@ -208,7 +215,6 @@ nav {
 }
 
 #page_body {
-    min-height: 70vh;
     display: flex;
     flex-direction: column;
     margin: 20px;
