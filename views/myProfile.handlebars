@@ -172,14 +172,14 @@
                     <button id="my_profile_submit_btn" type="submit">Update</button>
                 </div>
                 <div class="tick-btn">
-                <i id="load-tick-profile" class="fa-solid fa-spinner fa-refresh fa-xl" style="color: grey;"></i>
-                <i id="done-tick-profile" class="fa-solid fa-check fa-xl" style="color: #0ff013;"></i>
+                    <i id="load-tick-profile" class="fa-solid fa-spinner fa-refresh fa-xl" style="color: grey;"></i>
+                    <i id="done-tick-profile" class="fa-solid fa-check fa-xl" style="color: #0ff013;"></i>
                 </div>
             </div>
         </form>
     </div>
 
-    <div>
+    <div id="security-section">
         <form id="update-security-info">
             <div>
                 <label for='current_password'>Confirm current password to update security details:</label>
@@ -198,25 +198,22 @@
                 <input id="my_profile_password" name="my_profile_password" type="password">
             </div>
             <div>
-                <label for="my_profile_comfirm_password">Confirm password:</label>
-                <input id="my_profile_comfirm_password" name="my_profile_comfirm_password" type="password">
+                <label for="my_profile_confirm_password">Confirm password:</label>
+                <input id="my_profile_confirm_password" name="my_profile_confirm_password" type="password">
                 <p id='password-format-error' style='color: red; display: none;'></p>
                 <p id='password-match-error' style='color: red; display: none;'></p>
             </div>
             <p id="passwordPromptMessage"></p>
             <div class="my-profile-password-btn-div">
-            <button id="update-security-button" type="submit">Update</button>
-            <div class="tick-btn">
-            <i id="load-tick-security" class="fa-solid fa-spinner fa-refresh fa-xl" style="color: grey; display: none"></i>
-            <i id="done-tick-security" class="fa-solid fa-check fa-xl" style="color: #0ff013; display: none;"></i>
-            </div>
+                <button id="update-security-button" type="submit">Update</button>
+                <div class="tick-btn">
+                    <i id="load-tick-security" class="fa-solid fa-spinner fa-refresh fa-xl"
+                        style="color: grey; display: none"></i>
+                    <i id="done-tick-security" class="fa-solid fa-check fa-xl"
+                        style="color: #0ff013; display: none;"></i>
+                </div>
             </div>
         </form>
-        <div id="delete">
-        <form id="deleteAccount">
-            <button type="submit">Delete account</button>
-        </form>
-        </div>
 
     </div>
     {{else}}
@@ -227,3 +224,35 @@
 
 <link href="/css/myProfile.css" rel="stylesheet">
 <script src="/script/myProfile.js"></script>
+
+<style scoped>
+    #security-section {
+        display: flex;
+        max-width: 100%;
+
+    }
+
+    #my_profile_info {
+        max-width: 100%;
+
+    }
+
+
+    #update-security-info {
+
+        div * {
+            padding: 25px;
+            margin: auto;
+            width: 100%;
+
+        }
+
+        form {
+            padding: 25px;
+            margin: auto;
+            width: 100%;
+        }
+
+
+    }
+</style>

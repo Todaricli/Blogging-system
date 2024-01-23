@@ -12,7 +12,7 @@
 #profile_container {
     display: grid;
     grid-template-columns: 0.5fr 2fr;
-    width: 1100px;
+    max-width: 100%;
     padding: 20px;
     justify-content: center;
     align-items: center;
@@ -115,7 +115,6 @@
 
 .profile_article_description {
     max-height: 200px;
-    width: 600px;
     overflow: hidden;
     margin: 15px 0 10px 0;
 }
@@ -164,6 +163,7 @@
         justify-content: center;
         align-items: center;
         margin: 60px 0;
+        padding: 0px;
         /* border: 1px solid red; */
     }
 
@@ -188,6 +188,7 @@
     #profile_articles_container{
         border-left: 0px;
         border-top: 1px solid lightgray;
+        padding: 0px;
         padding-top: 20px;
     }
 

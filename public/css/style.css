@@ -2,6 +2,11 @@
     --nav-user-size: 16px;
 }
 
+body {
+    margin: 0px;
+    padding: 2rem;
+}
+
 #user_status {
     display: none;
 }
@@ -19,7 +24,6 @@
     margin-top: 15px;
     border-radius: 5px;
     background-color: #f9f9f9;
-
 }
 
 .filterDiv form {
@@ -28,7 +32,6 @@
     flex-direction: column;
     justify-items: center;
     width: 100%;
-    
 }
 
 .filterDiv form input {
@@ -44,7 +47,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 #calendar-btn button:hover {
@@ -87,7 +89,7 @@ nav {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.login > a{
+.login > a {
     text-decoration: none;
     color: rgb(42, 42, 42);
     padding-left: 10px;
@@ -98,51 +100,27 @@ nav {
     padding: 10px 20px 10px 20px;
     background-color: rgb(12, 175, 17);
     border-radius: 30px;
-
 }
 
-.register a{
+.register a {
     text-decoration: none;
     color: white;
 }
 
-.logout{
+.logout {
     margin-right: 15px;
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
     padding: 10px 20px 10px 20px;
-    background-color: #1A77F2;
+    background-color: #1a77f2;
     border-radius: 30px;
     color: white;
-
 }
 
 .logo img {
     width: auto;
     height: 60px;
 }
-
-/* #viewAllDiv{
-    text-align: center;
-    background-color: pink;
-} */
-
-/* .search_bar {
-    border: 1px solid black;
-    border-radius: 20px;
-    padding-top: 10px; 
-    height: 40px;
-    max-height: 400px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-} */ 
-
-/* .search_bar div {
-    background-color: lightblue;
-    border: 1px solid black;
-    border-radius: 15px;
-} */
 
 .dropdown {
     position: relative;
@@ -168,7 +146,6 @@ nav {
     display: flex;
     align-items: center;
     color: black;
-
 }
 
 .dropdown .username {
@@ -182,14 +159,12 @@ nav {
     width: 40px;
     border: transparent;
     border-radius: 50%;
-    
 }
 
 #user_avatar {
     width: 40px;
     border: transparent;
     border-radius: 50%;
-    
 }
 
 .dropbtn {
@@ -197,7 +172,6 @@ nav {
 }
 .dropbtn:hover {
     cursor: pointer;
-
 }
 
 .dropdown-content {
@@ -229,12 +203,12 @@ nav {
 }
 
 .dropdown-content a:hover {
-    background-color:white;
-    color: #1A77F2;;
+    background-color: white;
+    color: #1a77f2;
 }
 
 #page_body {
-    min-height: 100vh;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     margin: 20px;
@@ -246,7 +220,7 @@ nav {
     display: flex;
     padding: 10px;
     background-color: white;
-    color: #392E76;
+    color: #392e76;
     font-family: Arial, Helvetica, sans-serif;
     border-top: 1px solid lightgray;
     width: 100%;
@@ -257,7 +231,7 @@ nav {
     height: 30px;
 }
 
-#footer>span {
+#footer > span {
     display: flex;
     align-self: center;
     font-size: 12px;
@@ -295,16 +269,15 @@ nav {
     color: rgb(12, 175, 17);
 }
 
-#register_page_container>p {
+#register_page_container > p {
     padding: 0px 30px 0px 30px;
 }
 
 #register_fillinbox {
     padding: 0px 30px 0px 30px;
-    
 }
 
-#register_fillinbox>div {
+#register_fillinbox > div {
     padding: 10px 0px 10px 0px;
 }
 
@@ -384,8 +357,7 @@ nav {
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: 4fr 1fr 4fr;
-    grid-template-areas:
-        "subscription . subscriber";
+    grid-template-areas: 'subscription . subscriber';
     padding: 20px;
 }
 
@@ -397,7 +369,7 @@ nav {
     height: auto;
 }
 
-#subscription_title>* {
+#subscription_title > * {
     display: flex;
     align-self: center;
     padding: 10px;
@@ -453,13 +425,13 @@ nav {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#subscription_container>* {
+#subscription_container > * {
     display: flex;
     justify-content: space-between;
     padding: 5px;
 }
 
-#subscriber_container>* {
+#subscriber_container > * {
     display: flex;
     justify-content: space-between;
     padding: 5px;
@@ -469,7 +441,7 @@ nav {
     width: 200px;
 }
 
-#subscriber_title>* {
+#subscriber_title > * {
     display: flex;
     align-self: center;
     padding: 10px;
@@ -487,14 +459,14 @@ nav {
     border-top: 1px solid lightgray;
 }
 
-.subscriber_rows>a {
+.subscriber_rows > a {
     display: flex;
     text-decoration: none;
     color: black;
     gap: 10px;
 }
 
-.subscriber_rows>a:hover {
+.subscriber_rows > a:hover {
     color: rgb(113, 113, 113);
 }
 
@@ -525,7 +497,7 @@ nav {
     overflow: scroll;
 }
 
-#icon_select_container>* {
+#icon_select_container > * {
     display: flex;
     justify-content: center;
 }
@@ -540,31 +512,13 @@ nav {
     cursor: pointer;
 }
 
-:checked+label img {
+:checked + label img {
     background-color: lightgray;
 }
 
-.icon_select>input {
+.icon_select > input {
     opacity: 0;
 }
-
-@media only screen and (max-width:800px) {
-    #register_page_body {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-width:600px) {
-    #icon_select_container {
-        width: 100%;
-
-    }
-}
-/* register page css end*/
-
-
-
-
 
 .each_posts {
     background-color: bisque;
@@ -578,86 +532,45 @@ nav {
     padding: 10px;
 }
 
-.allArticles{
+.allArticles {
     text-align: center;
     margin: auto;
     padding: auto;
 }
 
-#readMoreDiv{
+#readMoreDiv {
     margin: 10px;
 }
 
-#descriptionDiv{
+#descriptionDiv {
     margin: 10px;
     font-style: italic;
 }
 
-#likes_icon{
+#likes_icon {
     height: 20px;
     width: 20px;
 }
 
-#comments_icon{
+#comments_icon {
     height: 20px;
     width: 20px;
 }
 
-
-
-/* LINKS */
-/* SRC: https://codepen.io/team/css-tricks/pen/gOXMgxR */
-/* #newArticleLink, #myPostEditLink, #myPostReadMoreLink {
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  #newArticleLink, #myPostEditLink{
-    background:
-      linear-gradient(
-        to right,
-        rgb(58, 144, 144),
-        rgb(176, 255, 255)
-      ),
-      linear-gradient(
-        to right,
-        rgba(255, 0, 0, 1),
-        rgba(255, 0, 180, 1),
-        rgba(0, 100, 200, 1)
-    );
-    background-size: 100% 3px, 0 3px;
-    background-position: 100% 100%, 0 100%;
-    background-repeat: no-repeat;
-    transition: background-size 400ms;
-  }
-
-  #myPostReadMoreLink{
-    color: #0B66C2
-  }
-
-  #myPostReadMoreLink:hover{
-    text-decoration: underline;
-  }
-  
-  #newArticleLink:hover, #myPostEditLink:hover {
-    background-size: 0 3px, 100% 3px;
-  }
-   */
-
-  hr{
+hr {
     border-top: 2px solid lightgrey;
-  }
+}
 
-  /* Write icon */
-  #write-icon i {
+/* Write icon */
+#write-icon i {
     font-size: 24px;
     color: black;
     margin-right: 5px;
-  }
+}
 
-  #write-icon i:hover {
+#write-icon i:hover {
     color: blue;
-  }
+}
 
 /* Calendar button */
 #calender-div button {
@@ -670,4 +583,27 @@ nav {
 #calender-div button:hover {
     color: #414a4c;
     cursor: pointer;
+}
+
+
+
+
+@media only screen and (max-width: 800px) {
+    body {
+        padding: 0.5rem;
+    }
+
+    #register_page_body {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        padding: 0.5rem;
+    }
+
+    #icon_select_container {
+        width: 100%;
+    }
 }
