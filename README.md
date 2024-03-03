@@ -2,6 +2,8 @@
 
 ## Overview
 
+<img width="800" alt="image" src="https://github.com/UOA-PGCIT-FULLTIME/group-2-s2-23-v1/assets/130806678/0ee70232-e7a5-4296-a3f3-f2f32320eca3">
+
 This project involves the development of a full-stack blogging website with the following features:
 
 - **User Registration and Authentication:** Users can sign up and log in securely.
