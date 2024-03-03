@@ -36,12 +36,12 @@ To run the project locally, follow these steps:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/UOA-PGCIT-FULLTIME/group-2-s2-23-v1.git
+   git clone https://github.com/tonexie/fullstack-blog.git
    ```
 
 2. Navigate to the project directory:
    ```
-   cd group-2-s2-23-v1
+   cd fullstack-blog
    ```
 
 3. Install dependencies using npm:
