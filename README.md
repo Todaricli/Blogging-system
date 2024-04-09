@@ -53,6 +53,10 @@ To run the project locally, follow these steps:
    ```
    npm run dev
    ```
+5. Navigate in the browser to:
+   ```
+   http://localhost:3000/
+   ```
 
 ## Test Accounts
 
